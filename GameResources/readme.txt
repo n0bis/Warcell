@@ -1,0 +1,1 @@
+Temporary storage of icons, sound files and other resources to make the game.
