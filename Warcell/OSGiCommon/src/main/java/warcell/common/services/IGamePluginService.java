@@ -1,7 +1,7 @@
-package dk.sdu.mmmi.cbse.common.services;
+package warcell.common.services;
 
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.data.World;
+import warcell.common.data.GameData;
+import warcell.common.data.World;
 
 public interface IGamePluginService {
     void start(GameData gameData, World world);

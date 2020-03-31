@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dk.sdu.mmmi.build</groupId>
+    <groupId>warcell.build</groupId>
     <artifactId>provision</artifactId>
 
     <name>PaxAteroids - imported bundles</name>
