@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <relativePath>../poms/compiled/</relativePath>
-        <groupId>dk.sdu.mmmi.build</groupId>
+        <groupId>warcell.build</groupId>
         <artifactId>compiled-bundle-settings</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <bundle.symbolicName>dk.sdu.mmmi.core</bundle.symbolicName>
-        <bundle.namespace>dk.sdu.mmmi</bundle.namespace>
+        <bundle.symbolicName>warcell.core</bundle.symbolicName>
+        <bundle.namespace>warcell</bundle.namespace>
     </properties>
   
     <modelVersion>4.0.0</modelVersion>
@@ -30,7 +30,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.mmmi.build</groupId>
+            <groupId>warcell.build</groupId>
             <artifactId>OSGiCommon</artifactId>
             <version>${project.version}</version>
         </dependency>

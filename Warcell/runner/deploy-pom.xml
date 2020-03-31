@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>dk.sdu.mmmi.PaxAteroids.build</groupId>
+  <groupId>warcell.PaxAteroids.build</groupId>
   <artifactId>deployment</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -22,14 +22,14 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.mmmi.build</groupId>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiCommon</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.mmmi.build</groupId>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiLibGDX</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
@@ -54,20 +54,20 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.mmmi.build</groupId>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiCore</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.mmmi.build</groupId>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiCommon</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>dk.sdu.mmmi.build</groupId>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiLibGDX</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
