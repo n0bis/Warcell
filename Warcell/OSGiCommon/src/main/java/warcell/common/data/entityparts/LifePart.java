@@ -8,10 +8,6 @@ package warcell.common.data.entityparts;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 
-/**
- *
- * @author Someone
- */
 public class LifePart implements EntityPart {
     private boolean dead = false;
     private int life;

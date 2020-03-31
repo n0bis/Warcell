@@ -8,10 +8,6 @@ package warcell.common.data.entityparts;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 
-/**
- *
- * @author Alexander
- */
 public interface EntityPart {
     void process(GameData gameData, Entity entity);
 }

@@ -8,10 +8,6 @@ package warcell.common.data.entityparts;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 
-/**
- *
- * @author Alexander
- */
 public class PositionPart implements EntityPart {
 
     private float x;
