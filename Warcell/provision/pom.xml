@@ -12,7 +12,7 @@
     <groupId>warcell.build</groupId>
     <artifactId>provision</artifactId>
 
-    <name>PaxAteroids - imported bundles</name>
+    <name>Warcell - imported bundles</name>
 
     <packaging>pom</packaging>
 

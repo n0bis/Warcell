@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGiCore
 Built-By: birke
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1585643178825
+Bnd-LastModified: 1586338049164
 Import-Package: com.badlogic.gdx,com.badlogic.gdx.backends.lwjgl,com.b
  adlogic.gdx.graphics,com.badlogic.gdx.graphics.glutils,warcell;versio
  n="1.0.0.SNAPSHOT",warcell.common.data;version="1.0.0.SNAPSHOT",warce

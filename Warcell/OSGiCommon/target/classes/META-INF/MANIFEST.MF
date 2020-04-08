@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: warcell.common
 Built-By: birke
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1585643175566
+Bnd-LastModified: 1586338046041
 Import-Package: warcell.common.data,warcell.common.data.entityparts,wa
  rcell.common.events,warcell.common.services
 Tool: Bnd-0.0.255
