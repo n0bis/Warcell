@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>warcell</groupId>
-        <artifactId>PaxAteroids</artifactId>
+        <artifactId>Warcell</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
