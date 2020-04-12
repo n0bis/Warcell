@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: warcell.common
-Built-By: birke
+Built-By: madsfalken
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1585643175566
+Bnd-LastModified: 1586696391300
 Import-Package: warcell.common.data,warcell.common.data.entityparts,wa
  rcell.common.events,warcell.common.services
 Tool: Bnd-0.0.255
@@ -15,5 +15,5 @@ Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-Name: OSGiCommon
 Private-Package: warcell.internal.*
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.8.0_241
+Build-Jdk: 1.8.0_101
 
