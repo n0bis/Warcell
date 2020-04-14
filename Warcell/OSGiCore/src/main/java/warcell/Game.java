@@ -8,6 +8,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -18,6 +20,9 @@ import warcell.common.services.IPostEntityProcessingService;
 import warcell.core.managers.GameInputProcessor;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.TexturePart;
+import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
 
@@ -28,8 +33,11 @@ public class Game implements ApplicationListener {
     private static final List<IEntityProcessingService> entityProcessorList = new CopyOnWriteArrayList<>();
     private static final List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
     private static List<IPostEntityProcessingService> postEntityProcessorList = new CopyOnWriteArrayList<>();
+    private SpriteBatch textureSpriteBatch;
+    private GameAssetManager gameAssetManager;
 
     public Game(){
+        gameAssetManager = new GameAssetManager();
         init();
     }
 
@@ -54,6 +62,9 @@ public class Game implements ApplicationListener {
         cam.update();
 
         sr = new ShapeRenderer();
+        
+        textureSpriteBatch = new SpriteBatch();
+        textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
@@ -69,7 +80,8 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
 
         update();
-        draw();
+        //draw();
+        drawTextures();
     }
 
     private void update() {
@@ -103,6 +115,26 @@ public class Game implements ApplicationListener {
             sr.end();
         }
     }
+    
+    private void drawTextures() {
+        textureSpriteBatch.setProjectionMatrix(cam.combined);
+        textureSpriteBatch.begin();
+
+
+        for (Entity e : world.getEntities()) {
+            TexturePart tp = e.getPart(TexturePart.class);
+            PositionPart pp = e.getPart(PositionPart.class);
+
+
+            if (tp != null && pp != null) {
+                Texture texture = gameAssetManager.checkGetTexture(e.getClass(), tp.getSrcPath());
+                //Sprite sprite = new Sprite(texture);
+                textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
+            }
+
+        }
+        textureSpriteBatch.end();
+    }
 
     @Override
     public void resize(int width, int height) {
@@ -118,6 +150,7 @@ public class Game implements ApplicationListener {
 
     @Override
     public void dispose() {
+        textureSpriteBatch.dispose();
     }
 
     public void addEntityProcessingService(IEntityProcessingService eps) {

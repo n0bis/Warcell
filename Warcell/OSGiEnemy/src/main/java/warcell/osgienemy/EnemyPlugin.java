@@ -1,18 +1,18 @@
-package dk.sdu.mmmi.cbse.osgienemy;
+package warcell.osgienemy;
 
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.TexturePart;
-import dk.sdu.mmmi.cbse.common.enemy.Enemy;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import warcell.common.data.Entity;
+import warcell.common.data.GameData;
+import warcell.common.data.World;
+import warcell.common.data.entityparts.LifePart;
+import warcell.common.data.entityparts.MovingPart;
+import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.TexturePart;
+import warcell.common.enemy.Enemy;
+import warcell.common.services.IGamePluginService;
 
 public class EnemyPlugin implements IGamePluginService {
     private String enemyID;
-    private final String walkAnimationPath = "WalkAnimation.png";
+    private final String walkAnimationPath = "test.png";
     private final int walkAnimationFrameColumns = 6;
     private final int walkAnimationFrameRows = 3;
     public EnemyPlugin() {
@@ -40,7 +40,7 @@ public class EnemyPlugin implements IGamePluginService {
        // enemyZombie.setRadius(4);
         enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new TexturePart(walkAnimationFrameColumns, walkAnimationFrameRows, walkAnimationPath));
+        enemyZombie.add(new TexturePart(walkAnimationPath));
         
         return enemyZombie;
     }

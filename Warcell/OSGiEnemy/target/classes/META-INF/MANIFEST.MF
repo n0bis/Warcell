@@ -1,38 +1,30 @@
 Manifest-Version: 1.0
 Bundle-Description: Generated using Pax-Construct
-Bundle-SymbolicName: OSGiAsteroids
-Built-By: Theod
+Bundle-SymbolicName: OSGIEnemy
+Built-By: madsfalken
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1586865390150
+Bnd-LastModified: 1586874193517
 Bundle-ActivationPolicy: lazy
-Import-Package: com.badlogic.gdx.graphics,com.badlogic.gdx.graphics.g2
- d,dk.sdu.mmmi.cbse.bullet;version="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.c
- ommon.bullet;version="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common.data;ve
- rsion="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common.data.entityparts;versi
- on="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common.enemy;version="1.0.0.SNAP
- SHOT",dk.sdu.mmmi.cbse.common.events;version="1.0.0.SNAPSHOT",dk.sdu.
- mmmi.cbse.common.services;version="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.o
- sgienemy;version="1.0.0.SNAPSHOT"
+Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
+ ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.enemy;
+ version="1.0.0.SNAPSHOT",warcell.common.events;version="1.0.0.SNAPSHO
+ T",warcell.common.services;version="1.0.0.SNAPSHOT",warcell.osgienemy
+ ;version="1.0.0.SNAPSHOT"
 Service-Component: META-INF/entityprocessor.xml,META-INF/gameplugin.xm
  l
 Tool: Bnd-0.0.255
-Export-Package: dk.sdu.mmmi.cbse.osgienemy;uses:="dk.sdu.mmmi.cbse.com
- mon.data.entityparts,dk.sdu.mmmi.cbse.common.data,com.badlogic.gdx.gr
- aphics.g2d,dk.sdu.mmmi.cbse.common.enemy,dk.sdu.mmmi.cbse.common.serv
- ices,com.badlogic.gdx.graphics";version="1.0.0.SNAPSHOT",dk.sdu.mmmi.
- cbse.common.data.entityparts;uses:="dk.sdu.mmmi.cbse.common.data";ver
- sion="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common.data;uses:="dk.sdu.mmmi
- .cbse.common.data.entityparts,dk.sdu.mmmi.cbse.common.events";version
- ="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.bullet;version="1.0.0.SNAPSHOT",dk
- .sdu.mmmi.cbse.common.bullet;uses:="dk.sdu.mmmi.cbse.common.data";ver
- sion="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common.events;uses:="dk.sdu.mm
- mi.cbse.common.data";version="1.0.0.SNAPSHOT",dk.sdu.mmmi.cbse.common
- .enemy;uses:="dk.sdu.mmmi.cbse.common.data";version="1.0.0.SNAPSHOT",
- dk.sdu.mmmi.cbse.common.services;uses:="dk.sdu.mmmi.cbse.common.data"
- ;version="1.0.0.SNAPSHOT"
+Export-Package: warcell.common.data;uses:="warcell.common.events,warce
+ ll.common.data.entityparts";version="1.0.0.SNAPSHOT",warcell.common.e
+ vents;uses:="warcell.common.data";version="1.0.0.SNAPSHOT",warcell.os
+ gienemy;uses:="warcell.common.data,warcell.common.services,warcell.co
+ mmon.enemy,warcell.common.data.entityparts";version="1.0.0.SNAPSHOT",
+ warcell.common.services;uses:="warcell.common.data";version="1.0.0.SN
+ APSHOT",warcell.common.enemy;uses:="warcell.common.data";version="1.0
+ .0.SNAPSHOT",warcell.common.data.entityparts;uses:="warcell.common.da
+ ta";version="1.0.0.SNAPSHOT"
 Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-Name: OSGiEnemy
-Private-Package: dk.sdu.mmmi.internal.*
+Private-Package: warcell.internal.*
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.8.0_231
+Build-Jdk: 1.8.0_101
 

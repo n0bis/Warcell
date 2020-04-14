@@ -53,6 +53,7 @@
     <module>OSGiCommon</module>
     <module>OSGiLibGDX</module>
     <module>OSGiEnemy</module>
+    <module>OSGiCommonEnemy</module>
   </modules>
 
   <build>
