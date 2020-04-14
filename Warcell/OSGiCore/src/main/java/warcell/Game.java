@@ -9,7 +9,9 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -20,8 +22,10 @@ import warcell.common.services.IPostEntityProcessingService;
 import warcell.core.managers.GameInputProcessor;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
+import warcell.common.utils.Vector2D;
 import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
@@ -82,6 +86,7 @@ public class Game implements ApplicationListener {
         update();
         //draw();
         drawTextures();
+        drawAnimations();
     }
 
     private void update() {
@@ -127,9 +132,32 @@ public class Game implements ApplicationListener {
 
 
             if (tp != null && pp != null) {
-                Texture texture = gameAssetManager.checkGetTexture(e.getClass(), tp.getSrcPath());
+                Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
                 //Sprite sprite = new Sprite(texture);
                 textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
+            }
+
+        }
+        textureSpriteBatch.end();
+    }
+    
+    private void drawAnimations() {
+        textureSpriteBatch.setProjectionMatrix(cam.combined);
+        textureSpriteBatch.begin();
+
+        for (Entity e : world.getEntities()) {
+            AnimationTexturePart animationTexturePart = e.getPart(AnimationTexturePart.class);
+            PositionPart pp = e.getPart(PositionPart.class);
+
+
+            if (animationTexturePart != null && pp != null) {
+                animationTexturePart.updateStateTime(gameData.getDelta());
+                Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
+                
+                TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
+                textureSpriteBatch.draw(currentFrame,
+                        pp.getX(),
+                        pp.getY());
             }
 
         }

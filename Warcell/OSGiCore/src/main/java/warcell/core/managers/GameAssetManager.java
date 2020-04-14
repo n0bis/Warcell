@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import warcell.common.data.entityparts.AnimationTexturePart;
 
 /**
  *
@@ -28,7 +30,7 @@ public class GameAssetManager {
         textureMap = new HashMap<>();
     }
     
-    public Texture checkGetTexture(Class objectClass, String path) {
+    public Texture getTexture(Class objectClass, String path) {
         Texture texture = textureMap.get(path);
 
         if (texture == null) {
@@ -50,5 +52,42 @@ public class GameAssetManager {
         }
 
         return texture;
+    }
+    
+    public Animation getAnimation(Class objectClass, AnimationTexturePart animationTexture) {
+        Animation animation = animationMap.get(animationTexture.getSrcPath());
+        
+        if (animation == null) {
+            InputStream is = objectClass.getClassLoader().getResourceAsStream(
+                    animationTexture.getSrcPath()
+            );
+
+            try {
+                Gdx2DPixmap gmp = new Gdx2DPixmap(is, Gdx2DPixmap.GDX2D_FORMAT_RGBA8888);
+                Pixmap pix = new Pixmap(gmp);
+                Texture texture = new Texture(pix);
+                TextureRegion textureRegion = new TextureRegion(texture);
+                TextureRegion[][] tmp = textureRegion.split(texture.getWidth() / animationTexture.getFrameCols(), texture.getHeight() / animationTexture.getFrameRows());
+                TextureRegion[] walkFrames = new TextureRegion[animationTexture.getFrameCols() * animationTexture.getFrameRows()];
+                int index = 0;
+                for (int i = 0; i < animationTexture.getFrameRows(); i++) {
+                    for (int j = 0; j < animationTexture.getFrameCols(); j++) {
+                        walkFrames[index++] = tmp[i][j];
+                    }
+                }
+                animation = new Animation(animationTexture.getFrameInterval(), walkFrames);
+                animation.setPlayMode(Animation.PlayMode.LOOP);
+                animationMap.put(animationTexture.getSrcPath(), animation);
+                
+                pix.dispose();
+                is.close();
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        }
+
+        return animation;
     }
 }

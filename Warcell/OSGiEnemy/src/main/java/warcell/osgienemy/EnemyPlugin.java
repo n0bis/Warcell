@@ -3,18 +3,21 @@ package warcell.osgienemy;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.services.IGamePluginService;
+import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
     private String enemyID;
-    private final String walkAnimationPath = "test.png";
-    private final int walkAnimationFrameColumns = 6;
-    private final int walkAnimationFrameRows = 3;
+    private final String walkAnimationPath = "WalkingAnimation.png";
+    private final int walkAnimationFrameColumns = 3;
+    private final int walkAnimationFrameRows = 5;
+    
     public EnemyPlugin() {
     }
 
@@ -40,7 +43,7 @@ public class EnemyPlugin implements IGamePluginService {
        // enemyZombie.setRadius(4);
         enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new TexturePart(walkAnimationPath));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
         
         return enemyZombie;
     }
