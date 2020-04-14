@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>warcell</groupId>
-        <artifactId>PaxAteroids</artifactId>
+        <artifactId>Warcell</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -12,7 +12,7 @@
     <groupId>warcell.build</groupId>
     <artifactId>provision</artifactId>
 
-    <name>PaxAteroids - imported bundles</name>
+    <name>Warcell - imported bundles</name>
 
     <packaging>pom</packaging>
 
