@@ -19,7 +19,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             PositionPart positionPart = entity.getPart(PositionPart.class);
             MovingPart movingPart = entity.getPart(MovingPart.class);
             double random = Math.random();
-            movingPart.setLeft(random < 0.2);
+            movingPart.setLeft(random < 0.3);
             movingPart.setRight(random > 0.3 && random < 0.5);
             movingPart.setUp(random > 0.7 && random < 0.9);
 

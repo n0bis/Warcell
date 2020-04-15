@@ -31,12 +31,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>OSGiCommonEnemy</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>warcell.build</groupId>
-                    <artifactId>OSGiCommon</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
