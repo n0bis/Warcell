@@ -24,18 +24,18 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        Entity enemy = createEnemyZombie(gameData);
+        Entity enemy = createSmallZombie(gameData);
         enemyID = world.addEntity(enemy);
         
     }
 
-    private Entity createEnemyZombie(GameData gameData) {
+    private Entity createSmallZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
-        float deacceleration = 10;
-        float acceleration = 200;
-        float maxSpeed = 300;
-        float rotationSpeed = 5;
+        float deacceleration = 5;
+        float acceleration = 500;
+        float maxSpeed = 400;
+        float rotationSpeed = 10;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
