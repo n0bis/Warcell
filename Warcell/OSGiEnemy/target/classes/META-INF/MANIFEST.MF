@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIEnemy
-Built-By: madsfalken
+Built-By: Theod
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1586877750219
+Bnd-LastModified: 1586941316998
 Bundle-ActivationPolicy: lazy
 Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
  ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.enemy;
@@ -28,5 +28,5 @@ Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-Name: OSGiEnemy
 Private-Package: warcell.internal.*
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.8.0_101
+Build-Jdk: 1.8.0_231
 

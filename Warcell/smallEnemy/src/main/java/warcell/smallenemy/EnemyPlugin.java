@@ -1,4 +1,4 @@
-package warcell.osgienemy;
+package warcell.smallenemy;
 
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;

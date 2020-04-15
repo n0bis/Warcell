@@ -11,7 +11,6 @@
   <properties>
     <org.osgi.service.http.port>8080</org.osgi.service.http.port>
     <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-    <netbeans.installation>/Applications/NetBeans/Apache NetBeans 11.2.app/Contents/Resources/NetBeans/netbeans</netbeans.installation>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
