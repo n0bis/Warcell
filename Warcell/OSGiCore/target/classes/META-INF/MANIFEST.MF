@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGiCore
 Built-By: Theod
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1586946749792
+Bnd-LastModified: 1586948492764
 Import-Package: com.badlogic.gdx,com.badlogic.gdx.backends.lwjgl,com.b
  adlogic.gdx.graphics,com.badlogic.gdx.graphics.g2d,com.badlogic.gdx.g
  raphics.glutils,com.badlogic.gdx.math,warcell;version="1.0.0.SNAPSHOT

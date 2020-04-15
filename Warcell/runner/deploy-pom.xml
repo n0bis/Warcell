@@ -81,7 +81,7 @@
     </dependency>
     <dependency>
       <groupId>warcell.build</groupId>
-      <artifactId>smallEnemy</artifactId>
+      <artifactId>OSGiEnemy</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
@@ -96,6 +96,13 @@
       <groupId>warcell.build</groupId>
       <artifactId>OSGiCommonEnemy</artifactId>
       <version>1.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>smallEnemy</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>bundle</type>
       <scope>provided</scope>
     </dependency>
   </dependencies>

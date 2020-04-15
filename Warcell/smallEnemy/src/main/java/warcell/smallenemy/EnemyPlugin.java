@@ -32,10 +32,10 @@ public class EnemyPlugin implements IGamePluginService {
     private Entity createSmallZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
-        float deacceleration = 10;
-        float acceleration = 200;
+        float deacceleration = 20;
+        float acceleration = 400;
         float maxSpeed = 300;
-        float rotationSpeed = 5;
+        float rotationSpeed = 10;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
