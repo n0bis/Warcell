@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import warcell.common.data.entityparts.TexturePart;
 
 public class Entity implements Serializable {
     private final UUID ID = UUID.randomUUID();
@@ -14,6 +15,8 @@ public class Entity implements Serializable {
     private float[] shapeY = new float[4];
     private float radius;
     private Map<Class, EntityPart> parts;
+
+    private TexturePart image;
     
     public Entity() {
         parts = new ConcurrentHashMap<>();
@@ -53,6 +56,17 @@ public class Entity implements Serializable {
 
     public float[] getShapeY() {
         return shapeY;
+    }
+
+    /*
+     * Required for map
+     */
+    public TexturePart getImage() {
+        return image;
+    }
+
+    public void setImage(TexturePart image) {
+        this.image = image;
     }
 
     public void setShapeY(float[] shapeY) {

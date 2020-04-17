@@ -125,12 +125,10 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
         textureSpriteBatch.begin();
 
-
         for (Entity e : world.getEntities()) {
             TexturePart tp = e.getPart(TexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
-
-
+            
             if (tp != null && pp != null) {
                 Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
                 //Sprite sprite = new Sprite(texture);
@@ -138,6 +136,7 @@ public class Game implements ApplicationListener {
             }
 
         }
+
         textureSpriteBatch.end();
     }
     

@@ -17,11 +17,23 @@ public class TexturePart implements EntityPart {
     private String srcPath;
 
     /**
+     * Image width
+     */
+    private float width;
+
+    /**
+     * Image height
+     */
+    private float height;
+
+    /**
      * Creates a new texture part with a given source path
      * @param srcPath String
      */
     public TexturePart(String srcPath) {
         this.srcPath = srcPath;
+        this.width = 20;
+        this.height = 20;
     }
 
     /**
@@ -38,6 +50,22 @@ public class TexturePart implements EntityPart {
      */
     public void setSrcPath(String srcPath) {
         this.srcPath = srcPath;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
     }
 
     @Override
