@@ -36,8 +36,8 @@ public class PlayerPlugin implements IGamePluginService {
         Entity enemyZombie = new Player();
 
         float deacceleration = 300;
-        float acceleration = 1000;
-        float maxSpeed = 150;
+        float acceleration = 1150;
+        float maxSpeed = 350;
         float rotationSpeed = 10;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;

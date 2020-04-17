@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIPlayer
 Built-By: prikn
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1587114332354
+Bnd-LastModified: 1587121303312
 Bundle-ActivationPolicy: lazy
 Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
  ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.events
