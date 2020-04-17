@@ -16,7 +16,8 @@ public class MovingPart implements EntityPart {
     private float dx, dy;
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
-    private boolean left, right, up;
+    private boolean left, right, up, down;
+    
 
     public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
         this.deceleration = deceleration;
@@ -65,6 +66,10 @@ public class MovingPart implements EntityPart {
     public void setUp(boolean up) {
         this.up = up;
     }
+    
+    public void setDown(boolean down){
+        this.down = down;
+    }
 
     @Override
     public void process(GameData gameData, Entity entity) {
@@ -74,48 +79,49 @@ public class MovingPart implements EntityPart {
         float radians = positionPart.getRadians();
         float dt = gameData.getDelta();
 
-        // turning
+        // moving
         if (left) {
-            radians += rotationSpeed * dt;
+            dx -= acceleration * dt;
         }
 
         if (right) {
-            radians -= rotationSpeed * dt;
+            dx += acceleration * dt;
         }
 
         // accelerating            
         if (up) {
-            dx += cos(radians) * acceleration * dt;
-            dy += sin(radians) * acceleration * dt;
+            dy += acceleration * dt;
+        }
+        
+        if (down) {
+            dy -= acceleration * dt;
         }
 
         // deccelerating
-        float vec = (float) sqrt(dx * dx + dy * dy);
-        if (vec > 0) {
-            dx -= (dx / vec) * deceleration * dt;
-            dy -= (dy / vec) * deceleration * dt;
+        if (!(down||up||left||right)) {
+            dx = 0;
+            dy = 0;
         }
-        if (vec > maxSpeed) {
-            dx = (dx / vec) * maxSpeed;
-            dy = (dy / vec) * maxSpeed;
-        }
-
         // set position
         x += dx * dt;
-        if (x > gameData.getDisplayWidth()) {
-            x = 0;
-        }
-        else if (x < 0) {
-            x = gameData.getDisplayWidth();
-        }
+        
+        //wrapping
+//        if (x > gameData.getDisplayWidth()) {
+//            x = 0;
+//        }
+//        else if (x < 0) {
+//            x = gameData.getDisplayWidth();
+//        }
 
         y += dy * dt;
-        if (y > gameData.getDisplayHeight()) {
-            y = 0;
-        }
-        else if (y < 0) {
-            y = gameData.getDisplayHeight();
-        }
+
+        //wrapping
+//        if (y > gameData.getDisplayHeight()) {
+//            y = 0;
+//        }
+//        else if (y < 0) {
+//            y = gameData.getDisplayHeight();
+//        }
 
         positionPart.setX(x);
         positionPart.setY(y);

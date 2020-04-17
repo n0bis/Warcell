@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-Description: Generated using Pax-Construct
+Bundle-SymbolicName: OSGIPlayer
+Built-By: prikn
+Bundle-ManifestVersion: 2
+Bnd-LastModified: 1587114332354
+Bundle-ActivationPolicy: lazy
+Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
+ ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.events
+ ;version="1.0.0.SNAPSHOT",warcell.common.player;version="1.0.0.SNAPSH
+ OT",warcell.common.services;version="1.0.0.SNAPSHOT",warcell.common.u
+ tils;version="1.0.0.SNAPSHOT",warcell.osgiplayer;version="1.0.0.SNAPS
+ HOT"
+Service-Component: META-INF/entityprocessor.xml,META-INF/gameplugin.xm
+ l
+Tool: Bnd-0.0.255
+Export-Package: warcell.common.data;uses:="warcell.common.events,warce
+ ll.common.data.entityparts";version="1.0.0.SNAPSHOT",warcell.common.p
+ layer;uses:="warcell.common.data";version="1.0.0.SNAPSHOT",warcell.co
+ mmon.events;uses:="warcell.common.data";version="1.0.0.SNAPSHOT",warc
+ ell.osgiplayer;uses:="warcell.common.data,warcell.common.player,warce
+ ll.common.services,warcell.common.utils,warcell.common.data.entitypar
+ ts";version="1.0.0.SNAPSHOT",warcell.common.services;uses:="warcell.c
+ ommon.data";version="1.0.0.SNAPSHOT",warcell.common.utils;version="1.
+ 0.0.SNAPSHOT",warcell.common.data.entityparts;uses:="warcell.common.d
+ ata,warcell.common.utils";version="1.0.0.SNAPSHOT"
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Name: OSGiPlayer
+Private-Package: warcell.internal.*
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.8.0_241
+
