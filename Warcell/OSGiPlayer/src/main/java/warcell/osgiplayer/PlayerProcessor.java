@@ -65,7 +65,7 @@ public class PlayerProcessor implements IEntityProcessingService {
      * Inverses the y-axis, since the mouse coordinates are reversed
      * @param originalPoint the point that gets reversed
      * @param gameData the GameData object of the game class
-     * @return the new inversed point on the y axis
+     * @return the new inverted point on the y axis
      */
     private double inverseYAxis (double originalPoint, GameData gameData) {
         double newPoint = 0;

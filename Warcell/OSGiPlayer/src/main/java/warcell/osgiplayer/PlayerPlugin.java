@@ -12,7 +12,7 @@ import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
 
 public class PlayerPlugin implements IGamePluginService {
-    private String enemyID;
+    private String entityID;
     private final String walkAnimationPath = "KnifeMove.png";
     private final int walkAnimationFrameColumns = 3;
     private final int walkAnimationFrameRows = 6;
@@ -27,8 +27,8 @@ public class PlayerPlugin implements IGamePluginService {
         if (world == null || gameData == null) {
             throw new IllegalArgumentException("World or gamedata is null");
         }
-        Entity enemy = createPlayer(gameData);
-        enemyID = world.addEntity(enemy);
+        Entity player = createPlayer(gameData);
+        entityID = world.addEntity(player);
     }
     
     /**
@@ -37,25 +37,26 @@ public class PlayerPlugin implements IGamePluginService {
      * @return the created player
      */
     private Entity createPlayer(GameData gameData) {
-        Entity enemyZombie = new Player();
+        Entity player = new Player();
 
         float acceleration = 2450;
         float maxSpeed = 350;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
-        enemyZombie.add(new LifePart(3));
-        // enemyZombie.setRadius(4);
-        enemyZombie.add(new MovingPart(acceleration, maxSpeed));
-        enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f));
+        int maxLife = 100;
+        player.add(new LifePart(maxLife));
+        player.add(new MovingPart(acceleration, maxSpeed));
+        player.add(new PositionPart(x, y, radians));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f));
+        
 
-        return enemyZombie;
+        return player;
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(enemyID);
+        world.removeEntity(entityID);
     }
 }
