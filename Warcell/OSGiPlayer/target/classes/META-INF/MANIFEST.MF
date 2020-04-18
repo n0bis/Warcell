@@ -3,14 +3,14 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIPlayer
 Built-By: prikn
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1587121303312
+Bnd-LastModified: 1587223504712
 Bundle-ActivationPolicy: lazy
-Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
- ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.events
- ;version="1.0.0.SNAPSHOT",warcell.common.player;version="1.0.0.SNAPSH
- OT",warcell.common.services;version="1.0.0.SNAPSHOT",warcell.common.u
- tils;version="1.0.0.SNAPSHOT",warcell.osgiplayer;version="1.0.0.SNAPS
- HOT"
+Import-Package: com.badlogic.gdx,warcell.common.data;version="1.0.0.SN
+ APSHOT",warcell.common.data.entityparts;version="1.0.0.SNAPSHOT",warc
+ ell.common.events;version="1.0.0.SNAPSHOT",warcell.common.player;vers
+ ion="1.0.0.SNAPSHOT",warcell.common.services;version="1.0.0.SNAPSHOT"
+ ,warcell.common.utils;version="1.0.0.SNAPSHOT",warcell.osgiplayer;ver
+ sion="1.0.0.SNAPSHOT"
 Service-Component: META-INF/entityprocessor.xml,META-INF/gameplugin.xm
  l
 Tool: Bnd-0.0.255
@@ -20,10 +20,10 @@ Export-Package: warcell.common.data;uses:="warcell.common.events,warce
  mmon.events;uses:="warcell.common.data";version="1.0.0.SNAPSHOT",warc
  ell.osgiplayer;uses:="warcell.common.data,warcell.common.player,warce
  ll.common.services,warcell.common.utils,warcell.common.data.entitypar
- ts";version="1.0.0.SNAPSHOT",warcell.common.services;uses:="warcell.c
- ommon.data";version="1.0.0.SNAPSHOT",warcell.common.utils;version="1.
- 0.0.SNAPSHOT",warcell.common.data.entityparts;uses:="warcell.common.d
- ata,warcell.common.utils";version="1.0.0.SNAPSHOT"
+ ts,com.badlogic.gdx";version="1.0.0.SNAPSHOT",warcell.common.services
+ ;uses:="warcell.common.data";version="1.0.0.SNAPSHOT",warcell.common.
+ utils;version="1.0.0.SNAPSHOT",warcell.common.data.entityparts;uses:=
+ "warcell.common.data,warcell.common.utils";version="1.0.0.SNAPSHOT"
 Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-Name: OSGiPlayer
 Private-Package: warcell.internal.*

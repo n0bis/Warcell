@@ -32,6 +32,12 @@
             <artifactId>OSGiCommonPlayer</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiLibGDX</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

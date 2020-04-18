@@ -25,7 +25,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
-import warcell.common.utils.Vector2D;
 import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
@@ -90,6 +89,7 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
+        
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);
@@ -148,7 +148,7 @@ public class Game implements ApplicationListener {
         for (Entity e : world.getEntities()) {
             AnimationTexturePart animationTexturePart = e.getPart(AnimationTexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
-
+            
 
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());

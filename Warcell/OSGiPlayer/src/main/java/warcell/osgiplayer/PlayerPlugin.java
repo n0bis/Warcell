@@ -17,7 +17,6 @@ public class PlayerPlugin implements IGamePluginService {
     private final int walkAnimationFrameColumns = 3;
     private final int walkAnimationFrameRows = 6;
     
-    
     public PlayerPlugin() {
     }
 
@@ -31,20 +30,23 @@ public class PlayerPlugin implements IGamePluginService {
         Entity enemy = createPlayer(gameData);
         enemyID = world.addEntity(enemy);
     }
-
+    
+    /**
+     * creates a player entity
+     * @param gameData the GameData of the Game class
+     * @return the created player
+     */
     private Entity createPlayer(GameData gameData) {
         Entity enemyZombie = new Player();
 
-        float deacceleration = 300;
-        float acceleration = 1150;
+        float acceleration = 2450;
         float maxSpeed = 350;
-        float rotationSpeed = 10;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
         enemyZombie.add(new LifePart(3));
         // enemyZombie.setRadius(4);
-        enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f));
 
