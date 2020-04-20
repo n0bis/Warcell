@@ -15,7 +15,7 @@ import warcell.common.utils.Vector2D;
 public class EnemyPlugin implements IGamePluginService {
 
     private String enemyID;
-    private final String walkAnimationPath = "WalkingAnimation.png";
+    private final String walkAnimationPath = "smallzombieSprites.png";
     private final int walkAnimationFrameColumns = 3;
     private final int walkAnimationFrameRows = 5;
     private final int AMOUNTOFENEMIES;
@@ -44,16 +44,16 @@ public class EnemyPlugin implements IGamePluginService {
     private Entity createSmallZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
 
-        float deacceleration = 20;
-        float acceleration = 400;
+        
+        float acceleration = 3000;
         float maxSpeed = 300;
-        float rotationSpeed = 10;
+        float rotationSpeed = 3500;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
-        enemyZombie.add(new LifePart(3));
-        // enemyZombie.setRadius(4);
-        enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        int maxLife = 25;
+        enemyZombie.add(new LifePart(maxLife));
+        enemyZombie.add(new MovingPart(acceleration, maxSpeed, rotationSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
 

@@ -32,16 +32,14 @@ public class EnemyPlugin implements IGamePluginService {
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
-        float deacceleration = 10;
-        float acceleration = 200;
+        float acceleration = 2450;
         float maxSpeed = 300;
-        float rotationSpeed = 5;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
-        enemyZombie.add(new LifePart(3));
-       // enemyZombie.setRadius(4);
-        enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        int maxLife = 50;
+        enemyZombie.add(new LifePart(maxLife));
+        enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
         
