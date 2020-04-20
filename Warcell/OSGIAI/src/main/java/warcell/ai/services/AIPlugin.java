@@ -5,10 +5,14 @@
  */
 package warcell.ai.services;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.xguzm.pathfinding.gdxbridge.NavTmxMapLoader;
+import org.xguzm.pathfinding.gdxbridge.NavigationTiledMapLayer;
+import org.xguzm.pathfinding.grid.GridCell;
+import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
 import warcell.common.ai.AISPI;
-import warcell.common.data.Entity;
-import warcell.common.data.World;
 import warcell.common.data.entityparts.PositionPart;
 
 /**
@@ -16,20 +20,24 @@ import warcell.common.data.entityparts.PositionPart;
  * @author madsfalken
  */
 public class AIPlugin implements AISPI {
-
-    @Override
-    public void setSourceNode(Entity arg0, World arg1, int arg2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    NavigationTiledMapLayer navigationLayer;
+    AStarGridFinder finder;
 
     @Override
     public void startAI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TiledMap map = new NavTmxMapLoader().load("your/tmx/file.tmx");
+        navigationLayer = (NavigationTiledMapLayer) map.getLayer("navigation");
     }
 
     @Override
-    public ArrayList<PositionPart> getPath() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<PositionPart> getPath() {
+        finder = new AStarGridFinder(navigationLayer.getClass());
+        List<GridCell> path = finder.findPath(0, 0, 0, 0, navigationLayer);
+                
+        return path.stream()
+            .map(gridCell -> new PositionPart(gridCell.getX(), gridCell.getY(), 0))
+            .collect(Collectors.toList());
     }
     
 }

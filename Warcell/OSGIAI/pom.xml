@@ -39,6 +39,16 @@
       <version>1.0-SNAPSHOT</version>
       <type>jar</type>
     </dependency>-->
+    <dependency>
+        <groupId>com.github.xaguzman</groupId>
+        <artifactId>pathfinding</artifactId>
+        <version>0.2.6</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.xaguzman</groupId>
+        <artifactId>pathfinding-gdx-bridge</artifactId>
+        <version>0.2.4</version>
+    </dependency>
   </dependencies>
   
   <build>

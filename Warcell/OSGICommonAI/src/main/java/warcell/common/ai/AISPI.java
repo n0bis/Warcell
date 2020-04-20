@@ -5,9 +5,7 @@
  */
 package warcell.common.ai;
 
-import java.util.ArrayList;
-import warcell.common.data.Entity;
-import warcell.common.data.World;
+import java.util.List;
 import warcell.common.data.entityparts.PositionPart;
 
 /**
@@ -15,7 +13,6 @@ import warcell.common.data.entityparts.PositionPart;
  * @author madsfalken
  */
 public interface AISPI {
-    void setSourceNode(Entity p, World world, int checkpointCount);
     void startAI();
-    ArrayList<PositionPart> getPath();
+    List<PositionPart> getPath();
 }
