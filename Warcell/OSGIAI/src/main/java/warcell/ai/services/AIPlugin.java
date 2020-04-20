@@ -5,6 +5,8 @@
  */
 package warcell.ai.services;
 
+import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +28,8 @@ public class AIPlugin implements AISPI {
 
     @Override
     public void startAI() {
-        TiledMap map = new NavTmxMapLoader().load("your/tmx/file.tmx");
-        navigationLayer = (NavigationTiledMapLayer) map.getLayer("navigation");
+        Map map = new NavTmxMapLoader().load("your/tmx/file.tmx");
+        navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
     }
 
     @Override
