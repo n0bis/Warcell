@@ -5,6 +5,7 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.player.Player;
@@ -17,9 +18,10 @@ public class PlayerProcessor implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         for (Entity entity : world.getEntities(Player.class)) {
-
+            
             PositionPart positionPart = entity.getPart(PositionPart.class);
             MovingPart movingPart = entity.getPart(MovingPart.class);
+            AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             
             // move the Player
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
@@ -34,7 +36,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             
             // angle between the Mouse and the Player
-            double angle = angleBetweenTwoPoints(positionPart.getX(), positionPart.getY(), mouseX, newMouseY);
+            double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
             System.out.println("angle : " + angle);
             positionPart.setRadians((float)angle);
             
