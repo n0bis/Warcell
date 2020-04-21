@@ -4,6 +4,9 @@ package warcell;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,6 +16,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -25,6 +32,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
+import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.utils.Vector2D;
 import warcell.core.managers.GameAssetManager;
 
@@ -39,6 +47,8 @@ public class Game implements ApplicationListener {
     private static List<IPostEntityProcessingService> postEntityProcessorList = new CopyOnWriteArrayList<>();
     private SpriteBatch textureSpriteBatch;
     private GameAssetManager gameAssetManager;
+    private TiledMap map;
+    private TiledMapRenderer renderer;
 
     public Game(){
         gameAssetManager = new GameAssetManager();
@@ -87,6 +97,7 @@ public class Game implements ApplicationListener {
         //draw();
         drawTextures();
         drawAnimations();
+        drawMap();
     }
 
     private void update() {
@@ -118,6 +129,20 @@ public class Game implements ApplicationListener {
             }
 
             sr.end();
+        }
+    }
+    
+    private void drawMap() {
+        for (Entity e : world.getEntities()) {
+            TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
+            
+            if (tiledMap != null) {
+                map = new TmxMapLoader().load(tiledMap.getSrcPath());
+                renderer = new OrthogonalTiledMapRenderer(map, 1f / 32f);
+
+                renderer.setView(cam);
+                renderer.render();
+            }
         }
     }
     
