@@ -48,7 +48,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new LifePart(maxLife));
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 250f, 206f, 1f, 1f));
         
 
         return player;
