@@ -11,6 +11,7 @@
   <properties>
     <org.osgi.service.http.port>8080</org.osgi.service.http.port>
     <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
+    <netbeans.installation>C:\Netbeans11\NetBeans-11.2\netbeans</netbeans.installation>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
@@ -69,6 +70,32 @@
     <dependency>
       <groupId>warcell.build</groupId>
       <artifactId>OSGiLibGDX</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>OSGiCommonPlayer</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>bundle</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>OSGiPlayer</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>bundle</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>OSGICommon</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>OSGiCommonPlayer</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
