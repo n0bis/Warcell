@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIEnemy
 Built-By: Theod
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1587367893266
+Bnd-LastModified: 1587481175394
 Bundle-ActivationPolicy: lazy
 Import-Package: warcell.common.data;version="1.0.0.SNAPSHOT",warcell.c
  ommon.data.entityparts;version="1.0.0.SNAPSHOT",warcell.common.enemy;

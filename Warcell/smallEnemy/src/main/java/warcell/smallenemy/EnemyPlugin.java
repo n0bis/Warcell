@@ -15,9 +15,9 @@ import warcell.common.utils.Vector2D;
 public class EnemyPlugin implements IGamePluginService {
 
     private String enemyID;
-    private final String walkAnimationPath = "WalkingAnimation.png";
-    private final int walkAnimationFrameColumns = 5;
-    private final int walkAnimationFrameRows = 3;
+    private final String walkAnimationPath = "smallZombie.png";
+    private final int walkAnimationFrameColumns = 8;
+    private final int walkAnimationFrameRows = 4;
     private final int AMOUNTOFENEMIES;
 
     public EnemyPlugin() {
