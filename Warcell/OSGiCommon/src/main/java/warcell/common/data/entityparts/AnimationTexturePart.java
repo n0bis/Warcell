@@ -21,6 +21,10 @@ public class AnimationTexturePart implements EntityPart {
     private int frameCols;
     private int frameRows;
     private float frameInterval;
+    private float width;
+    private float height;
+    private float scaleX;
+    private float scaleY;
     
     public AnimationTexturePart(Vector2D position, String srcPath, int frameCols, int frameRows, float frameInterval) {
         this.position = position;
@@ -29,6 +33,19 @@ public class AnimationTexturePart implements EntityPart {
         this.frameRows = frameRows;
         this.frameInterval = frameInterval;
         this.stateTime = 0.0f;
+    }
+    
+    public AnimationTexturePart(Vector2D position, String srcPath, int frameCols, int frameRows, float frameInterval, float width, float height, float scaleX, float scaleY) {
+        this.position = position;
+        this.srcPath = srcPath;
+        this.frameCols = frameCols;
+        this.frameRows = frameRows;
+        this.frameInterval = frameInterval;
+        this.stateTime = 0.0f;
+        this.width = width;
+        this.height = height;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
     }
 
     public int getFrameCols() {
@@ -57,6 +74,38 @@ public class AnimationTexturePart implements EntityPart {
 
     public void updateStateTime(float delta) {
         stateTime += delta;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public float getScaleX() {
+        return scaleX;
+    }
+
+    public void setScaleX(float scaleX) {
+        this.scaleX = scaleX;
+    }
+
+    public float getScaleY() {
+        return scaleY;
+    }
+
+    public void setScaleY(float scaleY) {
+        this.scaleY = scaleY;
     }
 
     @Override

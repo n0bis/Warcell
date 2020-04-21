@@ -36,6 +36,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             // angle between the Mouse and the Player
             double angle = angleBetweenTwoPoints(positionPart.getX(), positionPart.getY(), mouseX, newMouseY);
             System.out.println("angle : " + angle);
+            positionPart.setRadians((float)angle);
             
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
