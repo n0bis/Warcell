@@ -13,7 +13,7 @@ public class MapPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world) {
         Entity tiledMap = new Tile();
-        tiledMap.add(new TiledMapPart("/maps/DefaultMap.tmx"));
+        tiledMap.add(new TiledMapPart("/maps/ZombieMap.tmx"));
         world.addEntity(tiledMap);
     }
 

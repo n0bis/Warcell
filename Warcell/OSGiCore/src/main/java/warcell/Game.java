@@ -48,7 +48,9 @@ public class Game implements ApplicationListener {
     private SpriteBatch textureSpriteBatch;
     private GameAssetManager gameAssetManager;
     private TiledMap map;
-    private TiledMapRenderer renderer;
+    private TiledMapRenderer mapRenderer;
+    
+    private float unitScale = 1 / 128f;
 
     public Game(){
         gameAssetManager = new GameAssetManager();
@@ -59,7 +61,7 @@ public class Game implements ApplicationListener {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Warcell";
         cfg.width = 1280;
-        cfg.height = 720;
+        cfg.height = 768;
         cfg.useGL30 = false;
         cfg.resizable = false;
 
@@ -70,9 +72,13 @@ public class Game implements ApplicationListener {
     public void create() {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
-
+        
+        float w = gameData.getDisplayWidth();
+        float h = gameData.getDisplayHeight();
+        
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
+        cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
+        //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
         sr = new ShapeRenderer();
@@ -94,10 +100,9 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
 
         update();
-        //draw();
+        drawMap();
         drawTextures();
         drawAnimations();
-        drawMap();
     }
 
     private void update() {
@@ -138,10 +143,10 @@ public class Game implements ApplicationListener {
             
             if (tiledMap != null) {
                 map = new TmxMapLoader().load(tiledMap.getSrcPath());
-                renderer = new OrthogonalTiledMapRenderer(map, 1f / 32f);
+                mapRenderer = new OrthogonalTiledMapRenderer(map);
 
-                renderer.setView(cam);
-                renderer.render();
+                mapRenderer.setView(cam);
+                mapRenderer.render();
             }
         }
     }
