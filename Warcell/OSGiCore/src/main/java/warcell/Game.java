@@ -4,9 +4,6 @@ package warcell;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,7 +30,6 @@ import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.data.entityparts.TiledMapPart;
-import warcell.common.utils.Vector2D;
 import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
