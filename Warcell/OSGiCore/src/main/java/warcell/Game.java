@@ -170,8 +170,6 @@ public class Game implements ApplicationListener {
                         pp.getY());
                 } else {
                     textureSpriteBatch.draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth()/2, animationTexturePart.getHeight()/2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
-                    System.out.println("OriginX: " + (pp.getX() + animationTexturePart.getWidth()/2) + "OriginY: " + (pp.getY() + animationTexturePart.getHeight()/2));
-                    System.out.println("X : " + pp.getX() + "Y : " + pp.getY());
                 }
             }
 
