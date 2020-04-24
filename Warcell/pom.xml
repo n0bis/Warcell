@@ -23,7 +23,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>warcell</groupId>
-  <artifactId>PaxAteroids</artifactId>
+  <artifactId>Warcell</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>Warcell</name>
@@ -52,6 +52,11 @@
     <module>OSGiCore</module>
     <module>OSGiCommon</module>
     <module>OSGiLibGDX</module>
+    <module>OSGiEnemy</module>
+    <module>OSGiCommonEnemy</module>
+    <module>smallEnemy</module>
+    <module>OSGICommonMap</module>
+    <module>OSGiMap</module>
     <module>OSGICommonAI</module>
     <module>OSGIAI</module>
   </modules>
