@@ -13,18 +13,12 @@ import warcell.common.data.GameData;
  * @author madsfalken
  */
 public class TexturePart implements EntityPart {
-    
+
     private String srcPath;
-
-    /**
-     * Image width
-     */
     private float width;
-
-    /**
-     * Image height
-     */
     private float height;
+    private float scaleX;
+    private float scaleY;
 
     /**
      * Creates a new texture part with a given source path
@@ -32,8 +26,46 @@ public class TexturePart implements EntityPart {
      */
     public TexturePart(String srcPath) {
         this.srcPath = srcPath;
-        this.width = 20;
-        this.height = 20;
+    }
+
+    public TexturePart(String srcPath, float width, float height, float scaleX, float scaleY) {
+        this.srcPath = srcPath;
+        this.width = width;
+        this.height = height;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+    }
+
+    public float getScaleX() {
+        return scaleX;
+    }
+
+    public void setScaleX(int scaleX) {
+        this.scaleX = scaleX;
+    }
+
+    public float getScaleY() {
+        return scaleY;
+    }
+
+    public void setScaleY(int scaleY) {
+        this.scaleY = scaleY;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     /**
@@ -50,22 +82,6 @@ public class TexturePart implements EntityPart {
      */
     public void setSrcPath(String srcPath) {
         this.srcPath = srcPath;
-    }
-
-    public float getWidth() {
-        return width;
-    }
-
-    public void setWidth(float width) {
-        this.width = width;
-    }
-
-    public float getHeight() {
-        return height;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
     }
 
     @Override

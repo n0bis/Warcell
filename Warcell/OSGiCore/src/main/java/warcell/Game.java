@@ -45,7 +45,7 @@ public class Game implements ApplicationListener {
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
-    
+
     private float unitScale = 1 / 128f;
 
     public Game(){
@@ -68,17 +68,17 @@ public class Game implements ApplicationListener {
     public void create() {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
-        
+
         float w = gameData.getDisplayWidth();
         float h = gameData.getDisplayHeight();
-        
+
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
         sr = new ShapeRenderer();
-        
+
         textureSpriteBatch = new SpriteBatch();
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
@@ -102,6 +102,7 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
+
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);
@@ -132,11 +133,11 @@ public class Game implements ApplicationListener {
             sr.end();
         }
     }
-    
+
     private void drawMap() {
         for (Entity e : world.getEntities()) {
             TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
-            
+
             if (tiledMap != null) {
                 map = new TmxMapLoader().load(tiledMap.getSrcPath());
                 mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -146,26 +147,36 @@ public class Game implements ApplicationListener {
             }
         }
     }
-    
+
     private void drawTextures() {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
         textureSpriteBatch.begin();
 
+
         for (Entity e : world.getEntities()) {
             TexturePart tp = e.getPart(TexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
-            
+
+
             if (tp != null && pp != null) {
                 Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
-                //Sprite sprite = new Sprite(texture);
-                textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
+                if (tp.getHeight() + tp.getWidth() == 0) {
+                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
+                } else {
+                    /* draw(Texture texture, float x, float y,
+                        float originX, float originY, float width, float height,
+                        float scaleX, float scaleY, float rotation,
+                        int srcX, int srcY, int srcWidth, int srcHeight,
+                        boolean flipX, boolean flipY) */
+                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians(), 0, 0, 0, 0, true, true);
+                }
+
             }
 
         }
-
         textureSpriteBatch.end();
     }
-    
+
     private void drawAnimations() {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
         textureSpriteBatch.begin();
@@ -178,11 +189,15 @@ public class Game implements ApplicationListener {
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-                
+
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
-                textureSpriteBatch.draw(currentFrame,
+                if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
+                    textureSpriteBatch.draw(currentFrame,
                         pp.getX(),
                         pp.getY());
+                } else {
+                    textureSpriteBatch.draw(currentFrame, pp.getX(), pp.getY(), pp.getX(), pp.getY(), animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
+                }
             }
 
         }
