@@ -52,8 +52,11 @@
     <module>OSGiCore</module>
     <module>OSGiCommon</module>
     <module>OSGiLibGDX</module>
-    <module>OSGiCommonPlayer</module>
-    <module>OSGiPlayer</module>
+    <module>OSGiEnemy</module>
+    <module>OSGiCommonEnemy</module>
+    <module>smallEnemy</module>
+    <module>OSGICommonMap</module>
+    <module>OSGiMap</module>
   </modules>
 
   <build>
