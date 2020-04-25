@@ -11,7 +11,7 @@ import warcell.common.services.IGamePluginService;
 
 public class DefensePlugin implements IGamePluginService {
     private String entityID;
-    private final String texturePath = "KnifeMove.png";
+    private final String texturePath = "TestChair.png";
     
     public DefensePlugin() {
     }
@@ -41,7 +41,7 @@ public class DefensePlugin implements IGamePluginService {
         int maxLife = 100;
         defense.add(new LifePart(maxLife));
         defense.add(new PositionPart(x, y, radians));
-        defense.add(new TexturePart(texturePath, x, y, 1, 1));
+        defense.add(new TexturePart(texturePath, x, y, 0.5f, 0.5f));
         
 
         return defense;
