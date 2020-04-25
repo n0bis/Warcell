@@ -11,10 +11,10 @@
         <bundle.namespace>warcell</bundle.namespace>
       </properties>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>OSGiCommonPlayer</artifactId>
+    <artifactId>OSGiCommonDefense</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>OSGiCommonPlayer</name>
+    <name>OSGiCommonDefense</name>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>

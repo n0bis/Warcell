@@ -1,4 +1,4 @@
-package warcell.common.player;
+package warcell.common.defense;
 
 import warcell.common.data.Entity;
 
@@ -6,5 +6,5 @@ import warcell.common.data.Entity;
  *
  * @author corfixen
  */
-public class Player extends Entity {
+public class Defense extends Entity {
 }

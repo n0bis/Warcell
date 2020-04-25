@@ -57,6 +57,10 @@
     <module>smallEnemy</module>
     <module>OSGICommonMap</module>
     <module>OSGiMap</module>
+    <module>OSGiPlayer</module>
+    <module>OSGiCommonPlayer</module>
+    <module>OSGiDefense</module>
+    <module>OSGiCommonDefense</module>
   </modules>
 
   <build>
