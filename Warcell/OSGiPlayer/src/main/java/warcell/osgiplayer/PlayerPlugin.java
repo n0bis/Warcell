@@ -13,9 +13,9 @@ import warcell.common.utils.Vector2D;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
-    private final String walkAnimationPath = "KnifeMove.png";
-    private final int walkAnimationFrameColumns = 3;
-    private final int walkAnimationFrameRows = 6;
+    private final String walkAnimationPath = "KnifeIdle.png";
+    private final int walkAnimationFrameColumns = 20;
+    private final int walkAnimationFrameRows = 1;
     
     public PlayerPlugin() {
     }
@@ -48,7 +48,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new LifePart(maxLife));
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 250f, 206f, 1f, 1f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 1f, 1f));
         
 
         return player;
