@@ -46,9 +46,11 @@ public class PlayerProcessor implements IEntityProcessingService {
             positionPart.process(gameData, entity);
             
             //Cycle weapons
-            if (gameData.getKeys().isPressed(GameKeys.Q)) {
+            if (gameData.getKeys().isDown(GameKeys.Q)) {
                 inventoryPart.nextWeapon();
-            } else if (gameData.getKeys().isPressed(GameKeys.E)) {
+                System.out.println("q");
+            } else if (gameData.getKeys().isDown(GameKeys.E)) {
+                System.out.println("e");
                 inventoryPart.previousWeapon();
             }
             

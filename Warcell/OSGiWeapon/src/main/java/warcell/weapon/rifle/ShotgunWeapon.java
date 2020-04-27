@@ -46,6 +46,7 @@ public class ShotgunWeapon implements WeaponsSPI {
 
     @Override
     public void shoot(Entity shooter, GameData gd, World world) {
+        System.out.println("shotgun pew, PAF");
         PositionPart shooterPos = shooter.getPart(PositionPart.class);
 
         float x = shooterPos.getX();
