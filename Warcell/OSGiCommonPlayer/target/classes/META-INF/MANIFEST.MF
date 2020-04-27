@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: warcell.common
 Built-By: Patrick
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1587814343608
+Bnd-LastModified: 1588019902820
 Import-Package: warcell.common.data,warcell.common.player
 Tool: Bnd-0.0.255
 Export-Package: warcell.common.player;uses:="warcell.common.data"
