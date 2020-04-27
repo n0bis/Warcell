@@ -13,6 +13,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -25,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
+import warcell.common.data.entityparts.TiledMapPart;
 import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
@@ -38,6 +43,10 @@ public class Game implements ApplicationListener {
     private static List<IPostEntityProcessingService> postEntityProcessorList = new CopyOnWriteArrayList<>();
     private SpriteBatch textureSpriteBatch;
     private GameAssetManager gameAssetManager;
+    private TiledMap map;
+    private TiledMapRenderer mapRenderer;
+
+    private float unitScale = 1 / 128f;
 
     public Game(){
         gameAssetManager = new GameAssetManager();
@@ -48,7 +57,7 @@ public class Game implements ApplicationListener {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Warcell";
         cfg.width = 1280;
-        cfg.height = 720;
+        cfg.height = 768;
         cfg.useGL30 = false;
         cfg.resizable = false;
 
@@ -60,12 +69,16 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
+        float w = gameData.getDisplayWidth();
+        float h = gameData.getDisplayHeight();
+
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
+        cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
+        //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
         sr = new ShapeRenderer();
-        
+
         textureSpriteBatch = new SpriteBatch();
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
@@ -83,13 +96,13 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
 
         update();
-        //draw();
+        drawMap();
         drawTextures();
         drawAnimations();
     }
 
     private void update() {
-        
+
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);
@@ -120,7 +133,21 @@ public class Game implements ApplicationListener {
             sr.end();
         }
     }
-    
+
+    private void drawMap() {
+        for (Entity e : world.getEntities()) {
+            TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
+
+            if (tiledMap != null) {
+                map = new TmxMapLoader().load(tiledMap.getSrcPath());
+                mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+                mapRenderer.setView(cam);
+                mapRenderer.render();
+            }
+        }
+    }
+
     private void drawTextures() {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
         textureSpriteBatch.begin();
@@ -143,13 +170,13 @@ public class Game implements ApplicationListener {
                         boolean flipX, boolean flipY) */
                     textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians(), 0, 0, 0, 0, true, true);
                 }
-                
+
             }
 
         }
         textureSpriteBatch.end();
     }
-    
+
     private void drawAnimations() {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
         textureSpriteBatch.begin();
@@ -157,12 +184,12 @@ public class Game implements ApplicationListener {
         for (Entity e : world.getEntities()) {
             AnimationTexturePart animationTexturePart = e.getPart(AnimationTexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
-            
+
 
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-                
+
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
                     textureSpriteBatch.draw(currentFrame,

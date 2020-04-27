@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.cbse.playersystem.plugin">
+    <implementation class="warcell.map.MapPlugin"/>
+    <service>
+        <provide interface="warcell.common.services.IGamePluginService"/>
+    </service>
+</scr:component>

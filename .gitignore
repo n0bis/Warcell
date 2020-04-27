@@ -112,6 +112,12 @@ fabric.properties
 *.tar.gz
 *.rar
 
+.DS_Store
+
+*.info
+runner/
+target/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
@@ -189,3 +195,5 @@ hs_err_pid*
 
 /Warcell/OSGiCommon/target/
 /Warcell/OSGiPlayer/target/
+runner/
+target/
