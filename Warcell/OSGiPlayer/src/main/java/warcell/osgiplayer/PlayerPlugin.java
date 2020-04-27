@@ -14,8 +14,8 @@ import warcell.common.utils.Vector2D;
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
     private final String walkAnimationPath = "KnifeIdle.png";
-    private final int walkAnimationFrameColumns = 4;
-    private final int walkAnimationFrameRows = 5;
+    private final int walkAnimationFrameColumns = 20;
+    private final int walkAnimationFrameRows = 1;
     
     public PlayerPlugin() {
     }
