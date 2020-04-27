@@ -59,6 +59,7 @@
     <module>OSGiMap</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGiPlayer</module>
+    <module>CommonWeapon</module>
   </modules>
 
   <build>
