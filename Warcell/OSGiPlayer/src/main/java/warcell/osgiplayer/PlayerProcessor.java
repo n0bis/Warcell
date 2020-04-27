@@ -9,6 +9,7 @@ import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
+import warcell.common.weapon.parts.InventoryPart;
 
 
 public class PlayerProcessor implements IEntityProcessingService {
@@ -20,6 +21,9 @@ public class PlayerProcessor implements IEntityProcessingService {
 
             PositionPart positionPart = entity.getPart(PositionPart.class);
             MovingPart movingPart = entity.getPart(MovingPart.class);
+            InventoryPart inventoryPart = entity.getPart(InventoryPart.class);
+
+            inventoryPart.process(gameData, entity);
             
             // move the Player
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
@@ -35,11 +39,23 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             // angle between the Mouse and the Player
             double angle = angleBetweenTwoPoints(positionPart.getX(), positionPart.getY(), mouseX, newMouseY);
-            System.out.println("angle : " + angle);
+            //System.out.println("angle : " + angle);
             positionPart.setRadians((float)angle);
             
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
+            
+            //Cycle weapons
+            if (gameData.getKeys().isPressed(GameKeys.Q)) {
+                inventoryPart.nextWeapon();
+            } else if (gameData.getKeys().isPressed(GameKeys.E)) {
+                inventoryPart.previousWeapon();
+            }
+            
+            if (gameData.getKeys().isDown(GameKeys.SPACE) && inventoryPart.getCurrentWeapon() != null) {
+                inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
+                System.out.println("pew");
+            }
         }
     }
     /**

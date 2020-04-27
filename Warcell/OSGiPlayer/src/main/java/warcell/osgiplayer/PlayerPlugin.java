@@ -10,6 +10,7 @@ import warcell.common.data.entityparts.PositionPart;
 import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
+import warcell.common.weapon.parts.InventoryPart;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
@@ -50,6 +51,9 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new PositionPart(x, y, radians));
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 250f, 206f, 1f, 1f));
         
+        InventoryPart inventoryPart = new InventoryPart();
+        
+        player.add(inventoryPart);
 
         return player;
     }
