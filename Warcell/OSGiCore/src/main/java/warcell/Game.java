@@ -159,7 +159,7 @@ public class Game implements ApplicationListener {
 
 
             if (tp != null && pp != null) {
-                Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
+                TextureRegion texture = new TextureRegion(gameAssetManager.getTexture(e.getClass(), tp.getSrcPath()));
                 if (tp.getHeight() + tp.getWidth() == 0) {
                     textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
                 } else {
@@ -168,7 +168,7 @@ public class Game implements ApplicationListener {
                         float scaleX, float scaleY, float rotation,
                         int srcX, int srcY, int srcWidth, int srcHeight,
                         boolean flipX, boolean flipY) */
-                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians(), 0, 0, 0, 0, true, true);
+                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians());
                 }
 
             }
