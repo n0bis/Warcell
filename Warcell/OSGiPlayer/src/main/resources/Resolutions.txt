@@ -1,0 +1,54 @@
+FlashlightIdle		= 268 x 168
+
+FlashlightMelee		= 283 x 200
+
+FlashlightMove 		= 271 x 173
+
+HandgunIdle		= 155 x 210
+
+HandgunMelee		= 224 x 253
+
+HandgunMove		= 159 x 213
+
+HandgunReload		= 173 x 212
+
+HandgunShoot		= 154 x 212
+
+KnifeIdle 		= 172 x 235
+
+KnifeMelee		= 269 x 276
+
+KnifeMove		= 175 x 232
+
+RifleIdle		= 155 x 262
+
+RifleMelee		= 317 x 322
+
+RifleMove		= 156 x 263
+
+RifleReload		= 163 x 267
+
+RifleShoot		= 153 x 260
+
+ShotgunIdle		= 155 x 262
+
+ShotgunMelee		= 317 x 321
+
+ShotgunMove		= 156 x 263
+
+ShotgunReload		= 163 x 267
+
+ShotgunShoot		= 153 x 260
+
+
+
+
+
+
+
+
+
+
+
+
+
