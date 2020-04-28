@@ -3,7 +3,7 @@ Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIPlayer
 Built-By: Theod
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1588064209702
+Bnd-LastModified: 1588064546835
 Bundle-ActivationPolicy: lazy
 Import-Package: com.badlogic.gdx,warcell.common.data;version="1.0.0.SN
  APSHOT",warcell.common.data.entityparts;version="1.0.0.SNAPSHOT",warc
