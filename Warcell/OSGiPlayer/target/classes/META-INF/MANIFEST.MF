@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-Description: Generated using Pax-Construct
 Bundle-SymbolicName: OSGIPlayer
-Built-By: prikn
+Built-By: Theod
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1587225050820
+Bnd-LastModified: 1588064209702
 Bundle-ActivationPolicy: lazy
 Import-Package: com.badlogic.gdx,warcell.common.data;version="1.0.0.SN
  APSHOT",warcell.common.data.entityparts;version="1.0.0.SNAPSHOT",warc
@@ -28,5 +28,5 @@ Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-Name: OSGiPlayer
 Private-Package: warcell.internal.*
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.8.0_241
+Build-Jdk: 1.8.0_231
 

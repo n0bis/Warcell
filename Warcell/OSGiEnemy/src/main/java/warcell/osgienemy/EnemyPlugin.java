@@ -17,16 +17,22 @@ public class EnemyPlugin implements IGamePluginService {
     private final String walkAnimationPath = "WalkingAnimation.png";
     private final int walkAnimationFrameColumns = 3;
     private final int walkAnimationFrameRows = 5;
+    private int amountOfEnemies;
     
     public EnemyPlugin() {
+        amountOfEnemies = 8;
     }
-
+    public EnemyPlugin(int amountOfEnemies) {
+        this.amountOfEnemies = amountOfEnemies;
+    }
+    
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        Entity enemy = createEnemyZombie(gameData);
-        enemyID = world.addEntity(enemy);
-        
+        for (int i = 0; i < amountOfEnemies; i++) {
+            Entity enemy = createEnemyZombie(gameData);
+            world.addEntity(enemy);
+        }
     }
 
     private Entity createEnemyZombie(GameData gameData) {
@@ -49,7 +55,8 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(enemyID);
+        for (Entity enemyZombie : world.getEntities(Enemy.class))
+        world.removeEntity(enemyZombie);
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>warcell.Warcell.build</groupId>
@@ -11,7 +11,6 @@
   <properties>
     <org.osgi.service.http.port>8080</org.osgi.service.http.port>
     <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-    <netbeans.installation>C:\Netbeans11\NetBeans-11.2\netbeans</netbeans.installation>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
@@ -75,24 +74,7 @@
     </dependency>
     <dependency>
       <groupId>warcell.build</groupId>
-     
-      <artifactId>OSGiCommonPlayer</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>bundle</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>warcell.build</groupId>
       <artifactId>OSGiCommonEnemy</artifactId>
-     
-      <version>1.0-SNAPSHOT</version>
-      <type>bundle</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>warcell.build</groupId>
-     
-      <artifactId>OSGiPlayer</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
@@ -100,7 +82,6 @@
     <dependency>
       <groupId>warcell.build</groupId>
       <artifactId>OSGiEnemy</artifactId>
-    
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
@@ -119,11 +100,20 @@
     </dependency>
     <dependency>
       <groupId>warcell.build</groupId>
-      <artifactId>smallEnemy</artifactId>
+      <artifactId>OSGiCommonPlayer</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>bundle</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
+      <artifactId>OSGiPlayer</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>bundle</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>warcell.build</groupId>
       <artifactId>OSGiCommonPlayer</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>provided</scope>

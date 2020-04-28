@@ -54,7 +54,6 @@
     <module>OSGiLibGDX</module>
     <module>OSGiEnemy</module>
     <module>OSGiCommonEnemy</module>
-    <module>smallEnemy</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGiPlayer</module>
   </modules>
