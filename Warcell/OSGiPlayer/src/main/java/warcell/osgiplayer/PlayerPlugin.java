@@ -11,6 +11,8 @@ import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
 import warcell.common.weapon.parts.InventoryPart;
+import warcell.common.weapon.parts.ShootingPart;
+import java.util.UUID;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
@@ -50,6 +52,8 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 1f, 1f));
+        UUID uuid = UUID.randomUUID();
+        player.add(new ShootingPart(uuid.toString()));
         
         InventoryPart inventoryPart = new InventoryPart();
         

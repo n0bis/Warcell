@@ -15,6 +15,8 @@ import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
+import warcell.common.weapon.parts.ProjectilePart;
+import warcell.common.weapon.parts.ShootingPart;
 import warcell.common.weapon.service.BulletSPI;
 import warcell.common.weapon.service.WeaponsSPI;
 
@@ -26,6 +28,8 @@ public class RifleWeapon implements WeaponsSPI {
     private final String name = "Colt M4A1";
     private final String description = "Automatic Carbine";
     private final String iconPath = "";
+    private Entity bullet;
+
     
     @Override
     public String getName() {
@@ -42,9 +46,39 @@ public class RifleWeapon implements WeaponsSPI {
         return iconPath;
     }
  
-    
-    
     @Override
+    public void shoot(Entity entity, GameData gameData, World world) {
+        if (entity.getPart(ShootingPart.class) != null) {
+
+            ShootingPart shootingPart = entity.getPart(ShootingPart.class);
+            //Shoot if isShooting is true, ie. space is pressed.
+            if (shootingPart.isShooting()) {
+                PositionPart positionPart = entity.getPart(PositionPart.class);
+                //Add entity radius to initial position to avoid immideate collision.
+                bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
+                System.out.println("rifle pew");
+                shootingPart.setIsShooting(false);
+                world.addEntity(bullet);
+            }
+        }
+    }
+
+    
+    //Could potentially do some shenanigans with differing colours for differing sources.
+    private Entity createBullet(float x, float y, float radians, String uuid) {
+        Entity b = new Bullet();
+
+        b.add(new PositionPart(x, y, radians));
+        b.add(new MovingPart(0, 5000, 300, 0));
+        b.add(new TimerPart(3));
+        // Projectile Part only used for better collision detection     
+        b.add(new ProjectilePart(uuid));
+        b.setRadius(2);
+
+        return b;
+    }
+    
+        /*    @Override
     public void shoot(Entity shooter, GameData gd, World world) {
     System.out.println("rifle pew");
     PositionPart shooterPos = shooter.getPart(PositionPart.class);
@@ -68,5 +102,6 @@ public class RifleWeapon implements WeaponsSPI {
     bullet.setShapeY(new float[2]);
     
     world.addEntity(bullet);
-    }
+    }*/
+
 }
