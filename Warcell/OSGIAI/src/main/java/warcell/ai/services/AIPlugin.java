@@ -22,7 +22,7 @@ import warcell.common.services.IGamePluginService;
  *
  * @author madsfalken
  */
-public class AIPlugin implements AISPI, IGamePluginService {
+public class AIPlugin implements AISPI {
     
     NavigationTiledMapLayer navigationLayer;
     AStarGridFinder finder;
@@ -41,16 +41,6 @@ public class AIPlugin implements AISPI, IGamePluginService {
         return path.stream()
             .map(gridCell -> new PositionPart(gridCell.getX(), gridCell.getY(), 0))
             .collect(Collectors.toList());
-    }
-
-    @Override
-    public void start(GameData gameData, World world) {
-
-    }
-
-    @Override
-    public void stop(GameData gameData, World world) {
-
     }
     
 }
