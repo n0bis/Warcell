@@ -29,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
+import warcell.common.utils.Vector2D;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.core.managers.GameAssetManager;
 
@@ -196,7 +197,7 @@ public class Game implements ApplicationListener {
                         pp.getX(),
                         pp.getY());
                 } else {
-                    textureSpriteBatch.draw(currentFrame, pp.getX(), pp.getY(), pp.getX(), pp.getY(), animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
+                    textureSpriteBatch.draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth()/2, animationTexturePart.getHeight()/2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
                 }
             }
 
