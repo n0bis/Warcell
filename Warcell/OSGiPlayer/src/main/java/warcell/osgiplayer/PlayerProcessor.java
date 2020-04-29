@@ -24,10 +24,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             
             // move the Player
-            movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
-            movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
-            movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
-            movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
+            movingPart.setLeft(gameData.getKeys().isDown(GameKeys.A));
+            movingPart.setRight(gameData.getKeys().isDown(GameKeys.D));
+            movingPart.setUp(gameData.getKeys().isDown(GameKeys.W));
+            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));
             
             // mouse position
             double mouseX = Gdx.input.getX();
