@@ -29,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
+import warcell.common.utils.Vector2D;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.core.managers.GameAssetManager;
 
