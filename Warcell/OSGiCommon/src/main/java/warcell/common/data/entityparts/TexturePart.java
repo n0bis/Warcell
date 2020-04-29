@@ -13,7 +13,7 @@ import warcell.common.data.GameData;
  * @author madsfalken
  */
 public class TexturePart implements EntityPart {
-    
+
     private String srcPath;
     private float width;
     private float height;
@@ -27,7 +27,7 @@ public class TexturePart implements EntityPart {
     public TexturePart(String srcPath) {
         this.srcPath = srcPath;
     }
-    
+
     public TexturePart(String srcPath, float width, float height, float scaleX, float scaleY) {
         this.srcPath = srcPath;
         this.width = width;

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="warcell.osgiplayer.plugin">
-    <implementation class="warcell.osgiplayer.PlayerPlugin"/>
-    <service>
-        <provide interface="warcell.common.services.IGamePluginService"/>
-    </service>
-</scr:component>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="warcell.smallenemy.plugin">
+    <implementation class="warcell.smallenemy.EnemyPlugin"/>
+    <service>
+        <provide interface="warcell.common.services.IGamePluginService"/>
+    </service>
+</scr:component>

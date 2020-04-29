@@ -14,7 +14,7 @@ import warcell.common.utils.Vector2D;
  * @author madsfalken
  */
 public class AnimationTexturePart implements EntityPart {
-    
+
     private float stateTime;
     private Vector2D position;
     private String srcPath;
@@ -25,7 +25,7 @@ public class AnimationTexturePart implements EntityPart {
     private float height;
     private float scaleX;
     private float scaleY;
-    
+
     public AnimationTexturePart(Vector2D position, String srcPath, int frameCols, int frameRows, float frameInterval) {
         this.position = position;
         this.srcPath = srcPath;
@@ -34,7 +34,7 @@ public class AnimationTexturePart implements EntityPart {
         this.frameInterval = frameInterval;
         this.stateTime = 0.0f;
     }
-    
+
     public AnimationTexturePart(Vector2D position, String srcPath, int frameCols, int frameRows, float frameInterval, float width, float height, float scaleX, float scaleY) {
         this.position = position;
         this.srcPath = srcPath;
@@ -67,7 +67,7 @@ public class AnimationTexturePart implements EntityPart {
     public String getSrcPath() {
         return srcPath;
     }
-    
+
     public float getFrameInterval() {
         return frameInterval;
     }
@@ -112,5 +112,5 @@ public class AnimationTexturePart implements EntityPart {
     public void process(GameData gameData, Entity entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
