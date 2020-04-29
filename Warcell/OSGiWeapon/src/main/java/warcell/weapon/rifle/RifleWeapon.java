@@ -5,10 +5,13 @@
  */
 package warcell.weapon.rifle;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TimerPart;
@@ -65,16 +68,20 @@ public class RifleWeapon implements WeaponsSPI {
     }
 
     
+    
     //Could potentially do some shenanigans with differing colours for differing sources.
     private Entity createBullet(float x, float y, float radians, String uuid) {
         Entity b = new Bullet();
 
-        b.add(new PositionPart(x, y, radians));
+        b.add(new PositionPart(x, y, (float) Math.toRadians(radians)));
         b.add(new MovingPart(0, 5000, 300, 0));
         b.add(new TimerPart(3));
+        b.add(new LifePart(1));
         // Projectile Part only used for better collision detection     
-        b.add(new ProjectilePart(uuid));
-        b.setRadius(2);
+        b.add(new ProjectilePart(uuid.toString()));
+        b.setRadius(5);
+
+  
 
         return b;
     }

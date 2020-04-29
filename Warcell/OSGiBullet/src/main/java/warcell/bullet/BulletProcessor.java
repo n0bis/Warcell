@@ -24,7 +24,7 @@ import warcell.common.weapon.entities.Bullet;
  */
 public class BulletProcessor implements IEntityProcessingService {
     Random rand = new Random();
-    
+    private Entity bullet;
     
     @Override
     public void process(GameData gameData, World world) {
@@ -33,8 +33,9 @@ public class BulletProcessor implements IEntityProcessingService {
             PositionPart ppb = b.getPart(PositionPart.class);
             MovingPart mpb = b.getPart(MovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
-            mpb.setUp(true);
+            mpb.setBulletUp(true);
             btp.reduceExpiration(gameData.getDelta());
+            LifePart lpb = b.getPart(LifePart.class);
             //If duration is exceeded, remove the bullet.
             if (btp.getExpiration() < 0) {
                 world.removeEntity(b);
@@ -43,6 +44,7 @@ public class BulletProcessor implements IEntityProcessingService {
             ppb.process(gameData, b);
             mpb.process(gameData, b);
             btp.process(gameData, b);
+            lpb.process(gameData, b);
 
             updateShape(b);
         }
