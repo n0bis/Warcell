@@ -45,6 +45,7 @@ public class Game implements ApplicationListener {
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
+    private boolean mapInit = false;
 
     private float unitScale = 1 / 128f;
 
@@ -83,6 +84,7 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+        drawMap();
 
     }
 
@@ -96,10 +98,13 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
         
         update();
-        drawMap();
         drawTextures();
         drawAnimations();
         draw();
+        if (!mapInit) {
+            drawMap();
+            this.mapInit = true;
+        }
     }
 
     private void update() {

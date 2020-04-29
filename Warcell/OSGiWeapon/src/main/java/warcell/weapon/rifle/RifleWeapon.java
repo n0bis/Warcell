@@ -10,6 +10,7 @@ import static java.lang.Math.sin;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -54,8 +55,13 @@ public class RifleWeapon implements WeaponsSPI {
             //Shoot if isShooting is true, ie. space is pressed.
             if (shootingPart.isShooting()) {
                 PositionPart positionPart = entity.getPart(PositionPart.class);
+                AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
+                double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
+               
+                
                 //Add entity radius to initial position to avoid immideate collision.
-                bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), positionPart.getRadians(), shootingPart.getID());
+                bullet = createBullet(positionPart.getX() + entity.getRadius(), positionPart.getY() + entity.getRadius(), 
+                        positionPart.getRadians(), shootingPart.getID());
                 System.out.println("rifle pew");
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
