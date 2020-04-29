@@ -11,6 +11,7 @@ import warcell.common.data.World;
 import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.weapon.parts.InventoryPart;
+import warcell.common.weapon.service.BulletSPI;
 import warcell.common.weapon.service.WeaponsSPI;
 
 /**
@@ -20,7 +21,7 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class WeaponPlugin implements IGamePluginService {
     private final WeaponsSPI rifle = new RifleWeapon();
     private final WeaponsSPI shotgun = new ShotgunWeapon();
-
+    
     @Override
     public void start(GameData gameData, World world) {
         for (Entity entity : world.getEntities(Player.class)) {

@@ -17,13 +17,12 @@ import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.weapon.entities.Bullet;
-import warcell.common.weapon.service.BulletSPI;
 
 /**
  *
  * @author birke
  */
-public class BulletProcessor implements IEntityProcessingService, BulletSPI {
+public class BulletProcessor implements IEntityProcessingService {
     Random rand = new Random();
     
     
@@ -65,31 +64,4 @@ public class BulletProcessor implements IEntityProcessingService, BulletSPI {
         entity.setShapeY(shapey);
     }
 
-    @Override
-    public Entity createBullet(Entity shooter, GameData gameData) {
-        PositionPart shooterPos = shooter.getPart(PositionPart.class);
-
-        float x = shooterPos.getX();
-        float y = shooterPos.getY();
-        float radians = shooterPos.getRadians();
-        float dt = gameData.getDelta();
-        float speed = 350;
-
-        Entity bullet = new Bullet();
-        bullet.setRadius(2);
-
-        float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
-        float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
-        
-
-        bullet.add(new PositionPart(bx + x, by + y, radians));
-        bullet.add(new LifePart(1));
-        bullet.add(new MovingPart(0, 5000000, speed, 5));
-        bullet.add(new TimerPart(1));
-
-        bullet.setShapeX(new float[2]);
-        bullet.setShapeY(new float[2]);
-
-        return bullet;
-    }
 }
