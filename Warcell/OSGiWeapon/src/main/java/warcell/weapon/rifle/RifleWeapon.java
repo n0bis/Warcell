@@ -72,7 +72,7 @@ public class RifleWeapon implements WeaponsSPI {
     private Entity createBullet(float x, float y, float radians, String uuid) {
         Entity b = new Bullet();
 
-        b.add(new PositionPart(x, y, (float) Math.toRadians(radians)));
+        b.add(new PositionPart(x, y, (float) Math.toRadians(radians+90)));
         b.add(new BulletMovingPart(0, 5000, 300, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
