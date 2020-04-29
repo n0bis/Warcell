@@ -7,12 +7,13 @@ package warcell.common.ai;
 
 import java.util.List;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.TiledMapPart;
 
 /**
  *
  * @author madsfalken
  */
 public interface AISPI {
-    void startAI();
-    List<PositionPart> getPath();
+    void startAI(TiledMapPart tiledMap);
+    List<PositionPart> getPath(PositionPart from, PositionPart target);
 }

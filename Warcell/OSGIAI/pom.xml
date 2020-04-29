@@ -1,68 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-  <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <parent>
     <relativePath>../poms/compiled/</relativePath>
     <groupId>warcell.build</groupId>
     <artifactId>compiled-bundle-settings</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-
-  <properties>
-    <bundle.symbolicName>warcell.ai</bundle.symbolicName>
+    <properties>
+    <bundle.symbolicName>warcell.osgiai</bundle.symbolicName>
     <bundle.namespace>warcell</bundle.namespace>
   </properties>
-
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>OSGIAI</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <name>OSGIAI</name>
-
-  <packaging>bundle</packaging>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>OSGICommonAI</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>OSGiCommon</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <type>jar</type>
-    </dependency>
-    <!--<dependency>
-      <groupId>racing.build</groupId>
-      <artifactId>CommonMap</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>jar</type>
-    </dependency>-->
-    <dependency>
-        <groupId>com.github.xaguzman</groupId>
-        <artifactId>pathfinding</artifactId>
-        <version>0.2.6</version>
-    </dependency>
-    <dependency>
-        <groupId>com.github.xaguzman</groupId>
-        <artifactId>pathfinding-gdx-bridge</artifactId>
-        <version>0.2.4</version>
-      <exclusions>
-        <exclusion>
-          <groupId>pathfinding</groupId>
-          <artifactId>pathfinding</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-     <dependency>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>OSGIAI</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <name>OSGIAI</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>OSGiLibGDX</artifactId>
+            <artifactId>OSGiCommonAI</artifactId>
             <version>${project.version}</version>
         </dependency>
-  </dependencies>
-  
-  <build>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiLibGDX</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiPathfinder</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -70,5 +49,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

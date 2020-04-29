@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="warcell.ai.services.plugin">
-    <implementation class="warcell.ai.services.AIPlugin"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="warcell.ai.plugin">
+    <implementation class="warcell.ai.AIPlugin"/>
     <service>
         <provide interface="warcell.common.ai.AISPI"/>
     </service>
