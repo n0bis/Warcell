@@ -19,6 +19,8 @@ import warcell.common.services.IPostEntityProcessingService;
  */
 public class CollisonProcessor implements IPostEntityProcessingService {
 
+    private int count = 0;
+    
     @Override
     public void process(GameData gameData, World world) {
         if(world == null) {
@@ -27,9 +29,8 @@ public class CollisonProcessor implements IPostEntityProcessingService {
         for (Entity entity1: world.getEntities()) {
             for (Entity entity2: world.getEntities()) {
                 if (!entity1.equals(entity2)){
-                    System.out.println("no collision");
                     if (hasCollided(entity1, entity2)){
-                        System.out.println("collision");
+                        System.out.println("collision" + count++);
                         CollisionPart collisionPart1 = entity1.getPart(CollisionPart.class);
                         CollisionPart collisionPart2 = entity2.getPart(CollisionPart.class);
                         collisionPart1.setIsHitEntity(true);

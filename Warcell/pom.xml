@@ -55,10 +55,10 @@
     <module>OSGiEnemy</module>
     <module>OSGiCommonEnemy</module>
     <module>OSGICommonMap</module>
-    <module>OSGiMap</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGiPlayer</module>
     <module>OSGiCollision</module>
+    <module>OSGiMap</module>
   </modules>
 
   <build>
