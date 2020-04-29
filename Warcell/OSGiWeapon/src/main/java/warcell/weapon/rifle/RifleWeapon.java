@@ -5,12 +5,11 @@
  */
 package warcell.weapon.rifle;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -74,7 +73,7 @@ public class RifleWeapon implements WeaponsSPI {
         Entity b = new Bullet();
 
         b.add(new PositionPart(x, y, (float) Math.toRadians(radians)));
-        b.add(new MovingPart(0, 5000, 300, 0));
+        b.add(new BulletMovingPart(0, 5000, 300, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         // Projectile Part only used for better collision detection     

@@ -11,6 +11,7 @@ import java.util.Random;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -31,9 +32,9 @@ public class BulletProcessor implements IEntityProcessingService {
     
         for (Entity b : world.getEntities(Bullet.class)) {
             PositionPart ppb = b.getPart(PositionPart.class);
-            MovingPart mpb = b.getPart(MovingPart.class);
+            BulletMovingPart mpb = b.getPart(BulletMovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
-            mpb.setBulletUp(true);
+            mpb.setUp(true);
             btp.reduceExpiration(gameData.getDelta());
             LifePart lpb = b.getPart(LifePart.class);
             //If duration is exceeded, remove the bullet.
