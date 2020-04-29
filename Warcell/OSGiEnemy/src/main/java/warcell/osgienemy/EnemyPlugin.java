@@ -4,6 +4,7 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -47,6 +48,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyZombie.add(new LifePart(maxLife));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
+        enemyZombie.add(new CollisionPart(true,0));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
         
         return enemyZombie;

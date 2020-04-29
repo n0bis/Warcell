@@ -4,6 +4,7 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -46,6 +47,7 @@ public class PlayerPlugin implements IGamePluginService {
         float radians = 3.1415f / 2;
         int maxLife = 100;
         player.add(new LifePart(maxLife));
+        player.add(new CollisionPart(true, 0));
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 1f, 1f));
