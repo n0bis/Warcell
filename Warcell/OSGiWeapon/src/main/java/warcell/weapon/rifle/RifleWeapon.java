@@ -28,6 +28,7 @@ public class RifleWeapon implements WeaponsSPI {
     private final String description = "Automatic Carbine";
     private final String iconPath = "";
     private Entity bullet;
+    private float rateOfFire;
 
     
     @Override
@@ -47,11 +48,13 @@ public class RifleWeapon implements WeaponsSPI {
  
     @Override
     public void shoot(Entity entity, GameData gameData, World world) {
+        
+        rateOfFire -= gameData.getDelta();
         if (entity.getPart(ShootingPart.class) != null) {
 
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
             //Shoot if isShooting is true, ie. space is pressed.
-            if (shootingPart.isShooting()) {
+            if (shootingPart.isShooting() && rateOfFire <= 0) {
                 PositionPart positionPart = entity.getPart(PositionPart.class);
                 AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
                
@@ -62,6 +65,7 @@ public class RifleWeapon implements WeaponsSPI {
                 System.out.println("rifle pew");
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
+                rateOfFire += (float) 0.1;
             }
         }
     }
