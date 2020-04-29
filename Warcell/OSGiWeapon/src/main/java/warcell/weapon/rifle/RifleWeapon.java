@@ -5,20 +5,16 @@
  */
 package warcell.weapon.rifle;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
-import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
 import warcell.common.weapon.parts.ShootingPart;
-import warcell.common.weapon.service.BulletSPI;
 import warcell.common.weapon.service.WeaponsSPI;
 
 /**
@@ -56,7 +52,6 @@ public class RifleWeapon implements WeaponsSPI {
             if (shootingPart.isShooting()) {
                 PositionPart positionPart = entity.getPart(PositionPart.class);
                 AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
-                double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
                
                 
                 //Add entity radius to initial position to avoid immideate collision.
