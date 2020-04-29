@@ -31,6 +31,7 @@ public class CollisonProcessor implements IPostEntityProcessingService {
                 if (!entity1.equals(entity2)){
                     if (hasCollided(entity1, entity2)){
                         System.out.println("collision" + count++);
+                        System.out.println(entity1.getClass() + "   collided with   " + entity2.getClass());
                         CollisionPart collisionPart1 = entity1.getPart(CollisionPart.class);
                         CollisionPart collisionPart2 = entity2.getPart(CollisionPart.class);
                         collisionPart1.setIsHitEntity(true);
@@ -48,7 +49,7 @@ public class CollisonProcessor implements IPostEntityProcessingService {
         if (squarePart1 == null || squarePart2 == null || entity1.getClass().equals(entity2.getClass())){
             return false;
         }
-         float distX = squarePart1.getCentreX() - squarePart2.getCentreX();
+        float distX = squarePart1.getCentreX() - squarePart2.getCentreX();
         float distY = squarePart1.getCentreY() - squarePart2.getCentreY();
         float distance = (float)(Math.sqrt(distX*distX + distY*distY));
         return distance < (squarePart1.getRadius() + squarePart2.getRadius()); 

@@ -15,7 +15,7 @@ import warcell.common.utils.Vector2D;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
-    private float playerRadius = 20f;
+    private float playerRadius = 75f;
     private final String walkAnimationPath = "KnifeIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
@@ -48,8 +48,8 @@ public class PlayerPlugin implements IGamePluginService {
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
         int maxLife = 100;
-        float centreX = (float) (Math.random() * (gameData.getDisplayWidth()*0.8+gameData.getDisplayWidth()*0.1));
-        float centreY = gameData.getDisplayHeight();
+        float centreX = 0;
+        float centreY = 0;
         player.add(new SquarePart(centreX, centreY, playerRadius));
         player.add(new LifePart(maxLife));
         player.add(new CollisionPart(true, 0));

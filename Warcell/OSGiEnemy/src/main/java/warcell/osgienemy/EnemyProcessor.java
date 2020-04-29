@@ -3,6 +3,7 @@ package warcell.osgienemy;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -22,6 +23,10 @@ public class EnemyProcessor implements IEntityProcessingService {
             MovingPart movingPart = entity.getPart(MovingPart.class);
             CollisionPart collisionPart = entity.getPart(CollisionPart.class);
             SquarePart circlePart = entity.getPart(SquarePart.class);
+            AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
+            
+            circlePart.setCentreX(positionPart.getX() + animationTexturePart.getWidth()/2);
+            circlePart.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
             
             double random = Math.random();
             movingPart.setLeft(random < 0.2);

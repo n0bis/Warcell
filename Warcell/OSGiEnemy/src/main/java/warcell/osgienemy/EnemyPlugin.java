@@ -16,10 +16,10 @@ import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
     private String enemyID;
-    private float enemyRadius = 20f;
-    private final String walkAnimationPath = "WalkingAnimation.png";
-    private final int walkAnimationFrameColumns = 3;
-    private final int walkAnimationFrameRows = 5;
+    private float enemyRadius = 75f;
+    private final String walkAnimationPath = "ZombieWalk.png";
+    private final int walkAnimationFrameColumns = 17;
+    private final int walkAnimationFrameRows = 1;
     private int amountOfEnemies;
     
     public EnemyPlugin() {
@@ -43,18 +43,18 @@ public class EnemyPlugin implements IGamePluginService {
         
         float acceleration = 100;
         float maxSpeed = 100;
-        float x = gameData.getDisplayWidth() / 3;
-        float y = gameData.getDisplayHeight() / 3;
+        float x = 500;
+        float y = 500;
         float radians = 3.1415f / 2;
         int maxLife = 50;
-        float centreX = (float) (Math.random() * (gameData.getDisplayWidth()*0.8+gameData.getDisplayWidth()*0.1));
-        float centreY = gameData.getDisplayHeight();
+        float centreX = 0;
+        float centreY = 0;
         enemyZombie.add(new SquarePart(centreX, centreY, enemyRadius));
         enemyZombie.add(new LifePart(maxLife));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new CollisionPart(true,0));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 1f, 1f));
         
         return enemyZombie;
     }
