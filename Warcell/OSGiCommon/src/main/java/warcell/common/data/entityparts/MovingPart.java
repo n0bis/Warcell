@@ -31,14 +31,6 @@ public class MovingPart implements EntityPart {
         this.maxSpeed = maxSpeed;
     }
 
-   
-
-    public MovingPart(float acceleration, float maxSpeed, float rotationSpeed) {
-        this.acceleration = acceleration;
-        this.maxSpeed = maxSpeed;
-        this.rotationSpeed = rotationSpeed;
-    }
-
     public float getDx() {
         return dx;
     }
