@@ -63,7 +63,7 @@ public class ShotgunWeapon implements WeaponsSPI {
             float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
 
             bullet.add(new PositionPart(bx + x, by + y, radians + (rand.nextFloat() * (1-2)))); //Accuracy attempt
-            bullet.add(new MovingPart(0, 5000000, speed, 5));
+            bullet.add(new MovingPart(0, 5000, speed, 5));
             bullet.add(new TimerPart(1));
 
             bullet.setShapeX(new float[2]);
