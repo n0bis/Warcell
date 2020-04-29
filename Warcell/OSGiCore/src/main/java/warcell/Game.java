@@ -96,14 +96,13 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
         
         update();
-        draw();
         drawMap();
         drawTextures();
         drawAnimations();
+        draw();
     }
 
     private void update() {
-
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);

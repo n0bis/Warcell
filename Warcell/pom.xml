@@ -59,6 +59,7 @@
 
     <module>OSGiEnemy</module>
     <module>smallEnemy</module>
+    <module>OSGiMap</module>
     <module>OSGiPlayer</module>
     <module>OSGiWeapon</module>
     <module>OSGiBullet</module>
