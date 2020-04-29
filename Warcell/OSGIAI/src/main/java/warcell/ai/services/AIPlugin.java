@@ -6,8 +6,6 @@
 package warcell.ai.services;
 
 import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.xguzm.pathfinding.gdxbridge.NavTmxMapLoader;
@@ -15,13 +13,16 @@ import org.xguzm.pathfinding.gdxbridge.NavigationTiledMapLayer;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
 import warcell.common.ai.AISPI;
+import warcell.common.data.GameData;
+import warcell.common.data.World;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.services.IGamePluginService;
 
 /**
  *
  * @author madsfalken
  */
-public class AIPlugin implements AISPI {
+public class AIPlugin implements AISPI, IGamePluginService {
     
     NavigationTiledMapLayer navigationLayer;
     AStarGridFinder finder;
@@ -40,6 +41,16 @@ public class AIPlugin implements AISPI {
         return path.stream()
             .map(gridCell -> new PositionPart(gridCell.getX(), gridCell.getY(), 0))
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public void start(GameData gameData, World world) {
+
+    }
+
+    @Override
+    public void stop(GameData gameData, World world) {
+
     }
     
 }
