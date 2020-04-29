@@ -17,31 +17,35 @@ public class EnemyPlugin implements IGamePluginService {
     private final String walkAnimationPath = "WalkingAnimation.png";
     private final int walkAnimationFrameColumns = 3;
     private final int walkAnimationFrameRows = 5;
+    private int amountOfEnemies;
     
     public EnemyPlugin() {
+        amountOfEnemies = 8;
     }
-
+    public EnemyPlugin(int amountOfEnemies) {
+        this.amountOfEnemies = amountOfEnemies;
+    }
+    
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
-        Entity enemy = createEnemyZombie(gameData);
-        enemyID = world.addEntity(enemy);
-        
+        for (int i = 0; i < amountOfEnemies; i++) {
+            Entity enemy = createEnemyZombie(gameData);
+            world.addEntity(enemy);
+        }
     }
 
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
-        float deacceleration = 10;
-        float acceleration = 200;
+        float acceleration = 2450;
         float maxSpeed = 300;
-        float rotationSpeed = 5;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
-        enemyZombie.add(new LifePart(3));
-       // enemyZombie.setRadius(4);
-        enemyZombie.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
+        int maxLife = 50;
+        enemyZombie.add(new LifePart(maxLife));
+        enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
         
@@ -51,7 +55,8 @@ public class EnemyPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(enemyID);
+        for (Entity enemyZombie : world.getEntities(Enemy.class))
+        world.removeEntity(enemyZombie);
     }
 
 }
