@@ -3,12 +3,9 @@ package warcell.osgispawner;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
-import warcell.common.data.entityparts.AnimationTexturePart;
-import warcell.common.data.entityparts.LifePart;
-import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.services.IGamePluginService;
-import warcell.common.utils.Vector2D;
+import warcell.common.spawner.Spawner;
 
 public class SpawnerPlugin implements IGamePluginService {
     private String entityID;
@@ -34,16 +31,15 @@ public class SpawnerPlugin implements IGamePluginService {
      * @return the created player
      */
     private Entity createSpawner(GameData gameData) {
-        Entity player = new Spawner();
+        Entity spawner = new Spawner();
 
-        float x = gameData.getDisplayWidth() / 3;
-        float y = gameData.getDisplayHeight() / 3;
+        float x = 500;
+        float y = 500;
         float radians = 3.1415f / 2;
 
-        player.add(new PositionPart(x, y, radians));
-        
+        spawner.add(new PositionPart(x, y, radians));
 
-        return player;
+        return spawner;
     }
 
     @Override

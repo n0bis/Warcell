@@ -56,7 +56,6 @@ public class PlayerProcessor implements IEntityProcessingService {
         double dy = compareY - originY;
         
         double angle = Math.toDegrees(Math.atan2(dy, dx) - 90*Math.PI/180);
-        
         if (angle < 0 ) {
             angle += 360;
         }

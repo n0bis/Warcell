@@ -5,6 +5,9 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.services.IEntityProcessingService;
+import warcell.common.spawner.Spawner;
+import warcell.common.enemy.Enemy;
+
 
 
 public class SpawnerProcessor implements IEntityProcessingService {
@@ -14,7 +17,8 @@ public class SpawnerProcessor implements IEntityProcessingService {
 
         for (Entity entity : world.getEntities(Spawner.class)) {
             
-            PositionPart positionPart = entity.getPart(PositionPart.class);            
+            PositionPart positionPart = entity.getPart(PositionPart.class);
+
             
             positionPart.process(gameData, entity);
         }
