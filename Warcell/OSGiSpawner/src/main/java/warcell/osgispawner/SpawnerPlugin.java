@@ -4,11 +4,13 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.TexturePart;
 import warcell.common.services.IGamePluginService;
 import warcell.common.spawner.Spawner;
 
 public class SpawnerPlugin implements IGamePluginService {
     private String entityID;
+    private final String debugPath = "SpawnerDebug.png";
 
     
     public SpawnerPlugin() {
@@ -38,6 +40,7 @@ public class SpawnerPlugin implements IGamePluginService {
         float radians = 3.1415f / 2;
 
         spawner.add(new PositionPart(x, y, radians));
+        spawner.add(new TexturePart(debugPath));
 
         return spawner;
     }
