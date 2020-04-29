@@ -58,6 +58,8 @@
     <module>OSGiMap</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGiPlayer</module>
+    <module>OSGiCommonSpawner</module>
+    <module>OSGiSpawner</module>
   </modules>
 
   <build>
