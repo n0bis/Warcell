@@ -192,5 +192,8 @@ hs_err_pid*
 /Warcell/OSGiLibGDX/target/
 /Warcell/OSGICommonAI/target/
 *.info
+
+/Warcell/OSGiCommon/target/
+/Warcell/OSGiPlayer/target/
 runner/
 target/
