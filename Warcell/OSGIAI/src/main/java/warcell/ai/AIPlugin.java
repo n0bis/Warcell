@@ -27,19 +27,22 @@ public class AIPlugin implements AISPI {
     
     @Override
     public void startAI(TiledMapPart tiledMap) {
-        //Map map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
-        //navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
+        Map map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
+        navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
     }
 
     @Override
     public List<PositionPart> getPath(PositionPart from, PositionPart target) {
-        /*finder = new AStarGridFinder(navigationLayer.getClass());
-        List<GridCell> path = finder.findPath(0, 0, 0, 0, navigationLayer);
-
-        return path.stream()
+        finder = new AStarGridFinder(navigationLayer.getClass());
+        List<GridCell> path = finder.findPath(Math.round(from.getX()), Math.round(from.getY()), Math.round(target.getX()), Math.round(target.getY()), navigationLayer);
+        
+        System.out.println(path);
+        
+        return null;
+        
+        /*return path.stream()
             .map(gridCell -> new PositionPart(gridCell.getX(), gridCell.getY(), 0))
             .collect(Collectors.toList());*/
-        return null;
     }
 
 }
