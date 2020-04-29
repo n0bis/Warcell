@@ -240,12 +240,14 @@ public class Game implements ApplicationListener {
 
     public void addGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.add(plugin);
+        gameData.setGamePlugins(gamePluginList);
         plugin.start(gameData, world);
 
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.remove(plugin);
+        gameData.setGamePlugins(gamePluginList);
         plugin.stop(gameData, world);
     }
 
