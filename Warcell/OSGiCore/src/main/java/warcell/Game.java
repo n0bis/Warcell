@@ -161,6 +161,9 @@ public class Game implements ApplicationListener {
 
             if (tp != null && pp != null) {
                 Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
+                if (texture == null)
+                    continue;
+                
                 if (tp.getHeight() + tp.getWidth() == 0) {
                     textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
                 } else {
@@ -190,7 +193,10 @@ public class Game implements ApplicationListener {
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-
+                
+                if (animation == null)
+                    continue;
+                
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
                     textureSpriteBatch.draw(currentFrame,

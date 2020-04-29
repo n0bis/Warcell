@@ -32,17 +32,17 @@ public class AIPlugin implements AISPI {
     }
 
     @Override
-    public List<PositionPart> getPath(PositionPart from, PositionPart target) {
+    public List<PositionPart> getPath(PositionPart source, PositionPart target) {
         finder = new AStarGridFinder(navigationLayer.getClass());
-        List<GridCell> path = finder.findPath(Math.round(from.getX()), Math.round(from.getY()), Math.round(target.getX()), Math.round(target.getY()), navigationLayer);
+        List<GridCell> thePath = finder.findPath(Math.round(source.getX()), Math.round(source.getY()), Math.round(target.getX()), Math.round(target.getY()), navigationLayer);
         
-        System.out.println(path);
+        List<PositionPart> pathToEnd = null;
         
-        return null;
+        for (GridCell path : thePath) {
+            pathToEnd.add(new PositionPart(path.getX(), path.getY(), 0));
+        }
         
-        /*return path.stream()
-            .map(gridCell -> new PositionPart(gridCell.getX(), gridCell.getY(), 0))
-            .collect(Collectors.toList());*/
+        return pathToEnd;
     }
 
 }
