@@ -34,6 +34,7 @@ public class EnemyPlugin implements IGamePluginService {
             world.addEntity(enemy);
         }
     }
+    
 
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
