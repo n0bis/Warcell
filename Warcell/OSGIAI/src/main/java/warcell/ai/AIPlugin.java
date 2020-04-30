@@ -28,13 +28,10 @@ import warcell.common.data.entityparts.TiledMapPart;
 public class AIPlugin implements AISPI {
 
     NavigationTiledMapLayer navigationLayer;
-    GridFinderOptions opt = new GridFinderOptions();
-    AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
+    AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
     
     @Override
     public void startAI(TiledMapPart tiledMap) {
-        opt.heuristic = new ManhattanDistance();
-        finder = new AStarGridFinder(GridCell.class, opt);
         Map map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
         navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
     }
@@ -42,17 +39,17 @@ public class AIPlugin implements AISPI {
     @Override
     public List<PositionPart> getPath(PositionPart source, PositionPart target) {
 
-        System.out.println(navigationLayer.getHeight());
-
         int sourceX = Math.round(source.getX()) / 128;
         int sourceY = Math.round(source.getY()) / 128;
         
         int targetX = Math.round(target.getX()) / 128;
         int targetY = Math.round(target.getY()) / 128;
         
+        System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
+        System.out.println("targetX: " + targetX + " targetY: " + targetY);
+        
         List<GridCell> thePath = finder.findPath(sourceX, sourceY, targetX, targetY, navigationLayer);
         
-        System.out.println(thePath);
         if(thePath == null)
             return null;
         
