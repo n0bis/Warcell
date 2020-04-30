@@ -32,17 +32,13 @@ public class EnemyProcessor implements IEntityProcessingService {
         for (Entity entity : world.getEntities(Enemy.class)) {
             
             PositionPart positionPart = entity.getPart(PositionPart.class);
-            System.out.println(positionPart.getX() + " : " + positionPart.getY());
-            System.out.println(playerPos.getX() + " : " + playerPos.getY());
             List<PositionPart> path = ai.getPath(positionPart, playerPos);
-
             MovingPart movingPart = entity.getPart(MovingPart.class);
-            
-            if (path != null) {
-                
-            
+            if (!path.isEmpty()) {
                 double zombieAngle = Math.abs(Math.toDegrees(positionPart.getRadians() * 1));
                 double angle = getAngle(positionPart, path.get(0));
+                positionPart.setRadians((float)angle);
+                System.out.println("angle: " + angle);
 
                 if (zombieAngle > angle - 4 && zombieAngle < angle + 4) {
                     movingPart.setUp(true);
@@ -53,7 +49,6 @@ public class EnemyProcessor implements IEntityProcessingService {
                 if (zombieAngle > angle + 4 && Math.abs(zombieAngle - angle) < 330) {
                     movingPart.setRight(true);
                 }
-            
             }
 
             movingPart.process(gameData, entity);
