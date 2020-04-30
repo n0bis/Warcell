@@ -48,10 +48,14 @@ public class AIPlugin implements AISPI {
         System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
         System.out.println("targetX: " + targetX + " targetY: " + targetY);
         
+        if (sourceX > 9) {
+            sourceX = 9;
+        }
+        
         List<GridCell> thePath = finder.findPath(sourceX, sourceY, targetX, targetY, navigationLayer);
         
         if(thePath == null)
-            return null;
+            return new ArrayList<>();
         
         List<PositionPart> pathToEnd = new ArrayList<>();
         

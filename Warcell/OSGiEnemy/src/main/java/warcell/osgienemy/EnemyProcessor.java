@@ -34,7 +34,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             PositionPart positionPart = entity.getPart(PositionPart.class);
             List<PositionPart> path = ai.getPath(positionPart, playerPos);
             MovingPart movingPart = entity.getPart(MovingPart.class);
-            if (!path.isEmpty() || path != null) {
+            if (!path.isEmpty()) {
                 double zombieAngle = Math.abs(Math.toDegrees(positionPart.getRadians() * 1));
                 double angle = getAngle(positionPart, path.get(0));
                 positionPart.setRadians((float)angle);
