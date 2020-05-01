@@ -52,15 +52,15 @@
     <module>OSGiCore</module>
     <module>OSGiCommon</module>
     <module>OSGiLibGDX</module>
-    <module>OSGiEnemy</module>
-    <module>OSGiCommonEnemy</module>
+    <module>OSGiPathfinder</module>
     <module>OSGICommonMap</module>
     <module>OSGiMap</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGiPlayer</module>
+    <module>OSGiCommonEnemy</module>
+    <module>OSGiEnemy</module>
     <module>OSGICommonAI</module>
     <module>OSGIAI</module>
-    <module>OSGiPathfinder</module>
   </modules>
 
   <build>
