@@ -35,34 +35,46 @@ public class EnemyProcessor implements IEntityProcessingService {
             List<PositionPart> path = ai.getPath(positionPart, playerPos);
             MovingPart movingPart = entity.getPart(MovingPart.class);
             if (!path.isEmpty()) {
-                double zombieAngle = Math.abs(Math.toDegrees(positionPart.getRadians() * 1));
+                
                 double angle = getAngle(positionPart, path.get(0));
                 positionPart.setRadians((float)angle);
-
-                if (zombieAngle > angle - 4 && zombieAngle < angle + 4) {
-                    movingPart.setUp(true);
-                }
-                if (zombieAngle < angle - 4 || Math.abs(zombieAngle - angle) > 330) {
-                    movingPart.setLeft(true);
-                }
-                if (zombieAngle > angle + 4 && Math.abs(zombieAngle - angle) < 330) {
+                if (angle <= 45 || angle >= 315) {
                     movingPart.setRight(true);
+                } else if (angle >= 46 && angle <= 135) {
+                    movingPart.setUp(true);
+                } else if (angle >= 136 && angle <= 225) {
+                    movingPart.setLeft(true);
+                } else if (angle >= 226 && angle <= 314) {
+                    movingPart.setDown(true);
                 }
+            }
+            
+            if (distance(positionPart, playerPos) < 2) {
+                System.out.println("Zomie Attack");
             }
 
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
+            
+            movingPart.setRight(false);
+            movingPart.setLeft(false);
+            movingPart.setUp(false);
+            movingPart.setDown(false);
         }
     }
     
     private double getAngle(PositionPart source, PositionPart target) {
-        double angle = (double) Math.toDegrees(Math.atan2(target.getY() - source.getY(), target.getX() - source.getX()));
+        double angle = Math.toDegrees(Math.atan2(target.getY() - source.getY(), target.getX() - source.getX()));
 
         if (angle < 0) {
             angle += 360;
         }
 
         return angle;
+    }
+    
+    private double distance(PositionPart source, PositionPart target) {
+        return (float)Math.sqrt(Math.pow(target.getX()-source.getX(),2)+Math.pow(target.getY()-source.getY(),2));
     }
     
     /**
