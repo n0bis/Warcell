@@ -42,6 +42,17 @@ public class GameInputProcessor extends InputAdapter {
         }
         if(k == Keys.Q) {
             gameData.getKeys().setKey(GameKeys.Q, true);
+        if(k == Keys.W) {
+            gameData.getKeys().setKey(GameKeys.W, true);
+        }
+        if(k == Keys.A) {
+            gameData.getKeys().setKey(GameKeys.A, true);
+        }
+        if(k == Keys.S) {
+            gameData.getKeys().setKey(GameKeys.S, true);
+        }
+        if(k == Keys.D) {
+            gameData.getKeys().setKey(GameKeys.D, true);
         }
         return true;
     }
@@ -76,6 +87,17 @@ public class GameInputProcessor extends InputAdapter {
         }
         if(k == Keys.Q) {
             gameData.getKeys().setKey(GameKeys.Q, false);
+        if(k == Keys.W) {
+            gameData.getKeys().setKey(GameKeys.W, false);
+        }
+        if(k == Keys.A) {
+            gameData.getKeys().setKey(GameKeys.A, false);
+        }
+        if(k == Keys.S) {
+            gameData.getKeys().setKey(GameKeys.S, false);
+        }
+        if(k == Keys.D) {
+            gameData.getKeys().setKey(GameKeys.D, false);
         }
         return true;
     }
