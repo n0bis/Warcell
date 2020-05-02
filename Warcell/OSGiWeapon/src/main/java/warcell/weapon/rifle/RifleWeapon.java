@@ -28,8 +28,9 @@ public class RifleWeapon implements WeaponsSPI {
     private final String description = "Automatic Carbine";
     private final String iconPath = "";
     private Entity bullet;
-    private float rateOfFire = (float) 0.1;
+    private float rateOfFire = (float) 0.2;
     private float fireDelay;
+    private final int bulletVelocity = 1200;
 
     
     @Override
@@ -74,18 +75,17 @@ public class RifleWeapon implements WeaponsSPI {
     
     
     //Could potentially do some shenanigans with differing colours for differing sources.
-    private Entity createBullet(float x, float y, float radians, String uuid) {
+    @Override
+    public Entity createBullet(float x, float y, float radians, String uuid) {
         Entity b = new Bullet();
 
         b.add(new PositionPart(x, y, (float) Math.toRadians(radians+90)));
-        b.add(new BulletMovingPart(0, 5000, 300, 0));
+        b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));
         b.setRadius(5);
-
-  
 
         return b;
     }

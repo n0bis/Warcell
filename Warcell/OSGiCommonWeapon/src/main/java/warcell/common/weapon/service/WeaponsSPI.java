@@ -19,4 +19,6 @@ public interface WeaponsSPI {
     String getIconPath();
     
     void shoot(Entity entity, GameData gameData, World world);
+    Entity createBullet(float x, float y, float radians, String uuid);
+
 }

@@ -15,9 +15,11 @@ import warcell.common.weapon.parts.ShootingPart;
 
 
 public class PlayerProcessor implements IEntityProcessingService {
-
+    private float weaponChangeDelay;
+    
     @Override
     public void process(GameData gameData, World world) {
+        weaponChangeDelay -= gameData.getDelta();
 
         for (Entity entity : world.getEntities(Player.class)) {
             
@@ -49,12 +51,15 @@ public class PlayerProcessor implements IEntityProcessingService {
             positionPart.process(gameData, entity);
             
             //Cycle weapons
-            if (gameData.getKeys().isDown(GameKeys.Q)) {
+            if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
                 inventoryPart.nextWeapon();
                 System.out.println("q");
-            } else if (gameData.getKeys().isDown(GameKeys.E)) {
+                weaponChangeDelay += 1;
+            } else if (gameData.getKeys().isDown(GameKeys.E) && weaponChangeDelay <= 0) {
                 System.out.println("e");
                 inventoryPart.previousWeapon();
+                weaponChangeDelay += 1;
+
             }
             
             if (gameData.getKeys().isDown(GameKeys.SPACE) && inventoryPart.getCurrentWeapon() != null) {
