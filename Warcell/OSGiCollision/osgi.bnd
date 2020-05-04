@@ -1,0 +1,2 @@
+Bundle-SymbolicName: OSGiCollision
+Service-Component: META-INF/CollisionProcessor.xml

@@ -17,7 +17,7 @@ import warcell.common.services.IPostEntityProcessingService;
  *
  * @author Jonas
  */
-public class CollisonProcessor implements IPostEntityProcessingService {
+public class CollisionProcessor implements IPostEntityProcessingService {
 
     private int count = 0;
     
