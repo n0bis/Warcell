@@ -84,6 +84,7 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+        drawMap();
 
     }
 
@@ -95,15 +96,16 @@ public class Game implements ApplicationListener {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
-
-        update();
+        
         drawMap();
+        update();
         drawTextures();
         drawAnimations();
+        draw();
+
     }
 
     private void update() {
-
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);
