@@ -70,7 +70,8 @@ public class MovingPart implements EntityPart {
 
     public void setUp(boolean up) {
         this.up = up;
-    }
+    }    
+
     
     public void setDown(boolean down){
         this.down = down;
@@ -83,6 +84,7 @@ public class MovingPart implements EntityPart {
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
         float dt = gameData.getDelta();
+        
         
         float vec = (float) sqrt(dx * dx + dy * dy);
         
@@ -138,6 +140,8 @@ public class MovingPart implements EntityPart {
                 dy = -maxSpeed;
             }
         }
+        
+
 
         // deccelerating
         if (!(down||up||left||right)) {

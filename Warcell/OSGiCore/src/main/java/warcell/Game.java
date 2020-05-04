@@ -72,7 +72,7 @@ public class Game implements ApplicationListener {
 
         float w = gameData.getDisplayWidth();
         float h = gameData.getDisplayHeight();
-
+        
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -84,6 +84,7 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+        drawMap();
 
     }
 
@@ -95,15 +96,16 @@ public class Game implements ApplicationListener {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
-
-        update();
+        
         drawMap();
+        update();
         drawTextures();
         drawAnimations();
+        draw();
+
     }
 
     private void update() {
-
         // Update
         for (IEntityProcessingService entityProcessorService : entityProcessorList) {
             entityProcessorService.process(gameData, world);
@@ -160,7 +162,7 @@ public class Game implements ApplicationListener {
 
 
             if (tp != null && pp != null) {
-                Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
+                TextureRegion texture = new TextureRegion(gameAssetManager.getTexture(e.getClass(), tp.getSrcPath()));
                 if (tp.getHeight() + tp.getWidth() == 0) {
                     textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
                 } else {
@@ -169,7 +171,7 @@ public class Game implements ApplicationListener {
                         float scaleX, float scaleY, float rotation,
                         int srcX, int srcY, int srcWidth, int srcHeight,
                         boolean flipX, boolean flipY) */
-                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians(), 0, 0, 0, 0, true, true);
+                    textureSpriteBatch.draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians());
                 }
 
             }
@@ -190,7 +192,10 @@ public class Game implements ApplicationListener {
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-
+                
+                if (animation == null)
+                    continue;
+                
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
                     textureSpriteBatch.draw(currentFrame,
@@ -240,12 +245,16 @@ public class Game implements ApplicationListener {
 
     public void addGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.add(plugin);
+        gameData.setGamePlugins(gamePluginList);
+        gameData.setDisplayWidth(Gdx.graphics.getWidth());
+        gameData.setDisplayHeight(Gdx.graphics.getHeight());
         plugin.start(gameData, world);
 
     }
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.remove(plugin);
+        gameData.setGamePlugins(gamePluginList);
         plugin.stop(gameData, world);
     }
 

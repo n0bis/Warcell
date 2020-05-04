@@ -11,17 +11,24 @@ import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
+import warcell.common.weapon.parts.InventoryPart;
+import warcell.common.weapon.parts.ShootingPart;
 
 
 public class PlayerProcessor implements IEntityProcessingService {
-
+    private float weaponChangeDelay;
+    
     @Override
     public void process(GameData gameData, World world) {
+        weaponChangeDelay -= gameData.getDelta();
 
         for (Entity entity : world.getEntities(Player.class)) {
             
             PositionPart positionPart = entity.getPart(PositionPart.class);
             MovingPart movingPart = entity.getPart(MovingPart.class);
+            InventoryPart inventoryPart = entity.getPart(InventoryPart.class);
+            ShootingPart shootingPart = entity.getPart(ShootingPart.class);
+
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             SquarePart sqp = entity.getPart(SquarePart.class);
             
@@ -29,10 +36,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             sqp.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
             
             // move the Player
-            movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
-            movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
-            movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
-            movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
+            movingPart.setLeft(gameData.getKeys().isDown(GameKeys.A));
+            movingPart.setRight(gameData.getKeys().isDown(GameKeys.D));
+            movingPart.setUp(gameData.getKeys().isDown(GameKeys.W));
+            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));
             
             // mouse position
             double mouseX = Gdx.input.getX();
@@ -44,8 +51,24 @@ public class PlayerProcessor implements IEntityProcessingService {
             double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
             positionPart.setRadians((float)angle);
             
+            inventoryPart.process(gameData, entity);
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
+            
+            //Cycle weapons
+            if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
+                inventoryPart.nextWeapon();
+                weaponChangeDelay += 1;
+            } else if (gameData.getKeys().isDown(GameKeys.E) && weaponChangeDelay <= 0) {
+                inventoryPart.previousWeapon();
+                weaponChangeDelay += 1;
+
+            }
+            
+            if (gameData.getKeys().isDown(GameKeys.SPACE) && inventoryPart.getCurrentWeapon() != null) {
+                shootingPart.setIsShooting(true);
+                inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
+            }
         }
     }
     /**
@@ -61,7 +84,6 @@ public class PlayerProcessor implements IEntityProcessingService {
         double dy = compareY - originY;
         
         double angle = Math.toDegrees(Math.atan2(dy, dx) - 90*Math.PI/180);
-        
         if (angle < 0 ) {
             angle += 360;
         }

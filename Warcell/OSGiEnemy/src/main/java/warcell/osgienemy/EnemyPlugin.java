@@ -37,14 +37,15 @@ public class EnemyPlugin implements IGamePluginService {
             world.addEntity(enemy);
         }
     }
+    
 
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
         float acceleration = 100;
-        float maxSpeed = 100;
-        float x = 500;
-        float y = 500;
+        float maxSpeed = 150;
+        float x = gameData.getDisplayWidth() / 3;
+        float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
         int maxLife = 50;
         float centreX = 0;
@@ -63,7 +64,7 @@ public class EnemyPlugin implements IGamePluginService {
     public void stop(GameData gameData, World world) {
         // Remove entities
         for (Entity enemyZombie : world.getEntities(Enemy.class))
-        world.removeEntity(enemyZombie);
+            world.removeEntity(enemyZombie);
     }
 
 }

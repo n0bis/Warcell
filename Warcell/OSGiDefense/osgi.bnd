@@ -1,0 +1,3 @@
+Bundle-SymbolicName: OSGIDefense
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/entityprocessor.xml, META-INF/gameplugin.xml
