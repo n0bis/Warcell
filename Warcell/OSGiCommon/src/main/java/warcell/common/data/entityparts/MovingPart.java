@@ -17,18 +17,21 @@ public class MovingPart implements EntityPart {
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
     private boolean left, right, up, down;
+    private boolean wrap;
     
 
-    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
+    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed, boolean wrap) {
         this.deceleration = deceleration;
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.rotationSpeed = rotationSpeed;
+        this.wrap = wrap;
     }
     
-    public MovingPart(float acceleration, float maxSpeed){
+    public MovingPart(float acceleration, float maxSpeed, boolean wrap){
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
+        this.wrap = wrap;
     }
 
     public float getDx() {
@@ -151,22 +154,44 @@ public class MovingPart implements EntityPart {
         // set position
         x += dx * dt;
         
-        // wrapping
-        if (x > gameData.getDisplayWidth()) {
-            x = 0;
-        }
-        else if (x < 0) {
-            x = gameData.getDisplayWidth();
-        }
+        if (wrap) {
+            
+            // wrapping
+            if (x > gameData.getDisplayWidth()) {
+                x = -100;
+            }
+            else if (x < -100) {
+                x = gameData.getDisplayWidth();
+            }
 
-        y += dy * dt;
+            y += dy * dt;
 
-        // wrapping
-        if (y > gameData.getDisplayHeight()) {
-            y = 0;
-        }
-        else if (y < 0) {
-            y = gameData.getDisplayHeight();
+            // wrapping
+            if (y > gameData.getDisplayHeight()) {
+                y = -100;
+            }
+            else if (y < -100) {
+                y = gameData.getDisplayHeight();
+            }
+        } else {
+            
+            // wrapping
+            if (x > gameData.getDisplayWidth()) {
+                x = gameData.getDisplayWidth();
+            }
+            else if (x < -100) {
+                x = -100;
+            }
+
+            y += dy * dt;
+
+            // wrapping
+            if (y > gameData.getDisplayHeight()) {
+                y = gameData.getDisplayHeight();
+            }
+            else if (y < -100) {
+                y = -100;
+            }
         }
 
         positionPart.setX(x);

@@ -49,9 +49,9 @@ public class PlayerPlugin implements IGamePluginService {
         float radians = 3.1415f / 2;
         int maxLife = 100;
         player.add(new LifePart(maxLife));
-        player.add(new MovingPart(acceleration, maxSpeed));
+        player.add(new MovingPart(acceleration, maxSpeed, false));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 0.5f, 0.5f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.5f, 0.5f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         

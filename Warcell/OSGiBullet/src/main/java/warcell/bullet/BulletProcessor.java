@@ -37,7 +37,7 @@ public class BulletProcessor implements IEntityProcessingService {
             btp.reduceExpiration(gameData.getDelta());
             LifePart lpb = b.getPart(LifePart.class);
             //If duration is exceeded, remove the bullet.
-            if (btp.getExpiration() < 0) {
+            if (btp.getExpiration() < 0 || mpb.getIsOut()) {
                 world.removeEntity(b);
             }
             
