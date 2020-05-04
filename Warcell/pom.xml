@@ -66,6 +66,7 @@
     <module>OSGiSpawner</module>
     <module>OSGiCommonSpawner</module>
     <module>OSGiMap</module>
+    <module>OSGIAI</module>
   </modules>
 
   <build>
