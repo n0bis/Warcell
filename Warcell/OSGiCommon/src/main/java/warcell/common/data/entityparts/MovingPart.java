@@ -16,7 +16,7 @@ public class MovingPart implements EntityPart {
     private float dx, dy;
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
-    private boolean left, right, up, down, bulletUp;
+    private boolean left, right, up, down;
     
 
     public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
@@ -71,10 +71,7 @@ public class MovingPart implements EntityPart {
     public void setUp(boolean up) {
         this.up = up;
     }    
-    
-    public void setBulletUp(boolean bulletUp) {
-        this.up = bulletUp;
-    }
+
     
     public void setDown(boolean down){
         this.down = down;
@@ -144,10 +141,7 @@ public class MovingPart implements EntityPart {
             }
         }
         
-        if (bulletUp) {
-            dx += cos(radians) * acceleration * dt;
-            dy += sin(radians) * acceleration * dt;
-        }
+
 
         // deccelerating
         if (!(down||up||left||right)) {
