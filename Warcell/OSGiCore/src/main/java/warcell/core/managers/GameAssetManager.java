@@ -39,6 +39,9 @@ public class GameAssetManager {
                     path
             );
             try {
+                if (is == null)
+                    return null;
+                
                 Gdx2DPixmap gmp = new Gdx2DPixmap(is, Gdx2DPixmap.GDX2D_FORMAT_RGBA8888);
                 Pixmap pix = new Pixmap(gmp);
                 texture = new Texture(pix);
@@ -61,8 +64,11 @@ public class GameAssetManager {
             InputStream is = objectClass.getClassLoader().getResourceAsStream(
                     animationTexture.getSrcPath()
             );
-
+            
             try {
+                if (is == null)
+                    return null;
+                
                 Gdx2DPixmap gmp = new Gdx2DPixmap(is, Gdx2DPixmap.GDX2D_FORMAT_RGBA8888);
                 Pixmap pix = new Pixmap(gmp);
                 Texture texture = new Texture(pix);

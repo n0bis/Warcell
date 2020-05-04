@@ -72,7 +72,7 @@ public class Game implements ApplicationListener {
 
         float w = gameData.getDisplayWidth();
         float h = gameData.getDisplayHeight();
-
+        
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -163,6 +163,9 @@ public class Game implements ApplicationListener {
 
             if (tp != null && pp != null) {
                 Texture texture = gameAssetManager.getTexture(e.getClass(), tp.getSrcPath());
+                if (texture == null)
+                    continue;
+                
                 if (tp.getHeight() + tp.getWidth() == 0) {
                     textureSpriteBatch.draw(texture, pp.getX(), pp.getY());
                 } else {
@@ -192,7 +195,10 @@ public class Game implements ApplicationListener {
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-
+                
+                if (animation == null)
+                    continue;
+                
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
                     textureSpriteBatch.draw(currentFrame,
@@ -242,6 +248,8 @@ public class Game implements ApplicationListener {
 
     public void addGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.add(plugin);
+        gameData.setDisplayWidth(Gdx.graphics.getWidth());
+        gameData.setDisplayHeight(Gdx.graphics.getHeight());
         plugin.start(gameData, world);
 
     }

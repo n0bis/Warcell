@@ -1,59 +1,98 @@
 package warcell.osgienemy;
 
+import java.util.List;
+import warcell.common.ai.AISPI;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.enemy.Enemy;
+import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
 
 
 public class EnemyProcessor implements IEntityProcessingService {
 
+    private AISPI ai;
+    private TiledMapPart tiledMap;
+    private PositionPart playerPos;
+    
     @Override
     public void process(GameData gameData, World world) {
-
+        for (Entity entity : world.getEntities()) {
+            tiledMap = entity.getPart(TiledMapPart.class);
+            if (tiledMap != null)
+                ai.startAI(tiledMap);
+        }
+        for (Entity entity : world.getEntities(Player.class)) {
+            playerPos = entity.getPart(PositionPart.class);
+        }
         for (Entity entity : world.getEntities(Enemy.class)) {
-
+            
             PositionPart positionPart = entity.getPart(PositionPart.class);
+            List<PositionPart> path = ai.getPath(positionPart, playerPos);
             MovingPart movingPart = entity.getPart(MovingPart.class);
-            double random = Math.random();
-            movingPart.setLeft(random < 0.2);
-            movingPart.setRight(random > 0.3 && random < 0.5);
-            movingPart.setUp(random > 0.7 && random < 0.9);
-
-           
+            if (!path.isEmpty()) {
+                
+                double angle = getAngle(positionPart, path.get(0));
+                positionPart.setRadians((float)angle);
+                if (angle <= 45 || angle >= 315) {
+                    movingPart.setRight(true);
+                } else if (angle >= 46 && angle <= 135) {
+                    movingPart.setUp(true);
+                } else if (angle >= 136 && angle <= 225) {
+                    movingPart.setLeft(true);
+                } else if (angle >= 226 && angle <= 314) {
+                    movingPart.setDown(true);
+                }
+            }
+            
+            if (distance(positionPart, playerPos) < 2) {
+                System.out.println("Zomie Attack");
+            }
 
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
-            updateShape(entity);
-
+            
+            movingPart.setRight(false);
+            movingPart.setLeft(false);
+            movingPart.setUp(false);
+            movingPart.setDown(false);
         }
     }
+    
+    private double getAngle(PositionPart source, PositionPart target) {
+        double angle = Math.toDegrees(Math.atan2(target.getY() - source.getY(), target.getX() - source.getX()));
 
-    private void updateShape(Entity entity) {
-        float[] shapex = entity.getShapeX();
-        float[] shapey = entity.getShapeY();
-        PositionPart positionPart = entity.getPart(PositionPart.class);
-        float x = positionPart.getX();
-        float y = positionPart.getY();
-        float radians = positionPart.getRadians();
+        if (angle < 0) {
+            angle += 360;
+        }
 
-        shapex[0] = (float) (x + Math.cos(radians) * 8);
-        shapey[0] = (float) (y + Math.sin(radians) * 8);
+        return angle;
+    }
+    
+    private double distance(PositionPart source, PositionPart target) {
+        return (float)Math.sqrt(Math.pow(target.getX()-source.getX(),2)+Math.pow(target.getY()-source.getY(),2));
+    }
+    
+    /**
+     * Declarative service set AI service
+     *
+     * @param ai AI service
+     */
+    public void setAIService(AISPI ai) {
+        this.ai = ai;
 
-        shapex[1] = (float) (x + Math.cos(radians - 4 * 3.1415f / 5) * 8);
-        shapey[1] = (float) (y + Math.sin(radians - 4 * 3.1145f / 5) * 8);
+    }
 
-        shapex[2] = (float) (x + Math.cos(radians + 3.1415f) * 5);
-        shapey[2] = (float) (y + Math.sin(radians + 3.1415f) * 5);
-
-        shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * 8);
-        shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * 8);
-
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
-        
+    /**
+     * Declarative service remove AI service
+     *
+     * @param ai AI service
+     */
+    public void removeAIService(AISPI ai) {
+        this.ai = null;
     }
 }
