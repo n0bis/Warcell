@@ -36,7 +36,7 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float x = 500;
-        float y = 500;
+        float y = 250;
         float radians = 3.1415f / 2;
 
         spawner.add(new PositionPart(x, y, radians));

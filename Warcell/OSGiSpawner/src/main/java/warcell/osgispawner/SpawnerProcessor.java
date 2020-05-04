@@ -25,10 +25,12 @@ public class SpawnerProcessor implements IEntityProcessingService {
                     if (plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
                         //Found the plugin just call start()
                         while (world.getEntities(Enemy.class).size() < 5) {
-                            plugin.start(gameData, world);
-                            PositionPart ppE = world.getEntities(Enemy.class).get(world.getEntities(Enemy.class).size()-1).getPart(PositionPart.class);
-                            ppE.setX(positionPart.getX() + r.nextInt(100)-50);
-                            ppE.setY(positionPart.getY() + r.nextInt(100)-50);
+                            if (r.nextInt(20) < 10){
+                                plugin.start(gameData, world);
+                                PositionPart ppE = world.getEntities(Enemy.class).get(world.getEntities(Enemy.class).size()-1).getPart(PositionPart.class);
+                                ppE.setX(positionPart.getX() + r.nextInt(100)-50);
+                                ppE.setY(positionPart.getY() + r.nextInt(100)-50);
+                            }
                         }
                     }
                 }

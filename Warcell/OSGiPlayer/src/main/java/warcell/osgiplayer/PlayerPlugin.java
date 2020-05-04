@@ -51,7 +51,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new LifePart(maxLife));
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 1f, 1f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 0.5f, 0.5f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         
