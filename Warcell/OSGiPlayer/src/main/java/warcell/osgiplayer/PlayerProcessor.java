@@ -36,8 +36,6 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.setUp(gameData.getKeys().isDown(GameKeys.W));
             movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));   
             
-            System.out.println("Player x : "+ positionPart.getX()+ "Player y : " + positionPart.getY());
-            
             // mouse position
             double mouseX = Gdx.input.getX();
             double mouseY = Gdx.input.getY();
