@@ -46,7 +46,6 @@ public class Game implements ApplicationListener {
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
-    private boolean mapInit = false;
 
     private float unitScale = 1 / 128f;
 
@@ -98,14 +97,12 @@ public class Game implements ApplicationListener {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
         
+        drawMap();
         update();
         drawTextures();
         drawAnimations();
         draw();
-        if (!mapInit) {
-            drawMap();
-            this.mapInit = true;
-        }
+
     }
 
     private void update() {
