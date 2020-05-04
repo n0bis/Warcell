@@ -5,30 +5,28 @@
  */
 package warcell.common.data.entityparts;
 
-import warcell.common.data.Entity;
-import warcell.common.data.GameData;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import warcell.common.data.Entity;
+import warcell.common.data.GameData;
 
-public class MovingPart implements EntityPart {
+/**
+ *
+ * @author Patrick
+ */
+public class BulletMovingPart implements EntityPart {
 
     private float dx, dy;
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
-    private boolean left, right, up, down;
-    
+    private boolean left, right, up;
 
-    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
+    public BulletMovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
         this.deceleration = deceleration;
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.rotationSpeed = rotationSpeed;
-    }
-    
-    public MovingPart(float acceleration, float maxSpeed){
-        this.acceleration = acceleration;
-        this.maxSpeed = maxSpeed;
     }
 
     public float getDx() {
@@ -70,11 +68,6 @@ public class MovingPart implements EntityPart {
 
     public void setUp(boolean up) {
         this.up = up;
-    }    
-
-    
-    public void setDown(boolean down){
-        this.down = down;
     }
 
     @Override
@@ -84,74 +77,35 @@ public class MovingPart implements EntityPart {
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
         float dt = gameData.getDelta();
-        
-        
-        float vec = (float) sqrt(dx * dx + dy * dy);
-        
-        // moving
+
+        // turning
         if (left) {
-            
-            if (!(up||down)) {
-                dy = 0;
-            }
-            
-            if (vec < maxSpeed) { 
-                dx -= acceleration * dt;
-            } else {
-                dx = -maxSpeed;
-            }
+            radians += rotationSpeed * dt;
         }
 
         if (right) {
-            
-            if (!(up||down)) {
-                dy = 0;
-            }
-            
-            if (vec < maxSpeed) { 
-                dx += acceleration * dt;
-            } else {
-                dx = maxSpeed;
-            }
+            radians -= rotationSpeed * dt;
         }
-           
-        if (up) {
-            
-            if (!(left||right)) {
-                dx = 0;
-            }
-            
-            if (vec < maxSpeed) { 
-                dy += acceleration * dt;
-            } else {
-                dy = maxSpeed;
-            }
-        }
-        
-        if (down) {
-            
-            if (!(left||right)) {
-                dx = 0;
-            }
-            
-            if (vec < maxSpeed) { 
-                dy -= acceleration * dt;
-            } else {
-                dy = -maxSpeed;
-            }
-        }
-        
 
+        // accelerating            
+        if (up) {
+            dx += cos(radians) * acceleration * dt;
+            dy += sin(radians) * acceleration * dt;
+        }
 
         // deccelerating
-        if (!(down||up||left||right)) {
-            dx = 0;
-            dy = 0;
+        float vec = (float) sqrt(dx * dx + dy * dy);
+        if (vec > 0) {
+            dx -= (dx / vec) * deceleration * dt;
+            dy -= (dy / vec) * deceleration * dt;
         }
+        if (vec > maxSpeed) {
+            dx = (dx / vec) * maxSpeed;
+            dy = (dy / vec) * maxSpeed;
+        }
+
         // set position
         x += dx * dt;
-        
-        // wrapping
         if (x > gameData.getDisplayWidth()) {
             x = 0;
         }
@@ -160,8 +114,6 @@ public class MovingPart implements EntityPart {
         }
 
         y += dy * dt;
-
-        // wrapping
         if (y > gameData.getDisplayHeight()) {
             y = 0;
         }
@@ -176,3 +128,4 @@ public class MovingPart implements EntityPart {
     }
 
 }
+
