@@ -93,10 +93,10 @@ public class Game implements ApplicationListener {
 
             if (tiledMap != null) {
                 assetManager = new AssetManager();
-		assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-		assetManager.load(tiledMap.getSrcPath(), TiledMap.class);
-		assetManager.finishLoading();
-		map = assetManager.get(tiledMap.getSrcPath());
+                assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+                assetManager.load(tiledMap.getSrcPath(), TiledMap.class);
+                assetManager.finishLoading();
+                map = assetManager.get(tiledMap.getSrcPath());
                 mapRenderer = new OrthogonalTiledMapRenderer(map);
             }
         }
