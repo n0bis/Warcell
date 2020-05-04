@@ -4,6 +4,8 @@ package warcell;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
@@ -44,6 +46,7 @@ public class Game implements ApplicationListener {
     private static List<IPostEntityProcessingService> postEntityProcessorList = new CopyOnWriteArrayList<>();
     private SpriteBatch textureSpriteBatch;
     private GameAssetManager gameAssetManager;
+    private AssetManager assetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
 
@@ -84,7 +87,20 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-        drawMap();
+
+        for (Entity e : world.getEntities()) {
+            TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
+
+            if (tiledMap != null) {
+                System.out.println(tiledMap.getSrcPath());
+                assetManager = new AssetManager();
+		assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+		assetManager.load(tiledMap.getSrcPath(), TiledMap.class);
+		assetManager.finishLoading();
+		map = assetManager.get(tiledMap.getSrcPath());
+                mapRenderer = new OrthogonalTiledMapRenderer(map);
+            }
+        }
 
     }
 
@@ -138,17 +154,8 @@ public class Game implements ApplicationListener {
     }
 
     private void drawMap() {
-        for (Entity e : world.getEntities()) {
-            TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
-
-            if (tiledMap != null) {
-                map = new TmxMapLoader().load(tiledMap.getSrcPath());
-                mapRenderer = new OrthogonalTiledMapRenderer(map);
-
-                mapRenderer.setView(cam);
-                mapRenderer.render();
-            }
-        }
+        mapRenderer.setView(cam);
+        mapRenderer.render();
     }
 
     private void drawTextures() {
