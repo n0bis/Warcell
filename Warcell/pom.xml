@@ -49,18 +49,20 @@
   <modules>
     <module>poms</module>
     <module>provision</module>
-    <module>OSGiCore</module>
-    <module>OSGiCommon</module>
     <module>OSGiLibGDX</module>
     <module>OSGiPathfinder</module>
+    <module>OSGiCore</module>
+    <module>OSGiCommon</module>
     <module>OSGICommonMap</module>
-    <module>OSGiMap</module>
+    <module>OSGiCommonWeapon</module>
     <module>OSGiCommonPlayer</module>
-    <module>OSGiPlayer</module>
-    <module>OSGiCommonEnemy</module>
-    <module>OSGiEnemy</module>
     <module>OSGICommonAI</module>
+    <module>OSGiEnemy</module>
+    <module>OSGiMap</module>
+    <module>OSGiPlayer</module>
     <module>OSGIAI</module>
+    <module>OSGiWeapon</module>
+    <module>OSGiBullet</module>
   </modules>
 
   <build>
