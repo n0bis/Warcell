@@ -20,7 +20,7 @@ public class EnemyPlugin implements IGamePluginService {
     private int amountOfEnemies;
     
     public EnemyPlugin() {
-        amountOfEnemies = 8;
+        amountOfEnemies = 1;
     }
     public EnemyPlugin(int amountOfEnemies) {
         this.amountOfEnemies = amountOfEnemies;
@@ -34,6 +34,7 @@ public class EnemyPlugin implements IGamePluginService {
             world.addEntity(enemy);
         }
     }
+    
 
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();

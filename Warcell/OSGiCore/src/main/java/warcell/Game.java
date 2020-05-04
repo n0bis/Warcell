@@ -248,6 +248,7 @@ public class Game implements ApplicationListener {
 
     public void addGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.add(plugin);
+        gameData.setGamePlugins(gamePluginList);
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         plugin.start(gameData, world);
@@ -256,6 +257,7 @@ public class Game implements ApplicationListener {
 
     public void removeGamePluginService(IGamePluginService plugin) {
         this.gamePluginList.remove(plugin);
+        gameData.setGamePlugins(gamePluginList);
         plugin.stop(gameData, world);
     }
 
