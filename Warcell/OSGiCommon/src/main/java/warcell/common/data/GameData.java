@@ -4,6 +4,7 @@ import warcell.common.events.Event;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import warcell.common.services.IGamePluginService;
 
 public class GameData {
 
@@ -12,6 +13,7 @@ public class GameData {
     private int displayHeight;
     private final GameKeys keys = new GameKeys();
     private List<Event> events = new CopyOnWriteArrayList<>();
+    private List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
 
     public void addEvent(Event e) {
         events.add(e);
@@ -51,6 +53,14 @@ public class GameData {
 
     public int getDisplayHeight() {
         return displayHeight;
+    }
+    
+    public void setGamePlugins(List<IGamePluginService> gamePluginList) {
+        this.gamePluginList = gamePluginList;
+    }
+    
+    public List<IGamePluginService> getGamePlugins() {
+        return this.gamePluginList;
     }
 
     public <E extends Event> List<Event> getEvents(Class<E> type, String sourceID) {

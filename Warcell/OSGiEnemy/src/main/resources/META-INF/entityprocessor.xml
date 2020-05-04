@@ -4,4 +4,7 @@
     <service>
         <provide interface="warcell.common.services.IEntityProcessingService"/>
     </service>
+    <reference bind="setAIService" cardinality="1..1"
+               interface="warcell.common.ai.AISPI"
+               name="AIService" policy="dynamic" unbind="removeAIService"/>
 </scr:component>
