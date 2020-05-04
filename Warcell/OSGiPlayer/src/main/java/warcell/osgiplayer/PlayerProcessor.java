@@ -45,12 +45,8 @@ public class PlayerProcessor implements IEntityProcessingService {
             // angle between the Mouse and the Player
             double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
             positionPart.setRadians((float)angle);
-            
-            inventoryPart.process(gameData, entity);
-            movingPart.process(gameData, entity);
-            positionPart.process(gameData, entity);
-            
-            //Cycle weapons
+
+            // Cycle weapons
             if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
                 inventoryPart.nextWeapon();
                 weaponChangeDelay += 1;
@@ -59,11 +55,16 @@ public class PlayerProcessor implements IEntityProcessingService {
                 weaponChangeDelay += 1;
 
             }
-            
-            if (gameData.getKeys().isDown(GameKeys.SPACE) && inventoryPart.getCurrentWeapon() != null) {
+            // Shooting
+            if (gameData.getKeys().isDown(GameKeys.LM) && inventoryPart.getCurrentWeapon() != null) {
                 shootingPart.setIsShooting(true);
                 inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
             }
+            
+            // process parts
+            inventoryPart.process(gameData, entity);
+            movingPart.process(gameData, entity);
+            positionPart.process(gameData, entity);
         }
     }
     /**

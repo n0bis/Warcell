@@ -1,5 +1,6 @@
 package warcell.core.managers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import warcell.common.data.GameData;
@@ -100,6 +101,22 @@ public class GameInputProcessor extends InputAdapter {
         }
         if(k == Keys.D) {
             gameData.getKeys().setKey(GameKeys.D, false);
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean touchDown (int x, int y, int pointer, int button) {
+        if (button == Input.Buttons.LEFT) {
+            gameData.getKeys().setKey(GameKeys.LM, true);
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean touchUp(int x, int y, int pointer, int button) {
+        if(button == Input.Buttons.LEFT) {
+            gameData.getKeys().setKey(GameKeys.LM, false);
         }
         return true;
     }
