@@ -53,10 +53,8 @@ public class PlayerProcessor implements IEntityProcessingService {
             //Cycle weapons
             if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
                 inventoryPart.nextWeapon();
-                System.out.println("q");
                 weaponChangeDelay += 1;
             } else if (gameData.getKeys().isDown(GameKeys.E) && weaponChangeDelay <= 0) {
-                System.out.println("e");
                 inventoryPart.previousWeapon();
                 weaponChangeDelay += 1;
 
@@ -65,7 +63,6 @@ public class PlayerProcessor implements IEntityProcessingService {
             if (gameData.getKeys().isDown(GameKeys.SPACE) && inventoryPart.getCurrentWeapon() != null) {
                 shootingPart.setIsShooting(true);
                 inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
-                System.out.println("pew");
             }
         }
     }

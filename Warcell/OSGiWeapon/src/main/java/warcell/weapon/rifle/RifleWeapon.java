@@ -64,7 +64,6 @@ public class RifleWeapon implements WeaponsSPI {
                 //Add entity radius to initial position to avoid immideate collision.
                 bullet = createBullet(positionPart.getX() + animationTexturePart.getWidth()/2, positionPart.getY() + animationTexturePart.getHeight()/2, 
                         positionPart.getRadians(), shootingPart.getID());
-                System.out.println("rifle pew");
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
                 fireDelay += rateOfFire;
