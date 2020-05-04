@@ -92,7 +92,6 @@ public class Game implements ApplicationListener {
             TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
 
             if (tiledMap != null) {
-                System.out.println(tiledMap.getSrcPath());
                 assetManager = new AssetManager();
 		assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
 		assetManager.load(tiledMap.getSrcPath(), TiledMap.class);

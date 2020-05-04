@@ -57,11 +57,11 @@
     <module>OSGiCommonWeapon</module>
     <module>OSGiCommonPlayer</module>
     <module>OSGICommonAI</module>
+    <module>OSGiPlayer</module>
     <module>OSGiEnemy</module>
     <module>OSGiMap</module>
     <module>OSGiDefense</module>
     <module>OSGiCommonDefense</module>
-    <module>OSGiPlayer</module>
     <module>OSGIAI</module>
     <module>OSGiWeapon</module>
     <module>OSGiBullet</module>
