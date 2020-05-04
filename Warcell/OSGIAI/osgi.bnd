@@ -1,0 +1,3 @@
+Bundle-SymbolicName: OSGIAI
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/gameplugin.xml

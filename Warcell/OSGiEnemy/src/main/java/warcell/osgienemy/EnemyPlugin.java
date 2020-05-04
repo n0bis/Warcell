@@ -39,8 +39,8 @@ public class EnemyPlugin implements IGamePluginService {
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
         
-        float acceleration = 2450;
-        float maxSpeed = 300;
+        float acceleration = 100;
+        float maxSpeed = 150;
         float x = gameData.getDisplayWidth() / 3;
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
@@ -48,7 +48,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyZombie.add(new LifePart(maxLife));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f, 234f, 227f, 1f, 1f));
         
         return enemyZombie;
     }
@@ -57,7 +57,7 @@ public class EnemyPlugin implements IGamePluginService {
     public void stop(GameData gameData, World world) {
         // Remove entities
         for (Entity enemyZombie : world.getEntities(Enemy.class))
-        world.removeEntity(enemyZombie);
+            world.removeEntity(enemyZombie);
     }
 
 }
