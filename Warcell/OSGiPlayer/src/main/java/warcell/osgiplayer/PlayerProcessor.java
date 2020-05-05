@@ -18,6 +18,7 @@ import warcell.common.weapon.parts.ShootingPart;
 
 public class PlayerProcessor implements IEntityProcessingService {
     private float weaponChangeDelay;
+    private PlayerState playerstate;
     
     @Override
     public void process(GameData gameData, World world) {
@@ -32,6 +33,8 @@ public class PlayerProcessor implements IEntityProcessingService {
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             SquarePart sqp = entity.getPart(SquarePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
+            
+            playerstate = PlayerState.IDLE;
             
             sqp.setCentreX(positionPart.getX() + animationTexturePart.getWidth()/2);
             sqp.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
@@ -59,12 +62,17 @@ public class PlayerProcessor implements IEntityProcessingService {
             } else if (gameData.getKeys().isDown(GameKeys.E) && weaponChangeDelay <= 0) {
                 inventoryPart.previousWeapon();
                 weaponChangeDelay += 1;
-
             }
+            
+            if (movingPart.isMoving()) {
+                playerstate = PlayerState.MOVING;
+            }
+            
             // Shooting
             if (gameData.getKeys().isDown(GameKeys.LM) && inventoryPart.getCurrentWeapon() != null) {
                 shootingPart.setIsShooting(true);
                 inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
+                playerstate = PlayerState.SHOOTING; 
             }
             
             // process parts
@@ -72,6 +80,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
             lifePart.process(gameData, entity);
+            
+            if (inventoryPart.getCurrentWeapon() != null) {
+                changeSprite(playerstate, inventoryPart.getCurrentWeapon().getName(), animationTexturePart);
+            }
             
             // Check if dead
             if (lifePart.isDead()) {
@@ -116,5 +128,32 @@ public class PlayerProcessor implements IEntityProcessingService {
                 newPoint = gameData.getDisplayHeight();
             }
         return newPoint;
+    }
+    
+    private void changeSprite(PlayerState ps, String weapon, AnimationTexturePart atp) {
+        System.out.println(weapon);
+        switch(ps) {
+            case IDLE:
+                if (weapon.equals("Rifle")) {
+                    atp.setSrcPath("RifleIdle.png", 155, 262, 20, 1, 0.09f);
+                } else if (weapon.equals("Shotgun")) {
+                    atp.setSrcPath("ShotgunIdle.png", 155, 262, 20, 1, 0.09f);
+                }
+                break;
+            case MOVING:
+                if (weapon.equals("Rifle")) {
+                    atp.setSrcPath("RifleMove.png", 156, 263, 20, 1, 0.09f);
+                } else if (weapon.equals("Shotgun")) {
+                    atp.setSrcPath("ShotgunMove.png", 156, 263, 20, 1, 0.09f);
+                }
+                break;
+            case SHOOTING:
+                if (weapon.equals("Rifle")) {
+                    atp.setSrcPath("RifleShoot.png", 153, 260, 3, 1, 0.09f);
+                } else if (weapon.equals("Shotgun")) {
+                    atp.setSrcPath("ShotgunShoot.png", 153, 260, 3, 1, 0.30f);
+                }
+                break;
+        }
     }
 }

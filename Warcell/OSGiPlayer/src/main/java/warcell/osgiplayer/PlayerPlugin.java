@@ -20,7 +20,7 @@ import warcell.common.data.entityparts.DamagePart;
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
     private float playerRadius = 75f;
-    private final String walkAnimationPath = "KnifeIdle.png";
+    private final String walkAnimationPath = "RifleIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
     

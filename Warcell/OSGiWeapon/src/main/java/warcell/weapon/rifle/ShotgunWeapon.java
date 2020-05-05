@@ -15,6 +15,7 @@ import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -32,7 +33,7 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class ShotgunWeapon implements WeaponsSPI {
     Random rand = new Random();
 
-    private final String name = "M870 Remington";
+    private final String name = "Shotgun";
     private final String description = "Pump Shotgun";
     private final String iconPath = "";
     private Entity bullet;
@@ -96,6 +97,7 @@ public class ShotgunWeapon implements WeaponsSPI {
         b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
+        b.add(new DamagePart(20));
         b.add(new SquarePart(x, y, 5f));
         b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     

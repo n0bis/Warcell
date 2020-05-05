@@ -6,10 +6,8 @@
 package warcell.common.data.entityparts;
 
 import warcell.common.data.Entity;
-import warcell.common.data.GameData;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import warcell.common.data.GameData;
 
 public class MovingPart implements EntityPart {
 
@@ -18,6 +16,7 @@ public class MovingPart implements EntityPart {
     private float maxSpeed, rotationSpeed;
     private boolean left, right, up, down;
     private boolean wrap;
+    private boolean isMoving;
     
 
     public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed, boolean wrap) {
@@ -26,12 +25,14 @@ public class MovingPart implements EntityPart {
         this.maxSpeed = maxSpeed;
         this.rotationSpeed = rotationSpeed;
         this.wrap = wrap;
+        this.isMoving = false;
     }
     
     public MovingPart(float acceleration, float maxSpeed, boolean wrap){
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.wrap = wrap;
+        this.isMoving = false;
     }
 
     public float getDx() {
@@ -143,6 +144,9 @@ public class MovingPart implements EntityPart {
                 dy = -maxSpeed;
             }
         }
+        if (down || up || left || right) {
+            isMoving = true;
+        }
         
 
 
@@ -150,6 +154,7 @@ public class MovingPart implements EntityPart {
         if (!(down||up||left||right)) {
             dx = 0;
             dy = 0;
+            isMoving = false;
         }
         // set position
         x += dx * dt;
@@ -198,6 +203,20 @@ public class MovingPart implements EntityPart {
         positionPart.setY(y);
 
         positionPart.setRadians(radians);
+    }
+
+    /**
+     * @return the isMoving
+     */
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    /**
+     * @param isMoving the isMoving to set
+     */
+    public void setIsMoving(boolean isMoving) {
+        this.isMoving = isMoving;
     }
 
 }

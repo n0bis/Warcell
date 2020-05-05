@@ -57,18 +57,18 @@
     <module>OSGICommonMap</module>
     <module>OSGiCommonWeapon</module>
     <module>OSGICommonAI</module>
+    <module>OSGiCommonDefense</module>
+    <module>OSGiCommonSpawner</module>
+    <module>OSGiCommonEnemy</module>
     <module>OSGiPlayer</module>
     <module>OSGiEnemy</module>
     <module>OSGiDefense</module>
-    <module>OSGiCommonDefense</module>
-    <module>OSGiCommonSpawner</module>
+    <module>OSGiWeapon</module>
     <module>OSGiCollision</module>
     <module>OSGiMap</module>
     <module>OSGIAI</module>
-    <module>OSGiWeapon</module>
     <module>OSGiBullet</module>
     <module>OSGiSpawner</module>
-    <module>OSGiCommonEnemy</module>
   </modules>
 
   <build>
