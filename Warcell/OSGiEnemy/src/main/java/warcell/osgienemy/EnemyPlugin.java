@@ -4,9 +4,11 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.services.IGamePluginService;
@@ -14,9 +16,10 @@ import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
     private String enemyID;
-    private final String walkAnimationPath = "WalkingAnimation.png";
-    private final int walkAnimationFrameColumns = 3;
-    private final int walkAnimationFrameRows = 5;
+    private float enemyRadius = 75f;
+    private final String walkAnimationPath = "ZombieWalk.png";
+    private final int walkAnimationFrameColumns = 17;
+    private final int walkAnimationFrameRows = 1;
     private int amountOfEnemies;
     
     public EnemyPlugin() {
@@ -45,10 +48,14 @@ public class EnemyPlugin implements IGamePluginService {
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
         int maxLife = 50;
+        float centreX = 0;
+        float centreY = 0;
+        enemyZombie.add(new SquarePart(centreX, centreY, enemyRadius));
         enemyZombie.add(new LifePart(maxLife));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.25f, 234f, 227f, 1f, 1f));
+        enemyZombie.add(new CollisionPart(true,0));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 1f, 1f));
         
         return enemyZombie;
     }

@@ -4,9 +4,11 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
@@ -16,6 +18,7 @@ import java.util.UUID;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
+    private float playerRadius = 75f;
     private final String walkAnimationPath = "KnifeIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
@@ -48,7 +51,11 @@ public class PlayerPlugin implements IGamePluginService {
         float y = gameData.getDisplayHeight() / 3;
         float radians = 3.1415f / 2;
         int maxLife = 100;
+        float centreX = 0;
+        float centreY = 0;
+        player.add(new SquarePart(centreX, centreY, playerRadius));
         player.add(new LifePart(maxLife));
+        player.add(new CollisionPart(true, 0));
         player.add(new MovingPart(acceleration, maxSpeed));
         player.add(new PositionPart(x, y, radians));
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 224f, 289f, 1f, 1f));

@@ -8,6 +8,7 @@ import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.weapon.parts.InventoryPart;
@@ -29,6 +30,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
 
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
+            SquarePart sqp = entity.getPart(SquarePart.class);
+            
+            sqp.setCentreX(positionPart.getX() + animationTexturePart.getWidth()/2);
+            sqp.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
             
             // move the Player
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.A));
