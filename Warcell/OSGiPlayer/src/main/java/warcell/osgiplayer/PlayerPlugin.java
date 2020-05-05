@@ -63,10 +63,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.5f, 0.5f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
-        
-        InventoryPart inventoryPart = new InventoryPart();
-        
-        player.add(inventoryPart);
+        player.add(new InventoryPart());
 
         return player;
     }

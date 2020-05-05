@@ -131,7 +131,6 @@ public class PlayerProcessor implements IEntityProcessingService {
     }
     
     private void changeSprite(PlayerState ps, String weapon, AnimationTexturePart atp) {
-        System.out.println(weapon);
         switch(ps) {
             case IDLE:
                 if (weapon.equals("Rifle")) {
