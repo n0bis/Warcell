@@ -29,13 +29,6 @@ public class CollisionPart implements EntityPart {
 
     @Override
     public void process(GameData gameData, Entity entity) {
-        PositionPart positionpart = entity.getPart(PositionPart.class);
-        
-        
-         if ((this.isHitEntity() || this.isHitGameMap()) && positionpart != null){
-             
-             
-         }
     }
 
     
