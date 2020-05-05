@@ -98,6 +98,7 @@ public class Game implements ApplicationListener {
                 assetManager.finishLoading();
                 map = assetManager.get(tiledMap.getSrcPath());
                 mapRenderer = new OrthogonalTiledMapRenderer(map);
+                mapRenderer.setView(cam);
             }
         }
 
@@ -153,7 +154,6 @@ public class Game implements ApplicationListener {
     }
 
     private void drawMap() {
-        mapRenderer.setView(cam);
         mapRenderer.render();
     }
 
