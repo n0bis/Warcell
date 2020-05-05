@@ -14,9 +14,11 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.BulletMovingPart;
+import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -94,6 +96,8 @@ public class ShotgunWeapon implements WeaponsSPI {
         b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
+        b.add(new SquarePart(x, y, 5f));
+        b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));
         b.setRadius(5);

@@ -6,6 +6,7 @@ import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
+import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.SquarePart;
@@ -28,9 +29,9 @@ public class PlayerProcessor implements IEntityProcessingService {
             MovingPart movingPart = entity.getPart(MovingPart.class);
             InventoryPart inventoryPart = entity.getPart(InventoryPart.class);
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
-
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             SquarePart sqp = entity.getPart(SquarePart.class);
+            LifePart lifePart = entity.getPart(LifePart.class);
             
             sqp.setCentreX(positionPart.getX() + animationTexturePart.getWidth()/2);
             sqp.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
@@ -70,6 +71,13 @@ public class PlayerProcessor implements IEntityProcessingService {
             inventoryPart.process(gameData, entity);
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
+            lifePart.process(gameData, entity);
+            
+            // Check if dead
+            if (lifePart.isDead()) {
+                world.removeEntity(entity);
+                System.out.println("PLAYER DEAD");
+            }
         }
     }
     /**

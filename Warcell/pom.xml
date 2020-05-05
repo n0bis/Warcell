@@ -68,6 +68,7 @@
     <module>OSGiWeapon</module>
     <module>OSGiBullet</module>
     <module>OSGiSpawner</module>
+    <module>OSGiCommonEnemy</module>
   </modules>
 
   <build>

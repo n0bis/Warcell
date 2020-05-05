@@ -15,6 +15,7 @@ import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.weapon.entities.Bullet;
@@ -33,9 +34,16 @@ public class BulletProcessor implements IEntityProcessingService {
             PositionPart ppb = b.getPart(PositionPart.class);
             BulletMovingPart mpb = b.getPart(BulletMovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
-            mpb.setUp(true);
-            btp.reduceExpiration(gameData.getDelta());
             LifePart lpb = b.getPart(LifePart.class);
+            SquarePart sp = b.getPart(SquarePart.class);
+            
+            mpb.setUp(true);
+            
+            sp.setCentreX(ppb.getX());
+            sp.setCentreY(ppb.getY());
+            
+            btp.reduceExpiration(gameData.getDelta());
+         
             //If duration is exceeded, remove the bullet.
             if (btp.getExpiration() < 0 || mpb.getIsOut()) {
                 world.removeEntity(b);
@@ -47,6 +55,10 @@ public class BulletProcessor implements IEntityProcessingService {
             mpb.process(gameData, b);
             btp.process(gameData, b);
             lpb.process(gameData, b);
+            
+            if (lpb.isDead()) {
+                world.removeEntity(b);
+            }
 
             updateShape(b);
         }

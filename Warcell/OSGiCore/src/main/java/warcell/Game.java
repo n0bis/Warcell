@@ -95,7 +95,7 @@ public class Game implements ApplicationListener {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
         
-        System.out.println("Delta: " + gameData.getDelta());
+        //System.out.println("Delta: " + gameData.getDelta());      // debug
         
         drawMap();
         update();
