@@ -11,7 +11,6 @@ import warcell.common.data.World;
 import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.weapon.parts.InventoryPart;
-import warcell.common.weapon.service.BulletSPI;
 import warcell.common.weapon.service.WeaponsSPI;
 
 /**

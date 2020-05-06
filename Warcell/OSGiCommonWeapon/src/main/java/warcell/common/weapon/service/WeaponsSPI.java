@@ -20,5 +20,4 @@ public interface WeaponsSPI {
     
     void shoot(Entity entity, GameData gameData, World world);
     Entity createBullet(float x, float y, float radians, String uuid);
-
 }
