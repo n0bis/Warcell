@@ -157,29 +157,27 @@ public class MovingPart implements EntityPart {
             isMoving = false;
         }
         // set position
-        x += dx * dt;
         
         if (wrap) {
-            
+            x += dx * dt;
             // wrapping
-            if (x > gameData.getDisplayWidth()) {
-                x = -100;
+            if (x > gameData.getDisplayWidth() + 150 && x < gameData.getDisplayWidth() + 300) {
+                x = gameData.getDisplayWidth() + 100;
             }
-            else if (x < -100) {
-                x = gameData.getDisplayWidth();
+            else if (x < -150 && x > -300) {
+                x = -100;
             }
 
             y += dy * dt;
 
-            // wrapping
-            if (y > gameData.getDisplayHeight()) {
+            if (y > gameData.getDisplayHeight() + 150 && y < gameData.getDisplayHeight() + 300) {
+                y = gameData.getDisplayHeight() + 100;
+            }
+            else if (y < -150 && y > - 300) {
                 y = -100;
             }
-            else if (y < -100) {
-                y = gameData.getDisplayHeight();
-            }
         } else {
-            
+            x += dx * dt;
             // wrapping
             if (x > gameData.getDisplayWidth()) {
                 x = gameData.getDisplayWidth();
