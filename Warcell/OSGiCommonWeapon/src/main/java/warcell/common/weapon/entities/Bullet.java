@@ -7,10 +7,6 @@ package warcell.common.weapon.entities;
 
 import warcell.common.data.Entity;
 
-/**
- *
- * @author Emil
- */
 public class Bullet extends Entity {
 
 }
