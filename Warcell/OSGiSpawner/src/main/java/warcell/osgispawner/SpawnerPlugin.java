@@ -4,6 +4,7 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SpawnerPart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.services.IGamePluginService;
 import warcell.common.spawner.Spawner;
@@ -35,12 +36,13 @@ public class SpawnerPlugin implements IGamePluginService {
     private Entity createSpawner(GameData gameData) {
         Entity spawner = new Spawner();
 
-        float x = 500;
-        float y = 250;
+        float x = 2000;
+        float y = 2000;
         float radians = 3.1415f / 2;
 
         spawner.add(new PositionPart(x, y, radians));
         spawner.add(new TexturePart(debugPath));
+        spawner.add(new SpawnerPart(2, 8));
 
         return spawner;
     }
