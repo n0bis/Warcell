@@ -82,8 +82,6 @@ public class ShotgunWeapon implements WeaponsSPI {
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
                 fireDelay += rateOfFire;
-                System.out.println("shotgun pew");
-
             }
         }
     }
@@ -107,37 +105,5 @@ public class ShotgunWeapon implements WeaponsSPI {
         return b;
     }
     
-    /*
-    @Override
-    public void shoot(Entity shooter, GameData gd, World world) {
-    System.out.println("shotgun pew, PAF");
-    PositionPart shooterPos = shooter.getPart(PositionPart.class);
-    
-    float x = shooterPos.getX();
-    float y = shooterPos.getY();
-    float radians = shooterPos.getRadians();
-    float speed = 350;
-    ArrayList<Entity> bulletArray = new ArrayList();
-    
-    for (int i = 0; i <= 8; i++) {
-    Entity bullet = new Bullet();
-    bullet.setRadius(2);
-    
-    float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
-    float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
-    
-    bullet.add(new PositionPart(bx + x, by + y, radians + (rand.nextFloat() * (1-2)))); //Accuracy attempt
-    bullet.add(new MovingPart(0, 5000, speed, 5));
-    bullet.add(new TimerPart(1));
-    
-    bullet.setShapeX(new float[2]);
-    bullet.setShapeY(new float[2]);
-    
-    bulletArray.add(bullet);
-    }
-    
-    for (Entity e : bulletArray) {
-    world.addEntity(e);
-    }*/
  }
 

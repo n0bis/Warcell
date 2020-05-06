@@ -93,31 +93,5 @@ public class RifleWeapon implements WeaponsSPI {
 
         return b;
     }
-    
-        /*    @Override
-    public void shoot(Entity shooter, GameData gd, World world) {
-    System.out.println("rifle pew");
-    PositionPart shooterPos = shooter.getPart(PositionPart.class);
-    
-    float x = shooterPos.getX();
-    float y = shooterPos.getY();
-    float radians = shooterPos.getRadians();
-    float speed = 350;
-    
-    Entity bullet = new Bullet();
-    bullet.setRadius(2);
-    
-    float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
-    float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
-    
-    bullet.add(new PositionPart(bx + x, by + y, radians));
-    bullet.add(new MovingPart(0, 5000, speed, 5));
-    bullet.add(new TimerPart(1));
-    
-    bullet.setShapeX(new float[2]);
-    bullet.setShapeY(new float[2]);
-    
-    world.addEntity(bullet);
-    }*/
 
 }
