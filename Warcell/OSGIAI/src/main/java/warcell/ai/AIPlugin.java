@@ -47,20 +47,18 @@ public class AIPlugin implements AISPI {
             int columns = gridCells[0].length;
             
             nodes = new AStarNode[rows][columns];
-            
-            System.out.println("rows: " + rows);
-            System.out.println("columns: " + columns);
            
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
                     GridCell gridCell = gridCells[i][j];
-                    System.out.println("gridX: " + gridCell.getX() + " gridY: " + gridCell.getY());
                     AStarNode node = new AStarNode(gridCell.getX(), gridCell.getY());
                     node.setW(gridCell.isWalkable() ? 1000 : 0);
                     node.setBlock(gridCell.isWalkable());
                     nodes[i][j] = node;
                 }
             }
+            
+            System.out.println(Arrays.toString(nodes));
             
             ai = new AStar(rows, columns);
             ai.setSearchArea(nodes);
@@ -70,25 +68,17 @@ public class AIPlugin implements AISPI {
     @Override
     public List<PositionPart> getPath(PositionPart sourcePart, PositionPart targetPart) {
         
-        AStarNode source = new AStarNode(Math.round(sourcePart.getX()) / 32, Math.round(sourcePart.getY()) / 32);
-        AStarNode target = new AStarNode(Math.round(targetPart.getX()) / 32, Math.round(targetPart.getY()) / 32);
+        /*AStarNode source = new AStarNode(Math.round(sourcePart.getX()), Math.round(sourcePart.getY()));
+        AStarNode target = new AStarNode(Math.round(targetPart.getX()), Math.round(targetPart.getY()));
         ai.setSourceAndTargetNode(source, target);
         
-        ArrayList<AStarNode> nodePath = new ArrayList<>();
-        try {
-            nodePath = (ArrayList<AStarNode>) ai.findPath();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return new ArrayList<>();
-        }
+        ArrayList<AStarNode> nodePath = (ArrayList<AStarNode>) ai.findPath();*/
         
         ArrayList<PositionPart> path = new ArrayList<>();
         
-        for (AStarNode node : nodePath) {
-            int x = node.getRow();
-            int y = node.getCol();
-
-            path.add(new PositionPart(x, y, 0));
-        }
+        /*nodePath.forEach((node) -> {
+            path.add(new PositionPart(node.getRow(), node.getCol(), 0));
+        });*/
         
         return path;
     }
