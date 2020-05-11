@@ -72,9 +72,9 @@ public class ShotgunWeapon implements WeaponsSPI {
                 for (int i = 0; i <= 8; i++) {
                 //Add entity radius to initial position to avoid immideate collision.
                     float angle = (float) Math.toRadians(positionPart.getRadians());
-                float bulletX = (float) (positionPart.getX() + animationTexturePart.getWidth()/2 + 
+                    float bulletX = (float) (positionPart.getX() + animationTexturePart.getWidth()/2 + 
                         (15 * Math.cos(angle) - 65 * Math.sin(angle)));
-                float bulletY = (float) (positionPart.getY() + animationTexturePart.getHeight()/2 + 
+                    float bulletY = (float) (positionPart.getY() + animationTexturePart.getHeight()/2 + 
                         (15 * Math.sin(angle) + 65 * Math.cos(angle)));
                 
                 
