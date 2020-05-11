@@ -70,8 +70,8 @@ public class AIPlugin implements AISPI {
     @Override
     public List<PositionPart> getPath(PositionPart sourcePart, PositionPart targetPart) {
         
-        AStarNode source = new AStarNode(Math.round(sourcePart.getX() / 32), Math.round(sourcePart.getY() / 32));
-        AStarNode target = new AStarNode(Math.round(targetPart.getX() / 32), Math.round(targetPart.getY() / 32));
+        AStarNode source = new AStarNode(Math.round(sourcePart.getX()) / 32, Math.round(sourcePart.getY()) / 32);
+        AStarNode target = new AStarNode(Math.round(targetPart.getX()) / 32, Math.round(targetPart.getY()) / 32);
         ai.setSourceAndTargetNode(source, target);
         
         ArrayList<AStarNode> nodePath = new ArrayList<>();
