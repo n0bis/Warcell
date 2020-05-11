@@ -30,8 +30,6 @@ import warcell.common.data.entityparts.TiledMapPart;
  */
 public class AIPlugin implements AISPI {
     
-    private AStar ai;
-    private AStarNode[][] nodes;
     private Map map;
     private NavigationTiledMapLayer navigationLayer;
     private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
@@ -41,46 +39,36 @@ public class AIPlugin implements AISPI {
         if (map == null) {
             map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
             navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
-            
-            GridCell[][] gridCells = navigationLayer.getNodes();
-            int rows = gridCells.length;
-            int columns = gridCells[0].length;
-            
-            nodes = new AStarNode[rows][columns];
-           
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
-                    GridCell gridCell = gridCells[i][j];
-                    AStarNode node = new AStarNode(gridCell.getX(), gridCell.getY());
-                    node.setW(gridCell.isWalkable() ? 1000 : 0);
-                    node.setBlock(gridCell.isWalkable());
-                    nodes[i][j] = node;
-                }
-            }
-            
-            System.out.println(Arrays.toString(nodes));
-            
-            ai = new AStar(rows, columns);
-            ai.setSearchArea(nodes);
         }
     }
 
     @Override
-    public List<PositionPart> getPath(PositionPart sourcePart, PositionPart targetPart) {
+    public List<PositionPart> getPath(PositionPart source, PositionPart target) {
+        int sourceX = Math.round(source.getX() / 128);
+        int sourceY = Math.round(source.getY() / 128);
         
-        /*AStarNode source = new AStarNode(Math.round(sourcePart.getX()), Math.round(sourcePart.getY()));
-        AStarNode target = new AStarNode(Math.round(targetPart.getX()), Math.round(targetPart.getY()));
-        ai.setSourceAndTargetNode(source, target);
+        int targetX = Math.round(target.getX() / 128);
+        int targetY = Math.round(target.getY() / 128);
         
-        ArrayList<AStarNode> nodePath = (ArrayList<AStarNode>) ai.findPath();*/
+        //System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
+        //System.out.println("targetX: " + targetX + " targetY: " + targetY);
+        List<GridCell> thePath = new ArrayList<>();
+        try {
+            thePath = finder.findPath(sourceX, sourceY, targetX, targetY, navigationLayer);
+        } catch (PathFindingException e) {
+            return new ArrayList<>();
+        }
         
-        ArrayList<PositionPart> path = new ArrayList<>();
+        if(thePath == null)
+            return new ArrayList<>();
         
-        /*nodePath.forEach((node) -> {
-            path.add(new PositionPart(node.getRow(), node.getCol(), 0));
-        });*/
+        List<PositionPart> pathToEnd = new ArrayList<>();
         
-        return path;
+        for (GridCell path : thePath) {
+            pathToEnd.add(new PositionPart(path.getX() * 128, path.getY() * 128, 0));
+        }
+        
+        return pathToEnd;
     }
 
 }
