@@ -41,12 +41,13 @@ public class AIPlugin implements AISPI {
         if (map == null) {
             map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
             navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
-            int rows = navigationLayer.getHeight();
-            int columns = navigationLayer.getWidth();
-            
-            nodes = new AStarNode[rows][columns];
             
             GridCell[][] gridCells = navigationLayer.getNodes();
+            int rows = gridCells.length;
+            int columns = gridCells[0].length;
+            
+            nodes = new AStarNode[rows][columns];
+           
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
                     GridCell gridCell = gridCells[i][j];
@@ -57,6 +58,8 @@ public class AIPlugin implements AISPI {
                 }
             }
             
+            System.out.println(Arrays.toString(nodes));
+            
             ai = new AStar(rows, columns);
             ai.setSearchArea(nodes);
         }
@@ -65,18 +68,18 @@ public class AIPlugin implements AISPI {
     @Override
     public List<PositionPart> getPath(PositionPart sourcePart, PositionPart targetPart) {
         
-        AStarNode source = new AStarNode(Math.round(sourcePart.getX()), Math.round(sourcePart.getY()));
+        /*AStarNode source = new AStarNode(Math.round(sourcePart.getX()), Math.round(sourcePart.getY()));
         AStarNode target = new AStarNode(Math.round(targetPart.getX()), Math.round(targetPart.getY()));
         ai.setSourceAndTargetNode(source, target);
         
-        //Gets path from AStar
-        ArrayList<AStarNode> nodePath = (ArrayList<AStarNode>) ai.findPath();
-        //List to be populated and returned
+        ArrayList<AStarNode> nodePath = (ArrayList<AStarNode>) ai.findPath();*/
+        
         ArrayList<PositionPart> path = new ArrayList<>();
- 
-        nodePath.forEach((node) -> {
+        
+        /*nodePath.forEach((node) -> {
             path.add(new PositionPart(node.getRow(), node.getCol(), 0));
-        });
+        });*/
+        
         return path;
     }
 
