@@ -19,7 +19,7 @@ import warcell.common.data.entityparts.DamagePart;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
-    private float playerRadius = 75f;
+    private float playerRadius = 20f;
     private final String walkAnimationPath = "RifleIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
@@ -60,7 +60,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new CollisionPart(true, 3));
         player.add(new MovingPart(acceleration, maxSpeed, false));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.5f, 0.5f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.25f, 0.25f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         player.add(new InventoryPart());

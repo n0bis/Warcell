@@ -37,11 +37,11 @@ public class AIPlugin implements AISPI {
 
     @Override
     public List<PositionPart> getPath(PositionPart source, PositionPart target) {
-        int sourceX = Math.round(source.getX() / 128);
-        int sourceY = Math.round(source.getY() / 128);
+        int sourceX = Math.round(source.getX() / 32);
+        int sourceY = Math.round(source.getY() / 32);
         
-        int targetX = Math.round(target.getX() / 128);
-        int targetY = Math.round(target.getY() / 128);
+        int targetX = Math.round(target.getX() / 32);
+        int targetY = Math.round(target.getY() / 32);
         
         //System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
         //System.out.println("targetX: " + targetX + " targetY: " + targetY);
@@ -58,7 +58,7 @@ public class AIPlugin implements AISPI {
         List<PositionPart> pathToEnd = new ArrayList<>();
         
         for (GridCell path : thePath) {
-            pathToEnd.add(new PositionPart(path.getX() * 128, path.getY() * 128, 0));
+            pathToEnd.add(new PositionPart(path.getX() * 32, path.getY() * 32, 0));
         }
         
         return pathToEnd;

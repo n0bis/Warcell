@@ -17,7 +17,7 @@ import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
     private String enemyID;
-    private float enemyRadius = 75f;
+    private float enemyRadius = 20f;
     private final String walkAnimationPath = "ZombieWalk.png";
     private final int walkAnimationFrameColumns = 17;
     private final int walkAnimationFrameRows = 1;
@@ -57,7 +57,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new CollisionPart(true,3));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 0.5f, 0.5f));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 0.25f, 0.25f));
         
         return enemyZombie;
     }
