@@ -6,20 +6,13 @@
 package warcell.ai;
 
 import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.math.GridPoint2;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.xguzm.pathfinding.PathFindingException;
 import org.xguzm.pathfinding.gdxbridge.NavTmxMapLoader;
 import org.xguzm.pathfinding.gdxbridge.NavigationTiledMapLayer;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
-import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
-import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
-import warcell.astar.AStar;
-import warcell.astar.AStarNode;
 import warcell.common.ai.AISPI;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TiledMapPart;
