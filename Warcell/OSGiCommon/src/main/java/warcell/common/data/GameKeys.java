@@ -5,7 +5,7 @@ public class GameKeys {
     private static boolean[] keys;
     private static boolean[] pkeys;
 
-    private static final int NUM_KEYS = 14;
+    private static final int NUM_KEYS = 15;
     public static final int UP = 0;
     public static final int LEFT = 1;
     public static final int DOWN = 2;
@@ -20,7 +20,9 @@ public class GameKeys {
     public static final int A = 11;
     public static final int S = 12;
     public static final int D = 13;
+    public static final int LM = 14;
 
+    
     public GameKeys() {
         keys = new boolean[NUM_KEYS];
         pkeys = new boolean[NUM_KEYS];

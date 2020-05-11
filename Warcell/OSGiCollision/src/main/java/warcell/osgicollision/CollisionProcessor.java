@@ -9,8 +9,11 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.DamagePart;
+import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.services.IPostEntityProcessingService;
+import warcell.common.enemy.Enemy;
 
 
 /**
@@ -19,21 +22,36 @@ import warcell.common.services.IPostEntityProcessingService;
  */
 public class CollisionProcessor implements IPostEntityProcessingService {
     
+    float timer1 = 0;
+    float timer2 = 0;
+    
     @Override
     public void process(GameData gameData, World world) {
         if(world == null) {
         throw new IllegalArgumentException("World is null");
     }
         for (Entity entity1: world.getEntities()) {
-            for (Entity entity2: world.getEntities()) {
+            for (Entity entity2: world.getEntities(Enemy.class)) {
                 if (!entity1.equals(entity2)){
                     if (hasCollided(entity1, entity2)){
-                        // System.out.println(entity1.getClass() + "   collided with   " + entity2.getClass());
                         CollisionPart collisionPart1 = entity1.getPart(CollisionPart.class);
                         CollisionPart collisionPart2 = entity2.getPart(CollisionPart.class);
-                        collisionPart1.setIsHitEntity(true);
-                        collisionPart2.setIsHitEntity(true);
+                        LifePart lp1 = entity1.getPart(LifePart.class);
+                        LifePart lp2 = entity2.getPart(LifePart.class);
+                        DamagePart dp1 = entity1.getPart(DamagePart.class);
+                        DamagePart dp2 = entity2.getPart(DamagePart.class);
+                        
+                        if (timer1 > collisionPart1.getMinTimeBetweenCollision()) {
+                            lp2.takeDamage(dp1.getDamage());
+                            timer1 = 0;
+                        }
+
+                        if (timer2 > collisionPart2.getMinTimeBetweenCollision()) {
+                            lp1.takeDamage(dp2.getDamage());
+                        }
                     }
+                    timer1 += gameData.getDelta();
+                    timer2 += gameData.getDelta();
                 }
             }
         }

@@ -37,6 +37,10 @@ public class LifePart implements EntityPart {
     public boolean isDead() {
         return dead;
     }
+    
+    public void takeDamage(int damage) {
+        this.life -= damage;
+    }
 
     
     

@@ -6,10 +6,8 @@
 package warcell.common.data.entityparts;
 
 import warcell.common.data.Entity;
-import warcell.common.data.GameData;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import warcell.common.data.GameData;
 
 public class MovingPart implements EntityPart {
 
@@ -17,18 +15,24 @@ public class MovingPart implements EntityPart {
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
     private boolean left, right, up, down;
+    private boolean wrap;
+    private boolean isMoving;
     
 
-    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
+    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed, boolean wrap) {
         this.deceleration = deceleration;
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.rotationSpeed = rotationSpeed;
+        this.wrap = wrap;
+        this.isMoving = false;
     }
     
-    public MovingPart(float acceleration, float maxSpeed){
+    public MovingPart(float acceleration, float maxSpeed, boolean wrap){
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
+        this.wrap = wrap;
+        this.isMoving = false;
     }
 
     public float getDx() {
@@ -140,6 +144,9 @@ public class MovingPart implements EntityPart {
                 dy = -maxSpeed;
             }
         }
+        if (down || up || left || right) {
+            isMoving = true;
+        }
         
 
 
@@ -147,32 +154,67 @@ public class MovingPart implements EntityPart {
         if (!(down||up||left||right)) {
             dx = 0;
             dy = 0;
+            isMoving = false;
         }
         // set position
-        x += dx * dt;
         
-        // wrapping
-        if (x > gameData.getDisplayWidth()) {
-            x = 0;
-        }
-        else if (x < 0) {
-            x = gameData.getDisplayWidth();
-        }
+        if (wrap) {
+            x += dx * dt;
+            // wrapping
+            if (x > gameData.getDisplayWidth() + 150 && x < gameData.getDisplayWidth() + 300) {
+                x = gameData.getDisplayWidth() + 100;
+            }
+            else if (x < -150 && x > -300) {
+                x = -100;
+            }
 
-        y += dy * dt;
+            y += dy * dt;
 
-        // wrapping
-        if (y > gameData.getDisplayHeight()) {
-            y = 0;
-        }
-        else if (y < 0) {
-            y = gameData.getDisplayHeight();
+            if (y > gameData.getDisplayHeight() + 150 && y < gameData.getDisplayHeight() + 300) {
+                y = gameData.getDisplayHeight() + 100;
+            }
+            else if (y < -150 && y > - 300) {
+                y = -100;
+            }
+        } else {
+            x += dx * dt;
+            // wrapping
+            if (x > gameData.getDisplayWidth()) {
+                x = gameData.getDisplayWidth();
+            }
+            else if (x < -100) {
+                x = -100;
+            }
+
+            y += dy * dt;
+
+            // wrapping
+            if (y > gameData.getDisplayHeight()) {
+                y = gameData.getDisplayHeight();
+            }
+            else if (y < -100) {
+                y = -100;
+            }
         }
 
         positionPart.setX(x);
         positionPart.setY(y);
 
         positionPart.setRadians(radians);
+    }
+
+    /**
+     * @return the isMoving
+     */
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    /**
+     * @param isMoving the isMoving to set
+     */
+    public void setIsMoving(boolean isMoving) {
+        this.isMoving = isMoving;
     }
 
 }

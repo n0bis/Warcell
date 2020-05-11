@@ -37,7 +37,8 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>OSGiLibGDX</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

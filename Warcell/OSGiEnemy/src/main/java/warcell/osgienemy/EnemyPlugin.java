@@ -5,6 +5,7 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
@@ -52,10 +53,11 @@ public class EnemyPlugin implements IGamePluginService {
         float centreY = 0;
         enemyZombie.add(new SquarePart(centreX, centreY, enemyRadius));
         enemyZombie.add(new LifePart(maxLife));
-        enemyZombie.add(new MovingPart(acceleration, maxSpeed));
+        enemyZombie.add(new DamagePart(10, 3));
+        enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new CollisionPart(true,0));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 1f, 1f));
+        enemyZombie.add(new CollisionPart(true,3));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.18f, 227f, 251f, 0.5f, 0.5f));
         
         return enemyZombie;
     }

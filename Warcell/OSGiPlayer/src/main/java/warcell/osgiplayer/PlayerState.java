@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package warcell.common.weapon.entities;
+package warcell.osgiplayer;
 
-import warcell.common.data.Entity;
-
-public class Bullet extends Entity {
-
+/**
+ *
+ * @author Patrick
+ */
+public enum PlayerState {
+    MOVING,
+    IDLE,
+    SHOOTING,
+    RELOADING
 }

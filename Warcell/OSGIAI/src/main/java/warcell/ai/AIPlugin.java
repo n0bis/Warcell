@@ -27,14 +27,18 @@ import warcell.common.data.entityparts.TiledMapPart;
  * @author madsfalken
  */
 public class AIPlugin implements AISPI {
-
+    
+    Map map;
     NavigationTiledMapLayer navigationLayer;
     AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
     
     @Override
     public void startAI(TiledMapPart tiledMap) {
-        Map map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
-        navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
+        
+        if (map == null) {
+        map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
+        navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation"); 
+        }
     }
 
     @Override

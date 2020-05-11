@@ -14,9 +14,12 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.BulletMovingPart;
+import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -30,7 +33,7 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class ShotgunWeapon implements WeaponsSPI {
     Random rand = new Random();
 
-    private final String name = "M870 Remington";
+    private final String name = "Shotgun";
     private final String description = "Pump Shotgun";
     private final String iconPath = "";
     private Entity bullet;
@@ -79,8 +82,6 @@ public class ShotgunWeapon implements WeaponsSPI {
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
                 fireDelay += rateOfFire;
-                System.out.println("shotgun pew");
-
             }
         }
     }
@@ -94,6 +95,9 @@ public class ShotgunWeapon implements WeaponsSPI {
         b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
+        b.add(new DamagePart(20));
+        b.add(new SquarePart(x, y, 5f));
+        b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));
         b.setRadius(5);
@@ -101,37 +105,5 @@ public class ShotgunWeapon implements WeaponsSPI {
         return b;
     }
     
-    /*
-    @Override
-    public void shoot(Entity shooter, GameData gd, World world) {
-    System.out.println("shotgun pew, PAF");
-    PositionPart shooterPos = shooter.getPart(PositionPart.class);
-    
-    float x = shooterPos.getX();
-    float y = shooterPos.getY();
-    float radians = shooterPos.getRadians();
-    float speed = 350;
-    ArrayList<Entity> bulletArray = new ArrayList();
-    
-    for (int i = 0; i <= 8; i++) {
-    Entity bullet = new Bullet();
-    bullet.setRadius(2);
-    
-    float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
-    float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
-    
-    bullet.add(new PositionPart(bx + x, by + y, radians + (rand.nextFloat() * (1-2)))); //Accuracy attempt
-    bullet.add(new MovingPart(0, 5000, speed, 5));
-    bullet.add(new TimerPart(1));
-    
-    bullet.setShapeX(new float[2]);
-    bullet.setShapeY(new float[2]);
-    
-    bulletArray.add(bullet);
-    }
-    
-    for (Entity e : bulletArray) {
-    world.addEntity(e);
-    }*/
  }
 

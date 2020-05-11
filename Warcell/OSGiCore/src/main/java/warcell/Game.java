@@ -84,8 +84,6 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-        drawMap();
-
     }
 
     @Override
@@ -97,12 +95,13 @@ public class Game implements ApplicationListener {
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
         
+        //System.out.println("Delta: " + gameData.getDelta());      // debug
+        
         drawMap();
         update();
         drawTextures();
         drawAnimations();
         draw();
-
     }
 
     private void update() {
@@ -142,10 +141,12 @@ public class Game implements ApplicationListener {
             TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
 
             if (tiledMap != null) {
-                map = new TmxMapLoader().load(tiledMap.getSrcPath());
+                if (map == null) {
+                    map = new TmxMapLoader().load(tiledMap.getSrcPath());
                 mapRenderer = new OrthogonalTiledMapRenderer(map);
 
                 mapRenderer.setView(cam);
+            }
                 mapRenderer.render();
             }
         }

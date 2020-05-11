@@ -10,9 +10,11 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.BulletMovingPart;
+import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
-import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -24,7 +26,7 @@ import warcell.common.weapon.service.WeaponsSPI;
  * @author birke
  */
 public class RifleWeapon implements WeaponsSPI {
-    private final String name = "Colt M4A1";
+    private final String name = "Rifle";
     private final String description = "Automatic Carbine";
     private final String iconPath = "";
     private Entity bullet;
@@ -82,37 +84,14 @@ public class RifleWeapon implements WeaponsSPI {
         b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
+        b.add(new DamagePart(20));
+        b.add(new SquarePart(x, y, 5f));
+        b.add(new CollisionPart(true, 0.5f));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));
         b.setRadius(5);
 
         return b;
     }
-    
-        /*    @Override
-    public void shoot(Entity shooter, GameData gd, World world) {
-    System.out.println("rifle pew");
-    PositionPart shooterPos = shooter.getPart(PositionPart.class);
-    
-    float x = shooterPos.getX();
-    float y = shooterPos.getY();
-    float radians = shooterPos.getRadians();
-    float speed = 350;
-    
-    Entity bullet = new Bullet();
-    bullet.setRadius(2);
-    
-    float bx = (float) cos(radians) * shooter.getRadius() * bullet.getRadius();
-    float by = (float) sin(radians) * shooter.getRadius() * bullet.getRadius();
-    
-    bullet.add(new PositionPart(bx + x, by + y, radians));
-    bullet.add(new MovingPart(0, 5000, speed, 5));
-    bullet.add(new TimerPart(1));
-    
-    bullet.setShapeX(new float[2]);
-    bullet.setShapeY(new float[2]);
-    
-    world.addEntity(bullet);
-    }*/
 
 }

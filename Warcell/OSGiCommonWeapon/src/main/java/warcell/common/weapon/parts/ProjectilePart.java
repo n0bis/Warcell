@@ -9,11 +9,6 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.entityparts.EntityPart;
 
-/**
- * Only used as a bullet identifier for better collision
- *
- * @author Phillip O
- */
 public class ProjectilePart implements EntityPart {
 
     String ID;

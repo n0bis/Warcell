@@ -7,6 +7,7 @@ import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.CollisionPart;
+import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.SquarePart;
@@ -35,11 +36,13 @@ public class EnemyProcessor implements IEntityProcessingService {
         for (Entity entity : world.getEntities(Enemy.class)) {
             
             PositionPart positionPart = entity.getPart(PositionPart.class);
-            List<PositionPart> path = ai.getPath(positionPart, playerPos);
             MovingPart movingPart = entity.getPart(MovingPart.class);
             CollisionPart collisionPart = entity.getPart(CollisionPart.class);
             SquarePart circlePart = entity.getPart(SquarePart.class);
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
+            LifePart lifePart = entity.getPart(LifePart.class);
+            
+            List<PositionPart> path = ai.getPath(positionPart, playerPos);
             
             circlePart.setCentreX(positionPart.getX() + animationTexturePart.getWidth()/2);
             circlePart.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
@@ -59,14 +62,18 @@ public class EnemyProcessor implements IEntityProcessingService {
                 }
             }
             
-            if (distance(positionPart, playerPos) < 2) {
-                System.out.println("Zomie Attack");
-            }
-
+            // Process parts
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
             collisionPart.process(gameData, entity);
             circlePart.process(gameData, entity);
+            lifePart.process(gameData, entity);
+            
+            // Check if dead
+            if (lifePart.isDead()) {
+                world.removeEntity(entity);
+                System.out.println("ENEMY DEAD");
+            }
             
             movingPart.setRight(false);
             movingPart.setLeft(false);
