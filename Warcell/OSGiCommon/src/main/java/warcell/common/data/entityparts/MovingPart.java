@@ -161,20 +161,20 @@ public class MovingPart implements EntityPart {
         if (wrap) {
             x += dx * dt;
             // wrapping
-            if (x > gameData.getDisplayWidth() + 150 && x < gameData.getDisplayWidth() + 300) {
-                x = gameData.getDisplayWidth() + 100;
+            if (x > gameData.getDisplayWidth()) {
+                x = gameData.getDisplayWidth();
             }
-            else if (x < -150 && x > -300) {
-                x = -100;
+            else if (x < 0) {
+                x = 0;
             }
 
             y += dy * dt;
 
-            if (y > gameData.getDisplayHeight() + 150 && y < gameData.getDisplayHeight() + 300) {
-                y = gameData.getDisplayHeight() + 100;
+            if (y > gameData.getDisplayHeight()) {
+                y = gameData.getDisplayHeight();
             }
-            else if (y < -150 && y > - 300) {
-                y = -100;
+            else if (y < 0) {
+                y = 0;
             }
         } else {
             x += dx * dt;
@@ -182,8 +182,8 @@ public class MovingPart implements EntityPart {
             if (x > gameData.getDisplayWidth()) {
                 x = gameData.getDisplayWidth();
             }
-            else if (x < -100) {
-                x = -100;
+            else if (x < 0) {
+                x = 0;
             }
 
             y += dy * dt;
@@ -192,8 +192,8 @@ public class MovingPart implements EntityPart {
             if (y > gameData.getDisplayHeight()) {
                 y = gameData.getDisplayHeight();
             }
-            else if (y < -100) {
-                y = -100;
+            else if (y < 0) {
+                y = 0;
             }
         }
 
