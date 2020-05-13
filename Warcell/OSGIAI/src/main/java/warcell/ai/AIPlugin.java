@@ -31,15 +31,11 @@ public class AIPlugin implements AISPI {
     private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, finderConfig);
 
     @Override
-    public void startAI(TiledMapPart tiledMap) {
-
-        
+    public void startAI(TiledMapPart tiledMap) {  
         if (map == null) {
             map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
             navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
         }
-        
-
         
     }
     

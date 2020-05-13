@@ -81,7 +81,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             collisionPart.process(gameData, entity);
             circlePart.process(gameData, entity);
             lifePart.process(gameData, entity);
-            
+
             // Check if dead
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
@@ -92,6 +92,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             movingPart.setLeft(false);
             movingPart.setUp(false);
             movingPart.setDown(false);
+            
         }
     }
     
