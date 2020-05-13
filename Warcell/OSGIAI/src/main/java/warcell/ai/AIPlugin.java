@@ -13,6 +13,7 @@ import org.xguzm.pathfinding.gdxbridge.NavTmxMapLoader;
 import org.xguzm.pathfinding.gdxbridge.NavigationTiledMapLayer;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
+import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 import warcell.common.ai.AISPI;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TiledMapPart;
@@ -23,17 +24,29 @@ import warcell.common.data.entityparts.TiledMapPart;
  */
 public class AIPlugin implements AISPI {
     
-    private final int DEFAULT_TILE_SIZE = 128;
+    private final int DEFAULT_TILE_SIZE = 32;
     private Map map;
     private NavigationTiledMapLayer navigationLayer;
-    private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
-    
+    private GridFinderOptions finderConfig = getOptions();
+    private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, finderConfig);
+
     @Override
     public void startAI(TiledMapPart tiledMap) {
+
+        
         if (map == null) {
             map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
             navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
         }
+        
+
+        
+    }
+    
+    public GridFinderOptions getOptions() {
+        finderConfig = new GridFinderOptions();
+        finderConfig.allowDiagonal = false;
+        return finderConfig;
     }
 
     @Override
@@ -44,11 +57,13 @@ public class AIPlugin implements AISPI {
         int targetX = Math.round(target.getX() / DEFAULT_TILE_SIZE);
         int targetY = Math.round(target.getY() / DEFAULT_TILE_SIZE);
         
-        //System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
-        //System.out.println("targetX: " + targetX + " targetY: " + targetY);
+        System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
+        System.out.println("targetX: " + targetX + " targetY: " + targetY);
+        
+        
         List<GridCell> thePath = new ArrayList<>();
         try {
-            thePath = finder.findPath(sourceX, sourceY, targetX, targetY, navigationLayer);
+            thePath = finder.findPath(navigationLayer.getCell(sourceX, sourceY),navigationLayer.getCell(targetX, targetY), navigationLayer);
         } catch (PathFindingException e) {
             return new ArrayList<>();
         }

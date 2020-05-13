@@ -51,15 +51,28 @@ public class EnemyProcessor implements IEntityProcessingService {
                 double angle = getAngle(positionPart, path.get(0));
                 positionPart.setRadians((float)angle);
                 
-                if (angle <= 67 || angle > 293) {
+                if ((angle > 315 && angle < 360) || (angle < 45 && angle > 0)) {
                     movingPart.setRight(true);
-                } else if (angle > 22 && angle <= 157) {
+                    movingPart.setUp(false);
+                    movingPart.setLeft(false);
+                    movingPart.setDown(false);
+                } else if ((angle >= 45 && angle < 135)) {
                     movingPart.setUp(true);
-                } else if (angle > 114 && angle <= 247) {
+                    movingPart.setRight(false);
+                    movingPart.setLeft(false);
+                    movingPart.setDown(false);
+                } else if ((angle >= 135 && angle < 225)) {
                     movingPart.setLeft(true);
-                } else if (angle > 204 && angle <= 336) {
+                    movingPart.setRight(false);
+                    movingPart.setDown(false);
+                    movingPart.setUp(false);
+                } else if ((angle >= 225 && angle < 315)) {
                     movingPart.setDown(true);
-                }
+                    movingPart.setRight(false);
+                    movingPart.setLeft(false);
+                    movingPart.setUp(false);
+                } 
+                System.out.println(angle);
             }
             
             // Process parts
