@@ -48,8 +48,8 @@ public class PlayerPlugin implements IGamePluginService {
 
         float acceleration = 2450;
         float maxSpeed = 350;
-        float x = gameData.getDisplayWidth() / 3;
-        float y = gameData.getDisplayHeight() / 3;
+        float x = 0;
+        float y = 0;
         float radians = 3.1415f / 2;
         int maxLife = 1000;
         float centreX = 0;
@@ -60,7 +60,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new CollisionPart(true, 3));
         player.add(new MovingPart(acceleration, maxSpeed, false));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.25f, 0.25f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 43f, 59f, 1f, 1f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         player.add(new InventoryPart());
