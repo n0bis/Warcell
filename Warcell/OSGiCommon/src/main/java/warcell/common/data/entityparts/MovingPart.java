@@ -203,8 +203,8 @@ public class MovingPart implements EntityPart {
         }
             
         if (isIsInWalls()) {
-            x = getLastX();
-            y = getLastY();
+            x = getLastX() + (x-getLastX())/2;
+            y = getLastY() + (y-getLastY())/2;
             setIsInWalls(false);
         }
         
