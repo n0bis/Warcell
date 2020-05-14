@@ -12,11 +12,13 @@ import warcell.common.data.GameData;
 public class MovingPart implements EntityPart {
 
     private float dx, dy;
+    private float lastX, lastY;
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
     private boolean left, right, up, down;
     private boolean wrap;
     private boolean isMoving;
+    private boolean isInWalls;
     
 
     public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed, boolean wrap) {
@@ -177,30 +179,41 @@ public class MovingPart implements EntityPart {
                 y = 0;
             }
         } else {
-            x += dx * dt;
-            // wrapping
-            if (x > gameData.getDisplayWidth()) {
-                x = gameData.getDisplayWidth();
-            }
-            else if (x < 0) {
-                x = 0;
-            }
+                
+                x += dx * dt;
+            
+                // wrapping
+                if (x > gameData.getDisplayWidth()) {
+                    x = gameData.getDisplayWidth();
+                }
+                else if (x < 0) {
+                    x = 0;
+                }
 
-            y += dy * dt;
+                y += dy * dt;
 
-            // wrapping
-            if (y > gameData.getDisplayHeight()) {
-                y = gameData.getDisplayHeight();
-            }
-            else if (y < 0) {
-                y = 0;
-            }
+                // wrapping
+                if (y > gameData.getDisplayHeight()) {
+                    y = gameData.getDisplayHeight();
+                }
+                else if (y < 0) {
+                    y = 0;
+                }
+            
         }
+            
+        if (isIsInWalls()) {
+            System.out.println("settin x: " + getLastX() + "settin y: " + getLastY());
+            x = getLastX();
+            y = getLastY();
+            setIsInWalls(false);
+        }
+        
+            positionPart.setX(x);
+            positionPart.setY(y);  
+            positionPart.setRadians(radians);
+            
 
-        positionPart.setX(x);
-        positionPart.setY(y);
-
-        positionPart.setRadians(radians);
     }
 
     /**
@@ -217,4 +230,45 @@ public class MovingPart implements EntityPart {
         this.isMoving = isMoving;
     }
 
+    /**
+     * @return the isInWalls
+     */
+    public boolean isIsInWalls() {
+        return isInWalls;
+    }
+
+    /**
+     * @param isInWalls the isInWalls to set
+     */
+    public void setIsInWalls(boolean isInWalls) {
+        this.isInWalls = isInWalls;
+    }
+
+    /**
+     * @return the lastX
+     */
+    public float getLastX() {
+        return lastX;
+    }
+
+    /**
+     * @param lastX the lastX to set
+     */
+    public void setLastX(float lastX) {
+        this.lastX = lastX;
+    }
+
+    /**
+     * @return the lastY
+     */
+    public float getLastY() {
+        return lastY;
+    }
+
+    /**
+     * @param lastY the lastY to set
+     */
+    public void setLastY(float lastY) {
+        this.lastY = lastY;
+    }
 }
