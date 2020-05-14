@@ -101,7 +101,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                 
                 for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
                     Rectangle rectangle = rectangleObject.getRectangle();
-                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 5, 5);
                     
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         world.removeEntity(bullet);
