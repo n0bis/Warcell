@@ -31,6 +31,7 @@ import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.utils.Vector2D;
 import warcell.common.data.entityparts.TiledMapPart;
+import warcell.common.player.Player;
 import warcell.core.managers.GameAssetManager;
 
 public class Game implements ApplicationListener {
@@ -77,6 +78,9 @@ public class Game implements ApplicationListener {
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
+        
+        map = new TmxMapLoader().load("maps/ZombieMap.tmx");
+        mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         sr = new ShapeRenderer();
 
@@ -96,8 +100,16 @@ public class Game implements ApplicationListener {
         gameData.getKeys().update();
         
         //System.out.println("Delta: " + gameData.getDelta());      // debug
+        for (Entity e : world.getEntities(Player.class)) {
+            PositionPart posPart = e.getPart(PositionPart.class);
+            cam.position.set(posPart.getX(), posPart.getY(), 0);
+            cam.update();
+            mapRenderer.setView(cam);
+            mapRenderer.render();
+            
+        } 
         
-        drawMap();
+
         update();
         drawTextures();
         drawAnimations();
@@ -136,21 +148,7 @@ public class Game implements ApplicationListener {
         }
     }
 
-    private void drawMap() {
-        for (Entity e : world.getEntities()) {
-            TiledMapPart tiledMap = e.getPart(TiledMapPart.class);
 
-            if (tiledMap != null) {
-                if (map == null) {
-                    map = new TmxMapLoader().load(tiledMap.getSrcPath());
-                mapRenderer = new OrthogonalTiledMapRenderer(map);
-
-                mapRenderer.setView(cam);
-            }
-                mapRenderer.render();
-            }
-        }
-    }
 
     private void drawTextures() {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
