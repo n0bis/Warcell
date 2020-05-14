@@ -203,7 +203,6 @@ public class MovingPart implements EntityPart {
         }
             
         if (isIsInWalls()) {
-            System.out.println("settin x: " + getLastX() + "settin y: " + getLastY());
             x = getLastX();
             y = getLastY();
             setIsInWalls(false);

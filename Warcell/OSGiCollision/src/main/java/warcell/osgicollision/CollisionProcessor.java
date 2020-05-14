@@ -77,21 +77,18 @@ public class CollisionProcessor implements IPostEntityProcessingService {
             }
 
             for (Entity player : world.getEntities(Player.class)) {
-                SquarePart playerSquare = player.getPart(SquarePart.class);
                 MovingPart movingPart = player.getPart(MovingPart.class);
                 PositionPart positionPart = player.getPart(PositionPart.class);
                 
                 for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
                     Rectangle rectangle = rectangleObject.getRectangle();
-                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 40, 65);
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
                     
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         movingPart.setIsInWalls(true);
-                        System.out.println("stuck at: " + positionPart.getX() + " " + positionPart.getY());
                     }
                 }
                 if (!movingPart.isIsInWalls()) {
-                    System.out.println("setting LastX: " + positionPart.getX() + "Last Y: " + positionPart.getY());
                     movingPart.setLastX(positionPart.getX());
                     movingPart.setLastY(positionPart.getY());
                 }
