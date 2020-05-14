@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Rectangle;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
@@ -26,6 +27,7 @@ import warcell.common.services.IPostEntityProcessingService;
 import warcell.common.enemy.Enemy;
 import warcell.common.map.Tile;
 import warcell.common.player.Player;
+import warcell.common.weapon.entities.Bullet;
 
 /**
  *
@@ -91,6 +93,19 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                 if (!movingPart.isIsInWalls()) {
                     movingPart.setLastX(positionPart.getX());
                     movingPart.setLastY(positionPart.getY());
+                }
+            }
+            for (Entity bullet : world.getEntities(Bullet.class)) {
+                BulletMovingPart movingPart = bullet.getPart(BulletMovingPart.class);
+                PositionPart positionPart = bullet.getPart(PositionPart.class);
+                
+                for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
+                    
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        world.removeEntity(bullet);
+                    }
                 }
             }
         }
