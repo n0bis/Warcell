@@ -5,6 +5,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
  
 import javax.inject.Inject;
+import org.junit.Before;
  
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,17 +28,17 @@ public class SetupTest {
     public Option[] config() {
  
         return options(
-            /*mavenBundle()
+            mavenBundle()
                 .groupId("warcell.build")
                 .artifactId("OSGiCore")
-                .versionAsInProject(),*/
+                .versionAsInProject(),
             junitBundles()
         );
     }
     
     @Test
-    public void tester() {
-        assertEquals(1, 1);
+    public void testBundleContext(BundleContext ctx) {
+        assertNotNull("Expecting BundleContext to be supplied", ctx);
     }
  
     /*@Test
