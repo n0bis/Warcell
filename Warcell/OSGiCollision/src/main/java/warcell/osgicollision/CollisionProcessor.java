@@ -5,6 +5,13 @@
  */
 package warcell.osgicollision;
 
+import com.badlogic.gdx.maps.Map;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -12,8 +19,11 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.services.IPostEntityProcessingService;
 import warcell.common.enemy.Enemy;
+import warcell.common.map.Tile;
+import warcell.common.player.Player;
 
 
 /**
@@ -24,37 +34,64 @@ public class CollisionProcessor implements IPostEntityProcessingService {
     
     float timer1 = 0;
     float timer2 = 0;
+    private Map map;
+    MapObjects objects;
+
     
     @Override
     public void process(GameData gameData, World world) {
         if(world == null) {
-        throw new IllegalArgumentException("World is null");
-    }
-        for (Entity entity1: world.getEntities()) {
-            for (Entity entity2: world.getEntities(Enemy.class)) {
-                if (!entity1.equals(entity2)){
-                    if (hasCollided(entity1, entity2)){
-                        CollisionPart collisionPart1 = entity1.getPart(CollisionPart.class);
-                        CollisionPart collisionPart2 = entity2.getPart(CollisionPart.class);
-                        LifePart lp1 = entity1.getPart(LifePart.class);
-                        LifePart lp2 = entity2.getPart(LifePart.class);
-                        DamagePart dp1 = entity1.getPart(DamagePart.class);
-                        DamagePart dp2 = entity2.getPart(DamagePart.class);
-                        
-                        if (timer1 > collisionPart1.getMinTimeBetweenCollision()) {
-                            lp2.takeDamage(dp1.getDamage());
-                            timer1 = 0;
-                        }
+            throw new IllegalArgumentException("World is null");
+        }
+        if (map == null) {
+            for (Entity tile : world.getEntities(Tile.class)) {
+                TiledMapPart tiledMap = tile.getPart(TiledMapPart.class);
+                map = new TmxMapLoader().load(tiledMap.getSrcPath());
+                objects = map.getLayers().get("objectlayer").getObjects(); 
+            }
+        } else {
+            for (Entity entity1: world.getEntities()) {
+                for (Entity entity2: world.getEntities(Enemy.class)) {
+                    if (!entity1.equals(entity2)){
+                        if (hasCollided(entity1, entity2)){
+                            CollisionPart collisionPart1 = entity1.getPart(CollisionPart.class);
+                            CollisionPart collisionPart2 = entity2.getPart(CollisionPart.class);
+                            LifePart lp1 = entity1.getPart(LifePart.class);
+                            LifePart lp2 = entity2.getPart(LifePart.class);
+                            DamagePart dp1 = entity1.getPart(DamagePart.class);
+                            DamagePart dp2 = entity2.getPart(DamagePart.class);
 
-                        if (timer2 > collisionPart2.getMinTimeBetweenCollision()) {
-                            lp1.takeDamage(dp2.getDamage());
+                            if (timer1 > collisionPart1.getMinTimeBetweenCollision()) {
+                                lp2.takeDamage(dp1.getDamage());
+                                timer1 = 0;
+                            }
+
+                            if (timer2 > collisionPart2.getMinTimeBetweenCollision()) {
+                                lp1.takeDamage(dp2.getDamage());
+                            }
                         }
+                        timer1 += gameData.getDelta();
+                        timer2 += gameData.getDelta();
                     }
-                    timer1 += gameData.getDelta();
-                    timer2 += gameData.getDelta();
                 }
             }
+
+            for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+
+                for (Entity player: world.getEntities(Player.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    SquarePart playerSquare = player.getPart(SquarePart.class);
+                    Rectangle playerRectangle = new Rectangle(playerSquare.getCentreX(), playerSquare.getCentreY(),
+                        5, 5);
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        System.out.println("collided");
+                        // Needs implementation
+                    }
+                }
+            }    
         }
+        
+
     }
     private boolean hasCollided(Entity entity1, Entity entity2){
         SquarePart squarePart1 = entity1.getPart(SquarePart.class);
@@ -70,8 +107,6 @@ public class CollisionProcessor implements IPostEntityProcessingService {
         return distance < (squarePart1.getRadius() + squarePart2.getRadius()); 
         
     }
-
-   
-    }
+}
 
 
