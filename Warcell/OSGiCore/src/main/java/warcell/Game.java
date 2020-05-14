@@ -47,7 +47,10 @@ public class Game implements ApplicationListener {
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
-
+    private PositionPart camPos;
+    float w = gameData.getDisplayWidth();
+    float h = gameData.getDisplayHeight();
+        
     private float unitScale = 1 / 128f;
 
     public Game(){
@@ -71,9 +74,7 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-        float w = gameData.getDisplayWidth();
-        float h = gameData.getDisplayHeight();
-        
+
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -102,13 +103,17 @@ public class Game implements ApplicationListener {
         //System.out.println("Delta: " + gameData.getDelta());      // debug
         for (Entity e : world.getEntities(Player.class)) {
             PositionPart posPart = e.getPart(PositionPart.class);
-            cam.position.set(posPart.getX(), posPart.getY(), 0);
-            cam.update();
-            mapRenderer.setView(cam);
-            mapRenderer.render();
-            
+            if (posPart != null) {
+                camPos = posPart;
+            } else {
+                camPos.setX(w);
+                camPos.setY(h);
+            }
         } 
-        
+        cam.position.set(camPos.getX(), camPos.getY(), 0);
+        cam.update();
+        mapRenderer.setView(cam);
+        mapRenderer.render();
 
         update();
         drawTextures();
