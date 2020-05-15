@@ -81,6 +81,7 @@ public class Game implements ApplicationListener {
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
+        gameData.setCam(cam);
         
         map = new TmxMapLoader().load("maps/ZombieMap.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -139,7 +140,7 @@ public class Game implements ApplicationListener {
     private void draw() {
         for (Entity entity : world.getEntities()) {
             sr.setColor(1, 1, 1, 1);
-
+            sr.setProjectionMatrix(cam.combined);
             sr.begin(ShapeRenderer.ShapeType.Line);
 
             float[] shapex = entity.getShapeX();

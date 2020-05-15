@@ -63,9 +63,9 @@ public class RifleWeapon implements WeaponsSPI {
                 AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
                    
                 float angle = (float) Math.toRadians(positionPart.getRadians());
-                float bulletX = (float) (gameData.getDisplayWidth()/2 + animationTexturePart.getWidth()/2 + 
+                float bulletX = (float) (positionPart.getX() + 
                         (10 * Math.cos(angle) - 25 * Math.sin(angle)));
-                float bulletY = (float) (gameData.getDisplayHeight()/2 + animationTexturePart.getHeight()/2 + 
+                float bulletY = (float) (positionPart.getY() + 
                         (10 * Math.sin(angle) + 25 * Math.cos(angle)));
                 
                 //Add entity radius to initial position to avoid immideate collision.
