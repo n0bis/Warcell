@@ -48,8 +48,8 @@ public class PlayerPlugin implements IGamePluginService {
 
         float acceleration = 2450;
         float maxSpeed = 350;
-        float x = 0;
-        float y = 0;
+        float x = 2000;
+        float y = 2000;
         float radians = 3.1415f / 2;
         int maxLife = 1000;
         float centreX = 0;
@@ -58,7 +58,7 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new LifePart(maxLife));
         player.add(new DamagePart(0));
         player.add(new CollisionPart(true, 3));
-        player.add(new MovingPart(acceleration, maxSpeed, false));
+        player.add(new MovingPart(acceleration, maxSpeed, true));
         player.add(new PositionPart(x, y, radians));
         player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 43f, 59f, 1f, 1f));
         UUID uuid = UUID.randomUUID();
