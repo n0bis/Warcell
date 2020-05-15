@@ -198,7 +198,6 @@ public class Game implements ApplicationListener {
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-				System.out.println(e.getClass());
 
                 if (animation == null) {
                     continue;

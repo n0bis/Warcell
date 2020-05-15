@@ -52,9 +52,14 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             
             // angle between the Mouse and the Player
-            double angle = angleBetweenTwoPoints((positionPart.getX() + animationTexturePart.getWidth()/2), (positionPart.getY() + animationTexturePart.getHeight()/2), mouseX, newMouseY);
+            double angle = angleBetweenTwoPoints(gameData.getDisplayWidth()/2,gameData.getDisplayHeight()/2 , mouseX, newMouseY);
             positionPart.setRadians((float)angle);
-
+            
+            
+            System.out.println("angle:" + angle);
+            System.out.println("X: "+positionPart.getX()+ "  Y: " + positionPart.getY());
+            System.out.println("MX: "+mouseX+"  MX: "+ newMouseY);
+            
             // Cycle weapons
             if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
                 inventoryPart.nextWeapon();
