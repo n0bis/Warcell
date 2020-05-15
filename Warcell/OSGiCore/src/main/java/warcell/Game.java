@@ -17,6 +17,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -50,7 +52,7 @@ public class Game implements ApplicationListener {
     private PositionPart camPos;
     float w = gameData.getDisplayWidth();
     float h = gameData.getDisplayHeight();
-        
+     
     private float unitScale = 1 / 128f;
 
     public Game(){
@@ -109,6 +111,7 @@ public class Game implements ApplicationListener {
                 camPos.setX(w);
                 camPos.setY(h);
             }
+
         } 
         cam.position.set(camPos.getX(), camPos.getY(), 0);
         cam.update();
@@ -192,13 +195,14 @@ public class Game implements ApplicationListener {
             AnimationTexturePart animationTexturePart = e.getPart(AnimationTexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
 
-
             if (animationTexturePart != null && pp != null) {
                 animationTexturePart.updateStateTime(gameData.getDelta());
                 Animation animation = gameAssetManager.getAnimation(e.getClass(), animationTexturePart);
-                
-                if (animation == null)
+				System.out.println(e.getClass());
+
+                if (animation == null) {
                     continue;
+                }
                 
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
