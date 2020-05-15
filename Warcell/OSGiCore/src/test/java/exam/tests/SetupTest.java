@@ -44,8 +44,6 @@ public class SetupTest {
     public Option[] configuration() throws IOException {
         return new Option[]{
             cleanCaches(),
-            frameworkProperty(Constants.FRAMEWORK_STORAGE).value(osgiStorage.toString()), // FIXME
-            frameworkProperty(Constants.FRAMEWORK_STORAGE_CLEAN).value(Constants.FRAMEWORK_STORAGE_CLEAN_ONFIRSTINIT),
             vmOption("-ea"),
             junitBundles(),
             mavenBundle("org.apache.felix", "org.apache.felix.scr", "2.1.2"),
