@@ -77,6 +77,8 @@ public class Game implements ApplicationListener {
 
     @Override
     public void create() {
+        guiManager = new GUIStateManager(this, world, gameData);
+
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
@@ -97,7 +99,6 @@ public class Game implements ApplicationListener {
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
         
-        guiManager = new GUIStateManager(this, world, gameData);
 
     }
 
