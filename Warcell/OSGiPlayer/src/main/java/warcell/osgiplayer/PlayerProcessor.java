@@ -43,7 +43,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.A));
             movingPart.setRight(gameData.getKeys().isDown(GameKeys.D));
             movingPart.setUp(gameData.getKeys().isDown(GameKeys.W));
-            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));   
+            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));
             
             // mouse position
             double mouseX = Gdx.input.getX();
