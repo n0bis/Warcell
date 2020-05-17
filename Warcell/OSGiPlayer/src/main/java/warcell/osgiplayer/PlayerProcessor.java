@@ -138,21 +138,21 @@ public class PlayerProcessor implements IEntityProcessingService {
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleIdle.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunIdle.png", 155, 262, 20, 1, 0.09f);
+                    atp.setSrcPath("ShotgunIdle.png", 39, 66, 20, 1, 0.09f);
                 }
                 break;
             case MOVING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleMove.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunMove.png", 156, 263, 20, 1, 0.09f);
+                    atp.setSrcPath("ShotgunMove.png", 39, 66, 20, 1, 0.09f);
                 }
                 break;
             case SHOOTING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleShoot.png", 39, 66, 3, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunShoot.png", 153, 260, 3, 1, 0.30f);
+                    atp.setSrcPath("ShotgunShoot.png", 39, 66, 3, 1, 0.30f);
                 }
                 break;
         }
