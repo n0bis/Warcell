@@ -73,19 +73,15 @@ public class Game implements ApplicationListener {
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        gameData.setCam(cam);
         
         map = new TmxMapLoader().load("maps/ZombieMap.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         sr = new ShapeRenderer();
-
         textureSpriteBatch = new SpriteBatch();
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-        
-
     }
 
     @Override
@@ -93,15 +89,11 @@ public class Game implements ApplicationListener {
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
         
         gameData.setDelta(Gdx.graphics.getDeltaTime());    
         guiManager.update(Gdx.graphics.getDeltaTime());
         guiManager.render(textureSpriteBatch);
         gameData.getKeys().update();
-     
-
     }
     
     @Override
@@ -151,51 +143,15 @@ public class Game implements ApplicationListener {
         plugin.stop(gameData, world);
     }
 
-    public World getWorld() {
-        return world;
-    }
-
-    public OrthographicCamera getCam() {
-        return cam;
-    }
-
-    public List<IEntityProcessingService> getEntityProcessorList() {
-        return entityProcessorList;
-    }
-
-    public List<IPostEntityProcessingService> getPostEntityProcessorList() {
-        return postEntityProcessorList;
-    }
-    public GameData getGameData() {
-        return gameData;
-    }
-
-    public TiledMapRenderer getMapRenderer() {
-        return mapRenderer;
-    }
-
-    public ShapeRenderer getSr() {
-        return sr;
-    }
-
-    public SpriteBatch getTextureSpriteBatch() {
-        return textureSpriteBatch;
-    }
-
-    public GameAssetManager getGameAssetManager() {
-        return gameAssetManager;
-    }
-
-    public float getW() {
-        return w;
-    }
-
-    public float getH() {
-        return h;
-    }
-    
-    
-    
-    
-
+    public World getWorld() { return world; }
+    public OrthographicCamera getCam() { return cam; }
+    public List<IEntityProcessingService> getEntityProcessorList() { return entityProcessorList; }
+    public List<IPostEntityProcessingService> getPostEntityProcessorList() { return postEntityProcessorList; }
+    public GameData getGameData() { return gameData; }
+    public TiledMapRenderer getMapRenderer() { return mapRenderer; }
+    public ShapeRenderer getSr() { return sr; }
+    public SpriteBatch getTextureSpriteBatch() { return textureSpriteBatch; }
+    public GameAssetManager getGameAssetManager() { return gameAssetManager; }
+    public float getW() { return w; }
+    public float getH() { return h; }
 }
