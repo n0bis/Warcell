@@ -25,6 +25,9 @@ public class MenuState extends State{
     private int currentItem;
     private String[] menuItems;
     private final String title = "Warcell";
+    private float menuSelectDelay;
+ 
+    
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
     }
@@ -44,16 +47,13 @@ public class MenuState extends State{
             "Play",
             "Highscores",
             "Quit"
-        };     
-        
-        
-        
+        };      
+        menuSelectDelay -= getGameData().getDelta();
     }
 
     @Override
     public void update(float dt) {
         handleInput();
-        System.out.println("test");
     }
 
     @Override
@@ -82,27 +82,23 @@ public class MenuState extends State{
         }
 
         getGame().getTextureSpriteBatch().end();
-        
-        
-        
     }
 
     @Override
-    public void handleInput() {
-        
-        if(getGameData().getKeys().isDown(GameKeys.UP)) {
-                if(currentItem > 0) {
-                        currentItem--;
-                }
+    public void handleInput() {       
+        if(getGameData().getKeys().isPressed(GameKeys.UP)) {
+            if(currentItem > 0) {
+                currentItem--;
+            }
         }
-        if(getGameData().getKeys().isDown(GameKeys.DOWN)) {
-                if(currentItem < menuItems.length - 1) {
-                        currentItem++;
-                }
+        if(getGameData().getKeys().isPressed(GameKeys.DOWN)) {
+            if(currentItem < menuItems.length - 1) {
+                currentItem++;
+            }
         }
-        if(getGameData().getKeys().isDown(GameKeys.ENTER)) {
-                select();
-        }    
+        if(getGameData().getKeys().isPressed(GameKeys.ENTER)) {
+            select();
+        }   
     }
     
     private void select() {

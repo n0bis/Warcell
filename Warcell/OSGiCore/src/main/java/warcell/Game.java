@@ -8,18 +8,12 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.services.IEntityProcessingService;
@@ -28,15 +22,9 @@ import warcell.common.services.IPostEntityProcessingService;
 import warcell.core.managers.GameInputProcessor;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import warcell.common.data.entityparts.AnimationTexturePart;
-import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.TexturePart;
-import warcell.common.utils.Vector2D;
-import warcell.common.data.entityparts.TiledMapPart;
-import warcell.common.player.Player;
+import warcell.common.data.GameKeys;
 import warcell.core.managers.GameAssetManager;
 import warcell.gamestates.GUIStateManager;
-import warcell.gamestates.MenuState;
 
 public class Game implements ApplicationListener {
 
@@ -107,12 +95,15 @@ public class Game implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        gameData.setDelta(Gdx.graphics.getDeltaTime());
-        gameData.getKeys().update();
+        if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
+            System.out.println("space");
+        }
         
+        gameData.setDelta(Gdx.graphics.getDeltaTime());    
         guiManager.update(Gdx.graphics.getDeltaTime());
         guiManager.render(textureSpriteBatch);
-        
+        gameData.getKeys().update();
+     
         /*        //System.out.println("Delta: " + gameData.getDelta());      // debug
         for (Entity e : world.getEntities(Player.class)) {
         PositionPart posPart = e.getPart(PositionPart.class);
