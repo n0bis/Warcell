@@ -47,6 +47,7 @@ public class EnemyProcessorTest {
         ai = mock(AISPI.class);
         world = new World();
         gameData = new GameData();
+        gameData.setDelta(0.0165346f);
         instance = new EnemyProcessor();
         float radians = 3.1415f / 2;
         doNothing().when(ai).startAI(anyObject());
@@ -80,9 +81,12 @@ public class EnemyProcessorTest {
     public void testProcess() {
         instance.process(gameData, world);
         PositionPart positionPart = enemy.getPart(PositionPart.class);
-        System.out.println(positionPart.getX() + " : " + positionPart.getY() + " angle: " + positionPart.getRadians());
-        MovingPart movingPart = enemy.getPart(MovingPart.class);
-        System.out.println(movingPart.getDx() + " : " + movingPart.getDy());
+        float startYPosition = 0;
+        float expected = 90.0f;
+        float result = positionPart.getRadians();
+        
+        assertEquals(expected, result, 5);
+        assertTrue("Expected enemy to have moved towards player", startYPosition < positionPart.getY());
     }
 
 }
