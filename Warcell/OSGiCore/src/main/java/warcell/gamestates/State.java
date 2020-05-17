@@ -17,7 +17,6 @@ import warcell.common.data.World;
 public abstract class State {
     
     private final Game game;
-    protected GUIStateManager guiManager;
     private final World world;
     private final GameData gameData;
     private final OrthographicCamera cam = new OrthographicCamera();

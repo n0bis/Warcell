@@ -26,10 +26,11 @@ public final class GUIStateManager {
     public static final int HIGHSCORE = 2;
 
     public GUIStateManager(Game game, World world, GameData gameData) {
-        setState(PLAY);
         this.game = game;
         this.world = world;
         this.gameData = gameData;
+        setState(PLAY);
+
     }
 
     public void setState(int state) {
@@ -38,7 +39,11 @@ public final class GUIStateManager {
                 gameState = new MenuState(game, world, gameData);
             }
             if(state == PLAY) {
-                gameState = new PlayState(game, world, gameData);
+                if (game == null) {
+                    System.out.println("it's null");
+                } else {
+                    gameState = new PlayState(game, world, gameData);
+                }
             }
             if(state == HIGHSCORE) {
                 gameState = new ScoreState(game, world, gameData);

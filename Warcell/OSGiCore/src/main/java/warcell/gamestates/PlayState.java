@@ -33,16 +33,12 @@ import warcell.core.managers.GameInputProcessor;
  * @author birke
  */
 public class PlayState extends State {
-    private final Game game;
-    private final World world;
-    private final GameData gameData;
+
     private PositionPart camPos;
 
     public PlayState(Game game, World world, GameData gameData) {
         super(game, world, gameData);
-        this.game = game;
-        this.world = world;
-        this.gameData = gameData;
+
 
     }
 
@@ -53,33 +49,33 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         // Update
-        for (IEntityProcessingService entityProcessorService : game.getEntityProcessorList()) {
-            entityProcessorService.process(gameData, world);
+        for (IEntityProcessingService entityProcessorService : getGame().getEntityProcessorList()) {
+            entityProcessorService.process(getGameData(), getWorld());
         }
 
         // Post Update
-        for (IPostEntityProcessingService postEntityProcessorService : game.getPostEntityProcessorList()) {
-            postEntityProcessorService.process(gameData, world);
+        for (IPostEntityProcessingService postEntityProcessorService : getGame().getPostEntityProcessorList()) {
+            postEntityProcessorService.process(getGameData(), getWorld());
         }    
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
-        //System.out.println("Delta: " + gameData.getDelta());      // debug
-        for (Entity e : world.getEntities(Player.class)) {
+        //System.out.println("Delta: " + getGameData().getDelta());      // debug
+        for (Entity e : getWorld().getEntities(Player.class)) {
             PositionPart posPart = e.getPart(PositionPart.class);
             if (posPart != null) {
                 camPos = posPart;
             } else {
-                camPos.setX(gameData.getDisplayWidth());
-                camPos.setY(gameData.getDisplayHeight());
+                camPos.setX(getGameData().getDisplayWidth());
+                camPos.setY(getGameData().getDisplayHeight());
             }
 
         } 
-        game.getCam().position.set(camPos.getX(), camPos.getY(), 0);
-        game.getCam().update();
-        game.getMapRenderer().setView(game.getCam());
-        game.getMapRenderer().render();
+        getGame().getCam().position.set(camPos.getX(), camPos.getY(), 0);
+        getGame().getCam().update();
+        getGame().getMapRenderer().setView(getGame().getCam());
+        getGame().getMapRenderer().render();
 
         drawTextures();
         drawAnimations();
@@ -87,10 +83,10 @@ public class PlayState extends State {
     }
 
     private void draw() {
-        for (Entity entity : world.getEntities()) {
-            game.getSr().setColor(1, 1, 1, 1);
-            game.getSr().setProjectionMatrix(game.getCam().combined);
-            game.getSr().begin(ShapeRenderer.ShapeType.Line);
+        for (Entity entity : getWorld().getEntities()) {
+            getGame().getSr().setColor(1, 1, 1, 1);
+            getGame().getSr().setProjectionMatrix(getGame().getCam().combined);
+            getGame().getSr().begin(ShapeRenderer.ShapeType.Line);
 
             float[] shapex = entity.getShapeX();
             float[] shapey = entity.getShapeY();
@@ -99,55 +95,55 @@ public class PlayState extends State {
                     i < shapex.length;
                     j = i++) {
 
-                game.getSr().line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                getGame().getSr().line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
 
-            game.getSr().end();
+            getGame().getSr().end();
         }
     }
 
 
 
     private void drawTextures() {
-        game.getTextureSpriteBatch().setProjectionMatrix(game.getCam().combined);
-        game.getTextureSpriteBatch().begin();
+        getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
+        getGame().getTextureSpriteBatch().begin();
 
 
-        for (Entity e : world.getEntities()) {
+        for (Entity e : getWorld().getEntities()) {
             TexturePart tp = e.getPart(TexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
 
 
             if (tp != null && pp != null) {
-                TextureRegion texture = new TextureRegion(game.getGameAssetManager().getTexture(e.getClass(), tp.getSrcPath()));
+                TextureRegion texture = new TextureRegion(getGame().getGameAssetManager().getTexture(e.getClass(), tp.getSrcPath()));
                 if (tp.getHeight() + tp.getWidth() == 0) {
-                    game.getTextureSpriteBatch().draw(texture, pp.getX(), pp.getY());
+                    getGame().getTextureSpriteBatch().draw(texture, pp.getX(), pp.getY());
                 } else {
                     /* draw(Texture texture, float x, float y,
                         float originX, float originY, float width, float height,
                         float scaleX, float scaleY, float rotation,
                         int srcX, int srcY, int srcWidth, int srcHeight,
                         boolean flipX, boolean flipY) */
-                    game.getTextureSpriteBatch().draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians());
+                    getGame().getTextureSpriteBatch().draw(texture, pp.getX(), pp.getY(), pp.getX(), pp.getY(), tp.getWidth(), tp.getHeight(), tp.getScaleX(), tp.getScaleY(), pp.getRadians());
                 }
 
             }
 
         }
-        game.getTextureSpriteBatch().end();
+        getGame().getTextureSpriteBatch().end();
     }
 
     private void drawAnimations() {
-        game.getTextureSpriteBatch().setProjectionMatrix(game.getCam().combined);
-        game.getTextureSpriteBatch().begin();
+        getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
+        getGame().getTextureSpriteBatch().begin();
 
-        for (Entity e : world.getEntities()) {
+        for (Entity e : getWorld().getEntities()) {
             AnimationTexturePart animationTexturePart = e.getPart(AnimationTexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
 
             if (animationTexturePart != null && pp != null) {
-                animationTexturePart.updateStateTime(gameData.getDelta());
-                Animation animation = game.getGameAssetManager().getAnimation(e.getClass(), animationTexturePart);
+                animationTexturePart.updateStateTime(getGameData().getDelta());
+                Animation animation = getGame().getGameAssetManager().getAnimation(e.getClass(), animationTexturePart);
 
                 if (animation == null) {
                     continue;
@@ -155,16 +151,16 @@ public class PlayState extends State {
                 
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
-                    game.getTextureSpriteBatch().draw(currentFrame,
+                    getGame().getTextureSpriteBatch().draw(currentFrame,
                         pp.getX(),
                         pp.getY());
                 } else {
-                    game.getTextureSpriteBatch().draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth()/2, animationTexturePart.getHeight()/2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
+                    getGame().getTextureSpriteBatch().draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth()/2, animationTexturePart.getHeight()/2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
                 }
             }
 
         }
-        game.getTextureSpriteBatch().end();
+        getGame().getTextureSpriteBatch().end();
     }
     
     @Override
