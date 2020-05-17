@@ -24,9 +24,7 @@ public class MenuState extends State{
     private BitmapFont font;
     private int currentItem;
     private String[] menuItems;
-    private final String title = "Warcell";
-    private float menuSelectDelay;
- 
+    private final String title = "Warcell"; 
     
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -35,7 +33,7 @@ public class MenuState extends State{
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-                Gdx.files.internal("fonts/Western Bang Bang.otf")
+            Gdx.files.internal("fonts/Western Bang Bang.otf")
         );   
 
         titleFont = gen.generateFont(100);
@@ -48,7 +46,6 @@ public class MenuState extends State{
             "Highscores",
             "Quit"
         };      
-        menuSelectDelay -= getGameData().getDelta();
     }
 
     @Override

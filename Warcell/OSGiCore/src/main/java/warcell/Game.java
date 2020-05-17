@@ -95,9 +95,7 @@ public class Game implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
-            System.out.println("space");
-        }
+
         
         gameData.setDelta(Gdx.graphics.getDeltaTime());    
         guiManager.update(Gdx.graphics.getDeltaTime());
