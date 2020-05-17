@@ -29,24 +29,20 @@ public final class GUIStateManager {
         this.game = game;
         this.world = world;
         this.gameData = gameData;
-        setState(PLAY);
+        setState(MENU);
 
     }
 
     public void setState(int state) {
             if(gameState != null) gameState.dispose();
             if(state == MENU) {
-                gameState = new MenuState(game, world, gameData);
+                gameState = new MenuState(this, game, world, gameData);
             }
             if(state == PLAY) {
-                if (game == null) {
-                    System.out.println("it's null");
-                } else {
-                    gameState = new PlayState(game, world, gameData);
-                }
+                gameState = new PlayState(this, game, world, gameData);
             }
             if(state == HIGHSCORE) {
-                gameState = new ScoreState(game, world, gameData);
+                gameState = new ScoreState(this, game, world, gameData);
             }
 
     }

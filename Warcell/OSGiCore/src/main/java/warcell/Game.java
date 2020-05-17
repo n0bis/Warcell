@@ -218,6 +218,14 @@ public class Game implements ApplicationListener {
     public GameAssetManager getGameAssetManager() {
         return gameAssetManager;
     }
+
+    public float getW() {
+        return w;
+    }
+
+    public float getH() {
+        return h;
+    }
     
     
     

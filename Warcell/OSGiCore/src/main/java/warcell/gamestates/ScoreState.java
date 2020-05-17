@@ -16,9 +16,12 @@ import warcell.common.data.World;
  */
 public class ScoreState extends State {
 
-    public ScoreState(Game game, World world, GameData gameData) {
-        super(game, world, gameData);
+    public ScoreState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
+        super(guiStateManager, game, world, gameData);
+        
     }
+
+    
     
     
 

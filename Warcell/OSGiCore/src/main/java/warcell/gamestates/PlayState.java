@@ -36,11 +36,11 @@ public class PlayState extends State {
 
     private PositionPart camPos;
 
-    public PlayState(Game game, World world, GameData gameData) {
-        super(game, world, gameData);
-
-
+    public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
+        super(guiStateManager, game, world, gameData);
     }
+
+
 
     @Override
     public void init() {

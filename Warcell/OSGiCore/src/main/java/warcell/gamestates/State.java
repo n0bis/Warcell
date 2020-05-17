@@ -20,12 +20,13 @@ public abstract class State {
     private final World world;
     private final GameData gameData;
     private final OrthographicCamera cam = new OrthographicCamera();
-
+    private final GUIStateManager guiStateManager;
     
-    public State(Game game, World world, GameData gameData) {
+    public State(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         this.game = game;
         this.world = world;
         this.gameData = gameData;
+        this.guiStateManager = guiStateManager;
         init();
     }
 
@@ -50,6 +51,11 @@ public abstract class State {
     public OrthographicCamera getCam() {
         return cam;
     }
+
+    public GUIStateManager getGuiStateManager() {
+        return guiStateManager;
+    }
+    
     
     
     

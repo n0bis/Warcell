@@ -35,6 +35,7 @@ public class SpawnerProcessor implements IEntityProcessingService {
                             plugin.start(gameData, world);
                             PositionPart ppE = world.getEntities(Enemy.class).get(world.getEntities(Enemy.class).size() - 1).getPart(PositionPart.class);
                             ppE.setX(positionPart.getX() + r.nextInt(100) - 50);
+                            
                             ppE.setY(positionPart.getY() + r.nextInt(100) - 50);
                             timer = 0;
                         }
