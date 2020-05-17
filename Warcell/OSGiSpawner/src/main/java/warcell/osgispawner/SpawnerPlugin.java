@@ -42,7 +42,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         spawner.add(new PositionPart(x, y, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(2, 8));
+        spawner.add(new SpawnerPart(10, 2));
 
         return spawner;
     }

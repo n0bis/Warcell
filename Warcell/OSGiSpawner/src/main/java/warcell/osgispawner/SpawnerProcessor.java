@@ -1,5 +1,7 @@
 package warcell.osgispawner;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -16,6 +18,7 @@ public class SpawnerProcessor implements IEntityProcessingService {
     Random r = new Random();
     IGamePluginService igp;
     float timer = 0;
+    private static Map<String, Entity> enemies = new HashMap<>();
 
     @Override
     public void process(GameData gameData, World world) {
@@ -32,12 +35,17 @@ public class SpawnerProcessor implements IEntityProcessingService {
                     //Found the plugin just call start()
                     if (world.getEntities(Enemy.class).size() < spawnerPart.getMaxEnemyAmount()) {
                         if (spawnerPart.getSpawnDelay() < timer) {
-                            plugin.start(gameData, world);
-                            PositionPart ppE = world.getEntities(Enemy.class).get(world.getEntities(Enemy.class).size() - 1).getPart(PositionPart.class);
-                            ppE.setX(positionPart.getX() + r.nextInt(100) - 50);
+                            for (Entity enemy : world.getEntities(Enemy.class)) {
+                                if (!enemies.containsKey(enemy.getID())) {
+                                    enemies.put(enemy.getID(), enemy);
+                                    plugin.start(gameData, world);
+                                    PositionPart ppE = enemy.getPart(PositionPart.class);
+                                    ppE.setX(positionPart.getX() + r.nextInt(100) - 50);
+                                    ppE.setY(positionPart.getY() + r.nextInt(100) - 50);
+                                    timer = 0;
+                                }
+                            }
                             
-                            ppE.setY(positionPart.getY() + r.nextInt(100) - 50);
-                            timer = 0;
                         }
                     }
                 }
