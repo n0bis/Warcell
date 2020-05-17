@@ -64,7 +64,7 @@ public class EnemyProcessorTest {
         enemy.add(new MovingPart(100, 150, true));
         enemy.add(new PositionPart(0, 0, 0));
         enemy.add(new CollisionPart(true, 3));
-        enemy.add(new AnimationTexturePart(new Vector2D(0, 0), "", 17, 1, 0.09f, 43f, 59f, 1f, 1f));
+        enemy.add(new AnimationTexturePart(new Vector2D(0, 0), "Zomies", 17, 1, 0.09f, 43f, 59f, 1f, 1f));
         
         world.addEntity(player);
         world.addEntity(enemy);
