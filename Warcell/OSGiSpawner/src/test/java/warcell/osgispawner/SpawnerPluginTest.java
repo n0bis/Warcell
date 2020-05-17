@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package warcell.map;
+package warcell.osgispawner;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,13 +13,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
-import warcell.common.map.Tile;
+import warcell.common.spawner.Spawner;
 
 /**
  *
  * @author madsfalken
  */
-public class MapPluginTest {
+public class SpawnerPluginTest {
     
     private World world;
     private GameData gameData;
@@ -35,27 +35,27 @@ public class MapPluginTest {
     }
 
     /**
-     * Test of start method, of class MapPlugin.
+     * Test of start method, of class SpawnerPlugin.
      */
     @Test
     public void testStart() {
-        MapPlugin instance = new MapPlugin();
+        SpawnerPlugin instance = new SpawnerPlugin();
         instance.start(gameData, world);
-        int expected = 1;
-        int result = world.getEntities(Tile.class).size();
+        int expected = 8;
+        int result = world.getEntities(Spawner.class).size();
         
         assertEquals(expected, result);
     }
 
     /**
-     * Test of stop method, of class MapPlugin.
+     * Test of stop method, of class SpawnerPlugin.
      */
     @Test
     public void testStop() {
-        MapPlugin instance = new MapPlugin();
+        SpawnerPlugin instance = new SpawnerPlugin();
         instance.stop(gameData, world);
         int expected = 0;
-        int result = world.getEntities(Tile.class).size();
+        int result = world.getEntities(Spawner.class).size();
         
         assertEquals(expected, result);
     }
