@@ -23,7 +23,7 @@ public final class GUIStateManager {
 
     public static final int MENU = 0;
     public static final int PLAY = 1;
-    public static final int HELP = 2;
+    public static final int HELP = 2;    
 
     public GUIStateManager(Game game, World world, GameData gameData) {
         this.game = game;

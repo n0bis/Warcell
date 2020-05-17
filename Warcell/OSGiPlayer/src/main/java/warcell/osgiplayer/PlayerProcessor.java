@@ -9,6 +9,7 @@ import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
@@ -33,6 +34,8 @@ public class PlayerProcessor implements IEntityProcessingService {
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             SquarePart sqp = entity.getPart(SquarePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
+            ScorePart scorePart = entity.getPart(ScorePart.class);
+            System.out.println(scorePart.getName());
             
             playerstate = PlayerState.IDLE;
             

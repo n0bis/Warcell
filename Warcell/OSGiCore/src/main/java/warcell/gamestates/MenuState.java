@@ -6,25 +6,30 @@
 package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import warcell.Game;
+import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.World;
+import warcell.common.data.entityparts.ScorePart;
+import warcell.common.player.Player;
 
 /**
  *
  * @author birke
  */
-public class MenuState extends State{
+public class MenuState extends State implements Input.TextInputListener {
     private BitmapFont titleFont;
     private BitmapFont font;
     private int currentItem;
     private String[] menuItems;
     private final String title = "Warcell"; 
+    private String PlayerName;
     
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -44,6 +49,7 @@ public class MenuState extends State{
         menuItems = new String[] {
             "Play",
             "Help",
+            "Change name",
             "Quit"
         };      
     }
@@ -77,6 +83,17 @@ public class MenuState extends State{
                 180 - 35 * i
             );
         }
+        
+        for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            ScorePart sp = entity.getPart(ScorePart.class);
+            font.draw(
+                getGame().getTextureSpriteBatch(),
+                sp.getName(),
+                20,
+                700
+            );
+            
+        }    
 
         getGame().getTextureSpriteBatch().end();
     }
@@ -106,8 +123,11 @@ public class MenuState extends State{
         // high scores
         else if(currentItem == 1) {
             getGuiStateManager().setState(GUIStateManager.HELP);
-        }
+        }        
         else if(currentItem == 2) {
+            Gdx.input.getTextInput(this, "Enter name", "", "Name");
+        }
+        else if(currentItem == 3) {
             Gdx.app.exit();
         }
     }
@@ -116,5 +136,18 @@ public class MenuState extends State{
     public void dispose() {
         titleFont.dispose();
         font.dispose();    
+    }
+
+    @Override
+    public void input(String string) {
+        for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            ScorePart sp = entity.getPart(ScorePart.class);
+            sp.setName(string);
+        }       
+    }
+
+    @Override
+    public void canceled() {
+
     }
 }
