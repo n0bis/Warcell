@@ -85,7 +85,8 @@ public class EnemyProcessorTest {
         float expected = 90.0f;
         float result = positionPart.getRadians();
         
-        assertEquals(expected, result, 5);
+        assertEquals("Expected angle to be 90 degress", expected, result, 5);
+        assertEquals("Expected new psoition of y to be close to 0.0273393, given delta 0.0165346f", 0.0273393, positionPart.getY(), 5);
         assertTrue("Expected enemy to have moved towards player", startYPosition < positionPart.getY());
     }
 
