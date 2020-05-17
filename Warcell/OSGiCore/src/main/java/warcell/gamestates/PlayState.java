@@ -37,19 +37,26 @@ public class PlayState extends State {
     private final World world;
     private final GameData gameData;
     private PositionPart camPos;
-    private OrthographicCamera cam = getGame().getCam();
-    private TiledMapRenderer mapRenderer = getGame().getMapRenderer();
-    private ShapeRenderer sr = getGame().getSr();
-    private SpriteBatch textureSpriteBatch = getGame().getTextureSpriteBatch();
-    private final List<IEntityProcessingService> entityProcessorList = getGame().getEntityProcessorList();
-    private List<IPostEntityProcessingService> postEntityProcessorList = getGame().getPostEntityProcessorList();
-    private GameAssetManager gameAssetManager = getGame().getGameAssetManager();
+    private OrthographicCamera cam;
+    private TiledMapRenderer mapRenderer;
+    private ShapeRenderer sr;
+    private SpriteBatch textureSpriteBatch;
+    private final List<IEntityProcessingService> entityProcessorList;
+    private List<IPostEntityProcessingService> postEntityProcessorList;
+    private GameAssetManager gameAssetManager;
 
     public PlayState(Game game, World world, GameData gameData) {
         super(game, world, gameData);
         this.game = game;
         this.world = world;
         this.gameData = gameData;
+        this.mapRenderer = getGame().getMapRenderer();
+        this.cam = getGame().getCam();
+        this.sr = getGame().getSr();
+        this.textureSpriteBatch = getGame().getTextureSpriteBatch();
+        this.entityProcessorList = getGame().getEntityProcessorList();
+        this.postEntityProcessorList = getGame().getPostEntityProcessorList();
+        this.gameAssetManager = getGame().getGameAssetManager();
     }
 
     
