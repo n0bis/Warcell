@@ -52,7 +52,6 @@ public class Game implements ApplicationListener {
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
-    private PositionPart camPos;
     float w = gameData.getDisplayWidth();
     float h = gameData.getDisplayHeight();
     private GUIStateManager guiManager;
