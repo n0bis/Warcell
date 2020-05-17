@@ -124,7 +124,7 @@ public class PlayState extends State {
                 getGame().getTextureSpriteBatch(),
                 "Points: " + String.valueOf(sp.getScore()),
                 camPos.getX() - 640,
-                camPos.getY() + 350
+                camPos.getY() + 360
             );
             getGame().getTextureSpriteBatch().end();
         }     
