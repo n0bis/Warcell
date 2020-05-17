@@ -19,7 +19,8 @@ public class MapPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-
+        for (Entity tiledMap : world.getEntities(Tile.class))
+            world.removeEntity(tiledMap);
     }
 
 }
