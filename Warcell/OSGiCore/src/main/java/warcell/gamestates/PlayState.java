@@ -139,7 +139,6 @@ public class PlayState extends State {
 
                 getGame().getSr().line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
-
             getGame().getSr().end();
         }
     }
