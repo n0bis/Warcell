@@ -62,7 +62,7 @@ public class MenuState extends State{
         titleFont.draw(
             getGame().getTextureSpriteBatch(),
             title,
-            0,
+            20,
             300
         );
 
@@ -73,7 +73,7 @@ public class MenuState extends State{
             font.draw(
                 getGame().getTextureSpriteBatch(),
                 menuItems[i],
-                0,
+                20,
                 180 - 35 * i
             );
         }

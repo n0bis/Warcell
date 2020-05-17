@@ -55,19 +55,19 @@ public class HelpState extends State {
         titleFont.draw(
             getGame().getTextureSpriteBatch(),
             "Controls",
-            0,
+            20,
             700
         );        
         font.drawMultiLine(
             getGame().getTextureSpriteBatch(),
             "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape",
-            0,
+            20,
             550
         );        
         font.drawMultiLine(
             getGame().getTextureSpriteBatch(),
             "Press ESCAPE to return",
-            0,
+            20,
             100
         );
         
