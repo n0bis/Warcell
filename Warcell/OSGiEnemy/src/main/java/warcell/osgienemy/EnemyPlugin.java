@@ -53,7 +53,7 @@ public class EnemyPlugin implements IGamePluginService {
         float centreY = 0;
         enemyZombie.add(new SquarePart(centreX, centreY, enemyRadius));
         enemyZombie.add(new LifePart(maxLife));
-        enemyZombie.add(new DamagePart(10, 3));
+        enemyZombie.add(new DamagePart(2, 3));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new CollisionPart(true,3));

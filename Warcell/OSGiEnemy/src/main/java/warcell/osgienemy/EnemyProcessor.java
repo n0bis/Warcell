@@ -72,7 +72,6 @@ public class EnemyProcessor implements IEntityProcessingService {
                     movingPart.setLeft(false);
                     movingPart.setUp(false);
                 } 
-                System.out.println(angle);
             }
             
             // Process parts

@@ -12,7 +12,7 @@
         <bundle.namespace>warcell</bundle.namespace>
         <pax.exam.version>4.13.1</pax.exam.version>
     </properties>
-  
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>OSGiCore</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -31,7 +31,12 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>OSGiCommonPlayer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- test only dependencies below -->
         <dependency>
             <groupId>junit</groupId>
@@ -73,7 +78,7 @@
             <artifactId>tinybundles</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
 
 </project>
