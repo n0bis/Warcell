@@ -38,10 +38,10 @@ public class MenuState extends State{
                 Gdx.files.internal("fonts/Western Bang Bang.otf")
         );   
 
-        titleFont = gen.generateFont(56);
+        titleFont = gen.generateFont(100);
         titleFont.setColor(Color.WHITE);
 
-        font = gen.generateFont(20);
+        font = gen.generateFont(50);
 
         menuItems = new String[] {
             "Play",
