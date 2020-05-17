@@ -43,7 +43,7 @@ public class MenuState extends State{
 
         menuItems = new String[] {
             "Play",
-            "Highscores",
+            "Help",
             "Quit"
         };      
     }
@@ -105,7 +105,7 @@ public class MenuState extends State{
         }
         // high scores
         else if(currentItem == 1) {
-            //getGuiStateManager().setState(GUIStateManager.HIGHSCORE);
+            getGuiStateManager().setState(GUIStateManager.HELP);
         }
         else if(currentItem == 2) {
             Gdx.app.exit();
