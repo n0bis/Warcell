@@ -35,7 +35,6 @@ public class PlayerProcessor implements IEntityProcessingService {
             SquarePart sqp = entity.getPart(SquarePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
             ScorePart scorePart = entity.getPart(ScorePart.class);
-            System.out.println(scorePart.getName());
             
             playerstate = PlayerState.IDLE;
             

@@ -24,6 +24,7 @@ import warcell.common.data.GameKeys;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
@@ -111,10 +112,22 @@ public class PlayState extends State {
                 camPos.getX(),
                 camPos.getY()
             );
-            getGame().getTextureSpriteBatch().end();
-
+            
+        getGame().getTextureSpriteBatch().end();
         }
+        
+        for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            getGame().getTextureSpriteBatch().begin();
 
+            ScorePart sp = entity.getPart(ScorePart.class);
+            font.draw(
+                getGame().getTextureSpriteBatch(),
+                "Points: " + String.valueOf(sp.getScore()),
+                camPos.getX() - 640,
+                camPos.getY() + 350
+            );
+            getGame().getTextureSpriteBatch().end();
+        }     
     }
 
     private void draw() {
