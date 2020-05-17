@@ -86,7 +86,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                 
                 for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
                     Rectangle rectangle = rectangleObject.getRectangle();
-                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
                     
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         movingPart.setIsInWalls(true);
@@ -94,7 +94,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                 }
                 for (RectangleMapObject rectangleObject : border.getByType(RectangleMapObject.class)) {
                     Rectangle rectangle = rectangleObject.getRectangle();
-                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
                     
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         movingPart.setIsInWalls(true);

@@ -17,15 +17,14 @@ public class SpawnerProcessor implements IEntityProcessingService {
 
     Random r = new Random();
     IGamePluginService igp;
-    float timer = 0;
     private static Map<String, Entity> enemies = new HashMap<>();
 
     @Override
     public void process(GameData gameData, World world) {
-        timer += gameData.getDelta();
         for (Entity entity : world.getEntities(Spawner.class)) {
             PositionPart positionPart = entity.getPart(PositionPart.class);
             SpawnerPart spawnerPart = entity.getPart(SpawnerPart.class);
+            spawnerPart.process(gameData, entity);
            
             for (IGamePluginService plugin : gameData.getGamePlugins()) {
                 if (plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
@@ -34,15 +33,16 @@ public class SpawnerProcessor implements IEntityProcessingService {
                     }
                     //Found the plugin just call start()
                     if (world.getEntities(Enemy.class).size() < spawnerPart.getMaxEnemyAmount()) {
-                        if (spawnerPart.getSpawnDelay() < timer) {
+                        if (spawnerPart.isReady()) {
                             for (Entity enemy : world.getEntities(Enemy.class)) {
                                 if (!enemies.containsKey(enemy.getID())) {
                                     enemies.put(enemy.getID(), enemy);
                                     plugin.start(gameData, world);
                                     PositionPart ppE = enemy.getPart(PositionPart.class);
-                                    ppE.setX(positionPart.getX() + r.nextInt(100) - 50);
-                                    ppE.setY(positionPart.getY() + r.nextInt(100) - 50);
-                                    timer = 0;
+                                    ppE.setX(positionPart.getX() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
+                                    ppE.setY(positionPart.getY() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
+                                    System.out.println("enemy Spawned at: "+ ppE.getX()+ " " + ppE.getY());
+                                    spawnerPart.resetTimer();
                                 }
                             }
                             

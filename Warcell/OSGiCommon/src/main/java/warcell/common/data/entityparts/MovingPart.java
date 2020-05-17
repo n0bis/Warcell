@@ -19,7 +19,6 @@ public class MovingPart implements EntityPart {
     private boolean wrap;
     private boolean isMoving;
     private boolean isInWalls;
-    
 
     public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed, boolean wrap) {
         this.deceleration = deceleration;
@@ -29,8 +28,8 @@ public class MovingPart implements EntityPart {
         this.wrap = wrap;
         this.isMoving = false;
     }
-    
-    public MovingPart(float acceleration, float maxSpeed, boolean wrap){
+
+    public MovingPart(float acceleration, float maxSpeed, boolean wrap) {
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;
         this.wrap = wrap;
@@ -44,7 +43,7 @@ public class MovingPart implements EntityPart {
     public float getDy() {
         return dy;
     }
-    
+
     public void setDeceleration(float deceleration) {
         this.deceleration = deceleration;
     }
@@ -56,7 +55,7 @@ public class MovingPart implements EntityPart {
     public void setMaxSpeed(float maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
-    
+
     public void setSpeed(float speed) {
         this.acceleration = speed;
         this.maxSpeed = speed;
@@ -76,10 +75,9 @@ public class MovingPart implements EntityPart {
 
     public void setUp(boolean up) {
         this.up = up;
-    }    
+    }
 
-    
-    public void setDown(boolean down){
+    public void setDown(boolean down) {
         this.down = down;
     }
 
@@ -90,18 +88,17 @@ public class MovingPart implements EntityPart {
         float y = positionPart.getY();
         float radians = positionPart.getRadians();
         float dt = gameData.getDelta();
-        
-        
+
         float vec = (float) sqrt(dx * dx + dy * dy);
-        
+
         // moving
         if (left) {
-            
-            if (!(up||down)) {
+
+            if (!(up || down)) {
                 dy = 0;
             }
-            
-            if (vec < maxSpeed) { 
+
+            if (vec < maxSpeed) {
                 dx -= acceleration * dt;
             } else {
                 dx = -maxSpeed;
@@ -109,38 +106,38 @@ public class MovingPart implements EntityPart {
         }
 
         if (right) {
-            
-            if (!(up||down)) {
+
+            if (!(up || down)) {
                 dy = 0;
             }
-            
-            if (vec < maxSpeed) { 
+
+            if (vec < maxSpeed) {
                 dx += acceleration * dt;
             } else {
                 dx = maxSpeed;
             }
         }
-           
+
         if (up) {
-            
-            if (!(left||right)) {
+
+            if (!(left || right)) {
                 dx = 0;
             }
-            
-            if (vec < maxSpeed) { 
+
+            if (vec < maxSpeed) {
                 dy += acceleration * dt;
             } else {
                 dy = maxSpeed;
             }
         }
-        
+
         if (down) {
-            
-            if (!(left||right)) {
+
+            if (!(left || right)) {
                 dx = 0;
             }
-            
-            if (vec < maxSpeed) { 
+
+            if (vec < maxSpeed) {
                 dy -= acceleration * dt;
             } else {
                 dy = -maxSpeed;
@@ -149,69 +146,42 @@ public class MovingPart implements EntityPart {
         if (down || up || left || right) {
             isMoving = true;
         }
-        
-
 
         // deccelerating
-        if (!(down||up||left||right)) {
+        if (!(down || up || left || right)) {
             dx = 0;
             dy = 0;
             isMoving = false;
         }
         // set position
-        
-        if (wrap) {
-            x += dx * dt;
-//            // wrapping
-//            if (x > gameData.getDisplayWidth()) {
-//                x = gameData.getDisplayWidth();
-//            }
-//            else if (x < 0) {
-//                x = 0;
-//            }
 
-            y += dy * dt;
+        x += dx * dt;
 
-//            if (y > gameData.getDisplayHeight()) {
-//                y = gameData.getDisplayHeight();
-//            }
-//            else if (y < 0) {
-//                y = 0;
-//            }
-        } else {
-                
-                x += dx * dt;
-            
-                // wrapping
-                if (x > gameData.getDisplayWidth()) {
-                    x = gameData.getDisplayWidth();
-                }
-                else if (x < 0) {
-                    x = 0;
-                }
-
-                y += dy * dt;
-
-                // wrapping
-                if (y > gameData.getDisplayHeight()) {
-                    y = gameData.getDisplayHeight();
-                }
-                else if (y < 0) {
-                    y = 0;
-                }
-            
+        // wrapping
+        if (x > 3200) {
+            x = 3200;
+        } else if (x < 0) {
+            x = 0;
         }
-            
+
+        y += dy * dt;
+
+        // wrapping
+        if (y > 3200) {
+            y = 3200;
+        } else if (y < 0) {
+            y = 0;
+        }
+
         if (isIsInWalls()) {
-            x = getLastX() + (x-getLastX())/2;
-            y = getLastY() + (y-getLastY())/2;
+            x = getLastX() + (x - getLastX()) / 2;
+            y = getLastY() + (y - getLastY()) / 2;
             setIsInWalls(false);
         }
-        
-            positionPart.setX(x);
-            positionPart.setY(y);  
-            positionPart.setRadians(radians);
-            
+
+        positionPart.setX(x);
+        positionPart.setY(y);
+        positionPart.setRadians(radians);
 
     }
 

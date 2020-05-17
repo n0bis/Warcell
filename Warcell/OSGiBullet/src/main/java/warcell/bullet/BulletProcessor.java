@@ -61,7 +61,6 @@ public class BulletProcessor implements IEntityProcessingService {
             }
 
             updateShape(b);
-            System.out.println("x: " + ppb.getX() + " y: " + ppb.getY());
         }
     }
 
