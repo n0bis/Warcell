@@ -53,10 +53,6 @@ public class AIPlugin implements AISPI {
         int targetX = Math.round(target.getX() / DEFAULT_TILE_SIZE);
         int targetY = Math.round(target.getY() / DEFAULT_TILE_SIZE);
         
-        System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
-        System.out.println("targetX: " + targetX + " targetY: " + targetY);
-        
-        
         List<GridCell> thePath = new ArrayList<>();
         try {
             thePath = finder.findPath(navigationLayer.getCell(sourceX, sourceY),navigationLayer.getCell(targetX, targetY), navigationLayer);

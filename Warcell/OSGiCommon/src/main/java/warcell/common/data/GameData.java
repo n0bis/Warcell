@@ -1,5 +1,6 @@
 package warcell.common.data;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import warcell.common.events.Event;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,15 @@ public class GameData {
     private final GameKeys keys = new GameKeys();
     private List<Event> events = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
+    private static OrthographicCamera cam;
+
+    public static OrthographicCamera getCam() {
+        return cam;
+    }
+
+    public static void setCam(OrthographicCamera cam) {
+        GameData.cam = cam;
+    }
 
     public void addEvent(Event e) {
         events.add(e);
