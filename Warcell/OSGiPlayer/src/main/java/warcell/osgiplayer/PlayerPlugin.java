@@ -46,6 +46,7 @@ public class PlayerPlugin implements IGamePluginService {
      */
     private Entity createPlayer(GameData gameData) {
         Entity player = new Player();
+        gameData.setGameOver(false);
 
         float acceleration = 2450;
         float maxSpeed = 350;

@@ -18,6 +18,7 @@ import warcell.common.data.GameKeys;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.ScorePart;
 import warcell.common.player.Player;
+import warcell.common.services.IGamePluginService;
 
 /**
  *
@@ -29,7 +30,8 @@ public class MenuState extends State implements Input.TextInputListener {
     private int currentItem;
     private String[] menuItems;
     private final String title = "Warcell"; 
-    private String PlayerName;
+    IGamePluginService zcp;
+    IGamePluginService pcp;
     
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -85,6 +87,7 @@ public class MenuState extends State implements Input.TextInputListener {
         }
         
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            
             ScorePart sp = entity.getPart(ScorePart.class);
             font.draw(
                 getGame().getTextureSpriteBatch(),
@@ -92,7 +95,7 @@ public class MenuState extends State implements Input.TextInputListener {
                 20,
                 700
             );
-            
+
         }    
 
         getGame().getTextureSpriteBatch().end();

@@ -44,8 +44,7 @@ public class SpawnerProcessor implements IEntityProcessingService {
                                     System.out.println("enemy Spawned at: "+ ppE.getX()+ " " + ppE.getY());
                                     spawnerPart.resetTimer();
                                 }
-                            }
-                            
+                            }    
                         }
                     }
                 }

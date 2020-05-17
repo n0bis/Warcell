@@ -16,6 +16,8 @@ public class GameData {
     private List<Event> events = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
     private static OrthographicCamera cam;
+    private boolean gameOver = false;
+    private int finalScore;
 
     public static OrthographicCamera getCam() {
         return cam;
@@ -83,4 +85,23 @@ public class GameData {
 
         return r;
     }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public int getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
+    }
+    
+    
+    
 }

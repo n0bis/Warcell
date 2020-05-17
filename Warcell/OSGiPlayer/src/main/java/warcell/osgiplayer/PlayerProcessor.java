@@ -18,12 +18,10 @@ import warcell.common.weapon.parts.ShootingPart;
 
 
 public class PlayerProcessor implements IEntityProcessingService {
-    private float weaponChangeDelay;
     private PlayerState playerstate;
     
     @Override
     public void process(GameData gameData, World world) {
-        weaponChangeDelay -= gameData.getDelta();
 
         for (Entity entity : world.getEntities(Player.class)) {
             
@@ -88,8 +86,11 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             // Check if dead
             if (lifePart.isDead()) {
+                
+                gameData.setFinalScore(scorePart.getScore());
                 world.removeEntity(entity);
                 System.out.println("PLAYER DEAD");
+                gameData.setGameOver(true);
             }
         }
     }

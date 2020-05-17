@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package warcell.weapon.rifle;
+package warcell.weapon;
 
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -36,6 +36,7 @@ public class WeaponPlugin implements IGamePluginService {
         for (Entity entity : world.getEntities(Player.class)) {
             InventoryPart inv = entity.getPart(InventoryPart.class);
             inv.removeAllWeapons();
+            inv.setCurrentWeapon(null);
         }
     }
 }

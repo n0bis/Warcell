@@ -7,16 +7,12 @@ package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.Game;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -30,8 +26,6 @@ import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.services.IGamePluginService;
 import warcell.common.services.IPostEntityProcessingService;
-import warcell.core.managers.GameAssetManager;
-import warcell.core.managers.GameInputProcessor;
 
 /**
  *
@@ -42,15 +36,13 @@ public class PlayState extends State {
     private PositionPart camPos;
     private boolean paused;
     private BitmapFont font;
-
+            
     public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
         paused = false;
 
     }
-
-
-
+    
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
@@ -77,8 +69,10 @@ public class PlayState extends State {
                 postEntityProcessorService.process(getGameData(), getWorld());
             }    
         }
-
-  
+        if (getGameData().isGameOver()){
+            getGuiStateManager().setState(GUIStateManager.GAMEOVER);
+        }
+        
     }
 
     @Override
@@ -88,11 +82,7 @@ public class PlayState extends State {
             PositionPart posPart = e.getPart(PositionPart.class);
             if (posPart != null) {
                 camPos = posPart;
-            } else {
-                camPos.setX(getGameData().getDisplayWidth());
-                camPos.setY(getGameData().getDisplayHeight());
             }
-
         } 
         getGame().getCam().position.set(camPos.getX(), camPos.getY(), 0);
         getGame().getCam().update();
@@ -212,13 +202,7 @@ public class PlayState extends State {
     }
     
     @Override
-    public void handleInput() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    public void handleInput() {}
     @Override
-    public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    public void dispose() {}
 }
