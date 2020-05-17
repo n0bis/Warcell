@@ -39,6 +39,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
     float timer2 = 0;
     private Map map;
     MapObjects objects;
+    MapObjects border;
 
     @Override
     public void process(GameData gameData, World world) {
@@ -50,6 +51,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                 TiledMapPart tiledMap = tile.getPart(TiledMapPart.class);
                 map = new TmxMapLoader().load(tiledMap.getSrcPath());
                 objects = map.getLayers().get("objectlayer").getObjects();
+                border = map.getLayers().get("border").getObjects();
             }
         } else {
             for (Entity entity1 : world.getEntities()) {
@@ -90,6 +92,14 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                         movingPart.setIsInWalls(true);
                     }
                 }
+                for (RectangleMapObject rectangleObject : border.getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 65);
+                    
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        movingPart.setIsInWalls(true);
+                    }
+                }
                 if (!movingPart.isIsInWalls()) {
                     movingPart.setLastX(positionPart.getX());
                     movingPart.setLastY(positionPart.getY());
@@ -105,6 +115,7 @@ public class CollisionProcessor implements IPostEntityProcessingService {
                     
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         world.removeEntity(bullet);
+                        
                     }
                 }
             }
