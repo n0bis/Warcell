@@ -17,6 +17,7 @@ public class GameData {
     private boolean gameOver = false;
     private int finalScore;
     private String name;
+    private float difficultyMultiplier = 0.1f;
 
     public void addEvent(Event e) {
         events.add(e);
@@ -99,6 +100,20 @@ public class GameData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    public float getDifficultyMultiplier() {
+        return difficultyMultiplier;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficultyMultiplier(float difficulty) {
+        this.difficultyMultiplier = difficulty;
     }
     
     

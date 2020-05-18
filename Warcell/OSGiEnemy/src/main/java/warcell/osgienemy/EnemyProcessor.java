@@ -89,8 +89,7 @@ public class EnemyProcessor implements IEntityProcessingService {
                 for (Entity player : world.getEntities(Player.class)) {
                     ScorePart sp = player.getPart(ScorePart.class);
                     int score = sp.getScore();
-                    sp.setScore(score += 10);
-                    
+                    sp.setScore(score += 10);   
                 } 
             }
             

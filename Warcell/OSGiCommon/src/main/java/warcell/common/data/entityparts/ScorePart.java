@@ -23,6 +23,10 @@ public class ScorePart implements EntityPart{
 
     @Override
     public void process(GameData gameData, Entity entity) {
+        if (score > 500) {
+            float multi = ((float)score)/5000f;
+            gameData.setDifficultyMultiplier(multi);
+        }
     }
 
     public String getName() {

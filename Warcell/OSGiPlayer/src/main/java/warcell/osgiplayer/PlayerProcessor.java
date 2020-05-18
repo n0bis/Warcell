@@ -78,6 +78,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
             lifePart.process(gameData, entity);
+            scorePart.process(gameData, entity);
             
             if (inventoryPart.getCurrentWeapon() != null) {
                 changeSprite(playerstate, inventoryPart.getCurrentWeapon().getName(), animationTexturePart);
