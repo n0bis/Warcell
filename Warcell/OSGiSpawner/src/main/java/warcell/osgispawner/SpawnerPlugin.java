@@ -51,9 +51,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(448, 3200, radians));
+        spawner.add(new PositionPart(448, 3150, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(140, 5, 100));
+        spawner.add(new SpawnerPart(140, 5, 10));
 
         return spawner;
     }
@@ -61,9 +61,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(1376, 3200, radians));
+        spawner.add(new PositionPart(1376, 3150, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(150, 4, 100));
+        spawner.add(new SpawnerPart(150, 4, 10));
 
         return spawner;
     }
@@ -71,9 +71,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(2784, 3200, radians));
+        spawner.add(new PositionPart(2784, 3150, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(140, 5, 100));
+        spawner.add(new SpawnerPart(140, 5, 10));
 
         return spawner;
     }
@@ -81,9 +81,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(3200, 1152, radians));
+        spawner.add(new PositionPart(3150, 800, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(100, 5, 30));
+        spawner.add(new SpawnerPart(100, 5, 10));
 
         return spawner;
     }
@@ -91,9 +91,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(3200, 2208, radians));
+        spawner.add(new PositionPart(3150, 2000, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(150, 6, 100));
+        spawner.add(new SpawnerPart(150, 6, 10));
 
         return spawner;
     }
@@ -101,9 +101,9 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(2336, 0, radians));
+        spawner.add(new PositionPart(2336, 32, radians));
         spawner.add(new TexturePart(debugPath));
-        spawner.add(new SpawnerPart(130, 4, 100));
+        spawner.add(new SpawnerPart(130, 4, 10));
 
         return spawner;
     }
@@ -111,7 +111,7 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(1216, 0, radians));
+        spawner.add(new PositionPart(1216, 32, radians));
         spawner.add(new TexturePart(debugPath));
         spawner.add(new SpawnerPart(100, 6, 50));
 
@@ -121,7 +121,7 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner = new Spawner();
 
         float radians = 3.1415f / 2;
-        spawner.add(new PositionPart(0, 1184, radians));
+        spawner.add(new PositionPart(32, 2350, radians));
         spawner.add(new TexturePart(debugPath));
         spawner.add(new SpawnerPart(120, 10, 10));
 

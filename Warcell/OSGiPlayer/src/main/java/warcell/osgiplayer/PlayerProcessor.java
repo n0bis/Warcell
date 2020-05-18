@@ -50,7 +50,6 @@ public class PlayerProcessor implements IEntityProcessingService {
             double mouseY = Gdx.input.getY();
             double newMouseY = inverseYAxis(mouseY, gameData);
             
-            
             // angle between the Mouse and the Player
             double angle = angleBetweenTwoPoints(gameData.getDisplayWidth()/2,gameData.getDisplayHeight()/2 , mouseX, newMouseY);
             positionPart.setRadians((float)angle);

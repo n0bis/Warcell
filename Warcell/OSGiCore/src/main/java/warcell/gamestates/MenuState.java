@@ -96,9 +96,7 @@ public class MenuState extends State implements Input.TextInputListener {
                 20,
                 700
             );
-
         }    
-
         getGame().getTextureSpriteBatch().end();
     }
 

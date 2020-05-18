@@ -41,7 +41,6 @@ public class SpawnerProcessor implements IEntityProcessingService {
                                     PositionPart ppE = enemy.getPart(PositionPart.class);
                                     ppE.setX(positionPart.getX() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
                                     ppE.setY(positionPart.getY() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
-                                    System.out.println("enemy Spawned at: "+ ppE.getX()+ " " + ppE.getY());
                                     spawnerPart.resetTimer();
                                 }
                             }    

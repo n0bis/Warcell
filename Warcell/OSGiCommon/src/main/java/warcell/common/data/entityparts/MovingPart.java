@@ -158,19 +158,19 @@ public class MovingPart implements EntityPart {
         x += dx * dt;
 
         // wrapping
-        if (x > 3200) {
-            x = 3200;
-        } else if (x < 0) {
-            x = 0;
+        if (x >= 3200) {
+            x = 3100;
+        } else if (x <= 0) {
+            x = 100;
         }
 
         y += dy * dt;
 
         // wrapping
-        if (y > 3200) {
-            y = 3200;
-        } else if (y < 0) {
-            y = 0;
+        if (y >= 3200) {
+            y = 3100;
+        } else if (y <= 0) {
+            y = 100;
         }
 
         if (isIsInWalls()) {
