@@ -25,7 +25,7 @@ public class SpawnerProcessor implements IEntityProcessingService {
             PositionPart positionPart = entity.getPart(PositionPart.class);
             SpawnerPart spawnerPart = entity.getPart(SpawnerPart.class);
             spawnerPart.process(gameData, entity);
-           
+
             for (IGamePluginService plugin : gameData.getGamePlugins()) {
                 if (plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
                     if (igp == null) {
@@ -39,13 +39,12 @@ public class SpawnerProcessor implements IEntityProcessingService {
                                     enemies.put(enemy.getID(), enemy);
                                     plugin.start(gameData, world);
                                     PositionPart ppE = enemy.getPart(PositionPart.class);
-                                    ppE.setX(positionPart.getX() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
-                                    ppE.setY(positionPart.getY() + r.nextInt(spawnerPart.getRadius()*2) - spawnerPart.getRadius());
-                                    System.out.println("enemy Spawned at: "+ ppE.getX()+ " " + ppE.getY());
+                                    ppE.setX(positionPart.getX() + r.nextInt(spawnerPart.getRadius() * 2) - spawnerPart.getRadius());
+                                    ppE.setY(positionPart.getY() + r.nextInt(spawnerPart.getRadius() * 2) - spawnerPart.getRadius());
+                                    System.out.println("enemy Spawned at: " + ppE.getX() + " " + ppE.getY());
                                     spawnerPart.resetTimer();
                                 }
                             }
-                            
                         }
                     }
                 }
