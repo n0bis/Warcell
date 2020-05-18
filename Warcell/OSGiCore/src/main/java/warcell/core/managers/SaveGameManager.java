@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import warcell.common.data.GameData;
 import warcell.common.data.SaveGame;
@@ -62,12 +63,12 @@ public class SaveGameManager {
             );
             saves = (ArrayList<SaveGame>) in.readObject();
             in.close();
+            Collections.sort(saves);
         } catch (Exception e) {
             
         }
 
     }
-    
     
     public boolean saveFileExists() {
         return file.exists();
