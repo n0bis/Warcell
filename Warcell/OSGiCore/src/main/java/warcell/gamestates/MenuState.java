@@ -51,6 +51,7 @@ public class MenuState extends State implements Input.TextInputListener {
         menuItems = new String[] {
             "Play",
             "Help",
+            "Highscore",
             "Change name",
             "Quit"
         };      
@@ -126,11 +127,14 @@ public class MenuState extends State implements Input.TextInputListener {
         // high scores
         else if(currentItem == 1) {
             getGuiStateManager().setState(GUIStateManager.HELP);
-        }        
+        }               
         else if(currentItem == 2) {
+            getGuiStateManager().setState(GUIStateManager.HIGHSCORE);
+        }         
+        else if(currentItem == 3) {
             Gdx.input.getTextInput(this, "Enter name", "", "Name");
         }
-        else if(currentItem == 3) {
+        else if(currentItem == 4) {
             Gdx.app.exit();
         }
     }

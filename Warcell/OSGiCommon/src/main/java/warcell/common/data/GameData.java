@@ -16,6 +16,7 @@ public class GameData {
     private List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
     private boolean gameOver = false;
     private int finalScore;
+    private String name;
 
     public void addEvent(Event e) {
         events.add(e);
@@ -91,5 +92,15 @@ public class GameData {
     public void setFinalScore(int finalScore) {
         this.finalScore = finalScore;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
 
 }

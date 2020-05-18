@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import java.io.File;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.services.IEntityProcessingService;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.GameKeys;
 import warcell.core.managers.GameAssetManager;
+import warcell.core.managers.SaveGameManager;
 import warcell.gamestates.GUIStateManager;
 
 public class Game implements ApplicationListener {
@@ -42,6 +44,7 @@ public class Game implements ApplicationListener {
     float w = gameData.getDisplayWidth();
     float h = gameData.getDisplayHeight();
     private GUIStateManager guiManager;
+    private SaveGameManager sgm;
 
     private float unitScale = 1 / 128f;
 
@@ -64,6 +67,7 @@ public class Game implements ApplicationListener {
     @Override
     public void create() {
         guiManager = new GUIStateManager(this, world, gameData);
+        sgm = new SaveGameManager(new File("saves.sav"), gameData);
 
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
@@ -154,4 +158,6 @@ public class Game implements ApplicationListener {
     public GameAssetManager getGameAssetManager() { return gameAssetManager; }
     public float getW() { return w; }
     public float getH() { return h; }
+    public SaveGameManager getSgm() { return sgm; }
+    
 }

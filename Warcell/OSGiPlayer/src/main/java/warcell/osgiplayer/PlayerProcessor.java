@@ -86,8 +86,8 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             // Check if dead
             if (lifePart.isDead()) {
-                
                 gameData.setFinalScore(scorePart.getScore());
+                gameData.setName(scorePart.getName());
                 world.removeEntity(entity);
                 System.out.println("PLAYER DEAD");
                 gameData.setGameOver(true);

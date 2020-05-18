@@ -10,11 +10,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import warcell.Game;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
+import warcell.common.data.SaveGame;
 import warcell.common.data.World;
 import warcell.common.services.IGamePluginService;
+import warcell.core.managers.SaveGameManager;
 
 /**
  *
@@ -23,6 +28,7 @@ import warcell.common.services.IGamePluginService;
 public class GameOverState extends State {
     private BitmapFont font;
     private BitmapFont title;
+    private SaveGame save;
     
     public GameOverState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -41,6 +47,8 @@ public class GameOverState extends State {
         title.setColor(Color.RED);
         
         getGame().getCam().setToOrtho(false, getGameData().getDisplayWidth(), getGameData().getDisplayHeight());
+        
+        getGame().getSgm().save();
     }
 
     @Override
@@ -99,9 +107,9 @@ public class GameOverState extends State {
                 plugin.stop(getGameData(), getWorld());
                 plugin.start(getGameData(), getWorld());
             }
-        }       
-
-        
+        }
     }
+    
+
     
 }
