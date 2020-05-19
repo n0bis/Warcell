@@ -26,7 +26,7 @@ import warcell.common.weapon.service.WeaponsSPI;
  * @author birke
  */
 public class RifleWeapon implements WeaponsSPI {
-    private final String name = "Rifle";
+    private final String name = "AK-74 Magpul";
     private final String description = "Automatic Carbine";
     private final String iconPath = "rifle.png";
     private Entity bullet;

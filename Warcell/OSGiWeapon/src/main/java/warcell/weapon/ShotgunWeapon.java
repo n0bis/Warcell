@@ -33,7 +33,7 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class ShotgunWeapon implements WeaponsSPI {
     Random rand = new Random();
 
-    private final String name = "Shotgun";
+    private final String name = "M870 Remington";
     private final String description = "Pump Shotgun";
     private final String iconPath = "shotgun.png";
     private Entity bullet;

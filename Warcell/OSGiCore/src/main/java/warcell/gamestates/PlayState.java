@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -39,7 +40,9 @@ public class PlayState extends State {
     private PositionPart camPos;
     private boolean paused;
     private BitmapFont font;
+    private BitmapFont smallFont;
     private Texture weaponSprite;
+    private HAlignment hAlign;
             
     public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -53,8 +56,11 @@ public class PlayState extends State {
             Gdx.files.internal("fonts/Western Bang Bang.otf")
         );   
         
+        
         font = gen.generateFont(50);
         font.setColor(Color.WHITE);
+        smallFont = gen.generateFont(25);
+        smallFont.setColor(Color.WHITE);
     }
 
     @Override
@@ -115,7 +121,24 @@ public class PlayState extends State {
             InventoryPart invPart = entity.getPart(InventoryPart.class);
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
 
-            if (invPart.getCurrentWeapon() != null && invPart.getCurrentWeapon().getDescription() != null) {
+            if (invPart.getCurrentWeapon() != null) {
+                smallFont.drawMultiLine(
+                    getGame().getTextureSpriteBatch(),
+                    "Ammo: " + String.valueOf(invPart.getCurrentWeapon().
+                            getAmmoCapacity()-invPart.getCurrentWeapon().getAmmo()),
+                    camPos.getX() + 620,
+                    camPos.getY() + 230,
+                    5f,
+                    hAlign.RIGHT
+                );                
+                smallFont.drawMultiLine(
+                    getGame().getTextureSpriteBatch(),
+                    invPart.getCurrentWeapon().getName(),
+                    camPos.getX() + 620,
+                    camPos.getY() + 250,
+                    5f,
+                    hAlign.RIGHT
+                );
                 weaponSprite = new Texture(Gdx.files.internal(invPart.getCurrentWeapon().getIconPath()));
                 getGame().getTextureSpriteBatch().draw(weaponSprite, camPos.getX() + 460, camPos.getY() + 250);
             }
