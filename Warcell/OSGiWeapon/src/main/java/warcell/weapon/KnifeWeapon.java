@@ -34,9 +34,9 @@ public class KnifeWeapon implements WeaponsSPI {
     private Entity bullet;
     private final int bulletVelocity = 300;
     private int ammo = 0;
-    private final int ammoCapacity = 1;
+    private final int ammoCapacity = Integer.MAX_VALUE;
     private float reloadTime = 0;
-    private float fireRate = (float) 0.7;
+    private float fireRate = 0.7f;
     private ArrayList<Entity> bulletArray = new ArrayList();
 
     public String getName() {
