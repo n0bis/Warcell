@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import warcell.Game;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -27,9 +26,9 @@ import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
-import warcell.common.services.IGamePluginService;
 import warcell.common.services.IPostEntityProcessingService;
 import warcell.common.weapon.parts.InventoryPart;
+import warcell.common.weapon.parts.ShootingPart;
 
 /**
  *
@@ -114,7 +113,7 @@ public class PlayState extends State {
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
             getGame().getTextureSpriteBatch().begin();
             InventoryPart invPart = entity.getPart(InventoryPart.class);
-            
+            ShootingPart shootingPart = entity.getPart(ShootingPart.class);
 
             if (invPart.getCurrentWeapon() != null && invPart.getCurrentWeapon().getDescription() != null) {
                 weaponSprite = new Texture(Gdx.files.internal(invPart.getCurrentWeapon().getIconPath()));
@@ -129,8 +128,20 @@ public class PlayState extends State {
                 camPos.getX() - 640,
                 camPos.getY() + 360
             );
-            
-            font.draw(getGame().getTextureSpriteBatch(), "HP: " + String.valueOf(lp.getLife()), camPos.getX()+500, camPos.getY()+350);
+            font.draw(
+                    getGame().getTextureSpriteBatch(), 
+                    "HP: " + String.valueOf(lp.getLife()), 
+                    camPos.getX()+500, 
+                    camPos.getY()+350
+            );
+            if (shootingPart.CanShoot() == false) {
+                font.draw(
+                        getGame().getTextureSpriteBatch(), 
+                        "Press R to reload!", 
+                        camPos.getX()-640, 
+                        camPos.getY()-320
+                );
+            }
             getGame().getTextureSpriteBatch().end();
         }     
     }

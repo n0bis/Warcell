@@ -61,8 +61,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             // Cycle weapons
             if (gameData.getKeys().isPressed(GameKeys.Q) && isReloading == false) {
                 inventoryPart.nextWeapon();
+                shootingPart.setCanShoot(true);
             } else if (gameData.getKeys().isPressed(GameKeys.E) && isReloading == false) {
                 inventoryPart.previousWeapon();
+                shootingPart.setCanShoot(true);
             }
             
             if (movingPart.isMoving()) {
@@ -78,17 +80,22 @@ public class PlayerProcessor implements IEntityProcessingService {
                 inventoryPart.getCurrentWeapon().setAmmo(0);
                 timerPart.setExpiration(inventoryPart.getCurrentWeapon().getReloadTime());
                 isReloading = true;
+                shootingPart.setCanShoot(true);
             }
             
             // Shooting
             if (gameData.getKeys().isDown(GameKeys.LM) && inventoryPart.getCurrentWeapon() != null) {
-                if (timerPart.getExpiration() <= 0 && inventoryPart.getCurrentWeapon().getAmmo() < inventoryPart.getCurrentWeapon().getAmmoCapacity()) {
-                    shootingPart.setIsShooting(true);
-                    inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
-                    inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmo() + 1);
-                    timerPart.setExpiration(inventoryPart.getCurrentWeapon().getFireRate());
-                    playerstate = PlayerState.SHOOTING;
-                } 
+                if (inventoryPart.getCurrentWeapon().getAmmo() < inventoryPart.getCurrentWeapon().getAmmoCapacity()) {
+                    if (timerPart.getExpiration() <= 0) {
+                        shootingPart.setIsShooting(true);
+                        inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
+                        inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmo() + 1);
+                        timerPart.setExpiration(inventoryPart.getCurrentWeapon().getFireRate());
+                        playerstate = PlayerState.SHOOTING;                    
+                    }
+                } else {
+                    shootingPart.setCanShoot(false);
+                }
 
             }
             
