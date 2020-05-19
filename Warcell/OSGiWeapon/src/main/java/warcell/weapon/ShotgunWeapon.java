@@ -60,13 +60,7 @@ public class ShotgunWeapon implements WeaponsSPI {
     
     @Override
     public void shoot(Entity entity, GameData gameData, World world) {
-        if (ammo == 0) {
-            reloadTime = 0;
-        } else if (ammo == 1) {
-            reloadTime = 1.33f;
-        } else {
-            reloadTime = (float)(ammoCapacity - ammo) * 1.33f;
-        }
+
         if (entity.getPart(ShootingPart.class) != null) {
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
             //Shoot if isShooting is true, ie. space is pressed.
@@ -123,6 +117,13 @@ public class ShotgunWeapon implements WeaponsSPI {
 
     @Override
     public float getReloadTime() {
+        if (ammo == 8) {
+            reloadTime = 0;
+        } else if (ammo == 7) {
+            reloadTime = 1.33f;
+        } else {
+            reloadTime = (float)(ammoCapacity - ammo) * 1.33f;
+        }
         return this.reloadTime;
     }
     
