@@ -35,7 +35,7 @@ public class ShotgunWeapon implements WeaponsSPI {
 
     private final String name = "Shotgun";
     private final String description = "Pump Shotgun";
-    private final String iconPath = "";
+    private final String iconPath = "shotgun.png";
     private Entity bullet;
     private float rateOfFire = (float) 1;
     private float fireDelay;

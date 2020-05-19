@@ -7,12 +7,14 @@ package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import warcell.Game;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -27,6 +29,7 @@ import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.services.IGamePluginService;
 import warcell.common.services.IPostEntityProcessingService;
+import warcell.common.weapon.parts.InventoryPart;
 
 /**
  *
@@ -37,6 +40,7 @@ public class PlayState extends State {
     private PositionPart camPos;
     private boolean paused;
     private BitmapFont font;
+    private Texture weaponSprite;
             
     public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -83,7 +87,7 @@ public class PlayState extends State {
             PositionPart posPart = e.getPart(PositionPart.class);
             if (posPart != null) {
                 camPos = posPart;
-            }
+            }            
         } 
         getGame().getCam().position.set(camPos.getX(), camPos.getY(), 0);
         getGame().getCam().update();
@@ -109,6 +113,13 @@ public class PlayState extends State {
         // show score
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
             getGame().getTextureSpriteBatch().begin();
+            InventoryPart invPart = entity.getPart(InventoryPart.class);
+            
+
+            if (invPart.getCurrentWeapon() != null && invPart.getCurrentWeapon().getDescription() != null) {
+                weaponSprite = new Texture(Gdx.files.internal(invPart.getCurrentWeapon().getIconPath()));
+                getGame().getTextureSpriteBatch().draw(weaponSprite, camPos.getX() + 460, camPos.getY() + 250);
+            }
 
             ScorePart sp = entity.getPart(ScorePart.class);
             LifePart lp = entity.getPart(LifePart.class);

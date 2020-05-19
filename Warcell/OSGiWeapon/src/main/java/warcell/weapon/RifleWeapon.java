@@ -28,7 +28,7 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class RifleWeapon implements WeaponsSPI {
     private final String name = "Rifle";
     private final String description = "Automatic Carbine";
-    private final String iconPath = "";
+    private final String iconPath = "rifle.png";
     private Entity bullet;
     private float rateOfFire = (float) 0.2;
     private float fireDelay;
