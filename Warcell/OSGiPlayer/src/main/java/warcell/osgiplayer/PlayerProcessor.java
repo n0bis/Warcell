@@ -163,9 +163,9 @@ public class PlayerProcessor implements IEntityProcessingService {
     private void changeSprite(PlayerState ps, String weapon, AnimationTexturePart atp) {
      switch(ps) {
             case IDLE:
-                if (weapon.equals("Rifle")) {
+                if (weapon.equals("AK-74 Magpul")) {
                     atp.setSrcPath("RifleIdle.png", 39, 66, 20, 1, 0.09f);
-                } else if (weapon.equals("Shotgun")) {
+                } else if (weapon.equals("M870 Remington")) {
                     atp.setSrcPath("ShotgunIdle.png", 39, 66, 20, 1, 0.09f);
                 } else if(weapon.equals("Handgun")) {
                     atp.setSrcPath("HandgunIdle.png", 39, 53, 20, 1, 0.09f);
@@ -175,9 +175,9 @@ public class PlayerProcessor implements IEntityProcessingService {
                 break;
                 
             case MOVING:
-                if (weapon.equals("Rifle")) {
+                if (weapon.equals("AK-74 Magpul")) {
                     atp.setSrcPath("RifleMove.png", 39, 66, 20, 1, 0.09f);
-                } else if (weapon.equals("Shotgun")) {
+                } else if (weapon.equals("M870 Remington")) {
                     atp.setSrcPath("ShotgunMove.png", 39, 66, 20, 1, 0.09f);
                 }else if(weapon.equals("Handgun")) {
                     atp.setSrcPath("HandgunMove.png", 40, 53, 20, 1, 0.09f);
@@ -187,9 +187,9 @@ public class PlayerProcessor implements IEntityProcessingService {
                 break;
                 
             case SHOOTING:
-                if (weapon.equals("Rifle")) {
+                if (weapon.equals("AK-74 Magpul")) {
                     atp.setSrcPath("RifleShoot.png", 39, 66, 3, 1, 0.09f);
-                } else if (weapon.equals("Shotgun")) {
+                } else if (weapon.equals("M870 Remington")) {
                     atp.setSrcPath("ShotgunShoot.png", 39, 66, 3, 1, 0.30f);
                 }else if(weapon.equals("Handgun")) {
                     atp.setSrcPath("HandgunShoot.png", 39, 53, 3, 1, 0.09f);
