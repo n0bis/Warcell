@@ -39,9 +39,9 @@ public class ShotgunWeapon implements WeaponsSPI {
     private Entity bullet;
     private final int bulletVelocity = 600;
     private ArrayList<Entity> bulletArray = new ArrayList();
-    private int ammo = 0;
+    private int ammo = 8;
     private final int ammoCapacity = 8;
-    private float reloadTime = 6f;
+    private float reloadTime = 0;
     private float fireRate = 0.8f;
 
     public String getName() {
@@ -60,6 +60,13 @@ public class ShotgunWeapon implements WeaponsSPI {
     
     @Override
     public void shoot(Entity entity, GameData gameData, World world) {
+        if (ammo == 0) {
+            reloadTime = 0;
+        } else if (ammo == 1) {
+            reloadTime = 1.33f;
+        } else {
+            reloadTime = (float)(ammoCapacity - ammo) * 1.33f;
+        }
         if (entity.getPart(ShootingPart.class) != null) {
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
             //Shoot if isShooting is true, ie. space is pressed.

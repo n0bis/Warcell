@@ -77,19 +77,20 @@ public class PlayerProcessor implements IEntityProcessingService {
             }
             
             if (gameData.getKeys().isPressed(GameKeys.R)) {
-                inventoryPart.getCurrentWeapon().setAmmo(0);
                 timerPart.setExpiration(inventoryPart.getCurrentWeapon().getReloadTime());
+                System.out.println(inventoryPart.getCurrentWeapon().getReloadTime());
                 isReloading = true;
                 shootingPart.setCanShoot(true);
+                inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmoCapacity());
             }
             
             // Shooting
             if (gameData.getKeys().isDown(GameKeys.LM) && inventoryPart.getCurrentWeapon() != null) {
-                if (inventoryPart.getCurrentWeapon().getAmmo() < inventoryPart.getCurrentWeapon().getAmmoCapacity()) {
+                if (inventoryPart.getCurrentWeapon().getAmmo() > 0) {
                     if (timerPart.getExpiration() <= 0) {
                         shootingPart.setIsShooting(true);
                         inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
-                        inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmo() + 1);
+                        inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmo() - 1);
                         timerPart.setExpiration(inventoryPart.getCurrentWeapon().getFireRate());
                         playerstate = PlayerState.SHOOTING;                    
                     }

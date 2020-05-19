@@ -124,8 +124,7 @@ public class PlayState extends State {
             if (invPart.getCurrentWeapon() != null) {
                 smallFont.drawMultiLine(
                     getGame().getTextureSpriteBatch(),
-                    "Ammo: " + String.valueOf(invPart.getCurrentWeapon().
-                            getAmmoCapacity()-invPart.getCurrentWeapon().getAmmo()),
+                    "Ammo: " + String.valueOf(invPart.getCurrentWeapon().getAmmo()),
                     camPos.getX() + 620,
                     camPos.getY() + 230,
                     5f,

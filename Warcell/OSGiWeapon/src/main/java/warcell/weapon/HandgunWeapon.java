@@ -31,7 +31,7 @@ public class HandgunWeapon implements WeaponsSPI {
     private final String iconPath = "handgun.png";
     private Entity bullet;
     private final int bulletVelocity = 1200;
-    private int ammo = 0;
+    private int ammo = 10;
     private int ammoCapacity = 10;
     private float reloadTime = 4;
     private float fireRate = 1f;

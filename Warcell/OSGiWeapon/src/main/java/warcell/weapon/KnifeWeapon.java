@@ -33,7 +33,7 @@ public class KnifeWeapon implements WeaponsSPI {
     private final String iconPath = "knife.png";
     private Entity bullet;
     private final int bulletVelocity = 300;
-    private int ammo = 0;
+    private int ammo = Integer.MAX_VALUE;
     private final int ammoCapacity = Integer.MAX_VALUE;
     private float reloadTime = 0;
     private float fireRate = 0.7f;
