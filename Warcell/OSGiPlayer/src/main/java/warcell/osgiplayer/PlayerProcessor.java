@@ -9,6 +9,7 @@ import warcell.common.data.entityparts.AnimationTexturePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
@@ -17,12 +18,10 @@ import warcell.common.weapon.parts.ShootingPart;
 
 
 public class PlayerProcessor implements IEntityProcessingService {
-    private float weaponChangeDelay;
     private PlayerState playerstate;
     
     @Override
     public void process(GameData gameData, World world) {
-        weaponChangeDelay -= gameData.getDelta();
 
         for (Entity entity : world.getEntities(Player.class)) {
             
@@ -33,6 +32,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             SquarePart sqp = entity.getPart(SquarePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
+            ScorePart scorePart = entity.getPart(ScorePart.class);
             
             playerstate = PlayerState.IDLE;
             
@@ -43,13 +43,12 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.A));
             movingPart.setRight(gameData.getKeys().isDown(GameKeys.D));
             movingPart.setUp(gameData.getKeys().isDown(GameKeys.W));
-            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));   
+            movingPart.setDown(gameData.getKeys().isDown(GameKeys.S));
             
             // mouse position
             double mouseX = Gdx.input.getX();
             double mouseY = Gdx.input.getY();
             double newMouseY = inverseYAxis(mouseY, gameData);
-            
             
             // angle between the Mouse and the Player
             double angle = angleBetweenTwoPoints(gameData.getDisplayWidth()/2,gameData.getDisplayHeight()/2 , mouseX, newMouseY);
@@ -57,12 +56,10 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             
             // Cycle weapons
-            if (gameData.getKeys().isDown(GameKeys.Q) && weaponChangeDelay <= 0) {
+            if (gameData.getKeys().isPressed(GameKeys.Q)) {
                 inventoryPart.nextWeapon();
-                weaponChangeDelay += 1;
-            } else if (gameData.getKeys().isDown(GameKeys.E) && weaponChangeDelay <= 0) {
+            } else if (gameData.getKeys().isPressed(GameKeys.E)) {
                 inventoryPart.previousWeapon();
-                weaponChangeDelay += 1;
             }
             
             if (movingPart.isMoving()) {
@@ -81,6 +78,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             movingPart.process(gameData, entity);
             positionPart.process(gameData, entity);
             lifePart.process(gameData, entity);
+            scorePart.process(gameData, entity);
             
             if (inventoryPart.getCurrentWeapon() != null) {
                 changeSprite(playerstate, inventoryPart.getCurrentWeapon().getName(), animationTexturePart);
@@ -88,8 +86,11 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             // Check if dead
             if (lifePart.isDead()) {
+                gameData.setFinalScore(scorePart.getScore());
+                gameData.setName(scorePart.getName());
                 world.removeEntity(entity);
                 System.out.println("PLAYER DEAD");
+                gameData.setGameOver(true);
             }
         }
     }
@@ -137,21 +138,21 @@ public class PlayerProcessor implements IEntityProcessingService {
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleIdle.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunIdle.png", 155, 262, 20, 1, 0.09f);
+                    atp.setSrcPath("ShotgunIdle.png", 39, 66, 20, 1, 0.09f);
                 }
                 break;
             case MOVING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleMove.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunMove.png", 156, 263, 20, 1, 0.09f);
+                    atp.setSrcPath("ShotgunMove.png", 39, 66, 20, 1, 0.09f);
                 }
                 break;
             case SHOOTING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleShoot.png", 39, 66, 3, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
-                    atp.setSrcPath("ShotgunShoot.png", 153, 260, 3, 1, 0.30f);
+                    atp.setSrcPath("ShotgunShoot.png", 39, 66, 3, 1, 0.30f);
                 }
                 break;
         }

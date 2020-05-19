@@ -16,6 +16,7 @@ import warcell.common.weapon.parts.InventoryPart;
 import warcell.common.weapon.parts.ShootingPart;
 import java.util.UUID;
 import warcell.common.data.entityparts.DamagePart;
+import warcell.common.data.entityparts.ScorePart;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
@@ -45,6 +46,7 @@ public class PlayerPlugin implements IGamePluginService {
      */
     private Entity createPlayer(GameData gameData) {
         Entity player = new Player();
+        gameData.setGameOver(false);
 
         float acceleration = 2450;
         float maxSpeed = 350;
@@ -64,6 +66,7 @@ public class PlayerPlugin implements IGamePluginService {
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         player.add(new InventoryPart());
+        player.add(new ScorePart("John Doe"));
 
         return player;
     }

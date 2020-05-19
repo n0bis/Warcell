@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="warcell.weapon.RifleWeapon">
-    <implementation class="warcell.weapon.rifle.RifleWeapon"/>  
-    
-    <reference bind="setBulletService" cardinality="0..1"
-           interface="warcell.common.weapon.service.BulletSPI"
-           name="BulletService" policy="dynamic" unbind="removeBulletService"/>
-</scr:component>

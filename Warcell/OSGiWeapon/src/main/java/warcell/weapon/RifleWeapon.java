@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package warcell.weapon.rifle;
+package warcell.weapon;
 
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;

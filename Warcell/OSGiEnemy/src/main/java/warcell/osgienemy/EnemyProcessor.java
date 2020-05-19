@@ -10,6 +10,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.enemy.Enemy;
@@ -72,7 +73,6 @@ public class EnemyProcessor implements IEntityProcessingService {
                     movingPart.setLeft(false);
                     movingPart.setUp(false);
                 } 
-                System.out.println(angle);
             }
             
             // Process parts
@@ -86,6 +86,11 @@ public class EnemyProcessor implements IEntityProcessingService {
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
                 System.out.println("ENEMY DEAD");
+                for (Entity player : world.getEntities(Player.class)) {
+                    ScorePart sp = player.getPart(ScorePart.class);
+                    int score = sp.getScore();
+                    sp.setScore(score += 10);   
+                } 
             }
             
             movingPart.setRight(false);
