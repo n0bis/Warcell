@@ -10,6 +10,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
+import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.SquarePart;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.enemy.Enemy;
@@ -48,18 +49,30 @@ public class EnemyProcessor implements IEntityProcessingService {
             circlePart.setCentreY(positionPart.getY() + animationTexturePart.getHeight()/2);
 
             if (!path.isEmpty()) {
-                
                 double angle = getAngle(positionPart, path.get(0));
                 positionPart.setRadians((float)angle);
-                if (angle <= 45 || angle >= 315) {
+                
+                if ((angle > 315 && angle < 360) || (angle < 45 && angle > 0)) {
                     movingPart.setRight(true);
-                } else if (angle >= 46 && angle <= 135) {
+                    movingPart.setUp(false);
+                    movingPart.setLeft(false);
+                    movingPart.setDown(false);
+                } else if ((angle >= 45 && angle < 135)) {
                     movingPart.setUp(true);
-                } else if (angle >= 136 && angle <= 225) {
+                    movingPart.setRight(false);
+                    movingPart.setLeft(false);
+                    movingPart.setDown(false);
+                } else if ((angle >= 135 && angle < 225)) {
                     movingPart.setLeft(true);
-                } else if (angle >= 226 && angle <= 314) {
+                    movingPart.setRight(false);
+                    movingPart.setDown(false);
+                    movingPart.setUp(false);
+                } else if ((angle >= 225 && angle < 315)) {
                     movingPart.setDown(true);
-                }
+                    movingPart.setRight(false);
+                    movingPart.setLeft(false);
+                    movingPart.setUp(false);
+                } 
             }
             
             // Process parts
@@ -68,17 +81,23 @@ public class EnemyProcessor implements IEntityProcessingService {
             collisionPart.process(gameData, entity);
             circlePart.process(gameData, entity);
             lifePart.process(gameData, entity);
-            
+
             // Check if dead
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
                 System.out.println("ENEMY DEAD");
+                for (Entity player : world.getEntities(Player.class)) {
+                    ScorePart sp = player.getPart(ScorePart.class);
+                    int score = sp.getScore();
+                    sp.setScore(score += 10);   
+                } 
             }
             
             movingPart.setRight(false);
             movingPart.setLeft(false);
             movingPart.setUp(false);
             movingPart.setDown(false);
+            
         }
     }
     

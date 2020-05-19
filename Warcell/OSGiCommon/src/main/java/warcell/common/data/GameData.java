@@ -14,6 +14,10 @@ public class GameData {
     private final GameKeys keys = new GameKeys();
     private List<Event> events = new CopyOnWriteArrayList<>();
     private List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
+    private boolean gameOver = false;
+    private int finalScore;
+    private String name;
+    private float difficultyMultiplier = 0.1f;
 
     public void addEvent(Event e) {
         events.add(e);
@@ -73,4 +77,45 @@ public class GameData {
 
         return r;
     }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public int getFinalScore() {
+        return finalScore;
+    }
+
+    public void setFinalScore(int finalScore) {
+        this.finalScore = finalScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    public float getDifficultyMultiplier() {
+        return difficultyMultiplier;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficultyMultiplier(float difficulty) {
+        this.difficultyMultiplier = difficulty;
+    }
+    
+    
+
 }

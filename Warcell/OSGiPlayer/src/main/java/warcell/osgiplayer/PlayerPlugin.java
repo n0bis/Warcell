@@ -16,10 +16,11 @@ import warcell.common.weapon.parts.InventoryPart;
 import warcell.common.weapon.parts.ShootingPart;
 import java.util.UUID;
 import warcell.common.data.entityparts.DamagePart;
+import warcell.common.data.entityparts.ScorePart;
 
 public class PlayerPlugin implements IGamePluginService {
     private String entityID;
-    private float playerRadius = 75f;
+    private float playerRadius = 20f;
     private final String walkAnimationPath = "RifleIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
@@ -45,11 +46,12 @@ public class PlayerPlugin implements IGamePluginService {
      */
     private Entity createPlayer(GameData gameData) {
         Entity player = new Player();
+        gameData.setGameOver(false);
 
         float acceleration = 2450;
         float maxSpeed = 350;
-        float x = gameData.getDisplayWidth() / 3;
-        float y = gameData.getDisplayHeight() / 3;
+        float x = 2000;
+        float y = 2000;
         float radians = 3.1415f / 2;
         int maxLife = 1000;
         float centreX = 0;
@@ -58,12 +60,13 @@ public class PlayerPlugin implements IGamePluginService {
         player.add(new LifePart(maxLife));
         player.add(new DamagePart(0));
         player.add(new CollisionPart(true, 3));
-        player.add(new MovingPart(acceleration, maxSpeed, false));
+        player.add(new MovingPart(acceleration, maxSpeed, true));
         player.add(new PositionPart(x, y, radians));
-        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 172f, 235f, 0.5f, 0.5f));
+        player.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 43f, 59f, 1f, 1f));
         UUID uuid = UUID.randomUUID();
         player.add(new ShootingPart(uuid.toString()));
         player.add(new InventoryPart());
+        player.add(new ScorePart("John Doe"));
 
         return player;
     }

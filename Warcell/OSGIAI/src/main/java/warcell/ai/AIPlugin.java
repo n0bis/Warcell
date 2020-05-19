@@ -6,18 +6,14 @@
 package warcell.ai;
 
 import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.math.GridPoint2;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.xguzm.pathfinding.PathFindingException;
 import org.xguzm.pathfinding.gdxbridge.NavTmxMapLoader;
 import org.xguzm.pathfinding.gdxbridge.NavigationTiledMapLayer;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
-import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 import warcell.common.ai.AISPI;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.TiledMapPart;
@@ -28,33 +24,38 @@ import warcell.common.data.entityparts.TiledMapPart;
  */
 public class AIPlugin implements AISPI {
     
-    Map map;
-    NavigationTiledMapLayer navigationLayer;
-    AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
-    
+    private final int DEFAULT_TILE_SIZE = 32;
+    private Map map;
+    private NavigationTiledMapLayer navigationLayer;
+    private GridFinderOptions finderConfig = getOptions();
+    private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, finderConfig);
+
     @Override
-    public void startAI(TiledMapPart tiledMap) {
-        
+    public void startAI(TiledMapPart tiledMap) {  
         if (map == null) {
-        map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
-        navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation"); 
+            map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
+            navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
         }
+        
+    }
+    
+    public GridFinderOptions getOptions() {
+        finderConfig = new GridFinderOptions();
+        finderConfig.allowDiagonal = false;
+        return finderConfig;
     }
 
     @Override
     public List<PositionPart> getPath(PositionPart source, PositionPart target) {
-
-        int sourceX = Math.round(source.getX()) / 128;
-        int sourceY = Math.round(source.getY()) / 128;
+        int sourceX = Math.round(source.getX() / DEFAULT_TILE_SIZE);
+        int sourceY = Math.round(source.getY() / DEFAULT_TILE_SIZE);
         
-        int targetX = Math.round(target.getX()) / 128;
-        int targetY = Math.round(target.getY()) / 128;
+        int targetX = Math.round(target.getX() / DEFAULT_TILE_SIZE);
+        int targetY = Math.round(target.getY() / DEFAULT_TILE_SIZE);
         
-        //System.out.println("sourceX: " + sourceX + " sourceY: " + sourceY);
-        //System.out.println("targetX: " + targetX + " targetY: " + targetY);
         List<GridCell> thePath = new ArrayList<>();
         try {
-            thePath = finder.findPath(sourceX, sourceY, targetX, targetY, navigationLayer);
+            thePath = finder.findPath(navigationLayer.getCell(sourceX, sourceY),navigationLayer.getCell(targetX, targetY), navigationLayer);
         } catch (PathFindingException e) {
             return new ArrayList<>();
         }
@@ -65,7 +66,7 @@ public class AIPlugin implements AISPI {
         List<PositionPart> pathToEnd = new ArrayList<>();
         
         for (GridCell path : thePath) {
-            pathToEnd.add(new PositionPart(path.getX() * 128, path.getY() * 128, 0));
+            pathToEnd.add(new PositionPart(path.getX() * DEFAULT_TILE_SIZE, path.getY() * DEFAULT_TILE_SIZE, 0));
         }
         
         return pathToEnd;

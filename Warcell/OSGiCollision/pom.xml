@@ -36,6 +36,36 @@
             <artifactId>OSGiCommonEnemy</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiLibGDX</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiCommonPlayer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGICommonMap</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiBullet</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiCommonWeapon</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     <build>
