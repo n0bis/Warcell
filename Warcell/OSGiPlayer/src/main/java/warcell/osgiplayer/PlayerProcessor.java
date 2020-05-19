@@ -160,26 +160,40 @@ public class PlayerProcessor implements IEntityProcessingService {
     }
     
     private void changeSprite(PlayerState ps, String weapon, AnimationTexturePart atp) {
-        switch(ps) {
+     switch(ps) {
             case IDLE:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleIdle.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
                     atp.setSrcPath("ShotgunIdle.png", 39, 66, 20, 1, 0.09f);
+                } else if(weapon.equals("Handgun")) {
+                    atp.setSrcPath("HandgunIdle.png", 39, 53, 20, 1, 0.09f);
+                }else if(weapon.equals("Knife")) {
+                    atp.setSrcPath("KnifeIdle.png", 43, 59, 20, 1, 0.09f);
                 }
                 break;
+                
             case MOVING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleMove.png", 39, 66, 20, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
                     atp.setSrcPath("ShotgunMove.png", 39, 66, 20, 1, 0.09f);
+                }else if(weapon.equals("Handgun")) {
+                    atp.setSrcPath("HandgunMove.png", 40, 53, 20, 1, 0.09f);
+                }else if(weapon.equals("Knife")) {
+                    atp.setSrcPath("KnifeMove.png", 44, 58, 20, 1, 0.09f);
                 }
                 break;
+                
             case SHOOTING:
                 if (weapon.equals("Rifle")) {
                     atp.setSrcPath("RifleShoot.png", 39, 66, 3, 1, 0.09f);
                 } else if (weapon.equals("Shotgun")) {
                     atp.setSrcPath("ShotgunShoot.png", 39, 66, 3, 1, 0.30f);
+                }else if(weapon.equals("Handgun")) {
+                    atp.setSrcPath("HandgunShoot.png", 39, 53, 3, 1, 0.09f);
+                }else if(weapon.equals("Knife")) {
+                    atp.setSrcPath("KnifeAttack.png", 67, 69, 15, 1, 0.05f);
                 }
                 break;
         }
