@@ -20,6 +20,8 @@ import warcell.common.weapon.service.WeaponsSPI;
 public class WeaponPlugin implements IGamePluginService {
     private final WeaponsSPI rifle = new RifleWeapon();
     private final WeaponsSPI shotgun = new ShotgunWeapon();
+    private final WeaponsSPI handgun = new HandgunWeapon();
+    private final WeaponsSPI knife = new KnifeWeapon();
     
     @Override
     public void start(GameData gameData, World world) {
@@ -27,6 +29,8 @@ public class WeaponPlugin implements IGamePluginService {
             InventoryPart inv = entity.getPart(InventoryPart.class);
             inv.addWeapon(rifle);
             inv.addWeapon(shotgun);
+            inv.addWeapon(handgun);
+            inv.addWeapon(knife);
         }
 
     }
