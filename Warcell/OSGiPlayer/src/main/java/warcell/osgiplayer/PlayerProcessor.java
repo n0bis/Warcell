@@ -159,6 +159,7 @@ public class PlayerProcessor implements IEntityProcessingService {
         return newPoint;
     }
     
+    
     private void changeSprite(PlayerState ps, String weapon, AnimationTexturePart atp) {
      switch(ps) {
             case IDLE:
