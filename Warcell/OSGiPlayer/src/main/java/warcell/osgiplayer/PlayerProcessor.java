@@ -11,6 +11,7 @@ import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.TimerPart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.weapon.parts.InventoryPart;
@@ -19,6 +20,7 @@ import warcell.common.weapon.parts.ShootingPart;
 
 public class PlayerProcessor implements IEntityProcessingService {
     private PlayerState playerstate;
+    private boolean isReloading = false;
     
     @Override
     public void process(GameData gameData, World world) {
@@ -33,6 +35,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             SquarePart sqp = entity.getPart(SquarePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
             ScorePart scorePart = entity.getPart(ScorePart.class);
+            TimerPart timerPart = entity.getPart(TimerPart.class);
             
             playerstate = PlayerState.IDLE;
             
@@ -56,9 +59,9 @@ public class PlayerProcessor implements IEntityProcessingService {
             
             
             // Cycle weapons
-            if (gameData.getKeys().isPressed(GameKeys.Q)) {
+            if (gameData.getKeys().isPressed(GameKeys.Q) && isReloading == false) {
                 inventoryPart.nextWeapon();
-            } else if (gameData.getKeys().isPressed(GameKeys.E)) {
+            } else if (gameData.getKeys().isPressed(GameKeys.E) && isReloading == false) {
                 inventoryPart.previousWeapon();
             }
             
@@ -66,11 +69,25 @@ public class PlayerProcessor implements IEntityProcessingService {
                 playerstate = PlayerState.MOVING;
             }
             
+            timerPart.reduceExpiration(gameData.getDelta());
+            if (timerPart.getExpiration() <= 0) {
+                isReloading = false;
+            }
+            
             // Shooting
             if (gameData.getKeys().isDown(GameKeys.LM) && inventoryPart.getCurrentWeapon() != null) {
-                shootingPart.setIsShooting(true);
-                inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
-                playerstate = PlayerState.SHOOTING; 
+                if (inventoryPart.getCurrentWeapon().getAmmo() > inventoryPart.getCurrentWeapon().getAmmoCapacity()) {
+                    inventoryPart.getCurrentWeapon().setAmmo(0);
+                    timerPart.setExpiration(inventoryPart.getCurrentWeapon().getReloadTime());
+                    isReloading = true;
+                } else if (timerPart.getExpiration() <= 0) {
+                    shootingPart.setIsShooting(true);
+                    inventoryPart.getCurrentWeapon().shoot(entity, gameData, world);
+                    inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmo() + 1);
+                    timerPart.setExpiration(inventoryPart.getCurrentWeapon().getFireRate());
+                    playerstate = PlayerState.SHOOTING;
+                } 
+
             }
             
             // process parts
@@ -79,6 +96,7 @@ public class PlayerProcessor implements IEntityProcessingService {
             positionPart.process(gameData, entity);
             lifePart.process(gameData, entity);
             scorePart.process(gameData, entity);
+            timerPart.process(gameData, entity);
             
             if (inventoryPart.getCurrentWeapon() != null) {
                 changeSprite(playerstate, inventoryPart.getCurrentWeapon().getName(), animationTexturePart);

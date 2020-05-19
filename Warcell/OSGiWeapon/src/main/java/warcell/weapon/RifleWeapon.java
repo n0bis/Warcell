@@ -30,11 +30,12 @@ public class RifleWeapon implements WeaponsSPI {
     private final String description = "Automatic Carbine";
     private final String iconPath = "rifle.png";
     private Entity bullet;
-    private float rateOfFire = (float) 0.2;
-    private float fireDelay;
     private final int bulletVelocity = 1200;
+    private int ammo = 0;
+    private final int ammoCapacity = 30;
+    private float reloadTime = 3.5f;
+    private float fireRate = 0.1f;
 
-    
     @Override
     public String getName() {
         return this.name;
@@ -53,12 +54,11 @@ public class RifleWeapon implements WeaponsSPI {
     @Override
     public void shoot(Entity entity, GameData gameData, World world) {
         
-        fireDelay -= gameData.getDelta();
         if (entity.getPart(ShootingPart.class) != null) {
 
             ShootingPart shootingPart = entity.getPart(ShootingPart.class);
             //Shoot if isShooting is true, ie. space is pressed.
-            if (shootingPart.isShooting() && fireDelay <= 0) {
+            if (shootingPart.isShooting()) {
                 PositionPart positionPart = entity.getPart(PositionPart.class);
                 AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
                    
@@ -73,7 +73,6 @@ public class RifleWeapon implements WeaponsSPI {
                         positionPart.getRadians(), shootingPart.getID());
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
-                fireDelay += rateOfFire;
             }
         }
     }
@@ -97,6 +96,31 @@ public class RifleWeapon implements WeaponsSPI {
         b.setRadius(5);
 
         return b;
+    }
+
+    @Override
+    public int getAmmoCapacity() {
+        return this.ammoCapacity;
+    }
+
+    @Override
+    public float getReloadTime() {
+        return this.reloadTime;
+    }
+    
+    @Override
+    public int getAmmo() {
+        return ammo;
+    }
+
+    @Override
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
+    
+    @Override
+    public float getFireRate() {
+        return this.fireRate;
     }
 
 }
