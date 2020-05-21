@@ -60,7 +60,7 @@ public class HelpState extends State {
         );        
         font.drawMultiLine(
             getGame().getTextureSpriteBatch(),
-            "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape",
+            "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape\nReload: R",
             20,
             550
         );        

@@ -7,8 +7,10 @@ package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -25,8 +27,9 @@ import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.player.Player;
 import warcell.common.services.IEntityProcessingService;
-import warcell.common.services.IGamePluginService;
 import warcell.common.services.IPostEntityProcessingService;
+import warcell.common.weapon.parts.InventoryPart;
+import warcell.common.weapon.parts.ShootingPart;
 
 /**
  *
@@ -37,6 +40,9 @@ public class PlayState extends State {
     private PositionPart camPos;
     private boolean paused;
     private BitmapFont font;
+    private BitmapFont smallFont;
+    private Texture weaponSprite;
+    private HAlignment hAlign;
             
     public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -50,8 +56,11 @@ public class PlayState extends State {
             Gdx.files.internal("fonts/Western Bang Bang.otf")
         );   
         
+        
         font = gen.generateFont(50);
         font.setColor(Color.WHITE);
+        smallFont = gen.generateFont(25);
+        smallFont.setColor(Color.WHITE);
     }
 
     @Override
@@ -83,7 +92,7 @@ public class PlayState extends State {
             PositionPart posPart = e.getPart(PositionPart.class);
             if (posPart != null) {
                 camPos = posPart;
-            }
+            }            
         } 
         getGame().getCam().position.set(camPos.getX(), camPos.getY(), 0);
         getGame().getCam().update();
@@ -109,6 +118,29 @@ public class PlayState extends State {
         // show score
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
             getGame().getTextureSpriteBatch().begin();
+            InventoryPart invPart = entity.getPart(InventoryPart.class);
+            ShootingPart shootingPart = entity.getPart(ShootingPart.class);
+
+            if (invPart.getCurrentWeapon() != null) {
+                smallFont.drawMultiLine(
+                    getGame().getTextureSpriteBatch(),
+                    "Ammo: " + String.valueOf(invPart.getCurrentWeapon().getAmmo()),
+                    camPos.getX() + 620,
+                    camPos.getY() + 230,
+                    5f,
+                    hAlign.RIGHT
+                );                
+                smallFont.drawMultiLine(
+                    getGame().getTextureSpriteBatch(),
+                    invPart.getCurrentWeapon().getName(),
+                    camPos.getX() + 620,
+                    camPos.getY() + 250,
+                    5f,
+                    hAlign.RIGHT
+                );
+                weaponSprite = new Texture(Gdx.files.internal(invPart.getCurrentWeapon().getIconPath()));
+                getGame().getTextureSpriteBatch().draw(weaponSprite, camPos.getX() + 460, camPos.getY() + 250);
+            }
 
             ScorePart sp = entity.getPart(ScorePart.class);
             LifePart lp = entity.getPart(LifePart.class);
@@ -118,8 +150,20 @@ public class PlayState extends State {
                 camPos.getX() - 640,
                 camPos.getY() + 360
             );
-            
-            font.draw(getGame().getTextureSpriteBatch(), "HP: " + String.valueOf(lp.getLife()), camPos.getX()+500, camPos.getY()+350);
+            font.draw(
+                    getGame().getTextureSpriteBatch(), 
+                    "HP: " + String.valueOf(lp.getLife()), 
+                    camPos.getX()+500, 
+                    camPos.getY()+350
+            );
+            if (shootingPart.CanShoot() == false) {
+                font.draw(
+                        getGame().getTextureSpriteBatch(), 
+                        "Press R to reload!", 
+                        camPos.getX()-640, 
+                        camPos.getY()-320
+                );
+            }
             getGame().getTextureSpriteBatch().end();
         }     
     }
