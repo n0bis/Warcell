@@ -19,7 +19,7 @@ import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -101,7 +101,7 @@ public class ShotgunWeapon implements WeaponsSPI {
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         b.add(new DamagePart(20));
-        b.add(new SquarePart(x, y, 5f));
+        b.add(new CirclePart(x, y, 5f));
         b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));

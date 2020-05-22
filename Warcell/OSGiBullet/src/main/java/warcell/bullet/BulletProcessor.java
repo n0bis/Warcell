@@ -15,7 +15,7 @@ import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.services.IEntityProcessingService;
 import warcell.common.weapon.entities.Bullet;
@@ -35,12 +35,12 @@ public class BulletProcessor implements IEntityProcessingService {
             BulletMovingPart mpb = b.getPart(BulletMovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
             LifePart lpb = b.getPart(LifePart.class);
-            SquarePart sp = b.getPart(SquarePart.class);
+            CirclePart cp = b.getPart(CirclePart.class);
             
             mpb.setUp(true);
             
-            sp.setCentreX(ppb.getX());
-            sp.setCentreY(ppb.getY());
+            cp.setCentreX(ppb.getX());
+            cp.setCentreY(ppb.getY());
             
             btp.reduceExpiration(gameData.getDelta());
          

@@ -11,7 +11,7 @@ import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.ScorePart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.enemy.Enemy;
 import warcell.common.player.Player;
@@ -39,7 +39,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             PositionPart positionPart = entity.getPart(PositionPart.class);
             MovingPart movingPart = entity.getPart(MovingPart.class);
             CollisionPart collisionPart = entity.getPart(CollisionPart.class);
-            SquarePart circlePart = entity.getPart(SquarePart.class);
+            CirclePart circlePart = entity.getPart(CirclePart.class);
             AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
             
