@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import java.util.ArrayList;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -31,6 +33,7 @@ public class KnifeWeapon implements WeaponsSPI {
     private final String name = "Knife";
     private final String description = "Hunters Knife";
     private final String iconPath = "knife.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/knifeSound.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 300;
     private int ammo = Integer.MAX_VALUE;
@@ -77,6 +80,7 @@ public class KnifeWeapon implements WeaponsSPI {
                 for (Entity e : bulletArray) {
                     world.addEntity(e);
                 }
+                sound.play(0.5f);
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
             }

@@ -7,6 +7,7 @@ package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +31,7 @@ public class MenuState extends State implements Input.TextInputListener {
     private int currentItem;
     private String[] menuItems;
     private final String title = "Warcell"; 
+    private Music music;
     IGamePluginService zcp;
     IGamePluginService pcp;
     
@@ -41,12 +43,18 @@ public class MenuState extends State implements Input.TextInputListener {
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
             Gdx.files.internal("fonts/Western Bang Bang.otf")
-        );   
+        );
+        music = Gdx.audio.newMusic(Gdx.files.internal("Audio/EpicMusic.mp3"));
+        
 
         titleFont = gen.generateFont(100);
         titleFont.setColor(Color.WHITE);
 
         font = gen.generateFont(50);
+        
+        music.setLooping(true);
+        music.setVolume(0.05f);
+        music.play();
 
         menuItems = new String[] {
             "Play",

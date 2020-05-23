@@ -1,6 +1,7 @@
 package warcell.osgiplayer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
@@ -21,6 +22,7 @@ import warcell.common.weapon.parts.ShootingPart;
 public class PlayerProcessor implements IEntityProcessingService {
     private PlayerState playerstate;
     private boolean isReloading = false;
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/deathSound.mp3"));
     
     @Override
     public void process(GameData gameData, World world) {
@@ -117,6 +119,7 @@ public class PlayerProcessor implements IEntityProcessingService {
                 gameData.setFinalScore(scorePart.getScore());
                 gameData.setName(scorePart.getName());
                 world.removeEntity(entity);
+                sound.play(0.5f);
                 System.out.println("PLAYER DEAD");
                 gameData.setGameOver(true);
             }

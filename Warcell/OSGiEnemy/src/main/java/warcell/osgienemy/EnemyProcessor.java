@@ -1,5 +1,7 @@
 package warcell.osgienemy;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import java.util.List;
 import warcell.common.ai.AISPI;
 import warcell.common.data.Entity;
@@ -23,6 +25,7 @@ public class EnemyProcessor implements IEntityProcessingService {
     private AISPI ai;
     private TiledMapPart tiledMap;
     private PositionPart playerPos;
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/zombieDeath.mp3"));
     
     @Override
     public void process(GameData gameData, World world) {
@@ -85,6 +88,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             // Check if dead
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
+                sound.play(0.4f);
                 System.out.println("ENEMY DEAD");
                 for (Entity player : world.getEntities(Player.class)) {
                     ScorePart sp = player.getPart(ScorePart.class);

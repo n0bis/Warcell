@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -29,6 +31,7 @@ public class HandgunWeapon implements WeaponsSPI {
     private final String name = "Handgun";
     private final String description = "Revolver";
     private final String iconPath = "handgun.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/handgunShot.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 1200;
     private int ammo = 10;
@@ -72,6 +75,7 @@ public class HandgunWeapon implements WeaponsSPI {
                 //Add entity radius to initial position to avoid immideate collision.
                 bullet = createBullet(bulletX, bulletY, 
                         positionPart.getRadians(), shootingPart.getID());
+                sound.play(0.05f);
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
             }

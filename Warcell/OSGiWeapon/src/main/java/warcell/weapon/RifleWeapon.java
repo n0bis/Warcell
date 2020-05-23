@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -29,6 +31,7 @@ public class RifleWeapon implements WeaponsSPI {
     private final String name = "AK-74 Magpul";
     private final String description = "Automatic Carbine";
     private final String iconPath = "rifle.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/rifleShot.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 1200;
     private int ammo = 30;
@@ -71,6 +74,7 @@ public class RifleWeapon implements WeaponsSPI {
                 //Add entity radius to initial position to avoid immideate collision.
                 bullet = createBullet(bulletX, bulletY, 
                         positionPart.getRadians(), shootingPart.getID());
+                sound.play(0.05f);
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
             }

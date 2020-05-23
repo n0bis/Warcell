@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class ShotgunWeapon implements WeaponsSPI {
     private final String name = "M870 Remington";
     private final String description = "Pump Shotgun";
     private final String iconPath = "shotgun.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/shotgunShot.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 600;
     private ArrayList<Entity> bulletArray = new ArrayList();
@@ -85,6 +88,7 @@ public class ShotgunWeapon implements WeaponsSPI {
                 for (Entity e : bulletArray) {
                     world.addEntity(e);
                 }
+                sound.play(0.05f);
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
             }
