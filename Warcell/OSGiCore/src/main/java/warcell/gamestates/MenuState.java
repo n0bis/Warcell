@@ -44,17 +44,11 @@ public class MenuState extends State implements Input.TextInputListener {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
             Gdx.files.internal("fonts/Western Bang Bang.otf")
         );
-        music = Gdx.audio.newMusic(Gdx.files.internal("Audio/EpicMusic.mp3"));
-        
 
         titleFont = gen.generateFont(100);
         titleFont.setColor(Color.WHITE);
 
         font = gen.generateFont(50);
-        
-        music.setLooping(true);
-        music.setVolume(0.05f);
-        music.play();
 
         menuItems = new String[] {
             "Play",
