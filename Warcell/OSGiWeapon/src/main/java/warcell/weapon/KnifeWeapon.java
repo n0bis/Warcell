@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import java.util.ArrayList;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -15,7 +17,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -31,6 +33,7 @@ public class KnifeWeapon implements WeaponsSPI {
     private final String name = "Knife";
     private final String description = "Hunters Knife";
     private final String iconPath = "knife.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/knifeSound.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 300;
     private int ammo = Integer.MAX_VALUE;
@@ -77,6 +80,7 @@ public class KnifeWeapon implements WeaponsSPI {
                 for (Entity e : bulletArray) {
                     world.addEntity(e);
                 }
+                sound.play(0.5f);
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
             }
@@ -93,7 +97,7 @@ public class KnifeWeapon implements WeaponsSPI {
         b.add(new TimerPart(0.05f));
         b.add(new LifePart(1000));
         b.add(new DamagePart(50));
-        b.add(new SquarePart(x, y, 5f));
+        b.add(new CirclePart(x, y, 5f));
         b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));

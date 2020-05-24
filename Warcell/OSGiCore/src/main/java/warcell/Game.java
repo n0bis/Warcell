@@ -4,6 +4,7 @@ package warcell;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
@@ -45,6 +46,7 @@ public class Game implements ApplicationListener {
     float h = gameData.getDisplayHeight();
     private GUIStateManager guiManager;
     private SaveGameManager sgm;
+    private Music music;
 
     private float unitScale = 1 / 128f;
 
@@ -62,6 +64,10 @@ public class Game implements ApplicationListener {
         cfg.resizable = false;
 
         new LwjglApplication(this, cfg);
+        music = Gdx.audio.newMusic(Gdx.files.internal("Audio/EpicMusic.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.05f);
+        music.play();
     }
 
     @Override

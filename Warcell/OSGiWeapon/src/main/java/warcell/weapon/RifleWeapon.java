@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -14,7 +16,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -29,6 +31,7 @@ public class RifleWeapon implements WeaponsSPI {
     private final String name = "AK-74 Magpul";
     private final String description = "Automatic Carbine";
     private final String iconPath = "rifle.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/rifleShot.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 1200;
     private int ammo = 30;
@@ -71,6 +74,7 @@ public class RifleWeapon implements WeaponsSPI {
                 //Add entity radius to initial position to avoid immideate collision.
                 bullet = createBullet(bulletX, bulletY, 
                         positionPart.getRadians(), shootingPart.getID());
+                sound.play(0.05f);
                 shootingPart.setIsShooting(false);
                 world.addEntity(bullet);
             }
@@ -89,7 +93,7 @@ public class RifleWeapon implements WeaponsSPI {
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         b.add(new DamagePart(20));
-        b.add(new SquarePart(x, y, 5f));
+        b.add(new CirclePart(x, y, 5f));
         b.add(new CollisionPart(true, 0.5f));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));
