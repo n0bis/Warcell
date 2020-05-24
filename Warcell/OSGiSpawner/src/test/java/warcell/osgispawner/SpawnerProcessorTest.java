@@ -6,12 +6,18 @@
 package warcell.osgispawner;
 
 import java.util.Arrays;
+import java.util.Random;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
@@ -29,6 +35,7 @@ import warcell.common.spawner.Spawner;
 public class SpawnerProcessorTest {
     
     private IGamePluginService plugin;
+    private Random random;
     private GameData gameData;
     private World world;
     private Entity spawner, enemy;
@@ -37,14 +44,14 @@ public class SpawnerProcessorTest {
     
     @Before
     public void setUp() {
-        plugin = mock(plugin.getClass());
-        doReturn("warcell.osgienemy.EnemyPlugin").when(plugin.getClass().getCanonicalName());
-        doNothing().when(plugin).start(gameData, world);
+        plugin = mock(IGamePluginService.class);
+        random = mock(Random.class);
+        when(random.nextInt(anyInt())).thenReturn(1);
         
         spawner = new Spawner();
-        spawner.add(new PositionPart(448, 3200, radians));
+        spawner.add(new PositionPart(20, 20, radians));
         spawner.add(new TexturePart("SpawnerDebug.png"));
-        spawner.add(new SpawnerPart(140, 5, 10));
+        spawner.add(new SpawnerPart(140, 1, 10));
         
         enemy = new Enemy();
         enemy.add(new PositionPart(0, 0, radians));
@@ -57,7 +64,10 @@ public class SpawnerProcessorTest {
         world.addEntity(enemy);
         world.addEntity(spawner);
         
-        instance = new SpawnerProcessor();
+        doNothing().when(plugin).start(gameData, world);
+        
+        instance = new SpawnerProcessor(random);
+        instance.enemyGamePluginServices.add(plugin);
     }
     
     @After
@@ -70,6 +80,14 @@ public class SpawnerProcessorTest {
     @Test
     public void testProcess() {
         instance.process(gameData, world);
+        PositionPart enemyPosition = enemy.getPart(PositionPart.class);
+        PositionPart spawnerPosition = spawner.getPart(PositionPart.class);
+        SpawnerPart spawnerPart = spawner.getPart(SpawnerPart.class);
+
+        float spawnX = spawnerPosition.getX() + 1 - spawnerPart.getRadius();
+        float spawnY = spawnerPosition.getY() + 1 - spawnerPart.getRadius();
+        assertEquals("Expected enemy position x to be equals to spawn x", spawnX, enemyPosition.getX(), 5);
+        assertEquals("Expected enemy position y to be equals to spawn y", spawnY, enemyPosition.getY(), 5);
     }
     
     @Test
