@@ -5,6 +5,8 @@
  */
 package warcell.weapon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
 import warcell.common.weapon.entities.Bullet;
 import warcell.common.weapon.parts.ProjectilePart;
@@ -36,6 +38,7 @@ public class ShotgunWeapon implements WeaponsSPI {
     private final String name = "M870 Remington";
     private final String description = "Pump Shotgun";
     private final String iconPath = "shotgun.png";
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/shotgunShot.mp3"));
     private Entity bullet;
     private final int bulletVelocity = 600;
     private ArrayList<Entity> bulletArray = new ArrayList();
@@ -85,6 +88,7 @@ public class ShotgunWeapon implements WeaponsSPI {
                 for (Entity e : bulletArray) {
                     world.addEntity(e);
                 }
+                sound.play(0.05f);
                 bulletArray.removeAll(bulletArray);
                 shootingPart.setIsShooting(false);
             }
@@ -101,7 +105,7 @@ public class ShotgunWeapon implements WeaponsSPI {
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
         b.add(new DamagePart(20));
-        b.add(new SquarePart(x, y, 5f));
+        b.add(new CirclePart(x, y, 5f));
         b.add(new CollisionPart(true, 1));
         // Projectile Part only used for better collision detection     
         b.add(new ProjectilePart(uuid.toString()));

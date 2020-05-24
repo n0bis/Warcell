@@ -9,7 +9,7 @@ import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TexturePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.services.IGamePluginService;
@@ -51,7 +51,7 @@ public class EnemyPlugin implements IGamePluginService {
         int maxLife = 50;
         float centreX = 0;
         float centreY = 0;
-        enemyZombie.add(new SquarePart(centreX, centreY, enemyRadius));
+        enemyZombie.add(new CirclePart(centreX, centreY, enemyRadius));
         enemyZombie.add(new LifePart(maxLife));
         enemyZombie.add(new DamagePart(2, 3));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));

@@ -13,7 +13,7 @@ import warcell.common.data.World;
  *
  * @author Jonas
  */
-public class SquarePart implements EntityPart {
+public class CirclePart implements EntityPart {
     
    private float centreX;
     private float centreY;
@@ -24,10 +24,10 @@ public class SquarePart implements EntityPart {
         
     }
 
-    public SquarePart() {
+    public CirclePart() {
     }
 
-    public SquarePart(float centreX, float centreY, float radius) {
+    public CirclePart(float centreX, float centreY, float radius) {
         this.centreX = centreX;
         this.centreY = centreY;
         this.radius = radius;

@@ -8,7 +8,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.player.Player;
 import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
@@ -57,7 +57,7 @@ public class PlayerPlugin implements IGamePluginService {
         int maxLife = 1000;
         float centreX = 0;
         float centreY = 0;
-        player.add(new SquarePart(centreX, centreY, playerRadius));
+        player.add(new CirclePart(centreX, centreY, playerRadius));
         player.add(new LifePart(maxLife));
         player.add(new DamagePart(0));
         player.add(new CollisionPart(true, 3));

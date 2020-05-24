@@ -21,7 +21,7 @@ import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.services.IPostEntityProcessingService;
 import warcell.common.enemy.Enemy;
@@ -128,21 +128,21 @@ public class CollisionProcessor implements IPostEntityProcessingService {
     }
 
     private boolean hasCollided(Entity entity1, Entity entity2) {
-        SquarePart squarePart1 = entity1.getPart(SquarePart.class
+        CirclePart circlePart1 = entity1.getPart(CirclePart.class
         );
-        SquarePart squarePart2 = entity2.getPart(SquarePart.class);
+        CirclePart circlePart2 = entity2.getPart(CirclePart.class);
 
         //no collision if no circle part
-        if (squarePart1 == null || squarePart2
+        if (circlePart1 == null || circlePart2
                 == null || entity1.getClass()
                         .equals(entity2.getClass())) {
             return false;
         }
-        float distX = squarePart1.getCentreX() - squarePart2.getCentreX();
-        float distY = squarePart1.getCentreY() - squarePart2.getCentreY();
+        float distX = circlePart1.getCentreX() - circlePart2.getCentreX();
+        float distY = circlePart1.getCentreY() - circlePart2.getCentreY();
         float distance = (float) (Math.sqrt(distX * distX + distY * distY));
 
-        return distance < (squarePart1.getRadius() + squarePart2.getRadius());
+        return distance < (circlePart1.getRadius() + circlePart2.getRadius());
 
     }
 }
