@@ -1,8 +1,6 @@
 package exam.tests;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.inject.Inject;
 import static org.junit.Assert.assertEquals;
@@ -29,8 +27,6 @@ import org.osgi.framework.Bundle;
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class SetupTest {
-
-    private static final Path osgiStorage = Paths.get("data/osgi-storage");
 
     @Inject
     protected BundleContext ctx;
