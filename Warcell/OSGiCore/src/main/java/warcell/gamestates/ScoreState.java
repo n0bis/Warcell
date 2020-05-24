@@ -5,12 +5,6 @@
  */
 package warcell.gamestates;
 
-<<<<<<< HEAD
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import warcell.Game;
-import warcell.common.data.GameData;
-import warcell.common.data.World;
-=======
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -26,34 +20,19 @@ import warcell.common.data.GameKeys;
 import warcell.common.data.SaveGame;
 import warcell.common.data.World;
 import warcell.core.managers.SaveGameManager;
->>>>>>> master
 
 /**
  *
  * @author birke
  */
 public class ScoreState extends State {
-<<<<<<< HEAD
-
-=======
     private BitmapFont titleFont;
     private BitmapFont font;
     
->>>>>>> master
     public ScoreState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
         
     }
-<<<<<<< HEAD
-
-    
-    
-    
-
-    @Override
-    public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
     
     @Override
     public void init() {
@@ -67,23 +46,15 @@ public class ScoreState extends State {
         font.setColor(Color.WHITE); 
         
         getGame().getSgm().load();
->>>>>>> master
     }
 
     @Override
     public void update(float dt) {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
         handleInput();
->>>>>>> master
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
         getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
         getGame().getTextureSpriteBatch().begin();
         
@@ -120,29 +91,19 @@ public class ScoreState extends State {
         
         
         getGame().getTextureSpriteBatch().end();    
->>>>>>> master
     }
 
     @Override
     public void handleInput() {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
         if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
             getGuiStateManager().setState(0);
         }
->>>>>>> master
     }
 
     @Override
     public void dispose() {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-=======
     }
 
 
->>>>>>> master
     
 }

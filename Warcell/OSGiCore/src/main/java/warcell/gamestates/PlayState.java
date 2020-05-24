@@ -7,42 +7,20 @@ package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-<<<<<<< HEAD
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-=======
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
->>>>>>> master
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-<<<<<<< HEAD
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-=======
->>>>>>> master
 import warcell.Game;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.AnimationTexturePart;
-<<<<<<< HEAD
-import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.TexturePart;
-import warcell.common.player.Player;
-import warcell.common.services.IEntityProcessingService;
-import warcell.common.services.IGamePluginService;
-import warcell.common.services.IPostEntityProcessingService;
-import warcell.core.managers.GameAssetManager;
-import warcell.core.managers.GameInputProcessor;
-=======
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.ScorePart;
@@ -52,7 +30,6 @@ import warcell.common.services.IEntityProcessingService;
 import warcell.common.services.IPostEntityProcessingService;
 import warcell.common.weapon.parts.InventoryPart;
 import warcell.common.weapon.parts.ShootingPart;
->>>>>>> master
 
 /**
  *
@@ -63,42 +40,27 @@ public class PlayState extends State {
     private PositionPart camPos;
     private boolean paused;
     private BitmapFont font;
-<<<<<<< HEAD
-
-=======
     private BitmapFont smallFont;
     private Texture weaponSprite;
     private HAlignment hAlign;
             
->>>>>>> master
     public PlayState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
         paused = false;
 
     }
-<<<<<<< HEAD
-
-
-
-=======
     
->>>>>>> master
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
             Gdx.files.internal("fonts/Western Bang Bang.otf")
         );   
         
-<<<<<<< HEAD
-        font = gen.generateFont(50);
-        font.setColor(Color.WHITE);
-=======
         
         font = gen.generateFont(50);
         font.setColor(Color.WHITE);
         smallFont = gen.generateFont(25);
         smallFont.setColor(Color.WHITE);
->>>>>>> master
     }
 
     @Override
@@ -117,15 +79,10 @@ public class PlayState extends State {
                 postEntityProcessorService.process(getGameData(), getWorld());
             }    
         }
-<<<<<<< HEAD
-
-  
-=======
         if (getGameData().isGameOver()){
             getGuiStateManager().setState(GUIStateManager.GAMEOVER);
         }
         
->>>>>>> master
     }
 
     @Override
@@ -135,15 +92,7 @@ public class PlayState extends State {
             PositionPart posPart = e.getPart(PositionPart.class);
             if (posPart != null) {
                 camPos = posPart;
-<<<<<<< HEAD
-            } else {
-                camPos.setX(getGameData().getDisplayWidth());
-                camPos.setY(getGameData().getDisplayHeight());
-            }
-
-=======
             }            
->>>>>>> master
         } 
         getGame().getCam().position.set(camPos.getX(), camPos.getY(), 0);
         getGame().getCam().update();
@@ -163,12 +112,6 @@ public class PlayState extends State {
                 camPos.getX(),
                 camPos.getY()
             );
-<<<<<<< HEAD
-            getGame().getTextureSpriteBatch().end();
-
-        }
-
-=======
             
         getGame().getTextureSpriteBatch().end();
         }
@@ -223,7 +166,6 @@ public class PlayState extends State {
             }
             getGame().getTextureSpriteBatch().end();
         }     
->>>>>>> master
     }
 
     private void draw() {
@@ -241,10 +183,6 @@ public class PlayState extends State {
 
                 getGame().getSr().line(shapex[i], shapey[i], shapex[j], shapey[j]);
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> master
             getGame().getSr().end();
         }
     }
@@ -311,19 +249,7 @@ public class PlayState extends State {
     }
     
     @Override
-<<<<<<< HEAD
-    public void handleInput() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void dispose() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-=======
     public void handleInput() {}
     @Override
     public void dispose() {}
->>>>>>> master
 }
