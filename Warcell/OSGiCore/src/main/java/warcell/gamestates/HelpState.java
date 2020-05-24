@@ -26,19 +26,19 @@ public class HelpState extends State {
     public HelpState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
     }
-    
-    
+
+
 
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
             Gdx.files.internal("fonts/Western Bang Bang.otf")
-        );   
+        );
 
 
         titleFont = gen.generateFont(80);
         titleFont.setColor(Color.WHITE);
-        font = gen.generateFont(40);    
+        font = gen.generateFont(40);
         font.setColor(Color.WHITE);
     }
 
@@ -51,28 +51,28 @@ public class HelpState extends State {
     public void render(SpriteBatch spriteBatch) {
         getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
         getGame().getTextureSpriteBatch().begin();
-        
+
         titleFont.draw(
             getGame().getTextureSpriteBatch(),
             "Controls",
             20,
             700
-        );        
+        );
         font.drawMultiLine(
             getGame().getTextureSpriteBatch(),
-            "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape",
+            "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape\nReload: R",
             20,
             550
-        );        
+        );
         font.drawMultiLine(
             getGame().getTextureSpriteBatch(),
             "Press ESCAPE to return",
             20,
             100
         );
-        
-        
-        getGame().getTextureSpriteBatch().end();    
+
+
+        getGame().getTextureSpriteBatch().end();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class HelpState extends State {
     @Override
     public void dispose() {
         titleFont.dispose();
-        font.dispose();    
+        font.dispose();
     }
-    
+
 }

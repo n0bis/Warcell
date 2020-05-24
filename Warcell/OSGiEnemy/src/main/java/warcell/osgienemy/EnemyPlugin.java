@@ -57,7 +57,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));
         enemyZombie.add(new PositionPart(x, y, radians));
         enemyZombie.add(new CollisionPart(true,3));
-        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 43f, 59f, 1f, 1f));
+        enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 56f, 63f, 1f, 1f));
         
         return enemyZombie;
     }

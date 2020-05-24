@@ -36,6 +36,12 @@
             <artifactId>OSGiCommonPlayer</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>warcell.build</groupId>
+            <artifactId>OSGiCommonWeapon</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
 
         <!-- test only dependencies below -->
         <dependency>

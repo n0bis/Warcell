@@ -119,10 +119,12 @@ public class CollisionProcessor implements IPostEntityProcessingService {
 
                     if (Intersector.overlaps(rectangle, playerRectangle)) {
                         world.removeEntity(bullet);
+
                     }
                 }
             }
         }
+
     }
 
     private boolean hasCollided(Entity entity1, Entity entity2) {

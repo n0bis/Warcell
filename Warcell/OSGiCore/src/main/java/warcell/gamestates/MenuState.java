@@ -6,25 +6,48 @@
 package warcell.gamestates;
 
 import com.badlogic.gdx.Gdx;
+<<<<<<< HEAD
+=======
+import com.badlogic.gdx.Input;
+>>>>>>> master
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import warcell.Game;
+<<<<<<< HEAD
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.World;
+=======
+import warcell.common.data.Entity;
+import warcell.common.data.GameData;
+import warcell.common.data.GameKeys;
+import warcell.common.data.World;
+import warcell.common.data.entityparts.ScorePart;
+import warcell.common.player.Player;
+import warcell.common.services.IGamePluginService;
+>>>>>>> master
 
 /**
  *
  * @author birke
  */
+<<<<<<< HEAD
 public class MenuState extends State{
+=======
+public class MenuState extends State implements Input.TextInputListener {
+>>>>>>> master
     private BitmapFont titleFont;
     private BitmapFont font;
     private int currentItem;
     private String[] menuItems;
     private final String title = "Warcell"; 
+<<<<<<< HEAD
+=======
+    IGamePluginService zcp;
+    IGamePluginService pcp;
+>>>>>>> master
     
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
@@ -44,6 +67,11 @@ public class MenuState extends State{
         menuItems = new String[] {
             "Play",
             "Help",
+<<<<<<< HEAD
+=======
+            "Highscore",
+            "Change name",
+>>>>>>> master
             "Quit"
         };      
     }
@@ -77,7 +105,21 @@ public class MenuState extends State{
                 180 - 35 * i
             );
         }
+<<<<<<< HEAD
 
+=======
+        
+        for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            
+            ScorePart sp = entity.getPart(ScorePart.class);
+            font.draw(
+                getGame().getTextureSpriteBatch(),
+                sp.getName(),
+                20,
+                700
+            );
+        }    
+>>>>>>> master
         getGame().getTextureSpriteBatch().end();
     }
 
@@ -106,8 +148,19 @@ public class MenuState extends State{
         // high scores
         else if(currentItem == 1) {
             getGuiStateManager().setState(GUIStateManager.HELP);
+<<<<<<< HEAD
         }
         else if(currentItem == 2) {
+=======
+        }               
+        else if(currentItem == 2) {
+            getGuiStateManager().setState(GUIStateManager.HIGHSCORE);
+        }         
+        else if(currentItem == 3) {
+            Gdx.input.getTextInput(this, "Enter name", "", "Name");
+        }
+        else if(currentItem == 4) {
+>>>>>>> master
             Gdx.app.exit();
         }
     }
@@ -117,4 +170,20 @@ public class MenuState extends State{
         titleFont.dispose();
         font.dispose();    
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public void input(String string) {
+        for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
+            ScorePart sp = entity.getPart(ScorePart.class);
+            sp.setName(string);
+        }       
+    }
+
+    @Override
+    public void canceled() {
+
+    }
+>>>>>>> master
 }

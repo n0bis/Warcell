@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import java.io.File;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.services.IEntityProcessingService;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import warcell.common.data.GameKeys;
 import warcell.core.managers.GameAssetManager;
+import warcell.core.managers.SaveGameManager;
 import warcell.gamestates.GUIStateManager;
 
 public class Game implements ApplicationListener {
@@ -36,13 +38,13 @@ public class Game implements ApplicationListener {
     private final List<IEntityProcessingService> entityProcessorList = new CopyOnWriteArrayList<>();
     private final List<IGamePluginService> gamePluginList = new CopyOnWriteArrayList<>();
     private static List<IPostEntityProcessingService> postEntityProcessorList = new CopyOnWriteArrayList<>();
-
     private GameAssetManager gameAssetManager;
     private TiledMap map;
     private TiledMapRenderer mapRenderer;
     float w = gameData.getDisplayWidth();
     float h = gameData.getDisplayHeight();
     private GUIStateManager guiManager;
+    private SaveGameManager sgm;
 
     private float unitScale = 1 / 128f;
 
@@ -65,6 +67,7 @@ public class Game implements ApplicationListener {
     @Override
     public void create() {
         guiManager = new GUIStateManager(this, world, gameData);
+        sgm = new SaveGameManager(new File("saves.sav"), gameData);
 
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
@@ -74,18 +77,16 @@ public class Game implements ApplicationListener {
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        gameData.setCam(cam);
-        
+
         map = new TmxMapLoader().load("maps/ZombieMap.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         sr = new ShapeRenderer();
-
         textureSpriteBatch = new SpriteBatch();
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-        
+
 
     }
 
@@ -95,36 +96,11 @@ public class Game implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-        
-        gameData.setDelta(Gdx.graphics.getDeltaTime());    
+        gameData.setDelta(Gdx.graphics.getDeltaTime());
         guiManager.update(Gdx.graphics.getDeltaTime());
         guiManager.render(textureSpriteBatch);
         gameData.getKeys().update();
-     
-        /*        //System.out.println("Delta: " + gameData.getDelta());      // debug
-        for (Entity e : world.getEntities(Player.class)) {
-        PositionPart posPart = e.getPart(PositionPart.class);
-        if (posPart != null) {
-        camPos = posPart;
-        } else {
-        camPos.setX(w);
-        camPos.setY(h);
-        }
-        
-        }
-        cam.position.set(camPos.getX(), camPos.getY(), 0);
-        cam.update();
-        mapRenderer.setView(cam);
-        mapRenderer.render();
-        
-        update();
-        drawTextures();
-        drawAnimations();
-        draw();*/
     }
-
-
 
     @Override
     public void resize(int width, int height) {
@@ -173,51 +149,17 @@ public class Game implements ApplicationListener {
         plugin.stop(gameData, world);
     }
 
-    public World getWorld() {
-        return world;
-    }
-
-    public OrthographicCamera getCam() {
-        return cam;
-    }
-
-    public List<IEntityProcessingService> getEntityProcessorList() {
-        return entityProcessorList;
-    }
-
-    public List<IPostEntityProcessingService> getPostEntityProcessorList() {
-        return postEntityProcessorList;
-    }
-    public GameData getGameData() {
-        return gameData;
-    }
-
-    public TiledMapRenderer getMapRenderer() {
-        return mapRenderer;
-    }
-
-    public ShapeRenderer getSr() {
-        return sr;
-    }
-
-    public SpriteBatch getTextureSpriteBatch() {
-        return textureSpriteBatch;
-    }
-
-    public GameAssetManager getGameAssetManager() {
-        return gameAssetManager;
-    }
-
-    public float getW() {
-        return w;
-    }
-
-    public float getH() {
-        return h;
-    }
-    
-    
-    
-    
+    public World getWorld() { return world; }
+    public OrthographicCamera getCam() { return cam; }
+    public List<IEntityProcessingService> getEntityProcessorList() { return entityProcessorList; }
+    public List<IPostEntityProcessingService> getPostEntityProcessorList() { return postEntityProcessorList; }
+    public GameData getGameData() { return gameData; }
+    public TiledMapRenderer getMapRenderer() { return mapRenderer; }
+    public ShapeRenderer getSr() { return sr; }
+    public SpriteBatch getTextureSpriteBatch() { return textureSpriteBatch; }
+    public GameAssetManager getGameAssetManager() { return gameAssetManager; }
+    public float getW() { return w; }
+    public float getH() { return h; }
+    public SaveGameManager getSgm() { return sgm; }
 
 }
