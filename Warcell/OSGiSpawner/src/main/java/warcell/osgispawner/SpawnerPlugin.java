@@ -131,6 +131,7 @@ public class SpawnerPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        world.removeEntity(entityID);
+        for (Entity spawner : world.getEntities(Spawner.class))
+            world.removeEntity(spawner);
     }
 }

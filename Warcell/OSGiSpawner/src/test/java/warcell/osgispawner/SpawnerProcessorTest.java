@@ -74,7 +74,7 @@ public class SpawnerProcessorTest {
     
     @Test
     public void testEnemyNotMovedBackToSpawnPoint() {
-        
+        System.out.println("Teeest");
     }
     
 }
