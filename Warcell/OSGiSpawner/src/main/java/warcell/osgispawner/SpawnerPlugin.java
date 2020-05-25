@@ -10,13 +10,12 @@ import warcell.common.services.IGamePluginService;
 import warcell.common.spawner.Spawner;
 
 public class SpawnerPlugin implements IGamePluginService {
+
     private String entityID;
     private final String debugPath = "SpawnerDebug.png";
 
-    
     public SpawnerPlugin() {
     }
-
 
     @Override
     public void start(GameData gameData, World world) {
@@ -41,9 +40,10 @@ public class SpawnerPlugin implements IGamePluginService {
         Entity spawner8 = createSpawner8(gameData);
         entityID = world.addEntity(spawner8);
     }
-    
+
     /**
      * creates a player entity
+     *
      * @param gameData the GameData of the Game class
      * @return the created player
      */
@@ -57,6 +57,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner2(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -67,6 +68,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner3(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -77,6 +79,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner4(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -87,6 +90,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner5(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -97,6 +101,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner6(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -107,6 +112,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner7(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -117,6 +123,7 @@ public class SpawnerPlugin implements IGamePluginService {
 
         return spawner;
     }
+
     private Entity createSpawner8(GameData gameData) {
         Entity spawner = new Spawner();
 
@@ -131,7 +138,8 @@ public class SpawnerPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        for (Entity spawner : world.getEntities(Spawner.class))
+        for (Entity spawner : world.getEntities(Spawner.class)) {
             world.removeEntity(spawner);
+        }
     }
 }

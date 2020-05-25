@@ -37,11 +37,11 @@ public class BulletMovingPart implements EntityPart {
     public float getDy() {
         return dy;
     }
-    
+
     public boolean getIsOut() {
         return isOut;
     }
-    
+
     public void setDeceleration(float deceleration) {
         this.deceleration = deceleration;
     }
@@ -53,7 +53,7 @@ public class BulletMovingPart implements EntityPart {
     public void setMaxSpeed(float maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
-    
+
     public void setSpeed(float speed) {
         this.acceleration = speed;
         this.maxSpeed = speed;
@@ -110,10 +110,9 @@ public class BulletMovingPart implements EntityPart {
         }
 
         // set position
-        
         x += dx * dt;
         y += dy * dt;
-        
+
         if (x > gameData.getDisplayWidth() || x < 0 || y > gameData.getDisplayHeight() || y < 0) {
             this.isOut = false;
         }
@@ -125,4 +124,3 @@ public class BulletMovingPart implements EntityPart {
     }
 
 }
-

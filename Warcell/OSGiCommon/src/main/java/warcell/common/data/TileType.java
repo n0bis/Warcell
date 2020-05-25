@@ -8,7 +8,7 @@ public enum TileType {
     /**
      * Finish line
      */
-    FINISHLINE(0, 1.0, 1.0,"tiles/goal.png", false),
+    FINISHLINE(0, 1.0, 1.0, "tiles/goal.png", false),
     /**
      * Road
      */
@@ -16,41 +16,35 @@ public enum TileType {
     /**
      * Grass
      */
-    GRASS(2, 5.0,10000, "tiles/grass.png", false),
+    GRASS(2, 5.0, 10000, "tiles/grass.png", false),
     /**
      * Water
      */
-
     WATER(3, 10.0, 20000, "tiles/water.png", false),
-
     /**
      * Tree
      */
     TREE(4, 2.0, 1700, "tiles/tree.png", true),
-
     /**
      * Start
      */
     START(5, 1.0, 1.0, "tiles/start.png", false),
-
     /**
      * Spawn
      */
-    SPAWN(6, 1.0, 1.0,"tiles/spawn.png", false),
+    SPAWN(6, 1.0, 1.0, "tiles/spawn.png", false),
     /**
      * Checkpoint one
      */
-    CHECKPOINTONE(7, 1.0, 1.0,"tiles/road.png", false),
+    CHECKPOINTONE(7, 1.0, 1.0, "tiles/road.png", false),
     /**
      * Checkpoint two
      */
-    CHECKPOINTTWO(8, 1.0, 1.0,"tiles/road.png", false),
-
-     /**
+    CHECKPOINTTWO(8, 1.0, 1.0, "tiles/road.png", false),
+    /**
      * Item
      */
     ITEM(9, 1.0, 1.0, "tiles/item.png", false);
-
 
     /**
      * Used to identify the tile type
@@ -65,7 +59,6 @@ public enum TileType {
     /**
      * The type weight
      */
-
     private double weight;
 
     /**

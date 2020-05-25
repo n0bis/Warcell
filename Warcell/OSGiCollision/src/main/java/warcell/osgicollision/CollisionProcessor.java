@@ -8,14 +8,12 @@ package warcell.osgicollision;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
-import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
@@ -110,7 +108,6 @@ public class CollisionProcessor implements IPostEntityProcessingService {
 
         if (objects != null) {
             for (Entity bullet : world.getEntities(Bullet.class)) {
-                BulletMovingPart movingPart = bullet.getPart(BulletMovingPart.class);
                 PositionPart positionPart = bullet.getPart(PositionPart.class);
 
                 for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {

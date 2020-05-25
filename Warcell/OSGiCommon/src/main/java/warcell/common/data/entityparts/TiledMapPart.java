@@ -28,6 +28,7 @@ public class TiledMapPart implements EntityPart {
 
     /**
      * Creates a new texture part with a given source path
+     *
      * @param srcPath String
      */
     public TiledMapPart(String srcPath) {
@@ -38,6 +39,7 @@ public class TiledMapPart implements EntityPart {
 
     /**
      * gets path to texture source
+     *
      * @return String
      */
     public String getSrcPath() {
@@ -46,6 +48,7 @@ public class TiledMapPart implements EntityPart {
 
     /**
      * Sets the path to the texture source
+     *
      * @param srcPath String
      */
     public void setSrcPath(String srcPath) {
@@ -72,5 +75,5 @@ public class TiledMapPart implements EntityPart {
     public void process(GameData gameData, Entity entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -7,7 +7,6 @@ import warcell.common.data.entityparts.TiledMapPart;
 import warcell.common.map.Tile;
 import warcell.common.services.IGamePluginService;
 
-
 public class MapPlugin implements IGamePluginService {
 
     @Override
@@ -19,8 +18,9 @@ public class MapPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-        for (Entity tiledMap : world.getEntities(Tile.class))
+        for (Entity tiledMap : world.getEntities(Tile.class)) {
             world.removeEntity(tiledMap);
+        }
     }
 
 }

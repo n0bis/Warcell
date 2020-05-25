@@ -34,7 +34,7 @@ import warcell.common.spawner.Spawner;
  * @author madsfalken
  */
 public class SpawnerProcessorTest {
-    
+
     private IGamePluginService plugin;
     private Random random;
     private GameData gameData;
@@ -42,35 +42,35 @@ public class SpawnerProcessorTest {
     private Entity spawner, enemy;
     private SpawnerProcessor instance;
     private float radians = 3.1415f / 2;
-    
+
     @Before
     public void setUp() {
         plugin = mock(IGamePluginService.class);
         random = mock(Random.class);
         when(random.nextInt(anyInt())).thenReturn(1);
-        
+
         spawner = new Spawner();
         spawner.add(new PositionPart(20, 20, radians));
         spawner.add(new TexturePart("SpawnerDebug.png"));
         spawner.add(new SpawnerPart(140, 1, 10));
-        
+
         enemy = new Enemy();
         enemy.add(new PositionPart(0, 0, radians));
-        
+
         gameData = new GameData();
         gameData.setDelta(radians);
         gameData.setGamePlugins(Arrays.asList(plugin));
-        
+
         world = new World();
         world.addEntity(enemy);
         world.addEntity(spawner);
-        
+
         doNothing().when(plugin).start(gameData, world);
-        
+
         instance = new SpawnerProcessor(random);
         instance.enemyGamePluginServices.add(plugin);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -90,7 +90,7 @@ public class SpawnerProcessorTest {
         assertEquals("Expected enemy position x to be equals to spawn x", spawnX, enemyPosition.getX(), 5);
         assertEquals("Expected enemy position y to be equals to spawn y", spawnY, enemyPosition.getY(), 5);
     }
-    
+
     @Test
     public void testEnemyNotMovedBackToSpawnPoint() {
         instance.process(gameData, world);
@@ -102,15 +102,15 @@ public class SpawnerProcessorTest {
         float spawnY = spawnerPosition.getY() + 1 - spawnerPart.getRadius();
         assertEquals("Expected enemy position x to be equals to spawn x", spawnX, enemyPosition.getX(), 5);
         assertEquals("Expected enemy position y to be equals to spawn y", spawnY, enemyPosition.getY(), 5);
-        
+
         // enemy have moved, do not return to spawn point
         PositionPart updateEnemyPosition = new PositionPart(2, 2, radians);
         enemy.add(updateEnemyPosition);
         instance.process(gameData, world);
         PositionPart newEnemyPosition = enemy.getPart(PositionPart.class);
-        
+
         assertNotEquals("Expected enemy position x to NOT be equals to spawn x", spawnX, newEnemyPosition.getX(), 5);
         assertNotEquals("Expected enemy position y to NOT be equals to spawn y", spawnY, newEnemyPosition.getY(), 5);
     }
-    
+
 }

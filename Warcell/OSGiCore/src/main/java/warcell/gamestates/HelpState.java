@@ -20,6 +20,7 @@ import warcell.common.data.World;
  * @author birke
  */
 public class HelpState extends State {
+
     private BitmapFont titleFont;
     private BitmapFont font;
 
@@ -27,14 +28,11 @@ public class HelpState extends State {
         super(guiStateManager, game, world, gameData);
     }
 
-
-
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-            Gdx.files.internal("fonts/Western Bang Bang.otf")
+                Gdx.files.internal("fonts/Western Bang Bang.otf")
         );
-
 
         titleFont = gen.generateFont(80);
         titleFont.setColor(Color.WHITE);
@@ -53,24 +51,23 @@ public class HelpState extends State {
         getGame().getTextureSpriteBatch().begin();
 
         titleFont.draw(
-            getGame().getTextureSpriteBatch(),
-            "Controls",
-            20,
-            700
+                getGame().getTextureSpriteBatch(),
+                "Controls",
+                20,
+                700
         );
         font.drawMultiLine(
-            getGame().getTextureSpriteBatch(),
-            "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape\nReload: R",
-            20,
-            550
+                getGame().getTextureSpriteBatch(),
+                "Movement: W, A, S, D \nShoot: Left mouse button \nChange weapon: Q or E \nPause: Escape\nReload: R",
+                20,
+                550
         );
         font.drawMultiLine(
-            getGame().getTextureSpriteBatch(),
-            "Press ESCAPE to return",
-            20,
-            100
+                getGame().getTextureSpriteBatch(),
+                "Press ESCAPE to return",
+                20,
+                100
         );
-
 
         getGame().getTextureSpriteBatch().end();
     }

@@ -26,15 +26,16 @@ import warcell.common.services.IGamePluginService;
  * @author birke
  */
 public class MenuState extends State implements Input.TextInputListener {
+
     private BitmapFont titleFont;
     private BitmapFont font;
     private int currentItem;
     private String[] menuItems;
-    private final String title = "Warcell"; 
+    private final String title = "Warcell";
     private Music music;
     IGamePluginService zcp;
     IGamePluginService pcp;
-    
+
     public MenuState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
     }
@@ -42,7 +43,7 @@ public class MenuState extends State implements Input.TextInputListener {
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-            Gdx.files.internal("fonts/Western Bang Bang.otf")
+                Gdx.files.internal("fonts/Western Bang Bang.otf")
         );
 
         titleFont = gen.generateFont(100);
@@ -50,13 +51,13 @@ public class MenuState extends State implements Input.TextInputListener {
 
         font = gen.generateFont(50);
 
-        menuItems = new String[] {
+        menuItems = new String[]{
             "Play",
             "Help",
             "Highscore",
             "Change name",
             "Quit"
-        };      
+        };
     }
 
     @Override
@@ -68,73 +69,72 @@ public class MenuState extends State implements Input.TextInputListener {
     public void render(SpriteBatch spriteBatch) {
         getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
         getGame().getTextureSpriteBatch().begin();
-        
+
         // draw title
         titleFont.draw(
-            getGame().getTextureSpriteBatch(),
-            title,
-            20,
-            300
+                getGame().getTextureSpriteBatch(),
+                title,
+                20,
+                300
         );
 
         // draw menu
-        for(int i = 0; i < menuItems.length; i++) {
-            if(currentItem == i) font.setColor(Color.RED);
-            else font.setColor(Color.WHITE);
+        for (int i = 0; i < menuItems.length; i++) {
+            if (currentItem == i) {
+                font.setColor(Color.RED);
+            } else {
+                font.setColor(Color.WHITE);
+            }
             font.draw(
-                getGame().getTextureSpriteBatch(),
-                menuItems[i],
-                20,
-                180 - 35 * i
+                    getGame().getTextureSpriteBatch(),
+                    menuItems[i],
+                    20,
+                    180 - 35 * i
             );
         }
-        
+
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
-            
+
             ScorePart sp = entity.getPart(ScorePart.class);
             font.draw(
-                getGame().getTextureSpriteBatch(),
-                sp.getName(),
-                20,
-                700
+                    getGame().getTextureSpriteBatch(),
+                    sp.getName(),
+                    20,
+                    700
             );
-        }    
+        }
         getGame().getTextureSpriteBatch().end();
     }
 
     @Override
-    public void handleInput() {       
-        if(getGameData().getKeys().isPressed(GameKeys.UP)) {
-            if(currentItem > 0) {
+    public void handleInput() {
+        if (getGameData().getKeys().isPressed(GameKeys.UP)) {
+            if (currentItem > 0) {
                 currentItem--;
             }
         }
-        if(getGameData().getKeys().isPressed(GameKeys.DOWN)) {
-            if(currentItem < menuItems.length - 1) {
+        if (getGameData().getKeys().isPressed(GameKeys.DOWN)) {
+            if (currentItem < menuItems.length - 1) {
                 currentItem++;
             }
         }
-        if(getGameData().getKeys().isPressed(GameKeys.ENTER)) {
+        if (getGameData().getKeys().isPressed(GameKeys.ENTER)) {
             select();
-        }   
+        }
     }
-    
+
     private void select() {
         // play
-        if(currentItem == 0) {
+        if (currentItem == 0) {
             getGuiStateManager().setState(GUIStateManager.PLAY);
-        }
-        // high scores
-        else if(currentItem == 1) {
+        } // high scores
+        else if (currentItem == 1) {
             getGuiStateManager().setState(GUIStateManager.HELP);
-        }               
-        else if(currentItem == 2) {
+        } else if (currentItem == 2) {
             getGuiStateManager().setState(GUIStateManager.HIGHSCORE);
-        }         
-        else if(currentItem == 3) {
+        } else if (currentItem == 3) {
             Gdx.input.getTextInput(this, "Enter name", "", "Name");
-        }
-        else if(currentItem == 4) {
+        } else if (currentItem == 4) {
             Gdx.app.exit();
         }
     }
@@ -142,7 +142,7 @@ public class MenuState extends State implements Input.TextInputListener {
     @Override
     public void dispose() {
         titleFont.dispose();
-        font.dispose();    
+        font.dispose();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class MenuState extends State implements Input.TextInputListener {
         for (Entity entity : getGame().getWorld().getEntities(Player.class)) {
             ScorePart sp = entity.getPart(ScorePart.class);
             sp.setName(string);
-        }       
+        }
     }
 
     @Override

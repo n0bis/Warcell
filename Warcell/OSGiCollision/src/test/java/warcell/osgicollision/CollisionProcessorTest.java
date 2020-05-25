@@ -26,12 +26,12 @@ import warcell.common.player.Player;
  * @author madsfalken
  */
 public class CollisionProcessorTest {
-    
+
     private World world;
     private GameData gameData;
     private Entity player, enemy;
     private CollisionProcessor instance;
-    
+
     @Before
     public void setUp() {
         float radius = 75f;
@@ -45,23 +45,23 @@ public class CollisionProcessorTest {
         player.add(new DamagePart(1));
         player.add(new CollisionPart(true, -1));
         player.add(new PositionPart(x, y, radians));
-        
+
         enemy = new Enemy();
         enemy.add(new CirclePart(centreX, centreY, radius));
         enemy.add(new LifePart(life));
         enemy.add(new DamagePart(1));
         enemy.add(new CollisionPart(true, -1));
         enemy.add(new PositionPart(x, y, radians));
-        
+
         world = new World();
         world.addEntity(player);
         world.addEntity(enemy);
-        
+
         gameData = new GameData();
-        
+
         instance = new CollisionProcessor();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -77,11 +77,11 @@ public class CollisionProcessorTest {
         DamagePart dp1 = player.getPart(DamagePart.class);
         DamagePart dp2 = enemy.getPart(DamagePart.class);
         int expected = 0;
-        
+
         assertEquals(expected, lp1.getLife());
         assertEquals(expected, lp2.getLife());
     }
-    
+
     /**
      * Test of process method, of class CollisionProcessor.
      */
@@ -94,9 +94,9 @@ public class CollisionProcessorTest {
         DamagePart dp1 = player.getPart(DamagePart.class);
         DamagePart dp2 = enemy.getPart(DamagePart.class);
         int expected = 1;
-        
+
         assertEquals(expected, lp1.getLife());
         assertEquals(expected, lp2.getLife());
     }
-    
+
 }

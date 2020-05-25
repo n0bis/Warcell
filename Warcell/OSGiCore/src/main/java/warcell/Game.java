@@ -1,7 +1,5 @@
 package warcell;
 
-
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -24,7 +22,6 @@ import warcell.common.services.IPostEntityProcessingService;
 import warcell.core.managers.GameInputProcessor;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import warcell.common.data.GameKeys;
 import warcell.core.managers.GameAssetManager;
 import warcell.core.managers.SaveGameManager;
 import warcell.gamestates.GUIStateManager;
@@ -50,7 +47,7 @@ public class Game implements ApplicationListener {
 
     private float unitScale = 1 / 128f;
 
-    public Game(){
+    public Game() {
         gameAssetManager = new GameAssetManager();
         init();
     }
@@ -78,7 +75,6 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
-
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -92,7 +88,6 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-
 
     }
 
@@ -155,17 +150,52 @@ public class Game implements ApplicationListener {
         plugin.stop(gameData, world);
     }
 
-    public World getWorld() { return world; }
-    public OrthographicCamera getCam() { return cam; }
-    public List<IEntityProcessingService> getEntityProcessorList() { return entityProcessorList; }
-    public List<IPostEntityProcessingService> getPostEntityProcessorList() { return postEntityProcessorList; }
-    public GameData getGameData() { return gameData; }
-    public TiledMapRenderer getMapRenderer() { return mapRenderer; }
-    public ShapeRenderer getSr() { return sr; }
-    public SpriteBatch getTextureSpriteBatch() { return textureSpriteBatch; }
-    public GameAssetManager getGameAssetManager() { return gameAssetManager; }
-    public float getW() { return w; }
-    public float getH() { return h; }
-    public SaveGameManager getSgm() { return sgm; }
+    public World getWorld() {
+        return world;
+    }
+
+    public OrthographicCamera getCam() {
+        return cam;
+    }
+
+    public List<IEntityProcessingService> getEntityProcessorList() {
+        return entityProcessorList;
+    }
+
+    public List<IPostEntityProcessingService> getPostEntityProcessorList() {
+        return postEntityProcessorList;
+    }
+
+    public GameData getGameData() {
+        return gameData;
+    }
+
+    public TiledMapRenderer getMapRenderer() {
+        return mapRenderer;
+    }
+
+    public ShapeRenderer getSr() {
+        return sr;
+    }
+
+    public SpriteBatch getTextureSpriteBatch() {
+        return textureSpriteBatch;
+    }
+
+    public GameAssetManager getGameAssetManager() {
+        return gameAssetManager;
+    }
+
+    public float getW() {
+        return w;
+    }
+
+    public float getH() {
+        return h;
+    }
+
+    public SaveGameManager getSgm() {
+        return sgm;
+    }
 
 }

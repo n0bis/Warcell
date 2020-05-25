@@ -7,8 +7,6 @@ package warcell.weapon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.Random;
 import warcell.common.data.Entity;
@@ -19,7 +17,6 @@ import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
-import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
@@ -33,6 +30,7 @@ import warcell.common.weapon.service.WeaponsSPI;
  * @author birke
  */
 public class ShotgunWeapon implements WeaponsSPI {
+
     Random rand = new Random();
 
     private final String name = "M870 Remington";
@@ -60,7 +58,7 @@ public class ShotgunWeapon implements WeaponsSPI {
     public String getIconPath() {
         return iconPath;
     }
-    
+
     @Override
     public void shoot(Entity entity, GameData gameData, World world) {
 
@@ -70,21 +68,20 @@ public class ShotgunWeapon implements WeaponsSPI {
             if (shootingPart.isShooting()) {
                 PositionPart positionPart = entity.getPart(PositionPart.class);
                 AnimationTexturePart animationTexturePart = entity.getPart(AnimationTexturePart.class);
-               
+
                 for (int i = 0; i <= 8; i++) {
-                //Add entity radius to initial position to avoid immideate collision.
+                    //Add entity radius to initial position to avoid immideate collision.
                     float angle = (float) Math.toRadians(positionPart.getRadians());
-                    float bulletX = (float) (positionPart.getX() + animationTexturePart.getWidth()/2 + 
-                        (10 * Math.cos(angle) - 25 * Math.sin(angle)));
-                    float bulletY = (float) (positionPart.getY() + animationTexturePart.getHeight()/2 + 
-                        (10 * Math.sin(angle) + 25 * Math.cos(angle)));
-                
-                
-                    bullet = createBullet(bulletX, bulletY, 
-                            positionPart.getRadians() + (rand.nextFloat() * (10-20)), shootingPart.getID());
+                    float bulletX = (float) (positionPart.getX() + animationTexturePart.getWidth() / 2
+                            + (10 * Math.cos(angle) - 25 * Math.sin(angle)));
+                    float bulletY = (float) (positionPart.getY() + animationTexturePart.getHeight() / 2
+                            + (10 * Math.sin(angle) + 25 * Math.cos(angle)));
+
+                    bullet = createBullet(bulletX, bulletY,
+                            positionPart.getRadians() + (rand.nextFloat() * (10 - 20)), shootingPart.getID());
                     bulletArray.add(bullet);
-                }   
-            
+                }
+
                 for (Entity e : bulletArray) {
                     world.addEntity(e);
                 }
@@ -94,13 +91,13 @@ public class ShotgunWeapon implements WeaponsSPI {
             }
         }
     }
-    
+
     //Could potentially do some shenanigans with differing colours for differing sources.
     @Override
     public Entity createBullet(float x, float y, float radians, String uuid) {
         Entity b = new Bullet();
 
-        b.add(new PositionPart(x, y, (float) Math.toRadians(radians+90)));
+        b.add(new PositionPart(x, y, (float) Math.toRadians(radians + 90)));
         b.add(new BulletMovingPart(0, 50000, bulletVelocity, 0));
         b.add(new TimerPart(3));
         b.add(new LifePart(1));
@@ -126,11 +123,11 @@ public class ShotgunWeapon implements WeaponsSPI {
         } else if (ammo == 7) {
             reloadTime = 1.33f;
         } else {
-            reloadTime = (float)(ammoCapacity - ammo) * 1.33f;
+            reloadTime = (float) (ammoCapacity - ammo) * 1.33f;
         }
         return this.reloadTime;
     }
-    
+
     @Override
     public int getAmmo() {
         return ammo;
@@ -140,11 +137,10 @@ public class ShotgunWeapon implements WeaponsSPI {
     public void setAmmo(int ammo) {
         this.ammo = ammo;
     }
-    
+
     @Override
     public float getFireRate() {
         return this.fireRate;
     }
-    
- }
 
+}

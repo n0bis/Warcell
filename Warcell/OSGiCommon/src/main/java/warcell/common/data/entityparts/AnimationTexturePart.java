@@ -107,9 +107,9 @@ public class AnimationTexturePart implements EntityPart {
     public void setScaleY(float scaleY) {
         this.scaleY = scaleY;
     }
-    
+
     public void setSrcPath(String srcPath, int width, int height, int frameCols, int frameRows, float frameInterval) {
-        
+
         if (!this.srcPath.equals(srcPath)) {
             this.srcPath = srcPath;
             this.height = height;

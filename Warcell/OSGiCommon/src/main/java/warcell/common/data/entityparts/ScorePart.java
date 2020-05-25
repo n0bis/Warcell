@@ -12,7 +12,8 @@ import warcell.common.data.GameData;
  *
  * @author birke
  */
-public class ScorePart implements EntityPart{
+public class ScorePart implements EntityPart {
+
     private String name;
     private int score;
 
@@ -24,7 +25,7 @@ public class ScorePart implements EntityPart{
     @Override
     public void process(GameData gameData, Entity entity) {
         if (score > 500) {
-            float multi = ((float)score)/5000f;
+            float multi = ((float) score) / 5000f;
             gameData.setDifficultyMultiplier(multi);
         }
     }
@@ -44,8 +45,5 @@ public class ScorePart implements EntityPart{
     public void setScore(int score) {
         this.score = score;
     }
-    
-    
-    
-    
+
 }

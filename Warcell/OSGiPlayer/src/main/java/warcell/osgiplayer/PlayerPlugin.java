@@ -20,15 +20,15 @@ import warcell.common.data.entityparts.ScorePart;
 import warcell.common.data.entityparts.TimerPart;
 
 public class PlayerPlugin implements IGamePluginService {
+
     private String entityID;
     private float playerRadius = 20f;
     private final String walkAnimationPath = "RifleIdle.png";
     private final int walkAnimationFrameColumns = 20;
     private final int walkAnimationFrameRows = 1;
-    
+
     public PlayerPlugin() {
     }
-
 
     @Override
     public void start(GameData gameData, World world) {
@@ -39,9 +39,10 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = createPlayer(gameData);
         entityID = world.addEntity(player);
     }
-    
+
     /**
      * creates a player entity
+     *
      * @param gameData the GameData of the Game class
      * @return the created player
      */

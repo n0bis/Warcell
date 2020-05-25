@@ -21,15 +21,15 @@ import warcell.common.data.entityparts.AnimationTexturePart;
  * @author madsfalken
  */
 public class GameAssetManager {
+
     private Map<String, Animation> animationMap;
     private Map<String, Texture> textureMap;
-
 
     public GameAssetManager() {
         animationMap = new HashMap<>();
         textureMap = new HashMap<>();
     }
-    
+
     public Texture getTexture(Class objectClass, String path) {
         Texture texture = textureMap.get(path);
 
@@ -39,9 +39,10 @@ public class GameAssetManager {
                     path
             );
             try {
-                if (is == null)
+                if (is == null) {
                     return null;
-                
+                }
+
                 Gdx2DPixmap gmp = new Gdx2DPixmap(is, Gdx2DPixmap.GDX2D_FORMAT_RGBA8888);
                 Pixmap pix = new Pixmap(gmp);
                 texture = new Texture(pix);
@@ -56,19 +57,20 @@ public class GameAssetManager {
 
         return texture;
     }
-    
+
     public Animation getAnimation(Class objectClass, AnimationTexturePart animationTexture) {
         Animation animation = animationMap.get(animationTexture.getSrcPath());
-        
+
         if (animation == null) {
             InputStream is = objectClass.getClassLoader().getResourceAsStream(
                     animationTexture.getSrcPath()
             );
-            
+
             try {
-                if (is == null)
+                if (is == null) {
                     return null;
-                
+                }
+
                 Gdx2DPixmap gmp = new Gdx2DPixmap(is, Gdx2DPixmap.GDX2D_FORMAT_RGBA8888);
                 Pixmap pix = new Pixmap(gmp);
                 Texture texture = new Texture(pix);
@@ -84,7 +86,7 @@ public class GameAssetManager {
                 animation = new Animation(animationTexture.getFrameInterval(), walkFrames);
                 animation.setPlayMode(Animation.PlayMode.LOOP);
                 animationMap.put(animationTexture.getSrcPath(), animation);
-                
+
                 pix.dispose();
                 is.close();
 

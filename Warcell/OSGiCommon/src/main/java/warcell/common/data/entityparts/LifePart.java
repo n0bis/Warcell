@@ -9,10 +9,10 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 
 public class LifePart implements EntityPart {
+
     private boolean dead = false;
     private int life;
     private boolean isHit = false;
-
 
     public LifePart(int life) {
         this.life = life;
@@ -33,26 +33,24 @@ public class LifePart implements EntityPart {
     public void setIsHit(boolean isHit) {
         this.isHit = isHit;
     }
-    
+
     public boolean isDead() {
         return dead;
     }
-    
+
     public void takeDamage(int damage) {
         this.life -= damage;
     }
 
-    
-    
     @Override
     public void process(GameData gameData, Entity entity) {
         if (isHit) {
-            life =- 1;
+            life = - 1;
             isHit = false;
         }
         if (life <= 0) {
             dead = true;
         }
-        
+
     }
 }

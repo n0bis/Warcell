@@ -14,6 +14,8 @@ import warcell.common.data.entityparts.TiledMapPart;
  * @author madsfalken
  */
 public interface AISPI {
+
     void startAI(TiledMapPart tiledMap);
+
     List<PositionPart> getPath(PositionPart from, PositionPart target);
 }

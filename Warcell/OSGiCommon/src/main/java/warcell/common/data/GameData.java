@@ -117,6 +117,4 @@ public class GameData {
         this.difficultyMultiplier = difficulty;
     }
 
-
-
 }

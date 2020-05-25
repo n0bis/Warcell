@@ -10,44 +10,39 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import warcell.Game;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.SaveGame;
 import warcell.common.data.World;
 import warcell.common.services.IGamePluginService;
-import warcell.core.managers.SaveGameManager;
 
 /**
  *
  * @author birke
  */
 public class GameOverState extends State {
+
     private BitmapFont font;
     private BitmapFont title;
-    private SaveGame save;
-    
+
     public GameOverState(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         super(guiStateManager, game, world, gameData);
     }
 
-    
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-            Gdx.files.internal("fonts/Western Bang Bang.otf")
-        );   
-               
+                Gdx.files.internal("fonts/Western Bang Bang.otf")
+        );
+
         font = gen.generateFont(50);
         font.setColor(Color.WHITE);
         title = gen.generateFont(100);
         title.setColor(Color.RED);
-        
+
         getGame().getCam().setToOrtho(false, getGameData().getDisplayWidth(), getGameData().getDisplayHeight());
-        
+
         getGame().getSgm().save();
     }
 
@@ -63,17 +58,17 @@ public class GameOverState extends State {
         getGame().getTextureSpriteBatch().begin();
 
         font.draw(
-            getGame().getTextureSpriteBatch(),
-            "Points: " + String.valueOf(getGameData().getFinalScore()),
-            20,
-            200
+                getGame().getTextureSpriteBatch(),
+                "Points: " + String.valueOf(getGameData().getFinalScore()),
+                20,
+                200
         );
-     
+
         title.draw(
-            getGame().getTextureSpriteBatch(),
-            "You died",
-            20,
-            100
+                getGame().getTextureSpriteBatch(),
+                "You died",
+                20,
+                100
         );
         getGame().getTextureSpriteBatch().end();
     }
@@ -92,8 +87,8 @@ public class GameOverState extends State {
     @Override
     public void dispose() {
         title.dispose();
-        font.dispose();    
-        
+        font.dispose();
+
         for (IGamePluginService plugin : getGameData().getGamePlugins()) {
             if (plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
                 plugin.stop(getGameData(), getWorld());
@@ -109,7 +104,5 @@ public class GameOverState extends State {
             }
         }
     }
-    
 
-    
 }

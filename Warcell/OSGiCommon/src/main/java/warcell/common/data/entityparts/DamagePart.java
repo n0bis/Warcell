@@ -13,32 +13,30 @@ import warcell.common.data.GameData;
  * @author Patrick
  */
 public class DamagePart implements EntityPart {
-    
+
     private int damage;
     private float multiplier;
     private int originalDamage;
-    
+
     public DamagePart(int damage) {
         this.damage = damage;
         this.originalDamage = damage;
         this.multiplier = 1;
     }
-    
+
     public DamagePart(int damage, float multiplier) {
         this.damage = Math.round(damage * multiplier);
         this.originalDamage = damage;
     }
-    
-    
+
     @Override
     public void process(GameData gameData, Entity entity) {
     }
-    
+
     public void resetDamage() {
         this.damage = originalDamage;
     }
 
-    
     /**
      * @return the damage
      */
@@ -52,7 +50,6 @@ public class DamagePart implements EntityPart {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-    
 
     /**
      * @return the multiplier
