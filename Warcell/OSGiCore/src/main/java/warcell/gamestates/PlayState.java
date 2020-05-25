@@ -56,16 +56,15 @@ public class PlayState extends State {
     @Override
     public void init() {
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-            Gdx.files.internal("fonts/Western Bang Bang.otf")
+                Gdx.files.internal("fonts/Western Bang Bang.otf")
         );
-
 
         font = gen.generateFont(50);
         font.setColor(Color.WHITE);
         smallFont = gen.generateFont(25);
         smallFont.setColor(Color.WHITE);
 
-        menuItems = new String[] {
+        menuItems = new String[]{
             "Player (loaded)",
             "Enemy (loaded)",
             "Weapons (loaded)"
@@ -90,7 +89,7 @@ public class PlayState extends State {
         } else {
             handleInput();
         }
-        if (getGameData().isGameOver()){
+        if (getGameData().isGameOver()) {
             getGuiStateManager().setState(GUIStateManager.GAMEOVER);
         }
 
@@ -118,20 +117,23 @@ public class PlayState extends State {
             getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
             getGame().getTextureSpriteBatch().begin();
             font.draw(
-                getGame().getTextureSpriteBatch(),
-                "Paused",
-                camPos.getX(),
-                camPos.getY()
+                    getGame().getTextureSpriteBatch(),
+                    "Paused",
+                    camPos.getX(),
+                    camPos.getY()
             );
 
-            for(int i = 0; i < menuItems.length; i++) {
-                if(currentItem == i) font.setColor(Color.RED);
-                else font.setColor(Color.WHITE);
-                    font.draw(
-                    getGame().getTextureSpriteBatch(),
-                    menuItems[i],
-                    camPos.getX(),
-                    (camPos.getY()-100) - 35 * i
+            for (int i = 0; i < menuItems.length; i++) {
+                if (currentItem == i) {
+                    font.setColor(Color.RED);
+                } else {
+                    font.setColor(Color.WHITE);
+                }
+                font.draw(
+                        getGame().getTextureSpriteBatch(),
+                        menuItems[i],
+                        camPos.getX(),
+                        (camPos.getY() - 100) - 35 * i
                 );
             }
 
@@ -145,20 +147,20 @@ public class PlayState extends State {
 
             if (invPart.getCurrentWeapon() != null) {
                 smallFont.drawMultiLine(
-                    getGame().getTextureSpriteBatch(),
-                    "Ammo: " + String.valueOf(invPart.getCurrentWeapon().getAmmo()),
-                    camPos.getX() + 620,
-                    camPos.getY() + 230,
-                    5f,
-                    hAlign.RIGHT
+                        getGame().getTextureSpriteBatch(),
+                        "Ammo: " + String.valueOf(invPart.getCurrentWeapon().getAmmo()),
+                        camPos.getX() + 620,
+                        camPos.getY() + 230,
+                        5f,
+                        hAlign.RIGHT
                 );
                 smallFont.drawMultiLine(
-                    getGame().getTextureSpriteBatch(),
-                    invPart.getCurrentWeapon().getName(),
-                    camPos.getX() + 620,
-                    camPos.getY() + 250,
-                    5f,
-                    hAlign.RIGHT
+                        getGame().getTextureSpriteBatch(),
+                        invPart.getCurrentWeapon().getName(),
+                        camPos.getX() + 620,
+                        camPos.getY() + 250,
+                        5f,
+                        hAlign.RIGHT
                 );
                 weaponSprite = new Texture(Gdx.files.internal(invPart.getCurrentWeapon().getIconPath()));
                 getGame().getTextureSpriteBatch().draw(weaponSprite, camPos.getX() + 460, camPos.getY() + 250);
@@ -167,23 +169,23 @@ public class PlayState extends State {
             ScorePart sp = entity.getPart(ScorePart.class);
             LifePart lp = entity.getPart(LifePart.class);
             font.draw(
-                getGame().getTextureSpriteBatch(),
-                "Points: " + String.valueOf(sp.getScore()),
-                camPos.getX() - 640,
-                camPos.getY() + 360
+                    getGame().getTextureSpriteBatch(),
+                    "Points: " + String.valueOf(sp.getScore()),
+                    camPos.getX() - 640,
+                    camPos.getY() + 360
             );
             font.draw(
                     getGame().getTextureSpriteBatch(),
                     "HP: " + String.valueOf(lp.getLife()),
-                    camPos.getX()+500,
-                    camPos.getY()+350
+                    camPos.getX() + 500,
+                    camPos.getY() + 350
             );
             if (shootingPart.CanShoot() == false) {
                 font.draw(
                         getGame().getTextureSpriteBatch(),
                         "Press R to reload!",
-                        camPos.getX()-640,
-                        camPos.getY()-320
+                        camPos.getX() - 640,
+                        camPos.getY() - 320
                 );
             }
             getGame().getTextureSpriteBatch().end();
@@ -209,17 +211,13 @@ public class PlayState extends State {
         }
     }
 
-
-
     private void drawTextures() {
         getGame().getTextureSpriteBatch().setProjectionMatrix(getGame().getCam().combined);
         getGame().getTextureSpriteBatch().begin();
 
-
         for (Entity e : getWorld().getEntities()) {
             TexturePart tp = e.getPart(TexturePart.class);
             PositionPart pp = e.getPart(PositionPart.class);
-
 
             if (tp != null && pp != null) {
                 TextureRegion texture = new TextureRegion(getGame().getGameAssetManager().getTexture(e.getClass(), tp.getSrcPath()));
@@ -259,10 +257,10 @@ public class PlayState extends State {
                 TextureRegion currentFrame = animation.getKeyFrame(animationTexturePart.getStateTime(), true);
                 if (animationTexturePart.getHeight() + animationTexturePart.getWidth() == 0) {
                     getGame().getTextureSpriteBatch().draw(currentFrame,
-                        pp.getX(),
-                        pp.getY());
+                            pp.getX(),
+                            pp.getY());
                 } else {
-                    getGame().getTextureSpriteBatch().draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth()/2, animationTexturePart.getHeight()/2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
+                    getGame().getTextureSpriteBatch().draw(currentFrame, pp.getX(), pp.getY(), animationTexturePart.getWidth() / 2, animationTexturePart.getHeight() / 2, animationTexturePart.getWidth(), animationTexturePart.getHeight(), animationTexturePart.getScaleX(), animationTexturePart.getScaleY(), pp.getRadians());
                 }
             }
 
@@ -270,19 +268,19 @@ public class PlayState extends State {
         getGame().getTextureSpriteBatch().end();
     }
 
-@Override
+    @Override
     public void handleInput() {
-        if(getGameData().getKeys().isPressed(GameKeys.UP)) {
-            if(currentItem > 0) {
+        if (getGameData().getKeys().isPressed(GameKeys.UP)) {
+            if (currentItem > 0) {
                 currentItem--;
             }
         }
-        if(getGameData().getKeys().isPressed(GameKeys.DOWN)) {
-            if(currentItem < menuItems.length - 1) {
+        if (getGameData().getKeys().isPressed(GameKeys.DOWN)) {
+            if (currentItem < menuItems.length - 1) {
                 currentItem++;
             }
         }
-        if(getGameData().getKeys().isPressed(GameKeys.ENTER)) {
+        if (getGameData().getKeys().isPressed(GameKeys.ENTER)) {
             select();
         }
     }
@@ -290,7 +288,7 @@ public class PlayState extends State {
     private void select() {
         for (IGamePluginService plugin : getGameData().getGamePlugins()) {
             // Player
-            if(currentItem == 0 && plugin.getClass().getCanonicalName().matches("warcell.osgiplayer.PlayerPlugin")) {
+            if (currentItem == 0 && plugin.getClass().getCanonicalName().matches("warcell.osgiplayer.PlayerPlugin")) {
                 if (menuItems[currentItem].equals("Player (loaded)")) {
                     menuItems[currentItem] = "Player (unloaded)";
                     plugin.stop(getGameData(), getWorld());
@@ -298,9 +296,8 @@ public class PlayState extends State {
                     menuItems[currentItem] = "Player (loaded)";
                     plugin.start(getGameData(), getWorld());
                 }
-            }
-            //Enemy
-            else if(currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
+            } //Enemy
+            else if (currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
                 if (menuItems[currentItem].equals("Enemy (loaded)")) {
                     menuItems[currentItem] = "Enemy (unloaded)";
                     plugin.stop(getGameData(), getWorld());
@@ -308,10 +305,9 @@ public class PlayState extends State {
                     menuItems[currentItem] = "Enemy (loaded)";
                     plugin.start(getGameData(), getWorld());
                 }
-            }
-            //Weapons
-            else if(currentItem == 2 && plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
-                    if (menuItems[currentItem].equals("Weapons (loaded)")) {
+            } //Weapons
+            else if (currentItem == 2 && plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
+                if (menuItems[currentItem].equals("Weapons (loaded)")) {
                     menuItems[currentItem] = "Weapons (unloaded)";
                     plugin.stop(getGameData(), getWorld());
                 } else {
@@ -321,6 +317,7 @@ public class PlayState extends State {
             }
         }
     }
+
     @Override
     public void dispose() {
         font.dispose();

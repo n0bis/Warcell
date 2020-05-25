@@ -14,15 +14,24 @@ import warcell.common.data.World;
  * @author birke
  */
 public interface WeaponsSPI {
+
     String getName();
+
     String getDescription();
+
     String getIconPath();
+
     int getAmmo();
+
     void setAmmo(int ammo);
+
     int getAmmoCapacity();
+
     float getReloadTime();
+
     float getFireRate();
-    
+
     void shoot(Entity entity, GameData gameData, World world);
+
     Entity createBullet(float x, float y, float radians, String uuid);
 }

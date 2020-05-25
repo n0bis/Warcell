@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @author birke
  */
 public class SaveGame implements Serializable, Comparable<SaveGame> {
-    
 
     String name;
     int Score;
@@ -37,14 +36,11 @@ public class SaveGame implements Serializable, Comparable<SaveGame> {
     public void setScore(int Score) {
         this.Score = Score;
     }
-    
-    
 
     @Override
     public int compareTo(SaveGame o) {
         int i = o.getScore() - this.getScore();
         return i;
     }
-    
-    
+
 }

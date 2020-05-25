@@ -11,7 +11,6 @@ import warcell.common.data.entityparts.PositionPart;
 import warcell.common.defense.Defense;
 import warcell.common.services.IEntityProcessingService;
 
-
 public class DefenseProcessor implements IEntityProcessingService {
 
     @Override
@@ -21,11 +20,11 @@ public class DefenseProcessor implements IEntityProcessingService {
 
             PositionPart positionPart = entity.getPart(PositionPart.class);
             LifePart lifePart = entity.getPart(LifePart.class);
-            
+
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
             }
-            
+
             lifePart.process(gameData, entity);
             positionPart.process(gameData, entity);
         }

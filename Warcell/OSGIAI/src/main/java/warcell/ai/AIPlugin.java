@@ -23,7 +23,7 @@ import warcell.common.data.entityparts.TiledMapPart;
  * @author madsfalken
  */
 public class AIPlugin implements AISPI {
-    
+
     private final int DEFAULT_TILE_SIZE = 32;
     private Map map;
     private NavigationTiledMapLayer navigationLayer;
@@ -31,14 +31,14 @@ public class AIPlugin implements AISPI {
     private AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, finderConfig);
 
     @Override
-    public void startAI(TiledMapPart tiledMap) {  
+    public void startAI(TiledMapPart tiledMap) {
         if (map == null) {
             map = new NavTmxMapLoader().load(tiledMap.getSrcPath());
             navigationLayer = (NavigationTiledMapLayer) map.getLayers().get("navigation");
         }
-        
+
     }
-    
+
     public GridFinderOptions getOptions() {
         finderConfig = new GridFinderOptions();
         finderConfig.allowDiagonal = false;
@@ -49,26 +49,27 @@ public class AIPlugin implements AISPI {
     public List<PositionPart> getPath(PositionPart source, PositionPart target) {
         int sourceX = Math.round(source.getX() / DEFAULT_TILE_SIZE);
         int sourceY = Math.round(source.getY() / DEFAULT_TILE_SIZE);
-        
+
         int targetX = Math.round(target.getX() / DEFAULT_TILE_SIZE);
         int targetY = Math.round(target.getY() / DEFAULT_TILE_SIZE);
-        
+
         List<GridCell> thePath = new ArrayList<>();
         try {
-            thePath = finder.findPath(navigationLayer.getCell(sourceX, sourceY),navigationLayer.getCell(targetX, targetY), navigationLayer);
+            thePath = finder.findPath(navigationLayer.getCell(sourceX, sourceY), navigationLayer.getCell(targetX, targetY), navigationLayer);
         } catch (PathFindingException e) {
             return new ArrayList<>();
         }
-        
-        if(thePath == null)
+
+        if (thePath == null) {
             return new ArrayList<>();
-        
+        }
+
         List<PositionPart> pathToEnd = new ArrayList<>();
-        
+
         for (GridCell path : thePath) {
             pathToEnd.add(new PositionPart(path.getX() * DEFAULT_TILE_SIZE, path.getY() * DEFAULT_TILE_SIZE, 0));
         }
-        
+
         return pathToEnd;
     }
 

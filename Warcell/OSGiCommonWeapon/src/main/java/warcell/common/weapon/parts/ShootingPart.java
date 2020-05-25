@@ -4,8 +4,8 @@ import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.entityparts.EntityPart;
 
-
 public class ShootingPart implements EntityPart {
+
     private float timeSinceLastShot;
     private boolean canShoot;
     private boolean isShooting;
@@ -52,9 +52,5 @@ public class ShootingPart implements EntityPart {
     public void setCanShoot(boolean canShoot) {
         this.canShoot = canShoot;
     }
-    
-    
-    
+
 }
-
-

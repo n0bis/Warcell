@@ -20,16 +20,16 @@ import warcell.common.spawner.Spawner;
  * @author madsfalken
  */
 public class SpawnerPluginTest {
-    
+
     private World world;
     private GameData gameData;
-    
+
     @Before
     public void setUp() {
         world = new World();
         gameData = new GameData();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,7 +43,7 @@ public class SpawnerPluginTest {
         instance.start(gameData, world);
         int expected = 8;
         int result = world.getEntities(Spawner.class).size();
-        
+
         assertEquals(expected, result);
     }
 
@@ -56,8 +56,8 @@ public class SpawnerPluginTest {
         instance.stop(gameData, world);
         int expected = 0;
         int result = world.getEntities(Spawner.class).size();
-        
+
         assertEquals(expected, result);
     }
-    
+
 }

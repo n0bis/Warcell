@@ -48,17 +48,17 @@ public class SetupTest {
     public void startupWorks() throws BundleException {
         assertNotNull("Bundle context should be applied", ctx);
     }
-    
+
     @Test
     public void testBundleStarted() {
         final Bundle bundle = getBundle(ctx, "OSGiCore");
         assertNotNull("Expecting OSGiCore bundle to be installed", bundle);
         assertEquals("Expecting OSGiCore bundle to be active", Bundle.ACTIVE, bundle.getState());
     }
-    
+
     private Bundle getBundle(BundleContext ctx, String symbolicName) {
-        for(Bundle b : ctx.getBundles()) {
-            if(symbolicName.equals(b.getSymbolicName())) {
+        for (Bundle b : ctx.getBundles()) {
+            if (symbolicName.equals(b.getSymbolicName())) {
                 return b;
             }
         }

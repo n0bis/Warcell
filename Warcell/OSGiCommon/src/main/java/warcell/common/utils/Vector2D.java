@@ -13,6 +13,7 @@ import java.util.List;
  * @author madsfalken
  */
 public class Vector2D {
+
     private float x;
     private float y;
 
@@ -33,7 +34,6 @@ public class Vector2D {
         this.x = x;
     }
 
-
     public void setY(float y) {
         this.y = y;
     }
@@ -45,7 +45,6 @@ public class Vector2D {
         hash = 89 * hash + Float.floatToIntBits(this.y);
         return hash;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -68,38 +67,39 @@ public class Vector2D {
         return true;
     }
 
-
-
     public Vector2D rotate90degrees() {
-        return new Vector2D(-y+0.0f, x);
+        return new Vector2D(-y + 0.0f, x);
     }
 
     public Vector2D rotateClockwise90degrees() {
-        return new Vector2D(y, -x+0.0f);
+        return new Vector2D(y, -x + 0.0f);
     }
 
     public float length() {
-        float length = (float)Math.sqrt(getX()*getX()+getY()*getY()); // len = sqrt(x²+y²)
+        float length = (float) Math.sqrt(getX() * getX() + getY() * getY()); // len = sqrt(x²+y²)
         return length;
     }
 
     /**
-     * Returns the angle in radians from the unit vector(1, 0). I.e. the angle in the unit circle.
+     * Returns the angle in radians from the unit vector(1, 0). I.e. the angle
+     * in the unit circle.
+     *
      * @return
      */
-    public float getAngle(){
+    public float getAngle() {
         return getAngle(new Vector2D(1, 0));
     }
 
     /**
      * Returns the angle in radians from the given vector.
+     *
      * @param other
      * @return
      */
     public float getAngle(Vector2D other) {
         Vector2D i = other;
 
-        float v = Vector2D.dot(this, other)/(this.length()*i.length());
+        float v = Vector2D.dot(this, other) / (this.length() * i.length());
 
         float radians = (float) Math.acos(v);
 
@@ -113,19 +113,18 @@ public class Vector2D {
             throw new Error("Length must be more that 0");
         }
 
-        return new Vector2D(getX()/length, getY()/length);
+        return new Vector2D(getX() / length, getY() / length);
     }
 
     public Vector2D projectOnto(Vector2D other) {
 
         // Formula for projecting b (this) onto a (other)
         // projection = dot(a,b)/(len(a)²) * a
-
         float dot = Vector2D.dot(this, other);
         float length = other.length();
-        float factor = dot/(length*length);
+        float factor = dot / (length * length);
 
-        Vector2D projection = new Vector2D(factor*other.x, factor*other.y);
+        Vector2D projection = new Vector2D(factor * other.x, factor * other.y);
         return projection;
     }
 
@@ -135,10 +134,9 @@ public class Vector2D {
         return dot;
     }
 
-    public float dot(){
-        return dot(this, new Vector2D(1,0));
+    public float dot() {
+        return dot(this, new Vector2D(1, 0));
     }
-
 
     /**
      * '
@@ -149,8 +147,8 @@ public class Vector2D {
     public static float[] getVerticesAsFloatArray(Vector2D[] vertices) {
         float[] floatVertices = new float[vertices.length * 2];
         for (int i = 0; i < vertices.length; i++) {
-            floatVertices[i*2] = vertices[i].getX();
-            floatVertices[i*2+1] = vertices[i].getY();
+            floatVertices[i * 2] = vertices[i].getX();
+            floatVertices[i * 2 + 1] = vertices[i].getY();
         }
         return floatVertices;
     }
@@ -159,19 +157,17 @@ public class Vector2D {
         List<Vector2D> vectors = new ArrayList<>();
 
         for (int i = 0, j = shapex.length - 1;
-             i < shapey.length;
-             j = i++) {
-            Vector2D vect = new Vector2D(shapex[i]-shapex[j], shapey[i]-shapey[j]);
+                i < shapey.length;
+                j = i++) {
+            Vector2D vect = new Vector2D(shapex[i] - shapex[j], shapey[i] - shapey[j]);
             vectors.add(vect);
         }
 
         return vectors;
     }
 
-
-
     @Override
-    public String toString(){
+    public String toString() {
         return "x: " + this.getX() + ", y: " + getY();
     }
 
@@ -223,11 +219,11 @@ public class Vector2D {
         return minMax;
     }
 
-    public static Vector2D subtractVectors(Vector2D a, Vector2D b){
-        return new Vector2D(a.getX()-b.getX(), a.getY()-b.getY());
+    public static Vector2D subtractVectors(Vector2D a, Vector2D b) {
+        return new Vector2D(a.getX() - b.getX(), a.getY() - b.getY());
     }
 
-    public void subtract(Vector2D otherVector){
+    public void subtract(Vector2D otherVector) {
         Vector2D newVector = subtractVectors(this, otherVector);
         this.x = newVector.getX();
         this.y = newVector.getY();
@@ -239,11 +235,11 @@ public class Vector2D {
 
     }
 
-    public static Vector2D sumVectors(Vector2D a, Vector2D b){
-        return new Vector2D(a.getX()+b.getX(), a.getY()+b.getY());
+    public static Vector2D sumVectors(Vector2D a, Vector2D b) {
+        return new Vector2D(a.getX() + b.getX(), a.getY() + b.getY());
     }
 
-    public void multiplyWithConstant(float f){
+    public void multiplyWithConstant(float f) {
         this.x *= f;
         this.y *= f;
     }

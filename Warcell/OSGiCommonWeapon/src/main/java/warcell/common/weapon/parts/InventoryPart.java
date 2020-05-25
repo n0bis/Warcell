@@ -16,8 +16,9 @@ import warcell.common.weapon.service.WeaponsSPI;
  * @author birke
  */
 public class InventoryPart implements EntityPart {
+
     private ArrayList<WeaponsSPI> weaponsArray;
-    private WeaponsSPI currentWeapon; 
+    private WeaponsSPI currentWeapon;
 
     public InventoryPart() {
         if (weaponsArray == null) {
@@ -25,25 +26,26 @@ public class InventoryPart implements EntityPart {
         }
     }
 
-    
-    
     @Override
     public void process(GameData gameData, Entity entity) {
-        
+
         if (!weaponsArray.isEmpty() && currentWeapon == null) {
-             currentWeapon = weaponsArray.get(0);
+            currentWeapon = weaponsArray.get(0);
         }
     }
-   
+
     /**
      * sets the current weapon to the given weapon
+     *
      * @param weapon
      */
     public void setCurrentWeapon(WeaponsSPI weapon) {
         this.currentWeapon = weapon;
     }
+
     /**
      * sets the weapon to the index given
+     *
      * @param i
      */
     public void setCurrentWeapon(int i) {
@@ -53,9 +55,10 @@ public class InventoryPart implements EntityPart {
     public WeaponsSPI getCurrentWeapon() {
         return this.currentWeapon;
     }
-    
+
     /**
      * sets current weapon to the next in the list
+     *
      * @return
      */
     public WeaponsSPI nextWeapon() {
@@ -79,6 +82,7 @@ public class InventoryPart implements EntityPart {
 
     /**
      * sets the current weapon to previous in the list
+     *
      * @return
      */
     public WeaponsSPI previousWeapon() {
@@ -104,10 +108,10 @@ public class InventoryPart implements EntityPart {
         if (!weaponsArray.contains(weapon)) {
             this.weaponsArray.add(weapon);
         }
-    }    
-    
+    }
+
     public void removeAllWeapons() {
         this.weaponsArray.removeAll(weaponsArray);
     }
-    
+
 }

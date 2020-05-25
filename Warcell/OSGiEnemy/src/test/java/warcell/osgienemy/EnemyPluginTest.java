@@ -20,16 +20,16 @@ import warcell.common.enemy.Enemy;
  * @author madsfalken
  */
 public class EnemyPluginTest {
-    
+
     private World world;
     private GameData gameData;
-    
+
     @Before
     public void setUp() {
         world = new World();
         gameData = new GameData();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,10 +43,10 @@ public class EnemyPluginTest {
         instance.start(gameData, world);
         int expected = 1;
         int result = world.getEntities(Enemy.class).size();
-        
+
         assertEquals(expected, result);
     }
-    
+
     /**
      * Test of start method, of class EnemyPlugin.
      */
@@ -56,7 +56,7 @@ public class EnemyPluginTest {
         instance.start(gameData, world);
         int expected = 5;
         int result = world.getEntities(Enemy.class).size();
-        
+
         assertEquals(expected, result);
     }
 
@@ -69,8 +69,8 @@ public class EnemyPluginTest {
         instance.stop(gameData, world);
         int expected = 0;
         int result = world.getEntities(Enemy.class).size();
-        
+
         assertEquals(expected, result);
     }
-    
+
 }

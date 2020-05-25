@@ -14,14 +14,14 @@ import warcell.common.data.World;
  * @author Jonas
  */
 public class CirclePart implements EntityPart {
-    
-   private float centreX;
+
+    private float centreX;
     private float centreY;
     private float radius;
 
     @Override
     public void process(GameData gameData, Entity entity) {
-        
+
     }
 
     public CirclePart() {
@@ -56,6 +56,5 @@ public class CirclePart implements EntityPart {
     public void setRadius(float radius) {
         this.radius = radius;
     }
-   
-   
+
 }

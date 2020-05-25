@@ -61,7 +61,7 @@ public class SpawnerPart implements EntityPart {
     @Override
     public void process(GameData gameData, Entity entity) {
         timer += gameData.getDelta();
-        maxEnemyAmount = (int)(gameData.getDifficultyMultiplier() * originalMaxAmount);
+        maxEnemyAmount = (int) (gameData.getDifficultyMultiplier() * originalMaxAmount);
     }
 
     /**
@@ -77,12 +77,14 @@ public class SpawnerPart implements EntityPart {
     public void setRadius(int radius) {
         this.radius = radius;
     }
+
     public boolean isReady() {
         if (timer > spawnDelay) {
             return true;
         }
         return false;
     }
+
     public void resetTimer() {
         timer = 0;
     }

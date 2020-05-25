@@ -20,16 +20,16 @@ import warcell.common.map.Tile;
  * @author madsfalken
  */
 public class MapPluginTest {
-    
+
     private World world;
     private GameData gameData;
-    
+
     @Before
     public void setUp() {
         world = new World();
         gameData = new GameData();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,7 +43,7 @@ public class MapPluginTest {
         instance.start(gameData, world);
         int expected = 1;
         int result = world.getEntities(Tile.class).size();
-        
+
         assertEquals(expected, result);
     }
 
@@ -56,8 +56,8 @@ public class MapPluginTest {
         instance.stop(gameData, world);
         int expected = 0;
         int result = world.getEntities(Tile.class).size();
-        
+
         assertEquals(expected, result);
     }
-    
+
 }

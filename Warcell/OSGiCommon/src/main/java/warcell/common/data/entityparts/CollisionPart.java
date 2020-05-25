@@ -9,7 +9,7 @@ import warcell.common.data.World;
  * @author Jonas
  */
 public class CollisionPart implements EntityPart {
-    
+
     private boolean canCollide;
     private boolean isHitEntity;
     private boolean isHitGameMap;
@@ -31,10 +31,6 @@ public class CollisionPart implements EntityPart {
     public void process(GameData gameData, Entity entity) {
     }
 
-    
-    
-    
-    
     public boolean isCanCollide() {
         return canCollide;
     }
@@ -74,9 +70,5 @@ public class CollisionPart implements EntityPart {
     public void setMinTimeBetweenCollision(float minTimeBetweenCollision) {
         this.minTimeBetweenCollision = minTimeBetweenCollision;
     }
-    
-    
-    
-    
-    
+
 }

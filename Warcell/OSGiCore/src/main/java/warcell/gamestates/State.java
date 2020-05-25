@@ -4,24 +4,26 @@
  * and open the template in the editor.
  */
 package warcell.gamestates;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import warcell.Game;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
+
 /**
  *
  * @author birke
  */
 public abstract class State {
-    
+
     private final Game game;
     private final World world;
     private final GameData gameData;
     private final OrthographicCamera cam = new OrthographicCamera();
     private final GUIStateManager guiStateManager;
-    
+
     public State(GUIStateManager guiStateManager, Game game, World world, GameData gameData) {
         this.game = game;
         this.world = world;
@@ -31,9 +33,13 @@ public abstract class State {
     }
 
     public abstract void init();
+
     public abstract void update(float dt);
+
     public abstract void render(SpriteBatch spriteBatch);
+
     public abstract void handleInput();
+
     public abstract void dispose();
 
     public Game getGame() {
@@ -55,8 +61,5 @@ public abstract class State {
     public GUIStateManager getGuiStateManager() {
         return guiStateManager;
     }
-    
-    
-    
-    
+
 }

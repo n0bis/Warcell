@@ -35,13 +35,13 @@ import warcell.common.utils.Vector2D;
  * @author madsfalken
  */
 public class EnemyProcessorTest {
-    
+
     private AISPI ai;
     private World world;
     private Entity player, enemy;
     private GameData gameData;
     private EnemyProcessor instance;
-    
+
     @Before
     public void setUp() {
         ai = mock(AISPI.class);
@@ -51,12 +51,12 @@ public class EnemyProcessorTest {
         instance = new EnemyProcessor(false);
         float radians = 3.1415f / 2;
         doNothing().when(ai).startAI(anyObject());
-        when(ai.getPath(anyObject(), anyObject())).thenReturn(Arrays.asList(new PositionPart(0,50,0)));
+        when(ai.getPath(anyObject(), anyObject())).thenReturn(Arrays.asList(new PositionPart(0, 50, 0)));
         instance.setAIService(ai);
-        
+
         player = new Player();
         player.add(new PositionPart(0, 50, 0));
-        
+
         enemy = new Enemy();
         enemy.add(new CirclePart(1, 1, 75f));
         enemy.add(new LifePart(1));
@@ -65,11 +65,11 @@ public class EnemyProcessorTest {
         enemy.add(new PositionPart(0, 0, 0));
         enemy.add(new CollisionPart(true, 3));
         enemy.add(new AnimationTexturePart(new Vector2D(0, 0), "Zomies", 17, 1, 0.09f, 43f, 59f, 1f, 1f));
-        
+
         world.addEntity(player);
         world.addEntity(enemy);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -84,7 +84,7 @@ public class EnemyProcessorTest {
         float startYPosition = 0;
         float expected = 90.0f;
         float result = positionPart.getRadians();
-        
+
         assertEquals("Expected angle to be 90 degress", expected, result, 5);
         assertEquals("Expected new psoition of y to be close to 0.0273393, given delta 0.0165346f", 0.0273393, positionPart.getY(), 5);
         assertTrue("Expected enemy to have moved towards player", startYPosition < positionPart.getY());

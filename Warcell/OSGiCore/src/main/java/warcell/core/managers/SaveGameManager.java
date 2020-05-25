@@ -24,6 +24,7 @@ import warcell.common.data.SaveGame;
  * @author birke
  */
 public class SaveGameManager {
+
     private File file;
     private ArrayList<SaveGame> saves;
     private ArrayList<SaveGame> loadSaves;
@@ -35,11 +36,11 @@ public class SaveGameManager {
         this.gameData = gameData;
         saves = new ArrayList();
     }
-  
+
     public void save() {
         try {
             ObjectOutputStream out = new ObjectOutputStream(
-                new FileOutputStream("saves.sav")
+                    new FileOutputStream("saves.sav")
             );
             if (saves == null) {
                 load();
@@ -47,29 +48,30 @@ public class SaveGameManager {
             saves.add(new SaveGame(gameData.getName(), gameData.getFinalScore()));
             out.writeObject(saves);
             out.close();
-            
+
         } catch (Exception e) {
-            
+
         }
 
     }
+
     public void load() {
         try {
-            if(!saveFileExists()) {
+            if (!saveFileExists()) {
                 return;
             }
             ObjectInputStream in = new ObjectInputStream(
-                new FileInputStream("saves.sav")
+                    new FileInputStream("saves.sav")
             );
             saves = (ArrayList<SaveGame>) in.readObject();
             in.close();
             Collections.sort(saves);
         } catch (Exception e) {
-            
+
         }
 
     }
-    
+
     public boolean saveFileExists() {
         return file.exists();
     }
@@ -77,6 +79,5 @@ public class SaveGameManager {
     public ArrayList<SaveGame> getSaves() {
         return saves;
     }
-    
-    
+
 }

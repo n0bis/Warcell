@@ -17,16 +17,16 @@ import warcell.common.data.GameKeys;
  * @author madsfalken
  */
 public class GameInputProcessorTest {
-    
+
     private GameData gameData;
     private GameInputProcessor instance;
-    
+
     @Before
     public void setUp() {
         gameData = new GameData();
         instance = new GameInputProcessor(gameData);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -54,5 +54,5 @@ public class GameInputProcessorTest {
         assertEquals(true, result);
         assertEquals(expResult, gameData.getKeys().isDown(GameKeys.W));
     }
-    
+
 }

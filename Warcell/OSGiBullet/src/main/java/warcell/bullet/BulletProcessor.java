@@ -25,37 +25,36 @@ import warcell.common.weapon.entities.Bullet;
  * @author birke
  */
 public class BulletProcessor implements IEntityProcessingService {
+
     Random rand = new Random();
-    
+
     @Override
     public void process(GameData gameData, World world) {
-    
+
         for (Entity b : world.getEntities(Bullet.class)) {
             PositionPart ppb = b.getPart(PositionPart.class);
             BulletMovingPart mpb = b.getPart(BulletMovingPart.class);
             TimerPart btp = b.getPart(TimerPart.class);
             LifePart lpb = b.getPart(LifePart.class);
             CirclePart cp = b.getPart(CirclePart.class);
-            
+
             mpb.setUp(true);
-            
+
             cp.setCentreX(ppb.getX());
             cp.setCentreY(ppb.getY());
-            
+
             btp.reduceExpiration(gameData.getDelta());
-         
+
             //If duration is exceeded, remove the bullet.
             if (btp.getExpiration() < 0 || mpb.getIsOut()) {
                 world.removeEntity(b);
             }
-            
-            
 
             ppb.process(gameData, b);
             mpb.process(gameData, b);
             btp.process(gameData, b);
             lpb.process(gameData, b);
-            
+
             if (lpb.isDead()) {
                 world.removeEntity(b);
             }
@@ -75,11 +74,8 @@ public class BulletProcessor implements IEntityProcessingService {
         shapex[0] = (float) (x + Math.cos(radians) * 20);
         shapey[0] = (float) (y + Math.sin(radians) * 20);
 
-
         shapex[1] = (float) (x + Math.cos(radians + 3.1415f) * entity.getRadius() * 0.5);
         shapey[1] = (float) (y + Math.sin(radians + 3.1415f) * entity.getRadius() * 0.5);
-
-
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);

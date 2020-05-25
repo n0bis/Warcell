@@ -23,7 +23,6 @@ public class GameKeys {
     public static final int LM = 14;
     public static final int R = 15;
 
-    
     public GameKeys() {
         keys = new boolean[NUM_KEYS];
         pkeys = new boolean[NUM_KEYS];

@@ -9,7 +9,8 @@ package warcell.common.utils;
  *
  * @author madsfalken
  */
-public class Point implements Comparable<Point>{
+public class Point implements Comparable<Point> {
+
     private float x;
     private float y;
 

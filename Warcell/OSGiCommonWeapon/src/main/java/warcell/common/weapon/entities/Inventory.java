@@ -12,5 +12,5 @@ import warcell.common.data.Entity;
  * @author birke
  */
 public class Inventory extends Entity {
-    
+
 }

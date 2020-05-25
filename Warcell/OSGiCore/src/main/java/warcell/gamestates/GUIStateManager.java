@@ -15,6 +15,7 @@ import warcell.common.data.World;
  * @author birke
  */
 public final class GUIStateManager {
+
     // current game state
     private State gameState;
     private final Game game;
@@ -36,20 +37,23 @@ public final class GUIStateManager {
     }
 
     public void setState(int state) {
-        if(gameState != null) gameState.dispose();
-        if(state == MENU) {
+        if (gameState != null) {
+            gameState.dispose();
+        }
+        if (state == MENU) {
             gameState = new MenuState(this, game, world, gameData);
         }
-        if(state == PLAY) {
+        if (state == PLAY) {
             gameState = new PlayState(this, game, world, gameData);
         }
-        if(state == HELP) {
+        if (state == HELP) {
             gameState = new HelpState(this, game, world, gameData);
         }
-        if(state == GAMEOVER) {
+        if (state == GAMEOVER) {
             gameState = new GameOverState(this, game, world, gameData);
 
-        }if(state == HIGHSCORE) {
+        }
+        if (state == HIGHSCORE) {
             gameState = new ScoreState(this, game, world, gameData);
         }
 

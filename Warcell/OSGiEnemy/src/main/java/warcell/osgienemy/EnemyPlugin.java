@@ -16,20 +16,22 @@ import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
+
     private String enemyID;
     private float enemyRadius = 20f;
     private final String walkAnimationPath = "ZombieWalk.png";
     private final int walkAnimationFrameColumns = 17;
     private final int walkAnimationFrameRows = 1;
     private int amountOfEnemies;
-    
+
     public EnemyPlugin() {
         amountOfEnemies = 1;
     }
+
     public EnemyPlugin(int amountOfEnemies) {
         this.amountOfEnemies = amountOfEnemies;
     }
-    
+
     @Override
     public void start(GameData gameData, World world) {
         // Add entities to the world
@@ -38,11 +40,10 @@ public class EnemyPlugin implements IGamePluginService {
             world.addEntity(enemy);
         }
     }
-    
 
     private Entity createEnemyZombie(GameData gameData) {
         Entity enemyZombie = new Enemy();
-        
+
         float acceleration = 100;
         float maxSpeed = 150;
         float x = gameData.getDisplayWidth() / 3;
@@ -56,17 +57,18 @@ public class EnemyPlugin implements IGamePluginService {
         enemyZombie.add(new DamagePart(2, 3));
         enemyZombie.add(new MovingPart(acceleration, maxSpeed, true));
         enemyZombie.add(new PositionPart(x, y, radians));
-        enemyZombie.add(new CollisionPart(true,3));
+        enemyZombie.add(new CollisionPart(true, 3));
         enemyZombie.add(new AnimationTexturePart(new Vector2D(x, y), walkAnimationPath, walkAnimationFrameColumns, walkAnimationFrameRows, 0.09f, 56f, 63f, 1f, 1f));
-        
+
         return enemyZombie;
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        for (Entity enemyZombie : world.getEntities(Enemy.class))
+        for (Entity enemyZombie : world.getEntities(Enemy.class)) {
             world.removeEntity(enemyZombie);
+        }
     }
 
 }
