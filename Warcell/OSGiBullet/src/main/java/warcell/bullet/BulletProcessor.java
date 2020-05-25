@@ -5,15 +5,12 @@
  */
 package warcell.bullet;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import java.util.Random;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
 import warcell.common.data.World;
 import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.LifePart;
-import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;

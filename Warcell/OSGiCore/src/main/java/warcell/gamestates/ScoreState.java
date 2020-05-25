@@ -10,16 +10,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import warcell.Game;
 import warcell.common.data.GameData;
 import warcell.common.data.GameKeys;
 import warcell.common.data.SaveGame;
 import warcell.common.data.World;
-import warcell.core.managers.SaveGameManager;
 
 /**
  *

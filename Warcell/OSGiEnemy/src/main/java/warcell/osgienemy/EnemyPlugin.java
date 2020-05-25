@@ -10,14 +10,12 @@ import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.CirclePart;
-import warcell.common.data.entityparts.TexturePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.services.IGamePluginService;
 import warcell.common.utils.Vector2D;
 
 public class EnemyPlugin implements IGamePluginService {
 
-    private String enemyID;
     private float enemyRadius = 20f;
     private final String walkAnimationPath = "ZombieWalk.png";
     private final int walkAnimationFrameColumns = 17;

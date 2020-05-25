@@ -7,8 +7,6 @@ package warcell.weapon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.Random;
 import warcell.common.data.Entity;
@@ -19,7 +17,6 @@ import warcell.common.data.entityparts.BulletMovingPart;
 import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
-import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
 import warcell.common.data.entityparts.CirclePart;
 import warcell.common.data.entityparts.TimerPart;
