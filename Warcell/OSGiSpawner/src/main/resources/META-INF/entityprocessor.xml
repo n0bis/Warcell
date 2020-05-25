@@ -4,4 +4,7 @@
     <service>
         <provide interface="warcell.common.services.IEntityProcessingService"/>
     </service>
+    <reference bind="setEnemyPluginService" cardinality="0..n"
+               interface="warcell.common.services.IGamePluginService"
+               name="IGamePluginService" policy="dynamic" unbind="removeEnemyPluginService"/>
 </scr:component>

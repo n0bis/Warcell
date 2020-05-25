@@ -197,3 +197,8 @@ hs_err_pid*
 /Warcell/OSGiPlayer/target/
 runner/
 target/
+data/
+/Warcell/OSGiCore/nbproject/
+/Warcell/OSGiEnemy/nbproject/
+/Warcell/OSGiMap/nbproject/
+/Warcell/OSGiSpawner/nbproject/

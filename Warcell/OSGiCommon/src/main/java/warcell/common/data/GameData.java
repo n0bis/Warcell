@@ -1,5 +1,6 @@
 package warcell.common.data;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import warcell.common.events.Event;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +59,11 @@ public class GameData {
     public int getDisplayHeight() {
         return displayHeight;
     }
-    
+
     public void setGamePlugins(List<IGamePluginService> gamePluginList) {
         this.gamePluginList = gamePluginList;
     }
-    
+
     public List<IGamePluginService> getGamePlugins() {
         return this.gamePluginList;
     }
@@ -115,7 +116,7 @@ public class GameData {
     public void setDifficultyMultiplier(float difficulty) {
         this.difficultyMultiplier = difficulty;
     }
-    
-    
+
+
 
 }

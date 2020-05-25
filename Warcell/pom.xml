@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <!--
+    <!--
      | put company details here
     <organization>
       <name>...</name>
@@ -9,7 +9,7 @@
     </organization>
     -->
 
-  <!--
+    <!--
      | put license details here
     <licenses>
       <license>
@@ -21,72 +21,142 @@
     </licenses>
     -->
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>warcell</groupId>
-  <artifactId>Warcell</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>warcell</groupId>
+    <artifactId>Warcell</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-  <name>Warcell</name>
+    <name>Warcell</name>
 
-  <!--
+    <!--
      | describe your project here
     -->
 
-  <description>Generated using Pax-Construct</description>
+    <description>Generated using Pax-Construct</description>
 
-  <properties>
-    <!--
+    <properties>
+        <!--
          | some example OSGi runtime properties
         -->
-    <org.osgi.service.http.port>8080</org.osgi.service.http.port>
-    <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+        <org.osgi.service.http.port>8080</org.osgi.service.http.port>
+        <org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <pax.exam.version>4.13.1</pax.exam.version>
+    </properties>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <modules>
-    <module>poms</module>
-    <module>provision</module>
-    <module>OSGiLibGDX</module>
-    <module>OSGiPathfinder</module>
-    <module>OSGiCore</module>
-    <module>OSGiCommon</module>
-    <module>OSGiCommonPlayer</module>
-    <module>OSGICommonMap</module>
-    <module>OSGiCommonWeapon</module>
-    <module>OSGICommonAI</module>
-    <module>OSGiCommonDefense</module>
-    <module>OSGiCommonSpawner</module>
-    <module>OSGiCommonEnemy</module>
-    <module>OSGiPlayer</module>
-    <module>OSGiEnemy</module>
-    <module>OSGiDefense</module>
-    <module>OSGiWeapon</module>
-    <module>OSGiCollision</module>
-    <module>OSGiMap</module>
-    <module>OSGIAI</module>
-    <module>OSGiBullet</module>
-    <module>OSGiSpawner</module>
-  </modules>
+    <modules>
+        <module>poms</module>
+        <module>provision</module>
+        <module>OSGiLibGDX</module>
+        <module>OSGiPathfinder</module>
+        <module>OSGiCore</module>
+        <module>OSGiCommon</module>
+        <module>OSGiCommonPlayer</module>
+        <module>OSGICommonMap</module>
+        <module>OSGiCommonWeapon</module>
+        <module>OSGICommonAI</module>
+        <module>OSGiCommonDefense</module>
+        <module>OSGiCommonSpawner</module>
+        <module>OSGiCommonEnemy</module>
+        <module>OSGiPlayer</module>
+        <module>OSGiEnemy</module>
+        <module>OSGiDefense</module>
+        <module>OSGiWeapon</module>
+        <module>OSGiCollision</module>
+        <module>OSGiMap</module>
+        <module>OSGIAI</module>
+        <module>OSGiBullet</module>
+        <module>OSGiSpawner</module>
+    </modules>
+  
+    <dependencyManagement>
+        <dependencies>
+            <!-- OSGi -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.core</artifactId>
+                <version>7.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.cmpn</artifactId>
+                <version>7.0.0</version>
+            </dependency>
+            <!-- Felix framework -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>6.0.3</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-junit4</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-native</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-forked</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-link-mvn</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.url</groupId>
+                <artifactId>pax-url-aether</artifactId>
+                <version>2.5.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-atinject_1.0_spec</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.tinybundles</groupId>
+                <artifactId>tinybundles</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.10.19</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.ops4j</groupId>
-        <artifactId>maven-pax-plugin</artifactId>
-        <version>1.6.0</version>
-        <configuration>
-          <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.ops4j</groupId>
+                <artifactId>maven-pax-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <!--
                      | some example Pax-Runner settings
                     -->
-          <provision>
-            <param>--platform=felix</param>
-          </provision>
-        </configuration>
-        <executions>
-          <!--
+                    <provision>
+                        <param>--platform=felix</param>
+                    </provision>
+                </configuration>
+                <executions>
+                    <!--
                      | uncomment to auto-generate IDE files
                     <execution>
                       <id>ide-support</id>
@@ -95,9 +165,10 @@
                       </goals>
                     </execution>
                     -->
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+  
+    
 </project>

@@ -80,45 +80,51 @@ public class CollisionProcessor implements IPostEntityProcessingService {
             }
         }
 
-        for (Entity player : world.getEntities(Player.class)) {
-            MovingPart movingPart = player.getPart(MovingPart.class);
-            PositionPart positionPart = player.getPart(PositionPart.class);
+        if (objects != null && border != null) {
+            for (Entity player : world.getEntities(Player.class)) {
+                MovingPart movingPart = player.getPart(MovingPart.class);
+                PositionPart positionPart = player.getPart(PositionPart.class);
 
-            for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
-                Rectangle rectangle = rectangleObject.getRectangle();
-                Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
+                for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
 
-                if (Intersector.overlaps(rectangle, playerRectangle)) {
-                    movingPart.setIsInWalls(true);
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        movingPart.setIsInWalls(true);
+                    }
                 }
-            }
-            for (RectangleMapObject rectangleObject : border.getByType(RectangleMapObject.class)) {
-                Rectangle rectangle = rectangleObject.getRectangle();
-                Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
+                for (RectangleMapObject rectangleObject : border.getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 35, 35);
 
-                if (Intersector.overlaps(rectangle, playerRectangle)) {
-                    movingPart.setIsInWalls(true);
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        movingPart.setIsInWalls(true);
+                    }
                 }
-            }
-            if (!movingPart.isIsInWalls()) {
-                movingPart.setLastX(positionPart.getX());
-                movingPart.setLastY(positionPart.getY());
-            }
-        }
-        for (Entity bullet : world.getEntities(Bullet.class)) {
-            BulletMovingPart movingPart = bullet.getPart(BulletMovingPart.class);
-            PositionPart positionPart = bullet.getPart(PositionPart.class);
-
-            for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
-                Rectangle rectangle = rectangleObject.getRectangle();
-                Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 5, 5);
-
-                if (Intersector.overlaps(rectangle, playerRectangle)) {
-                    world.removeEntity(bullet);
-
+                if (!movingPart.isIsInWalls()) {
+                    movingPart.setLastX(positionPart.getX());
+                    movingPart.setLastY(positionPart.getY());
                 }
             }
         }
+
+        if (objects != null) {
+            for (Entity bullet : world.getEntities(Bullet.class)) {
+                BulletMovingPart movingPart = bullet.getPart(BulletMovingPart.class);
+                PositionPart positionPart = bullet.getPart(PositionPart.class);
+
+                for (RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = rectangleObject.getRectangle();
+                    Rectangle playerRectangle = new Rectangle(positionPart.getX(), positionPart.getY(), 5, 5);
+
+                    if (Intersector.overlaps(rectangle, playerRectangle)) {
+                        world.removeEntity(bullet);
+
+                    }
+                }
+            }
+        }
+
     }
 
     private boolean hasCollided(Entity entity1, Entity entity2) {

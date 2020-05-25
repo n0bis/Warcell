@@ -83,7 +83,7 @@ public class Game implements ApplicationListener {
         cam.setToOrtho(false, gameData.getDisplayWidth(), gameData.getDisplayHeight());
         //cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        
+
         map = new TmxMapLoader().load("maps/ZombieMap.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -92,6 +92,8 @@ public class Game implements ApplicationListener {
         textureSpriteBatch.setProjectionMatrix(cam.combined);
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+
+
     }
 
     @Override
@@ -99,13 +101,13 @@ public class Game implements ApplicationListener {
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-        gameData.setDelta(Gdx.graphics.getDeltaTime());    
+
+        gameData.setDelta(Gdx.graphics.getDeltaTime());
         guiManager.update(Gdx.graphics.getDeltaTime());
         guiManager.render(textureSpriteBatch);
         gameData.getKeys().update();
     }
-    
+
     @Override
     public void resize(int width, int height) {
     }
@@ -165,5 +167,5 @@ public class Game implements ApplicationListener {
     public float getW() { return w; }
     public float getH() { return h; }
     public SaveGameManager getSgm() { return sgm; }
-    
+
 }
