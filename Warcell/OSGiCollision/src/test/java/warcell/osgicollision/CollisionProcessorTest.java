@@ -17,7 +17,7 @@ import warcell.common.data.entityparts.CollisionPart;
 import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.player.Player;
 
@@ -40,14 +40,14 @@ public class CollisionProcessorTest {
         int life = 1;
         float radians = 3.1415f / 2;
         player = new Player();
-        player.add(new SquarePart(centreX, centreY, radius));
+        player.add(new CirclePart(centreX, centreY, radius));
         player.add(new LifePart(life));
         player.add(new DamagePart(1));
         player.add(new CollisionPart(true, -1));
         player.add(new PositionPart(x, y, radians));
         
         enemy = new Enemy();
-        enemy.add(new SquarePart(centreX, centreY, radius));
+        enemy.add(new CirclePart(centreX, centreY, radius));
         enemy.add(new LifePart(life));
         enemy.add(new DamagePart(1));
         enemy.add(new CollisionPart(true, -1));
@@ -87,7 +87,7 @@ public class CollisionProcessorTest {
      */
     @Test
     public void testDoesNotCollide() {
-        player.add(new SquarePart(150, 150, 75f));
+        player.add(new CirclePart(150, 150, 75f));
         instance.process(gameData, world);
         LifePart lp1 = player.getPart(LifePart.class);
         LifePart lp2 = enemy.getPart(LifePart.class);

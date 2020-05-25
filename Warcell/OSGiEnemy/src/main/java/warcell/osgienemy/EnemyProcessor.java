@@ -25,8 +25,16 @@ public class EnemyProcessor implements IEntityProcessingService {
     private AISPI ai;
     private TiledMapPart tiledMap;
     private PositionPart playerPos;
-    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/zombieDeath.mp3"));
+    private Sound sound;
     
+    public EnemyProcessor(boolean playSound) {
+        this.sound = playSound ? Gdx.audio.newSound(Gdx.files.internal("Audio/zombieDeath.mp3")) : null;
+    }
+    
+    public EnemyProcessor() {
+        this(true);
+    }
+
     @Override
     public void process(GameData gameData, World world) {
         for (Entity entity : world.getEntities()) {
@@ -88,7 +96,8 @@ public class EnemyProcessor implements IEntityProcessingService {
             // Check if dead
             if (lifePart.isDead()) {
                 world.removeEntity(entity);
-                sound.play(0.4f);
+                if (sound != null)
+                    sound.play(0.4f);
                 System.out.println("ENEMY DEAD");
                 for (Entity player : world.getEntities(Player.class)) {
                     ScorePart sp = player.getPart(ScorePart.class);

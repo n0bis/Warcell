@@ -25,7 +25,7 @@ import warcell.common.data.entityparts.DamagePart;
 import warcell.common.data.entityparts.LifePart;
 import warcell.common.data.entityparts.MovingPart;
 import warcell.common.data.entityparts.PositionPart;
-import warcell.common.data.entityparts.SquarePart;
+import warcell.common.data.entityparts.CirclePart;
 import warcell.common.enemy.Enemy;
 import warcell.common.player.Player;
 import warcell.common.utils.Vector2D;
@@ -48,7 +48,7 @@ public class EnemyProcessorTest {
         world = new World();
         gameData = new GameData();
         gameData.setDelta(0.0165346f);
-        instance = new EnemyProcessor();
+        instance = new EnemyProcessor(false);
         float radians = 3.1415f / 2;
         doNothing().when(ai).startAI(anyObject());
         when(ai.getPath(anyObject(), anyObject())).thenReturn(Arrays.asList(new PositionPart(0,50,0)));
@@ -58,7 +58,7 @@ public class EnemyProcessorTest {
         player.add(new PositionPart(0, 50, 0));
         
         enemy = new Enemy();
-        enemy.add(new SquarePart(1, 1, 75f));
+        enemy.add(new CirclePart(1, 1, 75f));
         enemy.add(new LifePart(1));
         enemy.add(new DamagePart(2, 3));
         enemy.add(new MovingPart(100, 150, true));
