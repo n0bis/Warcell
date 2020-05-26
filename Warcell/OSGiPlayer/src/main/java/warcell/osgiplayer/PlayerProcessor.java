@@ -79,7 +79,6 @@ public class PlayerProcessor implements IEntityProcessingService {
 
             if (gameData.getKeys().isPressed(GameKeys.R)) {
                 timerPart.setExpiration(inventoryPart.getCurrentWeapon().getReloadTime());
-                System.out.println(inventoryPart.getCurrentWeapon().getReloadTime());
                 isReloading = true;
                 shootingPart.setCanShoot(true);
                 inventoryPart.getCurrentWeapon().setAmmo(inventoryPart.getCurrentWeapon().getAmmoCapacity());
@@ -119,7 +118,6 @@ public class PlayerProcessor implements IEntityProcessingService {
                 gameData.setName(scorePart.getName());
                 world.removeEntity(entity);
                 sound.play(0.5f);
-                System.out.println("PLAYER DEAD");
                 gameData.setGameOver(true);
             }
         }
