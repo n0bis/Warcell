@@ -332,9 +332,10 @@ public class PlayState extends State {
                 bundle.start();
             }
         }
+        }
         
     }
-    
+
     private Bundle getBundle(BundleContext ctx, String symbolicName) {
 	for (Bundle b : ctx.getBundles()) {
 		if (symbolicName.equals(b.getSymbolicName())) {
