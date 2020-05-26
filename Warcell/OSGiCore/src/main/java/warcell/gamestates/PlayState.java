@@ -289,51 +289,62 @@ public class PlayState extends State {
     }
 
     private void select() {
-        for (IGamePluginService plugin : getGameData().getGamePlugins()) {
-            // Player
-            if (currentItem == 0 && plugin.getClass().getCanonicalName().matches("warcell.osgiplayer.PlayerPlugin")) {
+        Bundle bundle = FrameworkUtil.getBundle(this.getClass());
+        BundleContext ctx = bundle.getBundleContext();
+        System.out.println(ctx.getBundles());
+        for (Bundle b : ctx.getBundles()) {
+            if (currentItem == 0 && b.getSymbolicName().equals("OSGIPlayer")) {
                 if (menuItems[currentItem].equals("Player (loaded)")) {
-                    BundleContext ctx;
-                    ctx.getBundles();
-                    Bundle b = getBundle(ctx, plugin.getClass().getCanonicalName()).stop();
-                    menuItems[currentItem] = "Player (unloaded)";
-                } else {
-                    menuItems[currentItem] = "Player (loaded)";
-                    try {
-                    } catch (Exception e) {
-                        
-                    }
+
+
+                try {
+                    System.out.println(ctx.getBundle(11).getSymbolicName());
+                    b.stop();
+
+                } catch (Exception e) {
+
                 }
-            } //Enemy
-            else if (currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
-                if (menuItems[currentItem].equals("Enemy (loaded)")) {
-                    menuItems[currentItem] = "Enemy (unloaded)";
-                    plugin.stop(getGameData(), getWorld());
-                } else {
-                    menuItems[currentItem] = "Enemy (loaded)";
-                    plugin.start(getGameData(), getWorld());
+
+                menuItems[currentItem] = "Player (unloaded)";
+            } else {
+                menuItems[currentItem] = "Player (loaded)";
+                try {
+                    b.start();
                 }
-            } //Weapons
-            else if (currentItem == 2 && plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
-                if (menuItems[currentItem].equals("Weapons (loaded)")) {
-                    menuItems[currentItem] = "Weapons (unloaded)";
-                    plugin.stop(getGameData(), getWorld());
-                } else {
-                    menuItems[currentItem] = "Weapons (loaded)";
-                    plugin.start(getGameData(), getWorld());
+                 catch (Exception e) {
+
                 }
+
             }
+        } 
         }
+
+//        
+//        for (IGamePluginService plugin : getGameData().getGamePlugins()) {
+//            // Player
+// //Enemy
+//            else if (currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
+//                if (menuItems[currentItem].equals("Enemy (loaded)")) {
+//                    menuItems[currentItem] = "Enemy (unloaded)";
+//                    plugin.stop(getGameData(), getWorld());
+//                } else {
+//                    menuItems[currentItem] = "Enemy (loaded)";
+//                    plugin.start(getGameData(), getWorld());
+//                }
+//            } //Weapons
+//            else if (currentItem == 2 && plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
+//                if (menuItems[currentItem].equals("Weapons (loaded)")) {
+//                    menuItems[currentItem] = "Weapons (unloaded)";
+//                    plugin.stop(getGameData(), getWorld());
+//                } else {
+//                    menuItems[currentItem] = "Weapons (loaded)";
+//                    plugin.start(getGameData(), getWorld());
+//                }
+//            }
+//        }
+
     }
     
-    private Bundle getBundle(BundleContext ctx, String symbolicName) {
-        for (Bundle b : ctx.getBundles()) {
-            if (symbolicName.equals(b.getSymbolicName())) {
-                return b;
-            }
-        }
-        return null;
-    }
 
     @Override
     public void dispose() {
