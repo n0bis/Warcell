@@ -99,7 +99,6 @@ public class EnemyProcessor implements IEntityProcessingService {
                 if (sound != null) {
                     sound.play(0.4f);
                 }
-                System.out.println("ENEMY DEAD");
                 for (Entity player : world.getEntities(Player.class)) {
                     ScorePart sp = player.getPart(ScorePart.class);
                     int score = sp.getScore();
