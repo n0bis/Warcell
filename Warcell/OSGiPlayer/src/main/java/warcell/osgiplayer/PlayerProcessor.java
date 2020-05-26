@@ -77,7 +77,7 @@ public class PlayerProcessor implements IEntityProcessingService {
                 isReloading = false;
             }
 
-            if (gameData.getKeys().isPressed(GameKeys.R)) {
+            if (inventoryPart.getCurrentWeapon() != null && gameData.getKeys().isPressed(GameKeys.R)) {
                 timerPart.setExpiration(inventoryPart.getCurrentWeapon().getReloadTime());
                 isReloading = true;
                 shootingPart.setCanShoot(true);
