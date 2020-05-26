@@ -15,8 +15,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
 import warcell.Game;
 import warcell.common.data.Entity;
@@ -284,55 +290,58 @@ public class PlayState extends State {
             }
         }
         if (getGameData().getKeys().isPressed(GameKeys.ENTER)) {
-            select();
+            try {
+                select();
+            } catch (BundleException ex) {
+                System.out.println(ex.getCause());
+            }
         }
     }
 
-    private void select() {
-        for (IGamePluginService plugin : getGameData().getGamePlugins()) {
-            // Player
-            if (currentItem == 0 && plugin.getClass().getCanonicalName().matches("warcell.osgiplayer.PlayerPlugin")) {
-                if (menuItems[currentItem].equals("Player (loaded)")) {
-                    BundleContext ctx;
-                    ctx.getBundles();
-                    Bundle b = getBundle(ctx, plugin.getClass().getCanonicalName()).stop();
-                    menuItems[currentItem] = "Player (unloaded)";
-                } else {
-                    menuItems[currentItem] = "Player (loaded)";
-                    try {
-                    } catch (Exception e) {
-                        
-                    }
-                }
-            } //Enemy
-            else if (currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
-                if (menuItems[currentItem].equals("Enemy (loaded)")) {
-                    menuItems[currentItem] = "Enemy (unloaded)";
-                    plugin.stop(getGameData(), getWorld());
-                } else {
-                    menuItems[currentItem] = "Enemy (loaded)";
-                    plugin.start(getGameData(), getWorld());
-                }
-            } //Weapons
-            else if (currentItem == 2 && plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
-                if (menuItems[currentItem].equals("Weapons (loaded)")) {
-                    menuItems[currentItem] = "Weapons (unloaded)";
-                    plugin.stop(getGameData(), getWorld());
-                } else {
-                    menuItems[currentItem] = "Weapons (loaded)";
-                    plugin.start(getGameData(), getWorld());
-                }
+    private void select() throws BundleException {
+        BundleContext ctx = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+        // Player
+        if (currentItem == 0) {
+            Bundle bundle = getBundle(ctx, "OSGIPlayer");
+
+            if (menuItems[currentItem].equals("Player (loaded)")) {
+                bundle.stop();
+                menuItems[currentItem] = "Player (unloaded)";
+            } else {
+                menuItems[currentItem] = "Player (loaded)";
+                bundle.start();
+            }
+        } //Enemy
+        else if (currentItem == 1) {
+            Bundle bundle = getBundle(ctx, "OSGIEnemy");
+            if (menuItems[currentItem].equals("Enemy (loaded)")) {
+                menuItems[currentItem] = "Enemy (unloaded)";
+                bundle.stop();
+            } else {
+                menuItems[currentItem] = "Enemy (loaded)";
+                bundle.start();
+            }
+        } //Weapons
+        else if (currentItem == 2) {
+            Bundle bundle = getBundle(ctx, "OSGiWeapon");
+            if (menuItems[currentItem].equals("Weapons (loaded)")) {
+                menuItems[currentItem] = "Weapons (unloaded)";
+                bundle.stop();
+            } else {
+                menuItems[currentItem] = "Weapons (loaded)";
+                bundle.start();
             }
         }
+        
     }
     
     private Bundle getBundle(BundleContext ctx, String symbolicName) {
-        for (Bundle b : ctx.getBundles()) {
-            if (symbolicName.equals(b.getSymbolicName())) {
-                return b;
-            }
-        }
-        return null;
+	for (Bundle b : ctx.getBundles()) {
+		if (symbolicName.equals(b.getSymbolicName())) {
+			return b;
+		}
+	}
+	return null;
     }
 
     @Override
