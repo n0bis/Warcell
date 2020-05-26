@@ -64,6 +64,6 @@ public class SpawnerProcessor implements IEntityProcessingService {
     }
 
     public void removeEnemyPluginService(IGamePluginService pluginService) {
-        this.enemyGamePluginServices = null;
+        this.enemyGamePluginServices = new ArrayList<>();
     }
 }
