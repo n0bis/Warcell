@@ -38,6 +38,11 @@ public class PlayerPlugin implements IGamePluginService {
         }
         Entity player = createPlayer(gameData);
         entityID = world.addEntity(player);
+        for (IGamePluginService plugin : gameData.getGamePlugins()) {
+            if (plugin.getClass().getCanonicalName().matches("warcell.weapon.WeaponPlugin")) {
+                plugin.start(gameData, world);
+            }
+        }
     }
 
     /**
