@@ -46,8 +46,8 @@ public class EnemyPlugin implements IGamePluginService {
 
         float acceleration = 100;
         float maxSpeed = 150;
-        float x = gameData.getDisplayWidth() / 3;
-        float y = gameData.getDisplayHeight() / 3;
+        float x = 310;
+        float y = 470;
         float radians = 3.1415f / 2;
         int maxLife = 50;
         float centreX = 0;
