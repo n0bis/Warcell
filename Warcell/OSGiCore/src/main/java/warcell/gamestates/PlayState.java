@@ -15,6 +15,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import warcell.Game;
 import warcell.common.data.Entity;
 import warcell.common.data.GameData;
@@ -290,11 +293,16 @@ public class PlayState extends State {
             // Player
             if (currentItem == 0 && plugin.getClass().getCanonicalName().matches("warcell.osgiplayer.PlayerPlugin")) {
                 if (menuItems[currentItem].equals("Player (loaded)")) {
+                    BundleContext ctx;
+                    ctx.getBundles();
+                    Bundle b = getBundle(ctx, plugin.getClass().getCanonicalName()).stop();
                     menuItems[currentItem] = "Player (unloaded)";
-                    plugin.stop(getGameData(), getWorld());
                 } else {
                     menuItems[currentItem] = "Player (loaded)";
-                    plugin.start(getGameData(), getWorld());
+                    try {
+                    } catch (Exception e) {
+                        
+                    }
                 }
             } //Enemy
             else if (currentItem == 1 && plugin.getClass().getCanonicalName().matches("warcell.osgienemy.EnemyPlugin")) {
@@ -316,6 +324,15 @@ public class PlayState extends State {
                 }
             }
         }
+    }
+    
+    private Bundle getBundle(BundleContext ctx, String symbolicName) {
+        for (Bundle b : ctx.getBundles()) {
+            if (symbolicName.equals(b.getSymbolicName())) {
+                return b;
+            }
+        }
+        return null;
     }
 
     @Override

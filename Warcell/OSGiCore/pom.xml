@@ -84,7 +84,12 @@
             <artifactId>tinybundles</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.main</artifactId>
+            <version>5.4.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
 </project>
