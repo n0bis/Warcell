@@ -53,7 +53,11 @@ public class SetupTest {
     public void testBundleStarted() {
         final Bundle bundle = getBundle(ctx, "OSGiCore");
         assertNotNull("Expecting OSGiCore bundle to be installed", bundle);
-        assertEquals("Expecting OSGiCore bundle to be active", Bundle.ACTIVE, bundle.getState());
+        if (getJavaVersion() <= 8) {
+            assertEquals("Expecting OSGiCore bundle to be active", Bundle.INSTALLED, bundle.getState());
+        } else {
+            assertEquals("Expecting OSGiCore bundle to be active", Bundle.ACTIVE, bundle.getState());
+        }
     }
 
     private Bundle getBundle(BundleContext ctx, String symbolicName) {
@@ -63,6 +67,14 @@ public class SetupTest {
             }
         }
         return null;
+    }
+    
+    private static int getJavaVersion() {
+        String version = System.getProperty("java.specification.version");
+        final int idx = version.indexOf('.');
+        if (idx > 0)
+                version = version.substring(idx + 1);
+        return Integer.parseInt(version); 
     }
 
 }
